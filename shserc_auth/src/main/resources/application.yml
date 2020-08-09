@@ -1,0 +1,55 @@
+server:
+  port: 2525
+
+spring:
+  datasource:
+    dynamic:
+      primary: source1
+      datasource:
+        source1:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+          username: root
+          password: root
+          filters: stat
+          maxActive: 20
+          initialSize: 1
+          maxWait: 60000
+          minIdle: 1
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: select 1 FROM DUAL
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+          poolPreparedStatements: true
+          maxOpenPreparedStatements: 20
+
+  #http configuration
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  #upload file size
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 30MB
+
+  #redis configuration
+  redis:
+    database: 0
+    host: 192.168.1.9
+    port: 6379
+    jedis:
+      pool:
+        # the max count for redis pool connection
+        max-active: 8
+        max-wait: -1ms
+    timeout: 2000ms
+
+#jwt token configuration
+token:
+  secret: secret
