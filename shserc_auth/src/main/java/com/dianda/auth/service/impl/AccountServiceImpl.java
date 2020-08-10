@@ -12,6 +12,7 @@ import com.dianda.auth.util.shiro.jwt.JwtToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -22,7 +23,7 @@ import javax.annotation.Resource;
  *  @Date 2020/8/9 23:16
  *  @Copyright 2019-2020 
  */
-
+@Service
 public class AccountServiceImpl implements IAccountService {
 	
 	@Resource
@@ -33,17 +34,17 @@ public class AccountServiceImpl implements IAccountService {
 		
 		ResUser user = userMapper.selectOne (
 				new QueryWrapper<ResUser> (  )
-						.eq ( "userName",login.getUserName ())
+						.eq ( "user_name",login.getUserName ())
 						.eq (  "password",login.getPassword ()));
 		if( ObjectUtil.isNull ( user)) {
 			login.setLoginSuccess ( false );
 			return login;
 		}
 		
-		String userJson=JSON.toJSONString ( user );
-		String token = JwtOperation.Sign ( userJson, System.currentTimeMillis ( ) );
-		
 		try {
+			String userJson=JSON.toJSONString ( user );
+			String token = JwtOperation.Sign ( userJson, System.currentTimeMillis ( ) );
+			
 			Subject subject = SecurityUtils.getSubject ( );
 			subject.login ( new JwtToken ( token ) );
 			login.setLoginSuccess ( true );

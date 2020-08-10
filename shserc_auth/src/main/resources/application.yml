@@ -48,7 +48,7 @@ spring:
         # the max count for redis pool connection
         max-active: 8
         max-wait: -1ms
-    timeout: 2000ms
+    timeout: 2000
 
 #jwt token configuration
 token:

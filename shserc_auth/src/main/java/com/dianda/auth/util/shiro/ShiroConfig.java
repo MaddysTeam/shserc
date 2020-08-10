@@ -1,5 +1,6 @@
 package com.dianda.auth.util.shiro;
 
+import com.dianda.auth.util.nosql.redis.RedisSettings;
 import com.dianda.auth.util.shiro.jwt.JwtConfiguration;
 import com.dianda.auth.util.shiro.jwt.JwtCustomizeRealm;
 import com.dianda.auth.util.shiro.jwt.JwtFilter;
@@ -10,6 +11,9 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -25,16 +29,19 @@ import org.springframework.context.annotation.DependsOn;
 @Configuration
 public class ShiroConfig {
 	
+	@Autowired
+	RedisSettings redisSettings;
+	
 	@Bean
-	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
-		return new LifecycleBeanPostProcessor();
+	public static LifecycleBeanPostProcessor lifecycleBeanPostProcessor( ) {
+		return new LifecycleBeanPostProcessor ( );
 	}
 	
 	@Bean
-	@DependsOn("lifecycleBeanPostProcessor")
-	public static DefaultAdvisorAutoProxyCreator getLifecycleBeanPostProcessor() {
-		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-		defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+	@DependsOn( "lifecycleBeanPostProcessor" )
+	public static DefaultAdvisorAutoProxyCreator getLifecycleBeanPostProcessor( ) {
+		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator ( );
+		defaultAdvisorAutoProxyCreator.setProxyTargetClass ( true );
 		return defaultAdvisorAutoProxyCreator;
 	}
 	
@@ -42,9 +49,9 @@ public class ShiroConfig {
 	 * @Description ensure invoke authorization logic in realm when using annotation before action
 	 */
 	@Bean
-	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
-		AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
-		advisor.setSecurityManager(securityManager);
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor( DefaultWebSecurityManager securityManager ) {
+		AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor ( );
+		advisor.setSecurityManager ( securityManager );
 		return advisor;
 	}
 	
@@ -52,23 +59,23 @@ public class ShiroConfig {
 	 * @Description build security manager for shiro
 	 */
 	@Bean
-	public DefaultWebSecurityManager buildSecurityManager(JwtCustomizeRealm realm) {
-		return JwtConfiguration.securityManager(realm,BuildCacheManager());
-	}
-
-	@Bean
-	public JwtFilter buildJwtFilter(){
-		return JwtConfiguration.buildJwtFilter();
+	public DefaultWebSecurityManager buildSecurityManager( JwtCustomizeRealm realm ) {
+		return JwtConfiguration.securityManager ( realm , BuildCacheManager ( ) );
 	}
 	
 	@Bean
-	public JwtCustomizeRealm  buildJwtRealm(){
-		return JwtConfiguration.buildRealm();
+	public JwtFilter buildJwtFilter( ) {
+		return JwtConfiguration.buildJwtFilter ( );
 	}
 	
 	@Bean
-	public ShiroFilterFactoryBean buildShiroFilter(DefaultWebSecurityManager manager) {
-		return JwtConfiguration.buildFilterFactory(manager);
+	public JwtCustomizeRealm buildJwtRealm( ) {
+		return JwtConfiguration.buildRealm ( );
+	}
+	
+	@Bean
+	public ShiroFilterFactoryBean buildShiroFilter( DefaultWebSecurityManager manager ) {
+		return JwtConfiguration.buildFilterFactory ( manager );
 	}
 	
 	
@@ -95,21 +102,22 @@ public class ShiroConfig {
 	 * 2 : set timeout
 	 */
 	@Bean
-	public RedisManager buildRedisCacheManager() {
-		RedisManager redisManager = new RedisManager();
-		redisManager.setHost("192.168.1.9:6379"); //TODO: will put into  redis constant file
-		redisManager.setTimeout(12000);  //TODO: will put into  redis constant file
-
+	public RedisManager buildRedisCacheManager( ) {
+		RedisManager redisManager = new RedisManager ( );
+		redisManager.setHost ( redisSettings.host + ":" + redisSettings.port );
+		redisManager.setTimeout ( redisSettings.timeout );
+		
 		return redisManager;
 	}
 	
 	@Bean
-	public RedisCacheManager BuildCacheManager(){
-	 	RedisCacheManager cacheManager =new RedisCacheManager();
-	 	cacheManager.setRedisManager(buildRedisCacheManager());
-	 	cacheManager.setExpire(20000);
-	 	
-	 	return cacheManager;
+	public RedisCacheManager BuildCacheManager( ) {
+		
+		RedisCacheManager cacheManager = new RedisCacheManager ( );
+		cacheManager.setRedisManager ( buildRedisCacheManager ( ) );
+		cacheManager.setExpire ( 20000 );
+		
+		return cacheManager;
 	}
 //
 //
