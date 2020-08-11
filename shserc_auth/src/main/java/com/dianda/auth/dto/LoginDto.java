@@ -38,4 +38,5 @@ public class LoginDto {
 	public void setToken( String token ) {
 		this.token = token;
 	}
+
 }

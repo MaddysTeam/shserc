@@ -11,6 +11,7 @@ import com.dianda.auth.util.shiro.jwt.JwtOperation;
 import com.dianda.auth.util.shiro.jwt.JwtToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class AccountServiceImpl implements IAccountService {
 	ResUserMapper userMapper;
 	
 	@Override
-	public LoginDto Login( LoginDto login ) {
+	public LoginDto login( LoginDto login ) {
 		
 		ResUser user = userMapper.selectOne (
 				new QueryWrapper<ResUser> (  )
@@ -57,4 +58,14 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		return login;
 	}
+
+
+	@Override
+	public boolean logout() {
+		Subject subject = SecurityUtils.getSubject ( );
+		subject.logout();
+
+		return true;
+	}
+
 }

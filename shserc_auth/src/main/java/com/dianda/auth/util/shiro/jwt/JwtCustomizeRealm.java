@@ -18,7 +18,7 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo  authorizationInfo=new SimpleAuthorizationInfo();
 		Object principal=principalCollection.getPrimaryPrincipal();
 		
-		authorizationInfo.addRole("Admin");
+		authorizationInfo.addRole("admin");
 		
 		return authorizationInfo;
 	}

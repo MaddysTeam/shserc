@@ -41,14 +41,14 @@ spring:
   #redis configuration
   redis:
     database: 0
-    host: 192.168.1.9
+    host: 127.0.0.1
     port: 6379
     jedis:
       pool:
         # the max count for redis pool connection
         max-active: 8
         max-wait: -1ms
-    timeout: 2000
+    timeout: 2000000
 
 #jwt token configuration
 token:

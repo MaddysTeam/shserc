@@ -38,11 +38,11 @@ public class JwtConfiguration {
 		DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
 		
 		// forbidden original  session
-		DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-		DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-		defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-		subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
-		securityManager.setSubjectDAO(subjectDAO);
+//		DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
+//		DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
+//		defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
+//		subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
+//		securityManager.setSubjectDAO(subjectDAO);
 		
 		// set cache manager
 		securityManager.setCacheManager(cacheManager);
@@ -61,13 +61,13 @@ public class JwtConfiguration {
 		// setting filter
 		Map<String, Filter> filterMap = new HashMap<> ();
 		filterMap.put("jwt", buildJwtFilter());
-		filterMap.put("logout",buildLogoutFilter());
+		//filterMap.put("logout",buildLogoutFilter());
 		shiroFilter.setFilters(filterMap);
-		
+
 		// setting filter chain map
 		Map<String, String> filterRuleMap = new LinkedHashMap<> ();
 		filterRuleMap.put("/account/login", "anon");
-		filterRuleMap.put("/logout","logout");
+		filterRuleMap.put("/account/logout","jwt");
 		filterRuleMap.put("/**", "jwt");
 		shiroFilter.setFilterChainDefinitionMap(filterRuleMap);
 		

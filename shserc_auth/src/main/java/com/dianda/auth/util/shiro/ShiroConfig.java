@@ -10,6 +10,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -115,10 +116,11 @@ public class ShiroConfig {
 		
 		RedisCacheManager cacheManager = new RedisCacheManager ( );
 		cacheManager.setRedisManager ( buildRedisCacheManager ( ) );
-		cacheManager.setExpire ( 20000 );
+		cacheManager.setExpire ( 2000000 );
 		
 		return cacheManager;
 	}
+
 //
 //
 //	/**

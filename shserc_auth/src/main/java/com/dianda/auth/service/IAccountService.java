@@ -6,5 +6,6 @@ import org.springframework.stereotype.Service;
 
 
 public interface IAccountService {
-	LoginDto Login( LoginDto login );
+	LoginDto login( LoginDto login );
+	boolean logout();
 }

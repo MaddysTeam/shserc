@@ -37,10 +37,10 @@ public class AccountTest {
 	
 	LoginDto loginDTO=new LoginDto ();
 	
-	@Before
-	public void setupMock(){
-		SecurityUtils.setSecurityManager( null );
-	}
+//	@Before
+//	public void setupMock(){
+//		SecurityUtils.setSecurityManager( null );
+//	}
 	
 	public AccountTest(){
 		loginDTO.setUserName("jimmyPoor");
@@ -56,7 +56,7 @@ public class AccountTest {
 	 
 	 @Test
 	public void LoginTest(){
-		 LoginDto result= accountService.Login ( loginDTO );
+		 LoginDto result= accountService.login ( loginDTO );
 		 Assert.notNull ( result.getToken () );
 	 }
 	 
