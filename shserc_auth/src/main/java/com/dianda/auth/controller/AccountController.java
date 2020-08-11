@@ -40,7 +40,7 @@ public class AccountController {
 			return JsonResult.success(loginDto, "success");
 		}
 		else{
-			return JsonResult.error();
+			return JsonResult.error(loginDto.getMessage ());
 		}
 	}
 

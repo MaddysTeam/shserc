@@ -2,10 +2,11 @@ package com.dianda.auth.dto;
 
 public class LoginDto {
 	
-	private  String userName;
-	private  String password;
-	private  Boolean IsLoginSuccess;
-	private  String token;
+	private String userName;
+	private String password;
+	private Boolean IsLoginSuccess;
+	private String token;
+	private String message;
 	
 	public String getUserName( ) {
 		return userName;
@@ -38,5 +39,14 @@ public class LoginDto {
 	public void setToken( String token ) {
 		this.token = token;
 	}
-
+	
+	public String getMessage( ) {
+		return message;
+	}
+	
+	public void setMessage( String message ) {
+		this.message = message;
+	}
+	
+	
 }

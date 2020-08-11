@@ -18,11 +18,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- *  @title AccountServiceImpl
- *  @Description 描述
- *  @author zhangqiang
- *  @Date 2020/8/9 23:16
- *  @Copyright 2019-2020 
+ * @author zhangqiang
+ * @title AccountServiceImpl
+ * @Description 描述
+ * @Date 2020/8/9 23:16
+ * @Copyright 2019-2020
  */
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -32,40 +32,33 @@ public class AccountServiceImpl implements IAccountService {
 	
 	@Override
 	public LoginDto login( LoginDto login ) {
-		
-		ResUser user = userMapper.selectOne (
-				new QueryWrapper<ResUser> (  )
-						.eq ( "user_name",login.getUserName ())
-						.eq (  "password",login.getPassword ()));
-		if( ObjectUtil.isNull ( user)) {
-			login.setLoginSuccess ( false );
-			return login;
-		}
-		
 		try {
-			String userJson=JSON.toJSONString ( user );
-			String token = JwtOperation.Sign ( userJson, System.currentTimeMillis ( ) );
-			
+			String loginJson = JSON.toJSONString ( login );
+			String loginToken = JwtOperation.Sign ( loginJson , System.currentTimeMillis ( ) );
 			Subject subject = SecurityUtils.getSubject ( );
-			subject.login ( new JwtToken ( token ) );
+			subject.login ( new JwtToken ( loginToken ) );
+			
+			// if login success,we can get token from subject
+			String token=subject.getPrincipal ().toString ();
 			login.setLoginSuccess ( true );
-			login.setToken ( token );
+			login.setToken ( token);
 			
 			return login;
-		}
-		catch (  AuthenticationException e ){
-		  login.setLoginSuccess ( false );
+		} catch ( AuthenticationException e ) {
+			login.setLoginSuccess ( false );
+			login.setMessage ( e.getMessage () );
 		}
 		return login;
 	}
-
-
+	
+	
 	@Override
-	public boolean logout() {
+	public boolean logout( ) {
 		Subject subject = SecurityUtils.getSubject ( );
-		subject.logout();
-
+		if ( subject.isAuthenticated ( ) )
+			subject.logout ( );
+		
 		return true;
 	}
-
+	
 }
