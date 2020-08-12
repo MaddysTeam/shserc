@@ -41,12 +41,12 @@ public class AccountServiceImpl implements IAccountService {
 			
 			// if login success,we can get token from subject
 			String token=subject.getPrincipal ().toString ();
-			login.setLoginSuccess ( true );
+			login.setIsSuccess ( true );
 			login.setToken ( token);
 			
 			return login;
 		} catch ( AuthenticationException e ) {
-			login.setLoginSuccess ( false );
+			login.setIsSuccess ( false );
 			login.setMessage ( e.getMessage () );
 		}
 		return login;

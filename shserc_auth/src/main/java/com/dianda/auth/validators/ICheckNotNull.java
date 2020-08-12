@@ -15,10 +15,10 @@ import java.lang.annotation.Target;
  *  @Copyright 2019-2020 
  */
 
-@Target({ ElementType.METHOD, ElementType.FIELD  })
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD  })
 @Retention( RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {ResUserValidator.class})
-public @interface IServiceValidator {
+@Constraint(validatedBy = { CheckNotNull.class})
+public @interface ICheckNotNull {
 	String message( ) default "{service validation}";
 	Class<?>[] groups( ) default {};
 	Class<? extends Payload>[] payload( ) default {};

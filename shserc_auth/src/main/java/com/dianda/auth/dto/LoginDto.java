@@ -1,60 +1,24 @@
 package com.dianda.auth.dto;
 
-import lombok.Data;
+import com.dianda.auth.validators.ICheckNotNull;
+import com.dianda.auth.common.*;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.Data;
 
+
+@Data
+@ICheckNotNull()
 public class LoginDto {
-
-	@NotBlank
+	
+	@NotBlank( message = Constant.Error.USER_NAME_IS_REQUIRED )
 	private String userName;
-	@NotBlank
+	@NotBlank()
 	private String password;
-
-	private Boolean IsLoginSuccess;
+	
+	private Boolean isSuccess;
 	private String token;
 	private String message;
-
-	public String getUserName( ) {
-		return userName;
-	}
-
-	public void setUserName( String userName ) {
-		this.userName = userName;
-	}
-
-	public String getPassword( ) {
-		return password;
-	}
-
-	public void setPassword( String password ) {
-		this.password = password;
-	}
-
-	public Boolean getLoginSuccess( ) {
-		return IsLoginSuccess;
-	}
-
-	public void setLoginSuccess( Boolean loginSuccess ) {
-		IsLoginSuccess = loginSuccess;
-	}
-
-	public String getToken( ) {
-		return token;
-	}
-
-	public void setToken( String token ) {
-		this.token = token;
-	}
-
-	public String getMessage( ) {
-		return message;
-	}
-
-	public void setMessage( String message ) {
-		this.message = message;
-	}
-
 	
 }

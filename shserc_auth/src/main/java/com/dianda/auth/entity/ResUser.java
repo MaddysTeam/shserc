@@ -2,6 +2,7 @@ package com.dianda.auth.entity;
 
 import java.io.Serializable;
 
+import com.dianda.auth.validators.ICheckNotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @EqualsAndHashCode( callSuper = false )
+@ICheckNotNull()
 public class ResUser implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
