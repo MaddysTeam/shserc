@@ -2,6 +2,7 @@ package com.dianda.auth.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dianda.auth.dto.ChangePasswordDto;
 import com.dianda.auth.dto.LoginDto;
 import com.dianda.auth.entity.ResUser;
 import com.dianda.auth.mapper.ResUserMapper;
@@ -18,9 +19,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * @author zhangqiang
+ * @author hauchao
  * @title AccountServiceImpl
- * @Description 描述
+ * @Description account service with following function: login , logout and change password
  * @Date 2020/8/9 23:16
  * @Copyright 2019-2020
  */
@@ -60,5 +61,10 @@ public class AccountServiceImpl implements IAccountService {
 		
 		return true;
 	}
-	
+
+	@Override
+	public ChangePasswordDto changePassword(ChangePasswordDto dto) {
+		return null;
+	}
+
 }

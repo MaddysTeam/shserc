@@ -1,4 +1,4 @@
-package com.dianda.auth.util.validators;
+package com.dianda.auth.validators;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -17,8 +17,8 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.METHOD, ElementType.FIELD  })
 @Retention( RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {StringServiceValidator.class,IntServiceValidator.class})
-public @interface IServiceValidation {
+@Constraint(validatedBy = {ResUserValidator.class})
+public @interface IServiceValidator {
 	String message( ) default "{service validation}";
 	Class<?>[] groups( ) default {};
 	Class<? extends Payload>[] payload( ) default {};

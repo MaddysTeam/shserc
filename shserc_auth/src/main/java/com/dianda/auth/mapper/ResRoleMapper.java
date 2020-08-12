@@ -1,6 +1,6 @@
 package com.dianda.auth.mapper;
 
-import com.dianda.auth.entity.ResUser;
+import com.dianda.auth.entity.ResRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author huachao
- * @since 2020-08-08
+ * @since 2020-08-12
  */
-public interface ResUserMapper extends BaseMapper<ResUser> {
+public interface ResRoleMapper extends BaseMapper<ResRole> {
 
 }

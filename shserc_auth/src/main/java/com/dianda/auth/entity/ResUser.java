@@ -5,6 +5,8 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  *
@@ -18,9 +20,11 @@ import lombok.EqualsAndHashCode;
 public class ResUser implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	@NotBlank
 	private String userName;
-	
+
+	@NotBlank
 	private String password;
 	
 	private String passwordHash;
@@ -28,7 +32,7 @@ public class ResUser implements Serializable {
 	public static long getSerialVersionUID( ) {
 		return serialVersionUID;
 	}
-	
+
 	public String getUserName( ) {
 		return userName;
 	}

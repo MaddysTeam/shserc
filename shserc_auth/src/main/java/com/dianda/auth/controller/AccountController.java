@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * <p>
  * Account 控制器
@@ -31,7 +33,7 @@ public class AccountController {
 	IAccountService accountService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public JsonResult login(@RequestBody LoginDto loginDto) {
+	public JsonResult login(@RequestBody @Valid LoginDto loginDto) {
 		if (ObjectUtil.isNull(loginDto))
 			return JsonResult.error();
 
