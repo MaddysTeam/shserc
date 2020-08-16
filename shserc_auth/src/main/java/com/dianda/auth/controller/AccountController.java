@@ -1,6 +1,7 @@
 package com.dianda.auth.controller;
 
 
+import com.dianda.auth.dto.ChangePasswordDto;
 import com.dianda.auth.dto.LoginDto;
 import com.dianda.auth.service.IAccountService;
 import com.dianda.auth.util.basic.ObjectUtil;
@@ -33,8 +34,8 @@ public class AccountController extends BaseController {
 	
 	@RequestMapping( value = "/login", method = RequestMethod.POST )
 	public JsonResult login( @RequestBody @Valid @Validated LoginDto loginDto , BindingResult bindingResult ) {
-		if(bindingResult.hasErrors ()){
-			return JsonResult.error ();
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( );
 		}
 		
 		loginDto = accountService.login ( loginDto );
@@ -53,6 +54,19 @@ public class AccountController extends BaseController {
 			return JsonResult.success ( );
 		else
 			return JsonResult.error ( );
+	}
+	
+	public JsonResult ChangePassword( @RequestBody @Valid ChangePasswordDto changePasswordDto , BindingResult bindingResult ) {
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( );
+		}
+		
+		changePasswordDto = accountService.changePassword ( changePasswordDto );
+		if ( changePasswordDto.getIsSuccess ( ) ) {
+			return JsonResult.success ( changePasswordDto , "success" );
+		} else {
+			return JsonResult.error ( changePasswordDto.getMessage ( ) );
+		}
 	}
 	
 	

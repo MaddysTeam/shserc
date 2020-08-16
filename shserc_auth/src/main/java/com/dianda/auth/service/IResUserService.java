@@ -1,10 +1,9 @@
 package com.dianda.auth.service;
 
+import com.dianda.auth.dto.EditUserDto;
 import com.dianda.auth.entity.ResUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.auth.vo.ResUserVo;
-
-import java.util.List;
 
 /**
  *
@@ -15,7 +14,6 @@ import java.util.List;
  */
 public interface IResUserService extends IService<ResUser> {
 	ResUserVo findByPhrase( String phrase, Integer pageIndex, Integer pageSize);
-    ResUser add(ResUser user);
-    ResUser edit(ResUser user);
+    ResUser edit( EditUserDto user);
 	ResUser delete(String id);
 }

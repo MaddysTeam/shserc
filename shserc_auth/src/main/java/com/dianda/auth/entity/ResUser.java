@@ -1,12 +1,11 @@
 package com.dianda.auth.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import com.dianda.auth.validators.ICheckNotNull;
+import com.dianda.auth.validators.ICheckNotNullOrEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
@@ -18,36 +17,32 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @EqualsAndHashCode( callSuper = false )
-@ICheckNotNull()
+@ICheckNotNullOrEmpty()
 public class ResUser implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
-	@NotBlank
+ 
+	private  String Id;
+	
 	private String userName;
-
-	@NotBlank
+	
 	private String password;
 	
 	private String passwordHash;
 	
+	private int isDeleted;
+	
+	private  String addUser;
+	
+	private Date createDate;
+	
+	private  Date updateDate;
+	
+	private  String updateUser;
+	
+	
 	public static long getSerialVersionUID( ) {
 		return serialVersionUID;
 	}
-
-	public String getUserName( ) {
-		return userName;
-	}
 	
-	public void setUserName( String userName ) {
-		this.userName = userName;
-	}
-	
-	public String getPassword( ) {
-		return password;
-	}
-	
-	public void setPassword( String password ) {
-		this.password = password;
-	}
 }

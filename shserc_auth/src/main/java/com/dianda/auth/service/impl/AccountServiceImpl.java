@@ -2,6 +2,8 @@ package com.dianda.auth.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.dianda.auth.dto.ChangePasswordDto;
 import com.dianda.auth.dto.LoginDto;
 import com.dianda.auth.entity.ResUser;
@@ -17,6 +19,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * @author hauchao
@@ -32,7 +35,7 @@ public class AccountServiceImpl implements IAccountService {
 	ResUserMapper userMapper;
 	
 	@Override
-	public LoginDto login( LoginDto login ) {
+	public LoginDto login( @Valid LoginDto login ) {
 		try {
 			String loginJson = JSON.toJSONString ( login );
 			String loginToken = JwtOperation.Sign ( loginJson , System.currentTimeMillis ( ) );
@@ -40,14 +43,14 @@ public class AccountServiceImpl implements IAccountService {
 			subject.login ( new JwtToken ( loginToken ) );
 			
 			// if login success,we can get token from subject
-			String token=subject.getPrincipal ().toString ();
+			String token = subject.getPrincipal ( ).toString ( );
 			login.setIsSuccess ( true );
-			login.setToken ( token);
+			login.setToken ( token );
 			
 			return login;
 		} catch ( AuthenticationException e ) {
 			login.setIsSuccess ( false );
-			login.setMessage ( e.getMessage () );
+			login.setMessage ( e.getMessage ( ) );
 		}
 		return login;
 	}
@@ -61,10 +64,23 @@ public class AccountServiceImpl implements IAccountService {
 		
 		return true;
 	}
-
+	
 	@Override
-	public ChangePasswordDto changePassword(ChangePasswordDto dto) {
-		return null;
+	public ChangePasswordDto changePassword( @Valid ChangePasswordDto dto ) {
+		ResUser user = new ResUser ( );
+		user.setPassword ( dto.getNewPassword ( ) );
+		
+		LambdaUpdateWrapper<ResUser> wrapper = new LambdaUpdateWrapper<> ( );
+		wrapper.eq ( ResUser :: getUserName , dto.getUserName ( ) );
+		
+		Integer row = userMapper.update ( user , wrapper );
+		if ( row > 0 ) {
+			dto.setIsSuccess ( true );
+		} else {
+			dto.setIsSuccess ( false );
+		}
+		
+		return dto;
 	}
-
+	
 }

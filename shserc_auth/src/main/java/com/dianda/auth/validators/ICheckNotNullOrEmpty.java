@@ -17,8 +17,8 @@ import java.lang.annotation.Target;
 
 @Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD  })
 @Retention( RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { CheckNotNull.class})
-public @interface ICheckNotNull {
+@Constraint(validatedBy = { CheckNotNullIsEmpty.class})
+public @interface ICheckNotNullOrEmpty {
 	String message( ) default "{service validation}";
 	Class<?>[] groups( ) default {};
 	Class<? extends Payload>[] payload( ) default {};

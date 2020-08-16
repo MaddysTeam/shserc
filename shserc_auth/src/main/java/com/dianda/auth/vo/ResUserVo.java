@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ResUserVo implements Serializable {
+public class ResUserVo  implements Serializable {
 	 Integer current;
 	 Integer size;
 	 Long total;
