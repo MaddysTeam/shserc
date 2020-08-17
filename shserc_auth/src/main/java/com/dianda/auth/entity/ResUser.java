@@ -6,6 +6,7 @@ import java.util.Date;
 import com.dianda.auth.validators.ICheckNotNullOrEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.apache.shiro.SecurityUtils;
 
 /**
  * <p>
@@ -16,33 +17,41 @@ import lombok.EqualsAndHashCode;
  * @since 2020-08-08
  */
 @Data
-@EqualsAndHashCode( callSuper = false )
+@EqualsAndHashCode(callSuper = false)
 @ICheckNotNullOrEmpty()
 public class ResUser implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
- 
-	private  String Id;
-	
+
+	private int id;
+
 	private String userName;
-	
+
 	private String password;
-	
-	private String passwordHash;
-	
+
+//	private String passwordHash;
+
 	private int isDeleted;
-	
-	private  String addUser;
-	
-	private Date createDate;
-	
-	private  Date updateDate;
-	
-	private  String updateUser;
-	
-	
-	public static long getSerialVersionUID( ) {
+
+//	private String addUser;
+//
+//	private Date addDate;
+//
+//	private String updateUser;
+//
+//	private Date updateDate;
+
+	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
-	
+
+	public boolean isNewOne() {
+		return id <= 0;
+	}
+
+	public static ResUser getUserInfo(){
+		ResUser current=(ResUser) SecurityUtils.getSubject().getPrincipal();
+		return  current;
+	}
+
 }

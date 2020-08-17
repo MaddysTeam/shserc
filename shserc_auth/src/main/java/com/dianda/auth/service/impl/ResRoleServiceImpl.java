@@ -1,5 +1,6 @@
 package com.dianda.auth.service.impl;
 
+import com.dianda.auth.dto.EditRoleDto;
 import com.dianda.auth.entity.ResRole;
 import com.dianda.auth.entity.ResUser;
 import com.dianda.auth.mapper.ResRoleMapper;
@@ -9,28 +10,23 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author huachao
  * @since 2020-08-12
  */
 @Service
-		public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> implements IResRoleService {
-	
+public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> implements IResRoleService {
+
 	@Override
-	public ResRole add( ResRole role ) {
+	public ResRole edit(EditRoleDto role) {
 		return null;
 	}
-	
+
 	@Override
-	public ResRole edit( ResRole role ) {
-		return null;
-	}
-	
-	@Override
-	public boolean delete( String id ) {
+	public boolean delete(String id) {
 		return false;
 	}
-	
+
 }

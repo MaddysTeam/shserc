@@ -4,7 +4,6 @@ package com.dianda.auth.controller;
 import com.dianda.auth.dto.ChangePasswordDto;
 import com.dianda.auth.dto.LoginDto;
 import com.dianda.auth.service.IAccountService;
-import com.dianda.auth.util.basic.ObjectUtil;
 import com.dianda.auth.util.json.JsonResult;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class AccountController extends BaseController {
 	}
 	
 	@RequestMapping( value = "/logout", method = RequestMethod.POST )
-	@RequiresRoles( "Admin" )
+	@RequiresRoles( "admin" )
 	public JsonResult logout( ) {
 		boolean result = accountService.logout ( );
 		if ( result )

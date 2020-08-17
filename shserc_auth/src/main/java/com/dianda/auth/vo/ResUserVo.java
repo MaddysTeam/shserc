@@ -8,10 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-public class ResUserVo  implements Serializable {
-	 Integer current;
-	 Integer size;
-	 Long total;
-	 List<ResUser> userList;
+
+public class ResUserVo extends BaseVo<ResUser>  implements Serializable {
+
 }
