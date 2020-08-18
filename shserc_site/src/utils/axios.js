@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Notification } from 'element-ui';
 import router from '../router'
 
-axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '//localhost:28019' : 'localhost:28019'
+//axios.defaults.baseURL = "api"; //process.env.NODE_ENV == 'development' ? '//localhost:28019' : 'localhost:28019'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers['token'] = localStorage.getItem('token') || ''

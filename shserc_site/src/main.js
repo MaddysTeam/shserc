@@ -9,7 +9,9 @@ import './assets/css/global.css'
 import { Button } from 'element-ui'
 import { Form,FormItem} from 'element-ui'
 import { Input } from 'element-ui'
+import instance_ from './utils/axios.js';
 
+Vue.prototype.instance = instance_;
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Button)
