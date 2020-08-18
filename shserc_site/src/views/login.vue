@@ -13,7 +13,11 @@
                     </el-form-item>
                     <!-- 密码 -->
                     <el-form-item>
-                        <el-input prefix-icon="el-icon-search" type="password" v-model="password"  placeholder="密码""></el-input>
+                        <el-input prefix-icon="el-icon-search" type="password" v-model="password"  placeholder="密码"></el-input>
+                    </el-form-item>
+                    <!-- 验证区域 -->
+                    <el-form-item>
+                        <Verify :type="3" @success="success" :showButton=false></Verify>
                     </el-form-item>
                     <!-- 按钮区域 -->
                     <el-form-item class="btns">
@@ -28,6 +32,7 @@
 </template>
 
 <script>
+    import Verify from 'vue2-verify'
     import {login} from '../api/user';
 
     export default {
@@ -37,9 +42,13 @@
                password:''
             }
         },
+        components: {Verify},
         methods:{
             login(){
                 login();
+            },
+            success(){
+                console.log('success!');
             }
         }
 
