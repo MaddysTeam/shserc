@@ -16,6 +16,7 @@ public class LoginDto {
 	private String userName;
 	@NotBlank(message = Constant.Error.PASSWORD_IS_REQUIRE)
 	private String password;
+	
 	private Boolean isSuccess;
 	private String token;
 	private String message;

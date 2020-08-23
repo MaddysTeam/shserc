@@ -7,44 +7,50 @@
             </div>
 
             <div>
+             <!--login form-->
                 <el-form :model="form" :rules="rules" ref="form" label-width="0px" class="login-form">
-                    <!-- 用户名 -->
+                    <!-- user name -->
                     <el-form-item prop="name">
                         <el-input prefix-icon="el-icon-search" v-model="form.name" placeholder="用户名">
                         </el-input>
                     </el-form-item>
-                    <!-- 密码 -->
+                    
+                    <!-- password -->
                     <el-form-item prop="password">
                         <el-input prefix-icon="el-icon-search" type="password" v-model="form.password"
                             placeholder="密码"></el-input>
                     </el-form-item>
-                    <!-- 验证区域 -->
+
+                    <!-- verify -->
                     <el-form-item>
                         <Verify :type="3" style="width:100%" @success="success" :showButton=false
                             :barSize="{width:'100%',height:'40px'}"></Verify>
                     </el-form-item>
-                    <!-- 按钮区域 -->
+
+                    <!-- buttons -->
                     <el-form-item class="btns">
-                        <el-button type="primary" @click="submitForm('form')">登录</el-button>
-                        <el-button type="info">重置</el-button>
+                        <el-button :disabled="form.isAble"  type="primary" @click="submitForm('form')">登录</el-button>
+                        <el-button :disabled="form.isAble"  type="info">重置</el-button>
                     </el-form-item>
                 </el-form>
             </div>
         </div>
-        <!--表单登录取域-->
+        <!--login form-->
     </div>
 </template>
 
 <script>
     import Verify from 'vue2-verify'
     import { login } from '../api/user';
+    import { Notification } from 'element-ui';
 
     export default {
         data() {
             return {
                 form: {
                     name: '',
-                    password: ''
+                    password: '',
+                    isAble:true
                 },
                 rules: {
                     name: [
@@ -55,18 +61,18 @@
         },
         components: { Verify },
         methods: {
-            login() {
-                login();
-            },
             success() {
                 console.log('success!');
+                this.form.isAble=false;
             },
 
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
-                        login({userName:this.name,password:this.password});
+                        login({"userName":this.form.name,"password":this.form.password}).then(res=>{
+                            Notification.success({message:"登录成功"});
+                            sessionStorage.setItem("token",res.data.token)
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -14,11 +14,13 @@ public class JsonResult<Data> {
 	Data data;
 	String message;
 	String status;
+	int resultCode;
 	
-	public JsonResult( Data data, String status, String message) {
+	public JsonResult( int code, Data data, String status, String message) {
 		this.data = data;
 		this.message = message;
 		this.status=status;
+		this.resultCode=code;
 	}
 	
 	public JsonResult( String status, String message) {
@@ -35,11 +37,11 @@ public class JsonResult<Data> {
 	}
 	
 	public static <T> JsonResult<T> success(T data) {
-		return new JsonResult(data, StatusType.OK.getStatus(), "success");
+		return new JsonResult(200,data, StatusType.OK.getStatus(), "success");
 	}
 	
 	public static <T> JsonResult<T> success(T data, String message) {
-		return new JsonResult(data, StatusType.OK.getStatus(), message);
+		return new JsonResult(200,data, StatusType.OK.getStatus(), message);
 	}
 	
 	public static final JsonResult error() {
@@ -76,6 +78,14 @@ public class JsonResult<Data> {
 	
 	public void setMessage( String message) {
 		this.message = message;
+	}
+	
+	public int getResultCode( ) {
+		return resultCode;
+	}
+	
+	public void setResultCode( int resultCode ) {
+		this.resultCode = resultCode;
 	}
 	
 }

@@ -42,6 +42,7 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		
 		// authenticate logic
 		JSONObject dto = JSON.parseObject ( account );
+		try {
 		ResUser user = userMapper.selectOne (
 				new QueryWrapper<ResUser> ( )
 						.eq ( "user_name" , dto.getString ("userName" ) )
@@ -54,7 +55,7 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 			token=JwtOperation.Sign ( account ,System.currentTimeMillis ( ));
 		}
 		
-		try {
+		
 			if ( JwtOperation.verifyToken ( token ) )
 				return new SimpleAuthenticationInfo ( token , credentials , account );
 		} catch ( UnsupportedEncodingException e ) {
