@@ -22,7 +22,9 @@
                 <DynamicMenu ></DynamicMenu>
             </el-aside>
             <!--right side-->
-            <el-main></el-main>
+            <el-main>
+                <router-view></router-view>
+            </el-main>
        </el-container>
    </el-container>
 </template>

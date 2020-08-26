@@ -17,7 +17,7 @@
 			<el-menu-item v-else :index="item.path" :key="item.id"  >
                 <i class="el-icon-setting" style="margin-left:10%"></i>
                 <template slot="title" >
-					<span slot="title">{{ item.name}}</span>
+					<span slot="title"><router-link :to="item.path">{{ item.name}}</router-link>  </span>
 				</template>
 			</el-menu-item>
 		</template>

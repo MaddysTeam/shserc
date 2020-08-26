@@ -5,8 +5,8 @@ export function getMenusData() {
 		name: 'menu1',
 		children: [{
 				id: 2,
-				name: '表格示例',
-				path: '/table',
+				name: '用户管理',
+				path: '/users',
 				children: []
 			},
 			{
