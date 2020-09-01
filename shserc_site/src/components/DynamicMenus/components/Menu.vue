@@ -17,7 +17,7 @@
 			<el-menu-item v-else :index="item.path" :key="item.id"  >
                 <i class="el-icon-setting" style="margin-left:10%"></i>
                 <template slot="title" >
-					<span slot="title"><router-link :to="item.path">{{ item.name}}</router-link>  </span>
+					<span slot="title">{{ item.name}}</span>
 				</template>
 			</el-menu-item>
 		</template>
@@ -59,7 +59,12 @@
      .el-submenu__title:hover {
         background-color: rgba(14, 221, 240, 0.32) !important;
         color:#333744!important;
-    }
+	}
+	
+	.el-menu-item.is-active{
+		color:#333744!important;
+		background-color: rgba(14, 221, 240, 0.32) !important;
+	}
 
     .el-menu-item:hover{
         background-color: rgba(14, 221, 240, 0.32) !important;

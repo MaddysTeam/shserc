@@ -4,16 +4,16 @@
        <el-header>
            <div>
             <span>特教资源库后台管理</span>
-            
            </div>
            <el-dropdown :hide-timeout=300>
-            <el-button type="danger" circle><i class="el-icon-setting"></i></el-button>
+            <el-button type="info" circle><el-image class="img_header" src="https://himg.bdimg.com/sys/portraitn/item/757c4a696d6d79576f6c6632303134ab4d"></el-image>
+            </el-button>
+            <el-link class="img-header">JimmyPoor</el-link>     
              <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>用户信息</el-dropdown-item>
                 <el-dropdown-item>注销 </el-dropdown-item></el-dropdown-item>
              </el-dropdown-menu>
            </el-dropdown>  
-          
        </el-header>
 
        <el-container>
@@ -58,6 +58,18 @@
 .el-header > div{
     display: flex;
     align-items: center;
+}
+.img-header{
+    color:#fff; font-size:12px;;
+}
+
+.el-button.is-circle{
+    padding: 1px;
+}
+.img_header{
+    width:38px;
+    height:38px;
+    border-radius: 50%;
 }
 .el-aside{
     background:#333744;

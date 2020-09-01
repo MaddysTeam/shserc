@@ -1,5 +1,13 @@
 <template>
-  <Table  :list="source" :columns="columns" :commands="commands"></Table>
+  <div>
+  <el-form>
+    <el-form-item>
+       <el-input  placeholder=""></el-input>
+    </el-form-item>
+    
+  </el-form>
+  <Table  :list="source" :columns="columns" :commands="commands" :handleChange="pageChange" :pageSize="pageSize" :total="total"></Table>
+</div>
 </template>
 
 <script>
@@ -11,12 +19,13 @@ export default {
   data() {
     return {
       columns: [{ prop: 'id',label:'id' },{ prop: 'name',label:'name' }],
-      source: [{id:1, name: "name" },{id:2, name: "name2" }],
+      source: this.pageChange(0),
+      pageSize:10,
       commands: [
         {
           id: 1,
           label: "编辑",
-          type: "info",
+          type: "primary",
           method: (index, row) => {
            console.log('编辑:'+index, row)
           },
@@ -26,6 +35,13 @@ export default {
   },
   mounted() {
   },
+  methods:{
+    pageChange(index){
+      let result= userList(index,this.pageSize);
+      this.total=result.length;
+      return result;
+    }
+  }
 };
 </script>
 

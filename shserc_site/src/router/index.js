@@ -11,17 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component:Index
+      component:Index,
+      children:[{
+        path:'/users',
+        name:'UserList',
+        component:UserList
+      }]
     },
     {
       path:'/login',
       name:'Login',
       component: Login
-    },
-    {
-      path:'/users',
-      name:'UserList',
-      component:UserList
     }
   ]
 })

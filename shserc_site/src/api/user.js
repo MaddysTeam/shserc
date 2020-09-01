@@ -5,6 +5,6 @@ export function login(params){
     return axios.post('api/account/login',params)
 }
 
-export function userList(){
-    return [{id:1,name:"jimmypoor"}]
+export function userList(pageIndex,pageSize){
+    return [{id:1,name:"jimmypoor"},{id:2,name:"jimmypoor"}]
 }
