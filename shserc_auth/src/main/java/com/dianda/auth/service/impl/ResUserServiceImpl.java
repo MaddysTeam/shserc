@@ -69,7 +69,6 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		return resUserVo;
 	}
 
-
 	@Override
 	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public ResUser edit(EditUserDto userDto) {

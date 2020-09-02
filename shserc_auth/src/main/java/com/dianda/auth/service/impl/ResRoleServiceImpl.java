@@ -6,6 +6,7 @@ import com.dianda.auth.entity.ResUser;
 import com.dianda.auth.mapper.ResRoleMapper;
 import com.dianda.auth.service.IResRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dianda.auth.util.basic.ObjectUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +21,11 @@ import org.springframework.stereotype.Service;
 public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> implements IResRoleService {
 
 	@Override
-	public ResRole edit(EditRoleDto role) {
+	public ResRole edit(EditRoleDto roleDto) {
+		if (ObjectUtil.isNull(roleDto))
+			return null;
+
+
 		return null;
 	}
 

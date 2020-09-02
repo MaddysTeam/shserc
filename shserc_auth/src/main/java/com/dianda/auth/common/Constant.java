@@ -4,8 +4,9 @@ public final class Constant {
 	
 	public static final class Error {
 		
-		public final static String USER_NAME_IS_REQUIRED = "用户名不能为空";
+		public final static String USER_NAME_IS_REQUIRED = "用户名为必须";
 		public final static String PASSWORD_IS_REQUIRE = "密码不能为空";
+		public final static String ROLE_NAME_IS_REQUIRED="角色名称为必须";
 		
 	}
 	
