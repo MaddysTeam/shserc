@@ -3,6 +3,7 @@
 import axios from 'axios'
 import { Notification } from 'element-ui';
 import router from '../router'
+import store from './store.js'
 
 //axios.defaults.baseURL = "api"; //process.env.NODE_ENV == 'development' ? '//localhost:28019' : 'localhost:28019'
 axios.defaults.withCredentials = true
@@ -10,6 +11,8 @@ axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
+//axios.interceptors.request.use();
+console.log(store)
 axios.interceptors.response.use(res => {
   if (typeof res.data !== 'object') {
     Toast.fail('服务端异常！')
@@ -24,6 +27,6 @@ axios.interceptors.response.use(res => {
   }
 
   return res.data
-})
+});
 
-export default axios
+export default axios;

@@ -11,6 +11,7 @@ import { Form,FormItem} from 'element-ui'
 import { Input } from 'element-ui'
 import {Container,Aside,Main,Menu,Submenu,MenuItem} from 'element-ui'
 import instance_ from './utils/axios.js';
+import store from './utils/store.js'
 
 Vue.prototype.instance = instance_;
 Vue.config.productionTip = false
@@ -26,9 +27,12 @@ Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'

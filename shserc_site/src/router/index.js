@@ -6,7 +6,7 @@ import UserList from '@/Views/user/list'
 
 Vue.use(Router)
 
-export default new Router({
+const router= new Router({
   routes: [
     {
       path: '/',
@@ -24,4 +24,20 @@ export default new Router({
       component: Login
     }
   ]
-})
+});
+
+/* route protector */
+router.beforeEach((to, from, next) => {
+  // ...
+  if(to.path=='/login'){
+   next()
+}
+else{
+  next({
+    path: '/login'
+  });
+}
+
+});
+
+export default router;
