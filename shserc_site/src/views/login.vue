@@ -51,7 +51,6 @@
 import Verify from "vue2-verify";
 import { login } from "../api/user";
 import { Notification } from "element-ui";
-import store from "../store/store";
 import { mapMutations } from "vuex";
 import * as types from '../store/type';
 
@@ -91,7 +90,7 @@ export default {
           });
         } else {
           console.log("error submit!!");
-           store.commit(types.LOGIN,'temptokenxxxxxxxxxxxxxxxxxxxxxx');
+           _this.$store.commit(types.LOGIN,'temptokenxxxxxxxxxxxxxxxxxxxxxx');
            _this.$router.push('index');
           //return false;
         }

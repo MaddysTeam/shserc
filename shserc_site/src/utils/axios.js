@@ -11,7 +11,7 @@ axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-axios.interceptors.request.use(req => {
+axios.interceptors.request.use(
   config => {
     if (store.state.isAuth) {
       config.headers['token'] = store.state.token;
@@ -19,10 +19,10 @@ axios.interceptors.request.use(req => {
     return config;
   },
   error=>{
-    return Promise.reject()
+    return Promise.reject(error)
   }
-});
-console.log(store)
+);
+
 axios.interceptors.response.use(res => {
   if (typeof res.data !== 'object') {
     Toast.fail('服务端异常！')
@@ -30,11 +30,8 @@ axios.interceptors.response.use(res => {
   }
   if (res.data.resultCode != 200) {
     if (res.data.message) Notification.error({ message: res.data.message })
-    if (res.data.resultCode == 416) {
+    if (res.data.resultCode == 416 || res.data.resultCode==401) {
       router.push({ path: '/login' })
-    }
-    if(res.data.resultCode==401){
-      
     }
     return Promise.reject(res.data)
   }

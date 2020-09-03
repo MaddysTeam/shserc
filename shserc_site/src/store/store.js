@@ -8,24 +8,17 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-    isAuth: false
+    isAuth: localStorage.getItem('Authorization') ? true:false
   },
   mutations: {
     [types.LOGIN]:(state,data)=>{
       if(data){
-        localStorage.setItem("Authorization",data);
+        localStorage.setItem('Authorization',data);
         state.isAuth=true;
       }
+    },
+    [types.LOGOUT]:(state)=>{
+      localStorage.removeItem('Authorization');
     }
-    // setAuth(state, user) {
-    //   state.token = user.token;
-    //   if (user.token) {
-    //     state.isAuth = true;
-    //   }
-    // },
-    // clearAuth(state){
-    //   localStorage.removeItem('Authorization');
-    //   state.isAuth=false;
-    // }
   }
 });

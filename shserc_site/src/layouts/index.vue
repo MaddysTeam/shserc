@@ -11,7 +11,7 @@
             <el-link class="img-header">JimmyPoor</el-link>     
              <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>用户信息</el-dropdown-item>
-                <el-dropdown-item>注销 </el-dropdown-item></el-dropdown-item>
+                <el-dropdown-item @click.native="logout">注销 </el-dropdown-item></el-dropdown-item>
              </el-dropdown-menu>
            </el-dropdown>  
        </el-header>
@@ -31,6 +31,8 @@
 
 <script>
    import DynamicMenu from '../components/DynamicMenus/index';
+   import * as types from '../store/type';
+
    export default{
      name:"layout",
      components:{
@@ -38,6 +40,12 @@
      },
      data(){
          return {}
+     },
+     methods:{
+         logout:function(){
+            this.$store.commit(types.LOGOUT)
+            this.$router.push('Login');
+         }
      }
    }
 </script>

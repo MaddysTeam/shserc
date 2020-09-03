@@ -23,6 +23,10 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });
@@ -34,8 +38,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
   else {
-    console.log("isAuth:"+store.state.isAuth)
-    console.log("next:"+to)
     if (store.state.isAuth) {
       next()
     }
