@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.auth.mapper.ResUserMapper">
-
+    <select id="selectUsers"  resultType="com.dianda.auth.entity.ResUser">
+        select u.id as id,
+        u.user_name,
+        u.real_name,
+        u.email,
+        c.company_name
+        from res_user
+        u left join res_company c on u.company_id=c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 </mapper>

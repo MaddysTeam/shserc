@@ -37,12 +37,12 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 
 	@Override
 	public ResUserVo find(UserSelectParams params) {
-		if(params==null) return new ResUserVo();
+		if (params == null) return new ResUserVo();
 
-		long companyId=params.getCompanyId();
-		String phrase=params.getPhrase();
-		int current=params.getCurrent();
-		int size=params.getSize();
+		long companyId = params.getCompanyId();
+		String phrase = params.getPhrase();
+		int current = params.getCurrent();
+		int size = params.getSize();
 
 		IPage<ResUser> page = new Page<>(current, size);
 		QueryWrapper<ResUser> wrapper = new QueryWrapper<>();
@@ -51,16 +51,15 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		if (!StringUtil.IsNullOrEmpty(phrase))
 			wrapper = wrapper.like("user_name", phrase);
 
-		if(companyId > 0) {
-			List<ResUser> users=resUserMapper.selectUsersByCompanyId(page, companyId);
-			resUserVo.setListData(users);
-		}
-		else{
-			page= resUserMapper.selectPage(page,wrapper);
-			resUserVo.setListData(page.getRecords());
+		if (companyId > 0) {
+			wrapper.eq( "company_id", companyId);
 		}
 
-		if (!ObjectUtil.isNull(page)) {
+		IPage<ResUser> pageData = resUserMapper.selectUsers(page, wrapper);
+		List<ResUser> users= pageData.getRecords();
+		resUserVo.setListData(users);
+
+		if (!ObjectUtil.isNull(users) && users.size() > 0) {
 			resUserVo.setTotal(page.getTotal());
 			resUserVo.setCurrent(current);
 			resUserVo.setSize(size);

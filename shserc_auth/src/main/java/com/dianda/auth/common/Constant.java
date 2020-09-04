@@ -17,7 +17,7 @@ public final class Constant {
 
 	public static class SQL {
 
-		public static final String  SEARCH_USER_BY_COMPANY_ID="select u.id,u.user_name,u.real_name,u.email,c.company_name from res_user u left join res_company c on u.company_id=c.id where c.id=#{companyId}";
+		//public static final String  SEARCH_USER_BY_COMPANY_ID="select u.id,u.user_name,u.real_name,u.email,c.company_name from res_user u left join res_company c on u.company_id=c.id where c.id=#{companyId}";
 
 	}
 }
