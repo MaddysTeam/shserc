@@ -3,8 +3,7 @@
   <el-form>
     <el-form-item>
        <el-input  placeholder=""></el-input>
-    </el-form-item>
-    
+    </el-form-item> 
   </el-form>
   <Table  :list="source" :columns="columns" :commands="commands" :handleChange="pageChange" :pageSize="pageSize" :total="total"></Table>
 </div>
@@ -18,9 +17,11 @@ export default {
   name: "user",
   data() {
     return {
-      columns: [{ prop: 'id',label:'id' },{ prop: 'name',label:'name' }],
-      source: this.pageChange(0),
-      pageSize:10,
+      columns: [{ prop: 'id',label:'id' },{ prop: 'userName',label:'name' }],
+      source: [],
+      pageSize:2,
+      index:1,
+      total:0,
       commands: [
         {
           id: 1,
@@ -34,12 +35,15 @@ export default {
     };
   },
   mounted() {
+    this.pageChange(this.index);
   },
   methods:{
     pageChange(index){
-      let result= userList(index,this.pageSize);
-      this.total=result.length;
-      return result;
+      let result= userList(index,this.pageSize).then((res)=>{
+        this.total=res.data.total;
+        this.source= res.data.listData;
+      });
+    
     }
   }
 };

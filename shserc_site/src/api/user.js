@@ -6,5 +6,6 @@ export function login(params){
 }
 
 export function userList(pageIndex,pageSize){
-    return [{id:1,name:"jimmypoor"},{id:2,name:"jimmypoor"}]
+    console.log(pageSize);
+    return axios.post('api/user/list',{'current':pageIndex,'size':pageSize}) //[{id:1,name:"jimmypoor"},{id:2,name:"jimmypoor"}]
 }

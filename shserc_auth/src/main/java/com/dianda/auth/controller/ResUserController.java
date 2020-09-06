@@ -20,14 +20,14 @@ import java.lang.reflect.Method;
  * @since 2020-08-08
  */
 @RestController
-@RequestMapping("/auth/userList")
+@RequestMapping("/user")
 public class ResUserController {
 
 	@Resource
 	IResUserService resUserService;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public JsonResult findByPhrase(UserSelectParams params) {
+	@RequestMapping( path ="/list", method = RequestMethod.POST)
+	public JsonResult findByPhrase(@RequestBody UserSelectParams params) {
 		ResUserVo vo = resUserService.find(params);
 
 		return JsonResult.success(vo,"");

@@ -17,7 +17,7 @@
         <el-pagination style="display: flex; margin:10px;" 
              background 
             :current-page="current" 
-            :page-sizes="[10, 20, 50, 100]" 
+            :page-sizes="[2, 5, 10]" 
             :page-size="pageSize"
             @current-change="handleCurrentChange"
             layout="total, sizes, prev, pager, next, jumper" 

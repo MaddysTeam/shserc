@@ -85,14 +85,12 @@ export default {
             password: _this.form.password,
           }).then((res) => {
             Notification.success({ message: "登录成功" });
-            store.commit(types.LOGIN,res.data.token)
-            _this.$router.push('index');
+            _this.$store.commit(types.LOGIN,res.data.token)
+            _this.$router.push('/users');
           });
         } else {
           console.log("error submit!!");
-           _this.$store.commit(types.LOGIN,'temptokenxxxxxxxxxxxxxxxxxxxxxx');
-           _this.$router.push('index');
-          //return false;
+          return false;
         }
       });
     },

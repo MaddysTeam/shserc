@@ -14,7 +14,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.interceptors.request.use(
   config => {
     if (store.state.isAuth) {
-      config.headers['token'] = store.state.token;
+      config.headers['Authorization'] = store.state.token;
     }
     return config;
   },

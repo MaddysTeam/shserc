@@ -6,6 +6,6 @@ import lombok.Data;
 public class UserSelectParams {
 	long companyId;
 	String phrase;
-	Integer current;
-	Integer size;
+	int current;
+	int size;
 }
