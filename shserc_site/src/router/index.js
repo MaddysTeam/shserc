@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/layouts/index'
 import Login from '@/views/login'
 import UserList from '@/views/user/list'
+import CompanyList from '@/views/company/list'
 import store from '../store/store'
 
 Vue.use(Router)
@@ -17,13 +18,20 @@ const router = new Router({
         path: '/users',
         name: 'UserList',
         component: UserList
-      }]
+      },
+      {
+        path: '/company',
+        name: 'CompanyList',
+        component: CompanyList
+      }
+      ]
     },
     {
       path: '/login',
       name: 'Login',
       component: Login
     },
+
     {
       path: "*",
       redirect: "/"

@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-    isAuth: localStorage.getItem('Authorization') ? true:false
+    isAuth: true //localStorage.getItem('Authorization') ? true:false
   },
   mutations: {
     [types.LOGIN]:(state,data)=>{
