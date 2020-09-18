@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c4a034be-c210-454f-8057-c770c46fd093" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_alibaba_fastjson_1_2_56.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_auth0_java_jwt_3_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_dynamic_datasource_spring_boot_starter_2_5_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_annotation_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_boot_starter_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_core_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_extension_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_baomidou_mybatis_plus_generator_3_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_classmate_1_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__com_zaxxer_HikariCP_3_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_core_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_schema_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_spi_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__io_swagger_swagger_models_1_5_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__junit_junit_4_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_9_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_9_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_cache_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_config_core_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_config_ogdl_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_cipher_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_core_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_hash_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_event_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_lang_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_spring_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_shiro_shiro_web_1_4_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_apache_velocity_velocity_engine_core_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_assertj_assertj_core_3_11_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_crazycake_shiro_redis_3_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_0_13_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_3_2_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_mapstruct_mapstruct_1_2_0_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_mockito_mockito_core_2_23_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_mybatis_mybatis_3_5_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_projectlombok_lombok_1_18_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_actuator_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_1_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_2_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_data_spring_data_redis_2_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_aop_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_beans_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_context_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_context_support_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_core_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_expression_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_jdbc_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_oxm_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_test_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_tx_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_web_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_springframework_spring_webmvc_5_1_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__org_yaml_snakeyaml_1_23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../resource/demo.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="E:\项目文件(GitLab)\特教资源库\Shserc.v2\shserc_auth\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1fwKLBLKXV4CbTq21bmbZYUs6AL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="D:/software/download/idea/AndroidSDK" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../shserc_service" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.dianda.auth" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.ResUserTest.pageUserDataWithCompanyId">
+    <configuration name="CodeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dianda.CodeGenerator" />
+      <module name="shserc_auth" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dianda.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResUserTest.pageUserDataWithCompanyId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shserc_auth" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dianda.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dianda.auth" />
+      <option name="MAIN_CLASS_NAME" value="com.dianda.auth.ResUserTest" />
+      <option name="METHOD_NAME" value="pageUserDataWithCompanyId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResUserTest.pageUserDataWithEmptyPhraseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shserc_auth" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dianda.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dianda.auth" />
+      <option name="MAIN_CLASS_NAME" value="com.dianda.auth.ResUserTest" />
+      <option name="METHOD_NAME" value="pageUserDataWithEmptyPhraseTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ResUserTest.pageUserDataWithPhraseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shserc_auth" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dianda.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dianda.auth" />
+      <option name="MAIN_CLASS_NAME" value="com.dianda.auth.ResUserTest" />
+      <option name="METHOD_NAME" value="pageUserDataWithPhraseTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="shserc_auth" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dianda.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dianda.auth.AuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ResUserTest.pageUserDataWithCompanyId" />
+        <item itemvalue="JUnit.ResUserTest.pageUserDataWithPhraseTest" />
+        <item itemvalue="JUnit.ResUserTest.pageUserDataWithEmptyPhraseTest" />
+        <item itemvalue="Spring Boot.AuthApplication" />
+        <item itemvalue="Application.CodeGenerator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c4a034be-c210-454f-8057-c770c46fd093" name="Default Changelist" comment="" />
+      <created>1597123656591</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597123656591</updated>
+      <workItem from="1597123662521" duration="888000" />
+      <workItem from="1597125074721" duration="11226000" />
+      <workItem from="1597220034652" duration="6565000" />
+      <workItem from="1597397684103" duration="5000" />
+      <workItem from="1597632535090" duration="581000" />
+      <workItem from="1597633147618" duration="12130000" />
+      <workItem from="1597717773366" duration="1225000" />
+      <workItem from="1598001992985" duration="639000" />
+      <workItem from="1598333062171" duration="14000" />
+      <workItem from="1598866507361" duration="3837000" />
+      <workItem from="1599039451057" duration="149000" />
+      <workItem from="1599185551274" duration="11530000" />
+      <workItem from="1600326821653" duration="167000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="547" y="295" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597124389550">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="547" y="295" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597124389550" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1597225007985">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1597225007985" />
+    <state x="517" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1598929587981">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="517" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598929587981" />
+    <state x="632" y="395" width="441" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1597643106886">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="632" y="395" width="441" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1597643106886" />
+    <state x="592" y="536" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1597224850188">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="592" y="536" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1920.1040@0.0.1920.1040" timestamp="1597224850188" />
+    <state x="543" y="403" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1597224769247">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="543" y="403" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597224769247" />
+    <state x="638" y="356" width="624" height="377" key="#com.intellij.structuralsearch.plugin.ui.StructuralSearchDialog" timestamp="1597647636037">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="638" y="356" width="624" height="377" key="#com.intellij.structuralsearch.plugin.ui.StructuralSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597647636037" />
+    <state x="681" y="512" key="#com.intellij.ws.actions.GenerateWsdlFromJavaDialog" timestamp="1597124363012">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="681" y="512" key="#com.intellij.ws.actions.GenerateWsdlFromJavaDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597124363012" />
+    <state width="445" height="466" key="DebuggerActiveHint" timestamp="1599206176656">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="445" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1599206176656" />
+    <state x="710" y="470" width="440" height="476" key="FileChooserDialogImpl" timestamp="1600326987827">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="710" y="470" width="440" height="476" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1600326987827" />
+    <state width="1249" height="177" key="GridCell.Tab.0.bottom" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.0.center" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.0.left" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.0.right" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.1.bottom" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.1.center" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.1.left" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1249" height="177" key="GridCell.Tab.1.right" timestamp="1599207436871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1249" height="177" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1599207436871" />
+    <state width="1388" height="224" key="GridCell.Tab.2.bottom" timestamp="1597650848389">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1388" height="224" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597650848389" />
+    <state width="1388" height="224" key="GridCell.Tab.2.center" timestamp="1597650848388">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1388" height="224" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597650848388" />
+    <state width="1388" height="224" key="GridCell.Tab.2.left" timestamp="1597650848388">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1388" height="224" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597650848388" />
+    <state width="1388" height="224" key="GridCell.Tab.2.right" timestamp="1597650848389">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1388" height="224" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597650848389" />
+    <state x="433" y="271" key="IDE.errors.dialog" timestamp="1597641856959">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="433" y="271" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597641856959" />
+    <state x="593" y="105" key="SettingsEditor" timestamp="1597633132508">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="593" y="105" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1597633132508" />
+    <state x="488" y="408" key="com.intellij.ide.util.TipDialog" timestamp="1600326824658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="488" y="408" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600326824658" />
+    <state x="511" y="255" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1597132439573">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="511" y="255" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1597132439573" />
+    <state x="398" y="277" width="994" height="524" key="find.popup" timestamp="1597647653547">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="398" y="277" width="994" height="524" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1597647653547" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtLogoutFilter.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtLogoutFilter.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtLogoutFilter.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtFilter.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/dianda/auth/ResUserTest.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/controller/ResUserController.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtCustomizeRealm.java</url>
+          <line>28</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtCustomizeRealm.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/controller/BaseController.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/controller/BaseController.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dianda/auth/util/shiro/jwt/JwtCustomizeRealm.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="resUserMapper.selectUsersByCompanyId(page, companyId)" />
+      </configuration>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="e" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

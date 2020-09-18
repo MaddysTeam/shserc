@@ -1,6 +1,8 @@
 package com.dianda.auth.service.impl;
 
+import com.dianda.auth.common.Constant;
 import com.dianda.auth.dto.EditCompanyDto;
+import com.dianda.auth.dto.mappers.IEditCompanyMapper;
 import com.dianda.auth.entity.ResCompany;
 import com.dianda.auth.exceptions.GlobalException;
 import com.dianda.auth.mapper.ResCompanyMapper;
@@ -15,9 +17,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * <p>
- * 服务实现类
- * </p>
+ *
+ * company service
+ *
  *
  * @author huachao
  * @since 2020-08-17
@@ -34,7 +36,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		//  step 2: return hierarchy data
 		
 		List<ResCompany> results = resCompanyMapper.selectList ( null );
-		ResCompanyVo companyVo = recursiveMapping ( 99 , results );
+		ResCompanyVo companyVo = recursiveMapping (Constant.ThisApp.ROOT_ID , results );
 		
 		return companyVo;
 	}
@@ -45,13 +47,37 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 	}
 	
 	@Override
-	public ResCompany edit( EditCompanyDto company ) {
-		return null;
+	public ResCompany edit( EditCompanyDto companyDto ) {
+		if(ObjectUtil.isNull(companyDto))
+			return null;
+
+		long parentId=companyDto.getParentId();
+		resCompanyMapper。s
+
+		ResCompany o= IEditCompanyMapper.INSTANCE.mapFrom(companyDto);
+
+		if(o.isNewOne()){
+			resCompanyMapper.insert(o);
+		}
+		else{
+			resCompanyMapper.updateById(o);
+		}
+
+		return o;
 	}
 	
 	@Override
 	public ResCompany delete( long id ) {
-		return null;
+		if (id <= 0)
+			return null;
+
+		ResCompany company= resCompanyMapper.selectById(id);
+		//TODO: if this used by user and resource then cannot been deleted
+
+		company.setIsDeleted(Constant.Status.DELETED);
+		resCompanyMapper.updateById(company);
+
+		return company;
 	}
 	
 	
