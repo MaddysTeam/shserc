@@ -109,28 +109,7 @@ export default {
   padding: 5px;
   margin: 0 auto;
   width: 400px;
-  /* position: absolute;
-        top:30%;*/
 }
-
-/* .avatar_box {
-        height: 130px;
-        width: 130px;
-        border: 1px solid #eee;
-        border-radius: 50%;
-        padding: 10px;
-        box-shadow: 0 0 10px #ddd;
-        background-color: #fff;
-        margin:0 auto;
-    }
-
-    .avatar_box img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: #eee;
-    } */
-
 .login-form {
   bottom: 0;
   width: 90%;
