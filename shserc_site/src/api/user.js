@@ -1,3 +1,4 @@
+import { ElDropdownItem } from 'element-ui/types/dropdown-item';
 import axios from '../utils/axios'
 
 export function login(params){
@@ -8,4 +9,8 @@ export function login(params){
 export function userList(pageIndex,pageSize){
     console.log(pageSize);
     return axios.post('api/user/list',{'current':pageIndex,'size':pageSize}) //[{id:1,name:"jimmypoor"},{id:2,name:"jimmypoor"}]
+}
+
+export function edit(userId){
+
 }

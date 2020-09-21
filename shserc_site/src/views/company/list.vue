@@ -16,43 +16,47 @@
 </template>
 
 <script>
-import edit from "./edit.vue";
+import edit from './edit.vue';
+import {companyList} from '../../api/company'
 export default {
   components: { edit },
   data() {
-    name: "companyList";
+    name: 'companyList';
     return {
       dialogVisible: false,
       source: [
-        {
-          id: 1,
-          label: "黄浦区",
-          children: [
-            {
-              id: 4,
-              label: "黄浦区第一小学",
-              children: [],
-            },
-            {
-              id: 5,
-              label: "二级 1-2",
-              children: [],
-            },
-          ],
-        },
-        {
-          id: 2,
-          label: "layer 1",
-          children: [
-            {
-              id: 4,
-              label: "二级 1-1",
-              children: [],
-            },
-          ],
-        },
+        // {
+        //   id: 1,
+        //   label: "黄浦区",
+        //   children: [
+        //     {
+        //       id: 4,
+        //       label: "黄浦区第一小学",
+        //       children: [],
+        //     },
+        //     {
+        //       id: 5,
+        //       label: "二级 1-2",
+        //       children: [],
+        //     },
+        //   ],
+        // },
+        // {
+        //   id: 2,
+        //   label: "layer 1",
+        //   children: [
+        //     {
+        //       id: 4,
+        //       label: "二级 1-1",
+        //       children: [],
+        //     },
+        //   ],
+        // },
       ],
     };
+  },
+  mounted(){
+    this.bind();
   },
   methods: {
     renderContent(h, { node, data, store }) {
@@ -69,7 +73,12 @@ export default {
       );
     },
     handleCloseEdit(){
-      this.dialogVisible=false
+      this.dialogVisible=false;
+    },
+    bind(){
+      companyList().then((res)=>{
+        this.source=res.data;
+      })
     }
   },
 };

@@ -17,7 +17,7 @@ public interface IResCompanyService extends IService<ResCompany> {
 	
 	ResCompanyVo find( );
 	
-	ResCompanyVo findByParentId( long parentId );
+	ResCompanyVo findChildren( long parentId );
 	
 	ResCompany edit( EditCompanyDto company );
 	

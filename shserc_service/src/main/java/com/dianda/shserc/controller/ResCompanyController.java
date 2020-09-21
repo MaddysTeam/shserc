@@ -2,7 +2,6 @@ package com.dianda.shserc.controller;
 
 
 import com.dianda.shserc.dto.EditCompanyDto;
-import com.dianda.shserc.entity.ResCompany;
 import com.dianda.shserc.service.IResCompanyService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResCompanyVo;
@@ -18,9 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * <p>
- * 前端控制器
- * </p>
+ * company controller
  *
  * @author huachao
  * @since 2020-08-17
@@ -35,6 +32,12 @@ public class ResCompanyController {
 	@RequestMapping(path="/search", method = RequestMethod.POST)
 	public JsonResult search() {
 		ResCompanyVo  vo= service.find ();
+		return JsonResult.success (vo);
+	}
+
+	@RequestMapping(path="/children", method = RequestMethod.POST)
+	public JsonResult searchChildren(@RequestBody long parentId){
+		ResCompanyVo  vo= service.findChildren (parentId);
 		return JsonResult.success (vo);
 	}
 	

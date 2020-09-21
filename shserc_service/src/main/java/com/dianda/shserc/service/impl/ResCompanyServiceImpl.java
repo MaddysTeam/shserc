@@ -1,5 +1,6 @@
 package com.dianda.shserc.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditCompanyDto;
 import com.dianda.shserc.dto.mappers.IEditCompanyMapper;
@@ -41,8 +42,31 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 	}
 	
 	@Override
-	public ResCompanyVo findByParentId( long parentId ) {
-		return null;
+	public ResCompanyVo findChildren( long parentId ) {
+		QueryWrapper<ResCompany> wrapper=new QueryWrapper<>();
+		List<ResCompany> childrenIncludeParent= resCompanyMapper
+				.selectList(wrapper
+						.eq("parentId", parentId)
+						.or()
+						.eq("id", parentId)
+				);
+
+		ResCompanyVo parentVo=new ResCompanyVo();
+		for(ResCompany item : childrenIncludeParent){
+			if(item.getId()==parentId){
+				parentVo.setId(parentId);
+				parentVo.setLabel(item.getCompanyName());
+			}
+			else{
+				parentVo.getChildren().put(
+						item.getId(),
+						new ResCompanyVo(item.getId(),
+								         item.getCompanyName(),
+								 null));
+			}
+		}
+
+		return parentVo;
 	}
 	
 	@Override
