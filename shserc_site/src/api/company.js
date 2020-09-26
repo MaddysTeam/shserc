@@ -5,7 +5,7 @@ export function companyList(){
 }   
 
 export function getChildren(parentId){
-    return axios.post('api/company/children',{'parentId':parentId})
+    return axios.post('api/company/children?parentId='+parentId)
 }
 
 export function edit(params){

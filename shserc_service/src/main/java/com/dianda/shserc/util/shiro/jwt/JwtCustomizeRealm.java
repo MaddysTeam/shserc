@@ -41,6 +41,9 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		
 		// authenticate logic
 		JSONObject dto = JSON.parseObject ( account );
+		if(ObjectUtil.isNull ( dto ))
+			throw new AuthenticationException ( "用户名或密码错误" );
+		
 		try {
 			ResUser user = userMapper.selectOne (
 					new QueryWrapper<ResUser> ( )

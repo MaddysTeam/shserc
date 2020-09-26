@@ -24,35 +24,7 @@ export default {
     name: 'companyList';
     return {
       dialogVisible: false,
-      source: [
-        // {
-        //   id: 1,
-        //   label: "黄浦区",
-        //   children: [
-        //     {
-        //       id: 4,
-        //       label: "黄浦区第一小学",
-        //       children: [],
-        //     },
-        //     {
-        //       id: 5,
-        //       label: "二级 1-2",
-        //       children: [],
-        //     },
-        //   ],
-        // },
-        // {
-        //   id: 2,
-        //   label: "layer 1",
-        //   children: [
-        //     {
-        //       id: 4,
-        //       label: "二级 1-1",
-        //       children: [],
-        //     },
-        //   ],
-        // },
-      ],
+      source: [],
     };
   },
   mounted(){
@@ -77,9 +49,10 @@ export default {
     },
     bind(){
       companyList().then((res)=>{
-        this.source=res.data;
+        console.log(res.data);
+        this.source=[JSON.parse(res.data)];
       })
-    }
+    } 
   },
 };
 </script>

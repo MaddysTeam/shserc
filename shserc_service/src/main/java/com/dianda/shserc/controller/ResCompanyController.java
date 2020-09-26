@@ -7,11 +7,7 @@ import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResCompanyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -36,8 +32,9 @@ public class ResCompanyController {
 	}
 
 	@RequestMapping(path="/children", method = RequestMethod.POST)
-	public JsonResult searchChildren(@RequestBody long parentId){
-		ResCompanyVo  vo= service.findChildren (parentId);
+	public JsonResult searchChildren(@RequestParam String parentId){
+		long pid=Long.parseLong ( parentId );
+		ResCompanyVo  vo= service.findChildren (pid);
 		return JsonResult.success (vo);
 	}
 	

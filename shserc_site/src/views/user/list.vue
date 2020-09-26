@@ -1,12 +1,19 @@
 <template>
   <div>
-  <el-form>
-    <el-form-item>
-       <el-input  placeholder=""></el-input>
-    </el-form-item> 
-  </el-form>
-  <Table  :list="source" :columns="columns" :commands="commands" :handleChange="pageChange" :pageSize="pageSize" :total="total"></Table>
-</div>
+    <el-form>
+      <el-form-item>
+        <el-input placeholder=""></el-input>
+      </el-form-item>
+    </el-form>
+    <Table
+      :list="source"
+      :columns="columns"
+      :commands="commands"
+      :handleChange="pageChange"
+      :pageSize="pageSize"
+      :total="total"
+    ></Table>
+  </div>
 </template>
 
 <script>
@@ -17,18 +24,21 @@ export default {
   name: "user",
   data() {
     return {
-      columns: [{ prop: 'id',label:'id' },{ prop: 'userName',label:'name' }],
+      columns: [
+        { prop: "id", label: "id" },
+        { prop: "userName", label: "name" },
+      ],
       source: [],
-      pageSize:2,
-      index:1,
-      total:0,
+      pageSize: 2,
+      index: 1,
+      total: 0,
       commands: [
         {
           id: 1,
           label: "编辑",
           type: "primary",
           method: (index, row) => {
-           console.log('编辑:'+index, row)
+            console.log("编辑:" + index, row);
           },
         },
       ],
@@ -37,15 +47,16 @@ export default {
   mounted() {
     this.pageChange(this.index);
   },
-  methods:{
-    pageChange(index){
-      let result= userList(index,this.pageSize).then((res)=>{
-        this.total=res.data.total;
-        this.source= res.data.listData;
+  methods: {
+    pageChange(index) {
+      let result = userList(index, this.pageSize).then((res) => {
+        if (res && res.data) {
+          this.total = res.data.total;
+          this.source = res.data.listData;
+        }
       });
-    
-    }
-  }
+    },
+  },
 };
 </script>
 

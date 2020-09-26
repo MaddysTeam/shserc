@@ -1,6 +1,8 @@
 package com.dianda.shserc.util.json;
 
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * @author hauchao
  * @title JsonResult
@@ -37,10 +39,12 @@ public class JsonResult<Data> {
 	}
 	
 	public static <T> JsonResult<T> success(T data) {
-		return new JsonResult(200,data, StatusType.OK.getStatus(), "success");
+		String json= JSONObject.toJSONString ( data );
+		return new JsonResult(200, json, StatusType.OK.getStatus(), "success");
 	}
 	
 	public static <T> JsonResult<T> success(T data, String message) {
+		String json= JSONObject.toJSONString ( data );
 		return new JsonResult(200,data, StatusType.OK.getStatus(), message);
 	}
 	

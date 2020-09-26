@@ -46,7 +46,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		QueryWrapper<ResCompany> wrapper=new QueryWrapper<>();
 		List<ResCompany> childrenIncludeParent= resCompanyMapper
 				.selectList(wrapper
-						.eq("parentId", parentId)
+						.eq("parent_Id", parentId)
 						.or()
 						.eq("id", parentId)
 				);
@@ -58,8 +58,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 				parentVo.setLabel(item.getCompanyName());
 			}
 			else{
-				parentVo.getChildren().put(
-						item.getId(),
+				parentVo.getChildren().add (
 						new ResCompanyVo(item.getId(),
 								         item.getCompanyName(),
 								 null));
@@ -114,15 +113,15 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 			return new ResCompanyVo ( );
 		
 		ResCompany company = source.stream ( ).filter ( x -> x.getId ( ) == parentId ).findFirst ( ).get ( );
-		Map<Long, ResCompanyVo> childrenMap = new HashMap<> ( );
-		ResCompanyVo vo = new ResCompanyVo ( company.getId ( ) , company.getCompanyName ( ) , childrenMap );
+		ArrayList<ResCompanyVo> children = new ArrayList<> ( );
+		ResCompanyVo vo = new ResCompanyVo ( company.getId ( ) , company.getCompanyName ( ) , children );
 		
 		if ( ObjectUtil.isNull ( source ) || source.isEmpty ( ) )
 			return vo;
 		
 		List<ResCompany> childrenList = source.stream ( ).filter ( x -> x.getParentId ( ) == parentId ).collect ( Collectors.toList ( ) );
 		for ( ResCompany item : childrenList ) {
-			childrenMap.put ( item.getId ( ) , recursiveMapping ( item.getId ( ) , source ) );
+			children.add (recursiveMapping ( item.getId ( ) , source ) );
 		}
 		
 		return vo;

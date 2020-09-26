@@ -1,4 +1,3 @@
-import { ElDropdownItem } from 'element-ui/types/dropdown-item';
 import axios from '../utils/axios'
 
 export function login(params){

@@ -1,11 +1,19 @@
 <template>
-  <el-dialog title="新增单位" :visible.sync="visible" :before-close="handleClose">
+  <el-dialog
+    title="新增单位"
+    :visible.sync="visible"
+    :before-close="handleClose"
+  >
     <el-form :model="company" ref="company">
       <el-form-item prop="companyName">
-        <el-input prefix-icon="el-icon-search" v-model="company.name" placeholder="单位名称"></el-input>
+        <el-input
+          prefix-icon="el-icon-search"
+          v-model="company.name"
+          placeholder="单位名称"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-select v-model="value" placeholder="请选择" style="width:100%">
+        <el-select v-model="model" placeholder="请选择" style="width: 100%">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -23,6 +31,8 @@
 </template>
 
 <script>
+import { getChildren } from "../../api/company.js";
+
 export default {
   name: "edit",
   data() {
@@ -30,37 +40,35 @@ export default {
       company: {
         name: "",
       },
-      options:[
-        {
-          value: '0',
-          label: '全部状态'
-        },
-        {
-          value: '1',
-          label: '正常运行'
-        },
-        {
-          value: '2',
-          label: '离线或故障'
-        },
-        {
-          value: '3',
-          label: '超标报警'
-        }
-      ]
-          
+      model: {},
+      options: [],
     };
   },
   props: {
     visible: { type: Boolean, required: true },
   },
+  mounted() {
+    this.bindCompany(1);
+  },
   methods: {
     submitForm() {
-      console.log("submit");
       this.$emit("close");
     },
     handleClose() {
       this.$emit("close");
+    },
+    bindCompany(root) {
+      getChildren(root).then((res) => {
+        var array = JSON.parse(res.data).children;
+        var resultArray = [];
+        for (let index = 0; index < array.length; index++) {
+          resultArray.push({
+            value: array[index].id,
+            label: array[index].label,
+          });
+        }
+        this.options = resultArray;
+      });
     },
   },
 };

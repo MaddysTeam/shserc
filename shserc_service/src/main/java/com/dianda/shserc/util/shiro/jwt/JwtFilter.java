@@ -2,7 +2,9 @@ package com.dianda.shserc.util.shiro.jwt;
 
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.dianda.shserc.util.basic.HttpUtil;
 import com.dianda.shserc.util.basic.ObjectUtil;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 
@@ -28,7 +30,12 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 		HttpServletRequest httpRequest = ( HttpServletRequest ) request;
 		String token = httpRequest.getHeader ( JwtConstant.Authorization );
 		JwtToken jwtToken = new JwtToken ( token );
-		getSubject ( request , response ).login ( jwtToken );
+		try {
+			getSubject ( request , response ).login ( jwtToken );
+		} catch ( AuthenticationException e ) {
+			HttpUtil.ResponseUnAuthorized ( request , response , "login fail" );
+			return false;
+		}
 		
 		return true;
 	}
@@ -44,9 +51,9 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 				Boolean result = executeLogin ( request , response );
 				return result;
 			} catch ( SignatureVerificationException e ) {
-			
+				e.printStackTrace ( );
 			} catch ( TokenExpiredException e ) {
-			
+				e.printStackTrace ( );
 			} catch ( Exception e ) {
 				e.printStackTrace ( );
 			} finally {
