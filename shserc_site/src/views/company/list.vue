@@ -49,8 +49,10 @@ export default {
     },
     bind(){
       companyList().then((res)=>{
+        if(res && res.data){
         console.log(res.data);
         this.source=[JSON.parse(res.data)];
+        }
       })
     } 
   },
