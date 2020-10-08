@@ -1,7 +1,9 @@
 package com.dianda.shserc.controller;
 
 
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditCompanyDto;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IResCompanyService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResCompanyVo;
@@ -20,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping( "/company" )
-public class ResCompanyController {
+public class ResCompanyController extends  BaseController {
 	
 	@Autowired
 	IResCompanyService service;
@@ -40,13 +42,14 @@ public class ResCompanyController {
 	
 	@RequestMapping(path="/edit", method = RequestMethod.POST)
 	public JsonResult edit( @RequestBody @Valid EditCompanyDto companyDto , BindingResult bindingResult ) {
+		ResUser user=getUserInfo ();
 		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ("");
+			return JsonResult.error (Constant.Error.PARAMS_IS_INVALID);
 		}
 		
-		service.edit ( companyDto );
+		service.edit ( companyDto, user.getId () );
 		
-		return JsonResult.success ( "" );
+		return JsonResult.success ( Constant.Success.EDIT_SUCCESS );
 	}
 	
 }

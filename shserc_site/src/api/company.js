@@ -1,4 +1,4 @@
-import axios from '../utils/axios' 
+import axios from '../static/axios' 
 
 export function companyList(){
     return axios.post('api/company/search');

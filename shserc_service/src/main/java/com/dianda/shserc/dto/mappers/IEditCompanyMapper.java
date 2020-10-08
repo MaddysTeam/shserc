@@ -16,7 +16,7 @@ public interface IEditCompanyMapper extends BasicMapper<ResCompany, EditCompanyD
 	@Mappings( {
 			@Mapping( source = "id", target = "id" ) ,
 			@Mapping( source = "parentId", target = "parentId" ) ,
-			@Mapping( source = "companyName", target = "companyName" ) ,
+			@Mapping( source = "name", target = "companyName" ) ,
 	} )
 	ResCompany mapFrom( EditCompanyDto editCompanyDto );
 }

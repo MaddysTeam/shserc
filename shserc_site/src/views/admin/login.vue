@@ -49,10 +49,10 @@
 
 <script>
 import Verify from "vue2-verify";
-import { login } from "../api/user";
+import { login } from "@/api/user";
 import { Notification } from "element-ui";
 import { mapMutations } from "vuex";
-import * as types from '../store/type';
+import * as types from '@/static/type';
 
 export default {
   data() {
@@ -86,7 +86,7 @@ export default {
           }).then((res) => {
             Notification.success({ message: "登录成功" });
             _this.$store.commit(types.LOGIN,res.data.token)
-            _this.$router.push('/users');
+            _this.$router.push('/admin/users');
           });
         } else {
           console.log("error submit!!");

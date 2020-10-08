@@ -2,6 +2,7 @@ package com.dianda.shserc.controller;
 
 
 import com.dianda.shserc.bean.UserSelectParams;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IResUserService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResUserVo;
@@ -29,12 +30,14 @@ public class ResUserController {
 
 	@RequestMapping( path ="/list", method = RequestMethod.POST)
 	public JsonResult findByPhrase(@RequestBody UserSelectParams params) {
-		
-		
 		ResUserVo vo = resUserService.find(params);
-
-		return JsonResult.success(vo,"");
+		return JsonResult.success(vo);
 	}
-
+	
+	@RequestMapping( path ="/id", method = RequestMethod.POST)
+	public JsonResult findById(@RequestBody long id ) {
+		ResUserVo vo=resUserService.getById ( id );
+		return JsonResult.success(vo);
+	}
 }
 

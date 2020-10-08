@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  *  @Copyright 2019-2020
  */
 
-@SpringBootTest( classes = AuthApplication.class )
+@SpringBootTest( classes = ServiceApplication.class )
 @RunWith( SpringRunner.class )
 public class ResCompanyTest {
 	

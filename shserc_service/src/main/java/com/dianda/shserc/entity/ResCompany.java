@@ -36,9 +36,9 @@ public class ResCompany implements Serializable {
 
 	private LocalDateTime updateDate;
 
-	private int isDeleted;
+	private Boolean isDeleted;
 
 	public boolean isNewOne() {
-		return id > 0;
+		return id <= 0;
 	}
 }

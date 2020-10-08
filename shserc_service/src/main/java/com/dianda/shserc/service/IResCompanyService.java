@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.vo.ResCompanyVo;
 
 /**
- * <p>
- * 服务类
- * </p>
+ * company service
  *
  * @author huachao
  * @since 2020-08-17
@@ -19,7 +17,7 @@ public interface IResCompanyService extends IService<ResCompany> {
 	
 	ResCompanyVo findChildren( long parentId );
 	
-	ResCompany edit( EditCompanyDto company );
+	ResCompany edit( EditCompanyDto company, long opertaorId );
 	
 	ResCompany delete( long id );
 	

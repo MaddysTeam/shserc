@@ -10,5 +10,5 @@ public class EditCompanyDto {
 	private  long id;
 	private  long parentId;
 	@NotBlank(message = Constant.Error.COMPANY_NAME_IS_REQUIRED )
-	private  String companyName;
+	private  String name;
 }

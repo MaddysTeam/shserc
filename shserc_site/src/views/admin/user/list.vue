@@ -1,10 +1,20 @@
 <template>
   <div>
-    <el-form>
+    <el-breadcrumb>
+      <el-breadcrumb-item :to="{path:'/'}">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!-- <el-form>
       <el-form-item>
         <el-input placeholder=""></el-input>
       </el-form-item>
-    </el-form>
+    </el-form> -->
+    <div class="btn-group">
+      <el-button class="el-button--primary" @click="dialogVisible = true">
+        <i class="el-icon-edit"></i> 新增用户
+      </el-button>
+    </div>
+    <edit @close="handleCloseEdit" :visible="dialogVisible"></edit>
     <Table
       :list="source"
       :columns="columns"
@@ -17,10 +27,12 @@
 </template>
 
 <script>
-import Table from "../../components/Tables/index";
-import { userList } from "../../api/user";
+import edit from "./edit.vue";
+import Table from "@/components/Tables/index";
+import { userList } from "@/api/user";
+
 export default {
-  components: { Table },
+  components: { Table, edit },
   name: "user",
   data() {
     return {
@@ -42,6 +54,8 @@ export default {
           },
         },
       ],
+
+      dialogVisible: false,
     };
   },
   mounted() {
@@ -51,13 +65,25 @@ export default {
     pageChange(index) {
       let result = userList(index, this.pageSize).then((res) => {
         if (res && res.data) {
-          this.total = res.data.total;
-          this.source = res.data.listData;
+          let data=JSON.parse(res.data);
+          this.total = data.total;
+          this.source = data.listData;
         }
       });
+    },
+
+    handleCloseEdit() {
+      this.dialogVisible = false;
     },
   },
 };
 </script>
 
-<style  scoped></style>
+<style  scoped>
+.btn-group{
+  display: flex;
+  flex-direction: row;
+  text-justify: auto;
+  margin:20px 20px 20px 0
+}
+</style>

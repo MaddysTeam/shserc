@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-@SpringBootTest(classes = AuthApplication.class)
+@SpringBootTest(classes = ServiceApplication.class)
 @RunWith(SpringRunner.class)
 public class ResUserTest {
 
@@ -74,9 +74,9 @@ public class ResUserTest {
 
 	@Test
 	public void deleteUserWithExistIdTest() {
-		ResUser user = service.delete(userId);
-		Assert.notNull(user);
-		Assert.isTrue(user.getIsDeleted() == Constant.Status.DELETED);
+		ResUserVo vo = service.delete(userId);
+		Assert.notNull(vo);
+		Assert.isTrue(vo.isDeleted () == Constant.Status.DELETED);
 	}
 
 	@Test
@@ -84,8 +84,8 @@ public class ResUserTest {
 		EditUserDto userDto = new EditUserDto();
 		userDto.setId(userId);
 		userDto.setUserName("jimmyPoor2031");
-
-		ResUser user = service.edit(userDto);
+		
+		ResUserVo user = service.edit(userDto);
 		Assert.notNull(user);
 		Assert.isTrue(user.getId() == userId && user.getUserName() == userDto.getUserName());
 	}

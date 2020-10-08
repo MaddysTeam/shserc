@@ -24,8 +24,7 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(res => {
-
-  if (typeof res.data !== 'object') {
+  if ( typeof res.data !== 'object') {
     Toast.fail('服务端异常！')
     return Promise.reject(res);
   }

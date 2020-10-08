@@ -1,0 +1,31 @@
+<configuration>
+    <Properties>
+        <Property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}:%L -%m%n"></Property>
+       <Property name="displayName" value="ShsercService"></Property>
+        <Property name="filepath" value="D:\temp\logs\shserc"></Property>
+    </Properties>
+    <Appenders>
+        <console name="Console" target="SYSTEM_OUT">
+        </console>
+        <File name="File" fileName="d:/temp/logs/shserc/test.log" append="false">
+            <PatternLayout pattern="${pattern}"/>
+        </File>
+<!--        <RollingFile name="RollingFile">-->
+<!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--            <PatternLayout pattern="${pattern}"/>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval="1"/>-->
+<!--                <SizeBasedTriggeringPolicy size="10MB"/>-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="15"/>-->
+<!--        </RollingFile>-->
+
+    </Appenders>
+    <Loggers>
+        <logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="RollingFile"/>-->
+        </logger>
+    </Loggers>
+</configuration>

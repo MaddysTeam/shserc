@@ -4,12 +4,10 @@ import com.dianda.shserc.entity.ResRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
+ * role mapper interface
  *
  * @author huachao
- * @since 2020-08-12
+ * @since 2020-08-17
  */
 public interface ResRoleMapper extends BaseMapper<ResRole> {
 

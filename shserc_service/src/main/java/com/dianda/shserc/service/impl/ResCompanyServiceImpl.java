@@ -15,6 +15,7 @@ import com.dianda.shserc.vo.ResCompanyVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -69,7 +70,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 	}
 	
 	@Override
-	public ResCompany edit( EditCompanyDto companyDto ) {
+	public ResCompany edit( EditCompanyDto companyDto,long userId ) {
 		if ( ObjectUtil.isNull ( companyDto ) )
 			return null;
 		
@@ -82,8 +83,12 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		
 		int result = 0;
 		if ( o.isNewOne ( ) ) {
+			o.setAddDate (LocalDateTime.now ());
+			o.setAddUser (userId  );
 			result = resCompanyMapper.insert ( o );
 		} else {
+			o.setUpdateDate ( LocalDateTime.now () );
+			o.setUpdateUser ( userId );
 			result = resCompanyMapper.updateById ( o );
 		}
 		if ( result <= 0 )

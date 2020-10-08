@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.vo.ResUserVo;
+import com.dianda.shserc.vo.mappers.IUserVoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,70 +31,82 @@ import java.util.List;
 
 @Service
 public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implements IResUserService {
-
+	
 	@Resource
 	ResUserMapper resUserMapper;
-
+	
 	@Override
-	public ResUserVo find(UserSelectParams params) {
-		if (params == null) return new ResUserVo();
-
-		long companyId = params.getCompanyId();
-		String phrase = params.getPhrase();
-		int current = params.getCurrent();
-		int size = params.getSize();
-
-		IPage<ResUser> page = new Page<>(current, size);
-		QueryWrapper<ResUser> wrapper = new QueryWrapper<>();
-		ResUserVo resUserVo = new ResUserVo();
-
-		if (!StringUtil.IsNullOrEmpty(phrase))
-			wrapper = wrapper.like("user_name", phrase);
-
-		if (companyId > 0) {
-			wrapper.eq( "company_id", companyId);
+	public ResUserVo find( UserSelectParams params ) {
+		if ( params == null ) return new ResUserVo ( );
+		
+		long companyId = params.getCompanyId ( );
+		String phrase = params.getPhrase ( );
+		int current = params.getCurrent ( );
+		int size = params.getSize ( );
+		
+		IPage<ResUser> page = new Page<> ( current , size );
+		QueryWrapper<ResUser> wrapper = new QueryWrapper<> ( );
+		ResUserVo resUserVo = new ResUserVo ( );
+		
+		if ( ! StringUtil.IsNullOrEmpty ( phrase ) )
+			wrapper = wrapper.like ( "user_name" , phrase );
+		
+		if ( companyId > 0 ) {
+			wrapper.eq ( "company_id" , companyId );
 		}
-
-		IPage<ResUser> pageData = resUserMapper.selectUsers(page, wrapper);
-		List<ResUser> users= pageData.getRecords();
-		resUserVo.setListData(users);
-
-		if (!ObjectUtil.isNull(users) && users.size() > 0) {
-			resUserVo.setTotal(page.getTotal());
-			resUserVo.setCurrent(current);
-			resUserVo.setSize(size);
+		
+		IPage<ResUser> pageData = resUserMapper.selectUsers ( page , wrapper );
+		List<ResUser> users = pageData.getRecords ( );
+		resUserVo.setListData ( users );
+		
+		if ( ! ObjectUtil.isNull ( users ) && users.size ( ) > 0 ) {
+			resUserVo.setTotal ( page.getTotal ( ) );
+			resUserVo.setCurrent ( current );
+			resUserVo.setSize ( size );
 		}
-
+		
 		return resUserVo;
 	}
-
+	
 	@Override
-	@Transactional(readOnly = false, rollbackFor = Exception.class)
-	public ResUser edit(EditUserDto userDto) {
-		if (ObjectUtil.isNull(userDto))
+	@Transactional( readOnly = false, rollbackFor = Exception.class )
+	public ResUserVo edit( EditUserDto userDto ) {
+		if ( ObjectUtil.isNull ( userDto ) )
 			return null;
-
+		
 		// execute user mapping from dto
-		ResUser user = IEditUserMapper.INSTANCE.mapFrom(userDto);
-		if (user.isNewOne()) {
-			resUserMapper.insert(user);
+		ResUser user = IEditUserMapper.INSTANCE.mapFrom ( userDto );
+		if ( user.isNewOne ( ) ) {
+			resUserMapper.insert ( user );
 		} else {
-			resUserMapper.updateById(user);
+			resUserMapper.updateById ( user );
 		}
-
-		return user;
+		
+		ResUserVo vo =IUserVoMapper.INSTANCE.mapFrom ( user );
+		return vo;
 	}
-
+	
 	@Override
-	public ResUser delete(long id) {
-		if (id <= 0)
+	public ResUserVo delete( long id ) {
+		if ( id <= 0 )
 			return null;
-
-		ResUser user = resUserMapper.selectById(id);
-		user.setIsDeleted(Constant.Status.DELETED);
-
-		int result = resUserMapper.updateById(user);
-		return user;
+		
+		ResUser user = resUserMapper.selectById ( id );
+		user.setIsDeleted ( Constant.Status.DELETED );
+		int result = resUserMapper.updateById ( user );
+		
+		ResUserVo vo =IUserVoMapper.INSTANCE.mapFrom ( user );
+		return vo;
 	}
-
+	
+	@Override
+	public ResUserVo getById( long id ) {
+		ResUser user = resUserMapper.selectById ( id );
+		ResUserVo vo = new ResUserVo ( );
+		if ( ! ObjectUtil.isNull ( user ) )
+			vo = IUserVoMapper.INSTANCE.mapFrom ( user );
+		
+		return vo;
+	}
+	
 }

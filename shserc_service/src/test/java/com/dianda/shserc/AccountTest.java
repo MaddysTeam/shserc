@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
 @ActiveProfiles("local")
-@SpringBootTest(classes = AuthApplication.class)
+@SpringBootTest(classes = ServiceApplication.class)
 @RunWith ( SpringRunner.class )
 @EnableConfigurationProperties({ JwtSettings.class})
 public class AccountTest {

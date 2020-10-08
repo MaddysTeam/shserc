@@ -1,6 +1,7 @@
 server:
   port: 2525
 
+
 spring:
   datasource:
     dynamic:
@@ -53,3 +54,6 @@ spring:
 #jwt token configuration
 token:
   secret: secret
+
+logging:
+  config: classpath:shserc-log.xml

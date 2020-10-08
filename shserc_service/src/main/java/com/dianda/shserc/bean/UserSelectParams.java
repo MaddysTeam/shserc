@@ -3,9 +3,8 @@ package com.dianda.shserc.bean;
 import lombok.Data;
 
 @Data
-public class UserSelectParams {
+public class UserSelectParams extends BaseSelectParams {
 	long companyId;
-	String phrase;
-	int current;
-	int size;
 }
+
+

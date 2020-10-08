@@ -4,12 +4,12 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>单位管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <div class="btn-group">
-      <el-button class="el-button--primary" @click="dialogVisible=true">
-        <i class="el-icon-edit"></i> 新增单位
-      </el-button>
-      <el-button class="el-button--primary">刷新列表</el-button>
-    </div>
+      <div class="btn-group">
+        <el-button class="el-button--primary" @click="dialogVisible=true">
+          <i class="el-icon-edit"></i> 新增单位
+        </el-button>
+        <el-button class="el-button--primary">刷新列表</el-button>
+      </div>
      <edit ref="companyEdit" @close="handleCloseEdit" :visible="dialogVisible"></edit>
     <el-tree :data="source" :default-expanded-keys="[26856]" :render-content="renderContent"></el-tree>
   </div>
@@ -17,7 +17,8 @@
 
 <script>
 import edit from './edit.vue';
-import {companyList} from '../../api/company'
+import {companyList} from '@/api/company'
+
 export default {
   components: { edit },
   data() {

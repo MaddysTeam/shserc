@@ -25,17 +25,18 @@ public class JsonResult<Data> {
 		this.resultCode=code;
 	}
 	
-	public JsonResult( String status, String message) {
+	public JsonResult(int code, String status, String message) {
 		this.message = message;
 		this.status = status;
+		this.resultCode=code;
 	}
 	
 	public static final JsonResult success() {
-		return new JsonResult(StatusType.OK.getStatus(), "message");
+		return new JsonResult(200,StatusType.OK.getStatus(), "message");
 	}
 	
 	public static final JsonResult success( String message) {
-		return new JsonResult(StatusType.OK.getStatus(), message);
+		return new JsonResult(200,StatusType.OK.getStatus(), message);
 	}
 	
 	public static <T> JsonResult<T> success(T data) {
@@ -49,15 +50,15 @@ public class JsonResult<Data> {
 	}
 	
 	public static final JsonResult error() {
-		return new JsonResult(StatusType.ERROR.getStatus(), "error");
+		return new JsonResult(500,StatusType.ERROR.getStatus(), "error");
 	}
 	
 	public static final JsonResult error( String message) {
-		return new JsonResult(StatusType.ERROR.getStatus(), message);
+		return new JsonResult(500,StatusType.ERROR.getStatus(), message);
 	}
 	
 	public static final JsonResult unAuthorized( String message){
-		return new JsonResult(StatusType.UNAUTHORIZED.getStatus(), message);
+		return new JsonResult(500,StatusType.UNAUTHORIZED.getStatus(), message);
 	}
 	
 	public Data getData() {

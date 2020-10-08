@@ -7,14 +7,14 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.vo.ResUserVo;
 
 /**
- *
- *  user service for curd
+ *  user service
  *
  * @author huachao
  * @since 2020-08-08
  */
 public interface IResUserService extends IService<ResUser> {
 	ResUserVo find(UserSelectParams params);
-    ResUser edit( EditUserDto user);
-	ResUser delete(long id);
+	ResUserVo edit( EditUserDto user);
+	ResUserVo delete(long id);
+	ResUserVo getById(long id);
 }

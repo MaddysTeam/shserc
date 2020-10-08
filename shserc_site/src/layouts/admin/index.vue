@@ -30,8 +30,8 @@
 </template>
 
 <script>
-   import DynamicMenu from '../components/DynamicMenus/index';
-   import * as types from '../store/type';
+   import DynamicMenu from '../../components/DynamicMenus/index';
+   import * as types from '../../static/type';
 
    export default{
      name:"layout",

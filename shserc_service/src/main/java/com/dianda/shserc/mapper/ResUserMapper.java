@@ -8,13 +8,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
+ * user mapper interface
  *
  * @author huachao
- * @since 2020-08-08
+ * @since 2020-08-17
  */
 public interface ResUserMapper extends BaseMapper<ResUser> {
 	IPage<ResUser> selectUsers(IPage<ResUser> page, @Param(Constants.WRAPPER)Wrapper<ResUser> wrapper);
-}
+		}

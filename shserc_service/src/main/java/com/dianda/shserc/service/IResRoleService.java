@@ -5,9 +5,7 @@ import com.dianda.shserc.entity.ResRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
- * 服务类
- * </p>
+ * role service
  *
  * @author huachao
  * @since 2020-08-12

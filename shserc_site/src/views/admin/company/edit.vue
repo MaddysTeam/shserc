@@ -4,8 +4,8 @@
       <el-form-item prop="name">
         <el-input prefix-icon="el-icon-search" v-model="company.name" placeholder="单位名称"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-select v-model="model" placeholder="请选择" style="width: 100%">
+      <el-form-item prop="parentId">
+        <el-select @change="selectChanged" v-model="company.parentId" placeholder="请选择" style="width: 100%">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -24,24 +24,21 @@
 
 <script>
 import { Notification } from "element-ui";
-import { getChildren, edit } from "../../api/company.js";
-import { regexs } from "../../constans/regex.js";
-import { messages } from "../../constans/message.js";
+import { getChildren, edit } from "@/api/company.js";
+import { messages } from "@/static/message";
+import {validateRequired,validateLessThan50,validateSelectValue} from '@/static/validator';
 
 export default {
   name: "edit",
   data() {
-    var checkName = (rule, value, callback) => {
-      if (!value) {
-        Notification.error({ message: messages()["COMPANY_NOT_NULL"] });
-      } else if (!regexs()["length50"].test(value)) {
-        Notification.error({
-          message: messages()["COMPANY_LENGHT_NOT_ALLOWED_MORE_THAN_50"],
-        });
-      } else {
-        callback();
-      }
+    var nameValidator = (rule, value, callback) => {
+      validateRequired(rule,value,callback,messages.COMPANY_NOT_NULL);
+      validateLessThan50(rule,value,callback,messages.COMPANY_LENGHT_NOT_ALLOWED_MORE_THAN_50);
     };
+
+    var companyValidator=(rule,value,callback) => {
+        validateSelectValue(rule,value,callback,messages.COMPANY_SELECT_NOT_NULL);
+    }
 
     return {
       company: {
@@ -52,7 +49,8 @@ export default {
       model: {},
       options: [],
       rules: {
-        name: { validator: checkName, trigger: "blur" },
+        name: { validator: nameValidator, trigger: 'blur' },
+        parentId:{validator:companyValidator,trigger:'change'}
       },
     };
   },
@@ -80,6 +78,9 @@ export default {
           this.options = resultArray;
         }
       });
+    },
+    selectChanged(parentId){
+      this.company.parentId=parentId;
     },
     submitForm(formName) {
       let _this = this;
