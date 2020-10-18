@@ -57,7 +57,9 @@ public class Resource {
 	
 	private  boolean isDeleted;
 	
-	private String deformity;
+	private long deformity;
+	
+	private String deformityName;
 	
 	
 	public boolean isNewOne(){

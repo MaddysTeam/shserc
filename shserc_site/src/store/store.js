@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isAuth: true, //localStorage.getItem('Authorization') ? true:false
     
     //following for dictionary
-    gender: []
+    gender: [],
+    deformity:[]
   },
   mutations: {
     [types.LOGIN]: (state, data) => {

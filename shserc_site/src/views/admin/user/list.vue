@@ -59,11 +59,11 @@ export default {
     };
   },
   mounted() {
-    this.pageChange(this.index);
+    this.bindUserList();
   },
   methods: {
-    pageChange(index) {
-      let result = userList(index, this.pageSize).then((res) => {
+    bindUserList() {
+      let result = userList(this.index, this.pageSize).then((res) => {
         if (res && res.data) {
           let data=JSON.parse(res.data);
           this.total = data.total;

@@ -31,7 +31,7 @@ public class ResUser implements Serializable {
 	
 	// private  int CardPassword;
 	
-	private Boolean isDeleted;
+	private int isDeleted;
 	
 	private  Long  companyId;
 	

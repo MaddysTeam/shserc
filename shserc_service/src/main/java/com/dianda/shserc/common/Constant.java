@@ -32,7 +32,7 @@ public final class Constant {
 	}
 	
 	public static final class Status {
-		public final static boolean DELETED = true	;
+		public final static int DELETED = 1	;
 	}
 	
 }

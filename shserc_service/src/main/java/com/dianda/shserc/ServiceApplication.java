@@ -16,11 +16,10 @@ import org.apache.logging.log4j.Logger;
 @CrossOrigin(origins = {"http://127.0.0.1:8080", "null"})
 public class ServiceApplication {
  
-	static Logger logger= LogManager.getLogger(ServiceApplication.class);
+	//static Logger logger= LogManager.getLogger(ServiceApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run( ServiceApplication.class, args);
-		logger.info ( "test" );
 	}
 
 }

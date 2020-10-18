@@ -14,8 +14,8 @@ public interface IEditResourceMapper extends BasicMapper<Resource, EditResourceD
 	
 	 IEditResourceMapper INSTANCE= Mappers.getMapper ( IEditResourceMapper.class);
 	
-	@Mappings( {
-			@Mapping(source="id",target="id"),
-	} )
+//	@Mappings( {
+//			@Mapping(source="id",target="id"),
+//	} )
 	Resource mapFrom(EditResourceDto editUserDto );
 }
