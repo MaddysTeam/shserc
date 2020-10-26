@@ -26,39 +26,50 @@
   </div>
 </template>
 <script>
-import Table from "@/components/Table/index";
+import Table from "@/components/Tables/index";
 import { resourceList } from "@/api/resource.js";
+import { mapState } from "vuex";
 
 export default {
   components: { Table },
   data() {
     return {
       columns: [
-        { prop: "id", label: "id" },
-        { prop: "title", label: "" },
+        { prop: 'id', label: 'id' },
+        { prop: 'title', label: '资源标题' },
+        { prop: 'author', label: '作者姓名'  }
       ],
       source: [],
       pageSize: 10,
       index: 1,
       total: 0,
       commands: [{}],
-      deformityOptions: [],
+      //deformityOptions: [],
       deformity: { key: "请选择", value: 0 },
     };
   },
+  computed: {
+    ...mapState({
+      deformityOptions: (state) => state.deformity,
+    }),
+  },
   mounted() {
-    this.deformityOptions = this.$store.deformity;
-    this.bindResourceList();
+    this.bindResourceList(this.index);
   },
   methods: {
-    bindResourceList() {
-      let result = resourceList(this.index, this.pageSize).then((res) => {
-        if (res && res.data) {
-          let data = JSON.parse(res.data);
-          this.total = data.total;
-          this.source = data.listData;
-        }
-      });
+    bindResourceList(index) {
+      this.index = index;
+      let result = resourceList(this.index, this.pageSize);
+      this.source = result;
+      this.total = 2;
+
+      // let result = resourceList(this.index, this.pageSize).then((res) => {
+      //   if (res && res.data) {
+      //     let data = JSON.parse(res.data);
+      //     this.total = data.total;
+      //     this.source = data.listData;
+      //   }
+      // });
     },
   },
 };

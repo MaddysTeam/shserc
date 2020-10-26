@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.shserc.mapper.ResourceMapper">
-    <select id="selectResources" resultType="com.dianda.shserc.entity.Resource">
+    <select id="selectResources" parameterType="" resultType="com.dianda.shserc.entity.Resource">
         select r.id,
                 r.title,
                 r.author,
 				r.authorAddress,
 				r.authorEmail,
 				r.authorPhone,
-				r.deformity,
+				r.deformityPKID,
 				r.description,
 				r.title,
 				r.fileSize,
 				r.keywords
-                d.name as deformityName
         from resource r
-        join dictionary d on r.deformity = d.id
     </select>
 </mapper>

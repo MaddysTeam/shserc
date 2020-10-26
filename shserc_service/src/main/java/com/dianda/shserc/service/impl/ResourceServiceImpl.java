@@ -13,8 +13,10 @@ import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.vo.ResourceVo;
+import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +51,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		IPage<Resource> page = new Page<> ( current , size );
 		page = mapper.selectResources ( page , wrapper );
 		List<Resource> resources = page.getRecords ( );
+		List<ResourceVo> resourceVoList = new ArrayList<> ( );
+		
+		for ( Resource res : resources ) {
+			resourceVoList.add ( IResourceVoMapper.INSTANCE.mapFrom ( res ) );
+		}
 		
 		ResourceVo vo = new ResourceVo ( );
 		vo.setCurrent ( current );
@@ -56,7 +63,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		vo.setTotal ( page.getTotal ( ) );
 		
 		if ( ! ObjectUtil.isNull ( resources ) && resources.size ( ) > 0 )
-			vo.setListData ( resources );
+			vo.setListData ( resourceVoList );
 		
 		return vo;
 	}

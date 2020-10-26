@@ -39,6 +39,12 @@ public class Resource {
 	
 	private  long deformityPKID;
 	
+	private  long resourceTypePKID;
+	
+	private  long MediumTypePKID;
+	
+	private  long statePKID;
+	
 	private  long viewCount;
 	
 	private  long starTotal;
@@ -57,10 +63,15 @@ public class Resource {
 	
 	private  boolean isDeleted;
 	
-	private long deformity;
 	
-	private String deformityName;
 	
+	private String deformity;
+	
+	private String resourceType;
+	
+	private  String mediumType;
+	
+	private String state;
 	
 	public boolean isNewOne(){
 		return this.id<=0;

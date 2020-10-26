@@ -19,7 +19,7 @@
       :list="source"
       :columns="columns"
       :commands="commands"
-      :handleChange="pageChange"
+      :handleChange="bindUserList"
       :pageSize="pageSize"
       :total="total"
     ></Table>
@@ -42,8 +42,8 @@ export default {
       ],
       source: [],
       pageSize: 2,
-      index: 1,
       total: 0,
+      current:1,
       commands: [
         {
           id: 1,
@@ -59,11 +59,12 @@ export default {
     };
   },
   mounted() {
-    this.bindUserList();
+    this.bindUserList(0);
   },
   methods: {
-    bindUserList() {
-      let result = userList(this.index, this.pageSize).then((res) => {
+    bindUserList(index) {
+      this.current=index;
+      let result = userList(index, this.pageSize).then((res) => {
         if (res && res.data) {
           let data=JSON.parse(res.data);
           this.total = data.total;

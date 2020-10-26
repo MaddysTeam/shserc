@@ -4,6 +4,7 @@ import Admin from '@/layouts/admin/index'
 import Login from '@/views/admin/login'
 import UserList from '@/views/admin/user/list'
 import CompanyList from '@/views/admin/company/list'
+import ResourceList from '@/views/admin/resource/list'
 import store from '../store/store'
 
 Vue.use(Router)
@@ -27,14 +28,18 @@ const router = new Router({
       name: 'Index',
       component: Admin,
       children: [{
-        path: '/admin/users',
+        path: '/admin/user/list',
         name: 'UserList',
         component: UserList
       },
       {
-        path: '/admin/company',
+        path: '/admin/company/list',
         name: 'CompanyList',
         component: CompanyList
+      },{
+        path:'/admin/resource/list',
+        name: 'ResourceList',
+        component: ResourceList
       }
       ]
     },

@@ -12,7 +12,7 @@ export default new Vuex.Store({
     
     //following for dictionary
     gender: [],
-    deformity:[]
+    deformity:[{key:1,value:1}]
   },
   mutations: {
     [types.LOGIN]: (state, data) => {
