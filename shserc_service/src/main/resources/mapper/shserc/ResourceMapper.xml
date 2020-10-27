@@ -9,6 +9,8 @@
 				r.authorEmail,
 				r.authorPhone,
 				r.deformityPKID,
+				r.statePKID,
+				r.mediumTypePKID
 				r.description,
 				r.title,
 				r.fileSize,
