@@ -57,3 +57,13 @@ token:
 
 logging:
   config: classpath:shserc-log.xml
+
+#cache:
+#  maxKeys: 1000000
+#  expireSeconds: 3600
+#  db:
+#    type: mysql
+#    name: shserc
+#    host: 127.0.0.1
+#    port: 3306
+#    expire: ${cache.expireSeconds}
