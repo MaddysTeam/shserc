@@ -26,17 +26,16 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 
 	@Resource
 	DictionaryMapper mapper;
-
-	@Resource
-	IDictionaryVoMapper voMapper;
+	
 
 	@Override
 	public DictionaryVo findAll() {
 		QueryWrapper<Dictionary> wrapper = new QueryWrapper<>();
 		List<Dictionary> list = mapper.selectList(wrapper);
 		List<DictionaryVo> voList= new ArrayList<>();
+		IDictionaryVoMapper mapper= IDictionaryVoMapper.INSTANCE;
 		for (Dictionary item : list) {
-		    DictionaryVo vo=voMapper.mapFrom(item);
+		    DictionaryVo vo=mapper.mapFrom(item);
 			voList.add(vo);
 		}
 

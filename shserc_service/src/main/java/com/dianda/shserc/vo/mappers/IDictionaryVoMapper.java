@@ -1,12 +1,15 @@
 package com.dianda.shserc.vo.mappers;
 
 import com.dianda.shserc.entity.Dictionary;
+import com.dianda.shserc.util.mapper.BasicMapper;
 import com.dianda.shserc.vo.DictionaryVo;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-public interface IDictionaryVoMapper {
+@Mapper
+public interface IDictionaryVoMapper extends BasicMapper<DictionaryVo, Dictionary> {
 	IDictionaryVoMapper INSTANCE = Mappers.getMapper(IDictionaryVoMapper.class);
 
 	@Mappings({
