@@ -24,9 +24,9 @@ public class LogAspect {
 	IServiceLogger logger;
 	
 	@Pointcut( dataPoint )
-	public void PointCut( ) { }
+	public void pointCut( ) { }
 	
-	@Around( "PointCut()" )
+	@Around( "pointCut()" )
 	public Object doAroundService( ProceedingJoinPoint joinPoint ) {
 		String method = joinPoint.getSignature ( ).getName ( );
 		Object[] args = joinPoint.getArgs ( );

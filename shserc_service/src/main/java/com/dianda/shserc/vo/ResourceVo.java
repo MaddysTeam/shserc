@@ -1,10 +1,19 @@
 package com.dianda.shserc.vo;
 
 import com.dianda.shserc.entity.Resource;
+import com.dianda.shserc.util.cache.DataDictionaryCache;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+
+/**
+ * Resource vo object
+ *
+ * @author huachao
+ * @since 2020-08-17
+ */
 
 @Data
 public class ResourceVo extends  BaseVo<ResourceVo> implements Serializable {

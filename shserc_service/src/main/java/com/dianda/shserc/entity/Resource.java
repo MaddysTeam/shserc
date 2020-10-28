@@ -65,7 +65,7 @@ public class Resource {
 	
 	
 	
-	private String deformity;
+	private String deformity;//DataDictionaryCache.translate(());;
 	
 	private String resourceType;
 	
