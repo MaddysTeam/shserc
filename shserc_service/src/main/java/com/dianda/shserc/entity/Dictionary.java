@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.io.Serializable;
 
+import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * dictionary  entity
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
 public class Dictionary implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	private long id;
 	
 	private String name;
@@ -34,5 +36,7 @@ public class Dictionary implements Serializable {
 	
 	private String value;
 	
+	public static void dictTranslate( Dictionary dic , DictionaryCache cache ) {
+	}
 	
 }

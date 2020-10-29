@@ -1,7 +1,5 @@
 package com.dianda.shserc.vo;
 
-import com.dianda.shserc.entity.Resource;
-import com.dianda.shserc.util.cache.DataDictionaryCache;
 import lombok.Data;
 
 import java.io.Serializable;

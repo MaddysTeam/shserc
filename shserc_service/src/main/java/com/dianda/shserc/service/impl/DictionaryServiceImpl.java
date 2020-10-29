@@ -6,11 +6,14 @@ import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.mapper.DictionaryMapper;
 import com.dianda.shserc.service.IDictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import com.dianda.shserc.vo.DictionaryVo;
 import com.dianda.shserc.vo.mappers.IDictionaryVoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +30,9 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 	@Resource
 	DictionaryMapper mapper;
 	
-
+	@Autowired
+	DictionaryCache dictionaryCache;
+	
 	@Override
 	public DictionaryVo findAll() {
 		QueryWrapper<Dictionary> wrapper = new QueryWrapper<>();
@@ -35,6 +40,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 		List<DictionaryVo> voList= new ArrayList<>();
 		IDictionaryVoMapper mapper= IDictionaryVoMapper.INSTANCE;
 		for (Dictionary item : list) {
+			Dictionary.dictTranslate (item,dictionaryCache);
 		    DictionaryVo vo=mapper.mapFrom(item);
 			voList.add(vo);
 		}

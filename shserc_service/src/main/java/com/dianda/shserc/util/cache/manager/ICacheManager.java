@@ -1,4 +1,6 @@
-package com.dianda.shserc.util.cache;
+package com.dianda.shserc.util.cache.manager;
+
+import com.dianda.shserc.util.cache.CacheObject;
 
 import java.util.List;
 import java.util.Map;

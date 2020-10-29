@@ -1,9 +1,10 @@
-package com.dianda.shserc.util.cache;
+package com.dianda.shserc.util.cache.dictionary;
 
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.service.IDictionaryService;
 import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.basic.StringUtil;
+import com.dianda.shserc.util.cache.CacheObject;
+import com.dianda.shserc.util.cache.manager.ICacheManager;
 import com.dianda.shserc.vo.DictionaryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,19 +16,18 @@ import java.util.Map;
 
 /**
  * data dictionary cache  数据字典缓存
- * due to dictionary only has tow layers
  *
  * @author huachao
  * @since 2020-08-05
  */
 @Component
-public class DataDictionaryCache {
+public class DictionaryCache {
 	
 	private static final String KEY = "dict";
 	private static final long EXPIRE_SECONDS = 100000;
 	
 	@Autowired
-	 ICacheManager manager;
+	ICacheManager manager;
 	
 	@Resource
 	IDictionaryService service;

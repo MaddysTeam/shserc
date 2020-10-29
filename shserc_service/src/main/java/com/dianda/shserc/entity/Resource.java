@@ -1,10 +1,8 @@
 package com.dianda.shserc.entity;
 
-
-import com.dianda.shserc.util.cache.DataDictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.time.LocalDateTime;
 
@@ -40,7 +38,7 @@ public class Resource {
 	
 	private String authorPhone;
 	
-	private long deformityPKID = 1;
+	public long deformityPKID;
 	
 	private long resourceTypePKID;
 	
@@ -66,13 +64,8 @@ public class Resource {
 	
 	private boolean isDeleted;
 	
-	
-	private String deformity;
-	
-	public String getDeformity( ) {
-		return new DataDictionaryCache ().translate ( "gender" , "" + deformityPKID );
-	}
-	
+	 String deformity;
+	 
 	private String resourceType;
 	
 	private String mediumType;

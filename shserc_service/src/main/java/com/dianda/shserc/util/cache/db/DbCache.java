@@ -1,5 +1,7 @@
-package com.dianda.shserc.util.cache;
+package com.dianda.shserc.util.cache.db;
 
+import com.dianda.shserc.util.cache.CacheObject;
+import com.dianda.shserc.util.cache.manager.ICacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

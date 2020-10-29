@@ -1,10 +1,9 @@
 package com.dianda.shserc.utils.cache;
 
 import com.dianda.shserc.ServiceApplication;
-import com.dianda.shserc.entity.Resource;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.cache.CacheObject;
-import com.dianda.shserc.util.cache.DataDictionaryCache;
+import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,13 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 
-
 @SpringBootTest( classes = ServiceApplication.class )
-@RunWith( SpringRunner.class )
+@RunWith( SpringRunner.class)
 public class DataDictionaryCacheTest {
 	
 	@Autowired
-	DataDictionaryCache cache;
+	DictionaryCache cache;
+	
 	long expireSeconds = 1;
 	long notExpireSeconds = 1000000;
 	
@@ -33,7 +32,6 @@ public class DataDictionaryCacheTest {
 	public void setCacheWithExpireTest( ) {
 		cache.setCacheFromService ( expireSeconds );
 		CacheObject o = cache.getCache ( );
-		int genderValue = 1;
 		
 		Assert.assertEquals ( null , o );
 	}
@@ -50,12 +48,11 @@ public class DataDictionaryCacheTest {
 	public void translateTest( ) {
 		String gender = cache.translate ( "gender" , "1" );
 		String gender2 = cache.translate ( "gender" , "0" );
-		String gender3 = cache.translate ( "gender" , "2");
+		String gender3 = cache.translate ( "gender" , "2" );
 		
 		Assert.assertTrue ( gender.equals ( "男" ) );
 		Assert.assertTrue ( gender2.equals ( "女" ) );
 		Assert.assertTrue ( ObjectUtil.isNull ( gender3 ) );
 	}
-	
 	
 }

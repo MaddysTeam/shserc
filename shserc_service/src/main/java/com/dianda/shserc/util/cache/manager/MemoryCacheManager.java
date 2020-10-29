@@ -3,7 +3,6 @@ package com.dianda.shserc.util.cache.manager;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.cache.CacheObject;
-import com.dianda.shserc.util.cache.ICacheManager;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ import java.util.stream.Collectors;
  * @since 2020-08-17
  */
 @Component
+
 public class MemoryCacheManager implements ICacheManager {
 
 	static List<CacheObject> cacheObjects = new ArrayList<>();
