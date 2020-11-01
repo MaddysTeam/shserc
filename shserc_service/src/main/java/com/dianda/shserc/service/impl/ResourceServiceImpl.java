@@ -12,8 +12,11 @@ import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
+import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import com.dianda.shserc.vo.ResourceVo;
+import com.dianda.shserc.vo.ResourceVoList;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,18 +35,31 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@javax.annotation.Resource
 	ResourceMapper mapper;
 	
+	
+	DictionaryCache cache;
+	
+	@Autowired
+	public ResourceServiceImpl( DictionaryCache cache ) {
+		this.cache = cache;
+		this.cache.setCacheFromService ( 0 );
+	}
+	
+	
 	@Override
-	public ResourceVo find( ResourceSelectParams params ) {
+	public ResourceVoList find( ResourceSelectParams params ) {
 		QueryWrapper<Resource> wrapper = new QueryWrapper<> ( );
 		long deformityId = params.getDeformityId ( );
+		long stateId = params.getStateId ( );
 		String phrase = params.getPhrase ( );
+		
 		if ( ! StringUtil.IsNullOrEmpty ( phrase ) )
 			wrapper = wrapper.like ( "title" , phrase );
-		
 		if ( deformityId > 0 ) {
-			wrapper.eq ( "deformity" , deformityId );
+			wrapper=wrapper.eq ( "deformityPKID" , deformityId );
 		}
-		
+		if ( stateId > 0 ) {
+			wrapper=wrapper.eq ( "statePKID" , stateId );
+		}
 		//TODO: add more filter fields here
 		
 		int current = params.getCurrent ( );
@@ -54,18 +70,19 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		List<ResourceVo> resourceVoList = new ArrayList<> ( );
 		
 		for ( Resource res : resources ) {
+			Resource.dictTranslate ( res , cache ); // 翻译字典
 			resourceVoList.add ( IResourceVoMapper.INSTANCE.mapFrom ( res ) );
 		}
 		
-		ResourceVo vo = new ResourceVo ( );
-		vo.setCurrent ( current );
-		vo.setSize ( size );
-		vo.setTotal ( page.getTotal ( ) );
+		ResourceVoList voList = new ResourceVoList ( );
+		voList.setCurrent ( current );
+		voList.setSize ( size );
+		voList.setTotal ( page.getTotal ( ) );
 		
 		if ( ! ObjectUtil.isNull ( resources ) && resources.size ( ) > 0 )
-			vo.setListData ( resourceVoList );
+			voList.setListData ( resourceVoList );
 		
-		return vo;
+		return voList;
 	}
 	
 	@Override

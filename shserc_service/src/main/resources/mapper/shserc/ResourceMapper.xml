@@ -4,17 +4,21 @@
     <select id="selectResources" resultType="com.dianda.shserc.entity.Resource">
         select r.id,
                 r.title,
+                r.description,
+                r.statePKID,
                 r.author,
 				r.authorAddress,
 				r.authorEmail,
 				r.authorPhone,
 				r.deformityPKID,
-				r.statePKID,
-				r.mediumTypePKID
 				r.description,
 				r.title,
 				r.fileSize,
-				r.keywords
+				r.keywords,
+				r.viewCount
         from resource r
+        <where>
+			${ew.sqlSegment}
+		</where>
     </select>
 </mapper>

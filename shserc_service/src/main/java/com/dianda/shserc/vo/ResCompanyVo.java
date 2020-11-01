@@ -5,12 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Data
-public class ResCompanyVo extends BaseVo<ResCompany> implements Serializable {
+public class ResCompanyVo extends BaseVoList<ResCompany> implements Serializable {
 
 	private long id;
 	private long value;

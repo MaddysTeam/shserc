@@ -1,5 +1,6 @@
 package com.dianda.shserc.entity;
 
+import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -38,7 +39,7 @@ public class Resource {
 	
 	private String authorPhone;
 	
-	public long deformityPKID;
+	private long deformityPKID;
 	
 	private long resourceTypePKID;
 	
@@ -64,8 +65,8 @@ public class Resource {
 	
 	private boolean isDeleted;
 	
-	 String deformity;
-	 
+	private String deformity;
+	
 	private String resourceType;
 	
 	private String mediumType;
@@ -74,6 +75,12 @@ public class Resource {
 	
 	public boolean isNewOne( ) {
 		return this.id <= 0;
+	}
+	
+	
+	public static void dictTranslate( Resource resource , DictionaryCache cache ) {
+		resource.deformity = cache.translate ( "deformity" , String.valueOf ( resource.getDeformityPKID ( ) ) );
+		resource.state = cache.translate ( "state" , String.valueOf ( resource.getStatePKID ( ) ) );
 	}
 	
 }

@@ -2,7 +2,13 @@
     <div>
         <el-table :data="list" style="width:100%" border>
             <template v-for="(item,index) in columns">
-                <el-table-column :prop="item.prop" :width="item.width" :key="item.label" :align="item.align"
+                <el-table-column :prop="item.prop" :width="item.width" :key="item.label" :align="item.align" v-if="item.isLink"
+                    :label="item.label">
+                    <template slot-scope="scope">
+                        <router-link :to="item.path+item.query">{{item.label}}</router-link>
+                    </template>
+                </el-table-column>
+                <el-table-column :prop="item.prop" :width="item.width" :key="item.label" :align="item.align" v-else
                     :label="item.label">
                 </el-table-column>
             </template>

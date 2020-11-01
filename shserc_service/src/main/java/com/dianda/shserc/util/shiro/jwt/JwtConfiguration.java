@@ -66,6 +66,9 @@ public class JwtConfiguration {
 		Map<String, String> filterRuleMap = new LinkedHashMap<> ();
 		filterRuleMap.put("/account/login", "anon");
 		filterRuleMap.put("/company/*", "anon");
+		filterRuleMap.put("/dictionary/*", "anon");
+		filterRuleMap.put("/resource/*", "anon");
+		filterRuleMap.put("/user/*", "anon");
 		filterRuleMap.put("/account/logout","jwt");
 		filterRuleMap.put("/**", "jwt");
 		shiroFilter.setFilterChainDefinitionMap(filterRuleMap);

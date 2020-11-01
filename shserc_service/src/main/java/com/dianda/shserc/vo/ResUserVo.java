@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ResUserVo extends BaseVo<ResUser>  implements Serializable {
+public class ResUserVo extends BaseVoList<ResUser> implements Serializable {
 	 private  long  id;
 	 private  String userName;
 	 private  long companyId;

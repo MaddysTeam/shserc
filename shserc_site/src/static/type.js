@@ -3,3 +3,4 @@ export const LOGOUT='logout';
 // following keys for dictionary
 export const GENDER='gender';
 export const DEFORMITY="deformity";
+export const DICTIONARY="dictionary";

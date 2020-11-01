@@ -64,10 +64,14 @@ public class DictionaryCache {
 	}
 	
 	public void setCacheFromService( long expireSeconds ) {
+		CacheObject o =getCache ();
+		if(!ObjectUtil.isNull ( o ))
+			return;
+		
 		DictionaryVo vo = service.findAll ( );
 		List<DictionaryVo> voList = vo.getListData ( );
 		Map<String, Object> map = new HashMap<> ( );
-		CacheObject o = new CacheObject ( );
+		o = new CacheObject ( );
 		o.setMap ( map );
 		for ( DictionaryVo item : voList ) {
 			map.put ( item.getCode ( ) , item );

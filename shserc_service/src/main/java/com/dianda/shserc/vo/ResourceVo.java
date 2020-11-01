@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 
 @Data
-public class ResourceVo extends  BaseVo<ResourceVo> implements Serializable {
+public class ResourceVo  implements Serializable {
 	
 	private  long id;
 	
@@ -28,7 +28,7 @@ public class ResourceVo extends  BaseVo<ResourceVo> implements Serializable {
 	
 	private  String state;
 	
-	private  String MediumType;
+	private  String mediumType;
 	
 	private  String fileExtName;
 	
@@ -41,3 +41,4 @@ public class ResourceVo extends  BaseVo<ResourceVo> implements Serializable {
 	private LocalDateTime addTime;
 	
 }
+

@@ -11,8 +11,9 @@ export default new Vuex.Store({
     isAuth: true, //localStorage.getItem('Authorization') ? true:false
     
     //following for dictionary
-    gender: [],
-    deformity:[{key:1,value:1}]
+    dict:[],
+    //gender: [],
+    deformity:[],
   },
   mutations: {
     [types.LOGIN]: (state, data) => {
@@ -26,8 +27,13 @@ export default new Vuex.Store({
     },
 
      //following for dictionary
-    [types.GENDER]: (state, data) => {
-      state.gender = data;
+    [types.DICTIONARY]: (state, data) => {
+      state.dict = data ;
+    },
+
+    [types.DEFORMITY]: (state, data) => {
+      state.deformity = data ;
     }
+
   }
 });

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class BaseVo<T> implements Serializable {
+public class BaseVoList<T> implements Serializable {
 	Integer current;
 	Integer size;
 	Long total;
