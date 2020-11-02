@@ -45,7 +45,9 @@ export default {
     return {
       columns: [
         { prop: "id", label: "id" },
-        { prop: "title", label: "资源标题", isLink: true, path: "#" },
+        { prop: "title", label: "资源标题", isLink: true,method:(index,row)=>{
+          this.$router.push('details?id='+row.id);
+        }},
         { prop: "author", label: "作者姓名" },
         { prop: "author", label: "作者邮箱" },
         { prop: "resourceType", label: "资源类型" },

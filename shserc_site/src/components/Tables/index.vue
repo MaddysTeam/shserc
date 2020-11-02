@@ -5,7 +5,7 @@
                 <el-table-column :prop="item.prop" :width="item.width" :key="item.label" :align="item.align" v-if="item.isLink"
                     :label="item.label">
                     <template slot-scope="scope">
-                        <router-link :to="item.path+item.query">{{item.label}}</router-link>
+                        <router-link :to="item.label" @click.native.prevent="item.method(index,scope.row)">{{item.label}}</router-link>
                     </template>
                 </el-table-column>
                 <el-table-column :prop="item.prop" :width="item.width" :key="item.label" :align="item.align" v-else
