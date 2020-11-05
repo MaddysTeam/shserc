@@ -5,9 +5,10 @@
       <el-breadcrumb-item>资源列表</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <div class="buttons">
+    <div class="btn-group">
       <el-button class="el-button--primary" type="danger" size="large" @click="addResource()">新增资源</el-button>
     </div>
+
     <div class="filters">
       <el-select
         v-model="deformity"
@@ -105,17 +106,14 @@ export default {
 };
 </script>
 <style scoped>
-.filters {
-  display: flex;
-  margin: 20px;
-}
-
 .filters .search {
   margin-left: 10px;
 }
 
-.buttons{
-  display:flex;
-  margin:20px;
+.btn-group,.filters {
+  display: flex;
+  flex-direction: row;
+  text-justify: auto;
+  margin: 20px 20px 20px 0;
 }
 </style>
