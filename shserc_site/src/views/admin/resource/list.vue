@@ -4,6 +4,10 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>资源列表</el-breadcrumb-item>
     </el-breadcrumb>
+
+    <div class="buttons">
+      <el-button class="el-button--primary" type="danger" size="large" @click="addResource()">新增资源</el-button>
+    </div>
     <div class="filters">
       <el-select
         v-model="deformity"
@@ -93,6 +97,10 @@ export default {
     deformitySelectChange(val) {
       this.deformityId = val;
     },
+
+    addResource(){
+      this.$router.push('/admin/resource/edit');
+    }
   },
 };
 </script>
@@ -104,5 +112,10 @@ export default {
 
 .filters .search {
   margin-left: 10px;
+}
+
+.buttons{
+  display:flex;
+  margin:20px;
 }
 </style>
