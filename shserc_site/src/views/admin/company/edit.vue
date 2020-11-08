@@ -31,15 +31,6 @@ import {validateRequired,validateLessThan50,validateSelectValue} from '@/static/
 export default {
   name: "edit",
   data() {
-    var nameValidator = (rule, value, callback) => {
-      validateRequired(rule,value,callback,messages.COMPANY_NOT_NULL);
-      validateLessThan50(rule,value,callback,messages.COMPANY_LENGHT_NOT_ALLOWED_MORE_THAN_50);
-    };
-
-    var companyValidator=(rule,value,callback) => {
-        validateSelectValue(rule,value,callback,messages.COMPANY_SELECT_NOT_NULL);
-    }
-
     return {
       company: {
         name: "",
@@ -49,8 +40,11 @@ export default {
       model: {},
       options: [],
       rules: {
-        name: { validator: nameValidator, trigger: 'blur' },
-        parentId:{validator:companyValidator,trigger:'change'}
+        name: [
+             {validator:(rule,value,callback)=>{ validateRequired(rule,value,callback,messages.COMPANY_NOT_NULL);},trigger:'blur'},
+             {validator:(rule,value,callback)=>{ validateLessThan50(rule,value,callback,messages.COMPANY_LENGHT_NOT_ALLOWED_MORE_THAN_50);},trigger:'blur'},
+             ],
+        parentId:{validator:(rule,value,callback) => {validateSelectValue(rule,value,callback,messages.COMPANY_SELECT_NOT_NULL);},trigger:'change'}
       },
     };
   },

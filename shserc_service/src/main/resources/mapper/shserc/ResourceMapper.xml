@@ -5,17 +5,17 @@
         select r.id,
                 r.title,
                 r.description,
-                r.statePKID,
+                r.state_id,
                 r.author,
-				r.authorAddress,
-				r.authorEmail,
-				r.authorPhone,
-				r.deformityPKID,
+				r.author_address,
+				r.author_email,
+				r.author_phone,
+				r.deformity_id,
 				r.description,
 				r.title,
-				r.fileSize,
+				r.file_size,
 				r.keywords,
-				r.viewCount
+				r.view_count
         from resource r
         <where>
 			${ew.sqlSegment}

@@ -8,6 +8,7 @@ import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.dto.EditResourceDto;
 import com.dianda.shserc.dto.mappers.IEditResourceMapper;
 import com.dianda.shserc.entity.Resource;
+import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.util.basic.ObjectUtil;
@@ -55,10 +56,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if ( ! StringUtil.IsNullOrEmpty ( phrase ) )
 			wrapper = wrapper.like ( "title" , phrase );
 		if ( deformityId > 0 ) {
-			wrapper=wrapper.eq ( "deformityPKID" , deformityId );
+			wrapper=wrapper.eq ( "deformity_Id" , deformityId );
 		}
 		if ( stateId > 0 ) {
-			wrapper=wrapper.eq ( "statePKID" , stateId );
+			wrapper=wrapper.eq ( "state_Id" , stateId );
 		}
 		//TODO: add more filter fields here
 		
@@ -104,7 +105,14 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	
 	@Override
 	public ResourceVo getById( long id ) {
-		return null;
+		try {
+			Resource resource = mapper.selectById ( id );
+			Resource.dictTranslate ( resource , cache ); // 翻译字典
+			return IResourceVoMapper.INSTANCE.mapFrom ( resource );
+		}
+		catch ( Exception e ){
+			return null;
+		}
 	}
 	
 	@Override

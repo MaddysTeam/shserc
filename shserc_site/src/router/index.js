@@ -42,7 +42,11 @@ const router = new Router({
         name: 'ResourceList',
         component: ResourceList
       },{
-        path:'/admin/resource/edit',
+        path:'/admin/resource/add/',
+        name:'ResourceAdd',
+        component:ResourceEdit
+      },{
+        path:'/admin/resource/edit/:id',
         name:'ResourceEdit',
         component:ResourceEdit
       }

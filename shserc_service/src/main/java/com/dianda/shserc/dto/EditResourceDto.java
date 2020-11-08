@@ -3,7 +3,6 @@ package com.dianda.shserc.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 
 @Data
 public class EditResourceDto {
@@ -29,6 +28,8 @@ public class EditResourceDto {
 	
 	private long fileSize;
 	
+	private String fileName;
+	
 	private boolean isLink;
 	
 	private String authorCompany;
@@ -39,10 +40,8 @@ public class EditResourceDto {
 	
 	private String authorPhone;
 	
-	private long deformityPKID;
+	private long deformityId;
 	
 	private long auditor;
-	
-	private String deformity;
 	
 }

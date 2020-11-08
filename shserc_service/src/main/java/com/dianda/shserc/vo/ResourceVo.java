@@ -40,5 +40,13 @@ public class ResourceVo  implements Serializable {
 	
 	private LocalDateTime addTime;
 	
+	private  String resourcePath;
+	
+	private String coverPath;
+	
+	private  String fileName;
+	
+	private  String keywords;
+	
 }
 

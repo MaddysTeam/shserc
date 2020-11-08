@@ -65,9 +65,15 @@ export default {
       pageSize: 10,
       index: 1,
       total: 0,
-      commands: [{}],
-      // deformityOptions: [],
-      deformity: { name: "请选择2", id: 0, value: 0 },
+      commands: [{
+          id: 1,
+          label: "编辑",
+          type: "primary",
+          method: (index, row) => {
+            this.$router.push('/admin/resource/edit/'+row.id)
+          },
+      }],
+      deformity: { name: "", id: 0, value: 0 },
       deformityId: 0,
     };
   },
@@ -100,7 +106,7 @@ export default {
     },
 
     addResource(){
-      this.$router.push('/admin/resource/edit');
+      this.$router.push('/admin/resource/add');
     }
   },
 };

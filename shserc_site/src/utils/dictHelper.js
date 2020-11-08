@@ -3,7 +3,7 @@ import * as types from '../static/type';
 
 export function initDic(store) {
     dicList().then(res => {
-        if (res.message && res.message == 'success' && store) {
+        if (res && res.message && res.message == 'success' && store) {
             let data = JSON.parse(res.data);
 
             store.commit(types.DICTIONARY, data.listData);

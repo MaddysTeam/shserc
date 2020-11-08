@@ -1,5 +1,6 @@
 package com.dianda.shserc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,8 @@ public class Resource {
 	
 	private String fileExtName;
 	
+	private  String fileName;
+	
 	private long fileSize;
 	
 	private boolean isLink;
@@ -39,13 +42,13 @@ public class Resource {
 	
 	private String authorPhone;
 	
-	private long deformityPKID;
+	private long deformityId;
 	
-	private long resourceTypePKID;
+	private long resourceTypeId;
 	
-	private long MediumTypePKID;
+	private long mediumTypeId;
 	
-	private long statePKID;
+	private long stateId;
 	
 	private long viewCount;
 	
@@ -53,7 +56,7 @@ public class Resource {
 	
 	private long auditor;
 	
-	private long auditorTime;
+	private LocalDateTime auditorTime;
 	
 	private long addUser;
 	
@@ -65,12 +68,16 @@ public class Resource {
 	
 	private boolean isDeleted;
 	
+	@TableField(exist = false)
 	private String deformity;
 	
+	@TableField(exist = false)
 	private String resourceType;
 	
+	@TableField(exist = false)
 	private String mediumType;
 	
+	@TableField(exist = false)
 	private String state;
 	
 	public boolean isNewOne( ) {
@@ -79,8 +86,8 @@ public class Resource {
 	
 	
 	public static void dictTranslate( Resource resource , DictionaryCache cache ) {
-		resource.deformity = cache.translate ( "deformity" , String.valueOf ( resource.getDeformityPKID ( ) ) );
-		resource.state = cache.translate ( "state" , String.valueOf ( resource.getStatePKID ( ) ) );
+		resource.deformity = cache.translate ( "deformity" , String.valueOf ( resource.getDeformityId ( ) ) );
+		resource.state = cache.translate ( "state" , String.valueOf ( resource.getStateId ( ) ) );
 	}
 	
 }

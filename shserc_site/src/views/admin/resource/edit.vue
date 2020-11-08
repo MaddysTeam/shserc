@@ -7,21 +7,31 @@
 
     <el-row :gutter="20" class="row">
       <el-col :span="14">
-        <el-form :model="resource" ref="resourceForm" label-width="80px">
-          <el-form-item label="资源名称">
+        <el-form
+          :model="resource"
+          ref="resourceForm"
+          label-width="80px"
+          :rules="rules"
+        >
+          <el-form-item label="资源名称" prop="title">
             <el-input v-model="resource.title"></el-input>
           </el-form-item>
           <el-form-item label="上传资源">
             <el-upload
-              class="upload-demo"
+              class="upload-file"
               action="https://jsonplaceholder.typicode.com/posts/"
-              :on-change="handleChange"
+              :limit="1"
+              :on-change="uploadResourceHandleChange"
               :file-list="fileList"
+              :on-exceed="uploadResourceHandleExceed"
+              :on-error="uploadResourceError"
+              :on-success="uploadResourceSuccess"
+              :on-remove="uploadResourceOnRemoveTxt"
+              :before-upload="uploadResourceOnBeforeUpload"
+              :http-request="uploadResource"
             >
-              <el-button  type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">
-                <!-- 只能上传jpg/png文件，且不超过500kb -->
-              </div>
+              <el-button type="primary">点击上传</el-button>
+              <div slot="tip" class="el-upload__tip"></div>
             </el-upload>
           </el-form-item>
           <el-form-item label="资源描述">
@@ -50,9 +60,10 @@
               {{ word }}
             </el-tag>
           </el-form-item>
-          <el-form-item label="残疾类型">
+          <el-form-item label="残疾类型" prop="deformityId">
             <el-select
-              v-model="deformity"
+              @change="deformitySelectChanged"
+              v-model="resource.deformityId"
               value-key="id"
               placeholder="选择残疾类型"
               style="width: 100%"
@@ -60,6 +71,7 @@
               <el-option
                 v-for="item in deformityOptions"
                 :key="item.id"
+                :label="item.name"
                 :value="item.value"
               >
               </el-option>
@@ -75,8 +87,8 @@
             <el-input v-model="resource.authorCompany"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" >提交</el-button>
-            <el-button>取消</el-button>
+            <el-button type="primary" @click="handSubmit()">提交</el-button>
+            <el-button type="info" @click="handCancel()">取消</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -125,36 +137,82 @@
 </template>
 
 <script>
+import { Notification } from "element-ui";
 import { mapState } from "vuex";
+import {
+  validateRequired,
+  validateLessThan50,
+  validateSelectValue,
+} from "@/static/validator";
+import { messages } from "@/static/message";
+import { edit, uploadFile, uploadCover,resource } from "@/api/resource";
+
 export default {
   data() {
     return {
       resource: {
+        id:0,
         title: "",
-        deformityPKID: "",
+        deformityId: "",
         author: "",
         authorEmail: "",
         authorCompany: "",
         authorPhone: "",
-        keywords: "key1,key2,key3",
+        keywords: null,
         description: "",
         resourcePath: "",
+        fileName: "",
       },
 
       inputVisible: false,
       keywords: [],
       inputKeywordsValue: "",
       deformity: { name: "请选择", id: 0, value: 0 },
+      fileList: [
+        // {
+        //   name: "food.jpeg",
+        //   url:
+        //     "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
+        // },
+      ],
 
-      //demo
-
-       fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }]
+      rules: {
+        title: [
+          {
+            validator: (rule, value, callback) => {
+              validateRequired(
+                rule,
+                value,
+                callback,
+                messages.RESOURCE_TITLE_NOT_NULL
+              );
+            },
+            trigger: "blur",
+          },
+          {
+            validator: (rule, value, callback) => {
+              validateLessThan50(
+                rule,
+                value,
+                callback,
+                messages.RESOURCE_TITLE_NOT_ALLOWED_MORE_THAN_50
+              );
+            },
+            trigger: "blur",
+          },
+        ],
+        deformityId: {
+          validator: (rule, value, callback) => {
+            validateSelectValue(
+              rule,
+              value,
+              callback,
+              messages.RESOURCE_DEFORMITY_SELECT_NOT_NULL
+            );
+          },
+          trigger: "change",
+        },
+      },
     };
   },
   computed: {
@@ -163,12 +221,29 @@ export default {
     }),
   },
   mounted() {
-    this.bindKeywords();
+    this.loadResource();
   },
 
   methods: {
+    loadResource() {
+      let id=this.$router.currentRoute.params.id
+      if (id) {
+          resource(id).then(res=>{
+               this.resource = JSON.parse(res.data);
+               this.fileList.push({
+                 name: this.resource.fileName,
+                 url: this.resource.resourcePath
+               });
+              console.log(this.resource.keywords);
+              this.bindKeywords();
+          });
+      }
+    },
+
     bindKeywords() {
-      this.keywords = this.resource.keywords.split(",");
+      if (this.resource.keywords) {
+        this.keywords = this.resource.keywords.split(",");
+      }
     },
 
     handleKeywordsClose(word) {
@@ -185,6 +260,7 @@ export default {
       this.inputVisible = false;
       console.log(this.resource.keywords);
     },
+
     showKeywordsInput() {
       this.inputVisible = true;
       this.$nextTick((_) => {
@@ -192,10 +268,53 @@ export default {
       });
     },
 
-    //demo
-     handleChange(file, fileList) {
-        this.fileList = fileList.slice(-3);
-      }
+    //upload resource file
+
+    uploadResource(options) {
+      uploadFile(options);
+    },
+
+    uploadResourceHandleChange(file, fileList) {},
+
+    uploadResourceHandleExceed() {
+      Notification.error({ message: "只能上传一个文件" });
+    },
+
+    uploadResourceError(error) {
+      console.log(error);
+    },
+
+    uploadResourceSuccess(response, file, fileList) {
+      var data = JSON.parse(response.data);
+      console.log(data);
+      this.resource.resourcePath = data.filePath;
+      this.resource.fileName = data.fileName;
+    },
+
+    uploadResourceOnRemoveTxt() {},
+
+    uploadResourceOnBeforeUpload() {},
+
+    deformitySelectChanged(deformityId) {
+      this.resource.deformityPKID = deformityId;
+    },
+
+    handSubmit() {
+      let _this = this;
+      _this.$refs["resourceForm"].validate((isValid) => {
+        if (isValid) {
+          edit(this.resource).then((res) => {
+            if (res && res.data) {
+              alert("success!");
+            }
+          });
+        }
+      });
+    },
+
+    handCancel() {
+      this.$router.push("/admin/resource/list");
+    },
   },
 };
 </script>
@@ -220,7 +339,7 @@ export default {
   height: 250px;
 }
 
-.upload-demo{
+.upload-file {
   display: flex;
 }
 </style>

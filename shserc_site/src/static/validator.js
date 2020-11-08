@@ -5,16 +5,18 @@ export function validateRequired(rule, value, callback,error) {
     if (value == '' || value == undefined || value == null) {
         callback(new Error(error));
     }
-    else
+    else{
         callback();
+    }
 }
 
 export function validateLessThan50(rule, value, callback,error) {
     if (!regexs.length50.test(value)) {
         callback(new Error(error));
     }
-    else
+    else{
         callback();
+    }
 }
 
 export function validateSelectValue(rule,value,callback,error){

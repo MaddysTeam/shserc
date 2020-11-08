@@ -50,7 +50,7 @@ public class WangsuUploader implements IWangsuFileUploader {
 	public UploadResult sliceUpload( MultipartFile file ) {
 		UploadResult result = new UploadResult ( );
 		if ( ! ObjectUtil.isNull ( file ) ) {
-			String fileKey = file.getName ( );
+			String fileKey = file.getOriginalFilename ( );
 			try {
 				InputStream stream = file.getInputStream ( );
 				result = sliceUpload ( fileKey , stream );
