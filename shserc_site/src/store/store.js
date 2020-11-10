@@ -12,7 +12,6 @@ export default new Vuex.Store({
     
     //following for dictionary
     dict:[],
-    //gender: [],
     deformity:[],
   },
   mutations: {

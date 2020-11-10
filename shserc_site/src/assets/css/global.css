@@ -2,3 +2,12 @@ html,
 body,
 #app {height: 100%;margin: 0;padding: 0}
 a {text-decoration:none; color:inherit;}
+.m_30 {margin: 30px;}
+.m_30_top {margin-top: 30px;}
+.m_20_top {margin-top: 20px;}
+.m_30_left {margin-left:30px;}
+.p_30 {padding: 30px;}
+.font20{font-size:20px;}   
+.font30{font-size:30px;}
+.font14 {font-size:14px;}
+.text_align_left{text-align:left;}
