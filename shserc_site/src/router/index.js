@@ -6,6 +6,7 @@ import UserList from '@/views/admin/user/list'
 import CompanyList from '@/views/admin/company/list'
 import ResourceList from '@/views/admin/resource/list'
 import ResourceEdit from '@/views/admin/resource/edit'
+import ResourceDetail from '@/views/admin/resource/detail'
 import store from '../store/store'
 
 Vue.use(Router)
@@ -49,6 +50,10 @@ const router = new Router({
         path:'/admin/resource/edit/:id',
         name:'ResourceEdit',
         component:ResourceEdit
+      },{
+        path:'/admin/resource/detail/:id',
+        name:'ResourceDetail',
+        component:ResourceDetail
       }
       ]
     },

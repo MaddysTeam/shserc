@@ -37,7 +37,7 @@
           <el-form-item label="资源描述">
             <el-input type="textarea" v-model="resource.description"></el-input>
           </el-form-item>
-          <el-form-item label="关键字">
+          <el-form-item label="关键字" prop="keywords">
             <el-input
               class="input-keywords"
               ref="inputKeywords"
@@ -145,13 +145,13 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/static/message";
-import { edit, uploadFile, uploadCover,resource } from "@/api/resource";
+import { edit, uploadFile, uploadCover, resource } from "@/api/resource";
 
 export default {
   data() {
     return {
       resource: {
-        id:0,
+        id: 0,
         title: "",
         deformityId: "",
         author: "",
@@ -212,6 +212,18 @@ export default {
           },
           trigger: "change",
         },
+
+        keywords: {
+          validator: (rule, value, callback) => {
+            validateRequired(
+              rule,
+              value,
+              callback,
+              messages.RESOURCE_KEYWORD_NOT_NULL
+            );
+          },
+          trigger: "blur",
+        },
       },
     };
   },
@@ -226,17 +238,17 @@ export default {
 
   methods: {
     loadResource() {
-      let id=this.$router.currentRoute.params.id
+      let id = this.$router.currentRoute.params.id;
       if (id) {
-          resource(id).then(res=>{
-               this.resource = JSON.parse(res.data);
-               this.fileList.push({
-                 name: this.resource.fileName,
-                 url: this.resource.resourcePath
-               });
-              console.log(this.resource.keywords);
-              this.bindKeywords();
+        resource(id).then((res) => {
+          this.resource = JSON.parse(res.data);
+          this.fileList.push({
+            name: this.resource.fileName,
+            url: this.resource.resourcePath,
           });
+          console.log(this.resource.keywords);
+          this.bindKeywords();
+        });
       }
     },
 
@@ -248,17 +260,21 @@ export default {
 
     handleKeywordsClose(word) {
       this.keywords.splice(this.keywords.indexOf(word), 1);
+      this.handleKeywordsConfirm();
     },
 
     handleKeywordsConfirm() {
       const find = this.keywords.find((key) => key == this.inputKeywordsValue);
-      if (!find && find != "") {
+      const isNotEmpty= !find && find != "" &&  this.inputKeywordsValue!=null && this.inputKeywordsValue.trim()!="";
+      if (isNotEmpty) {
         this.keywords.push(this.inputKeywordsValue);
-      }
-      this.resource.keywords = this.keywords.join(",");
-      this.inputKeywordsValue = "";
+        this.resource.keywords = this.keywords.join(",");
+      } else {
+        this.resource.keywords = null;
+      }   
+
+      this.inputKeywordsValue = null;
       this.inputVisible = false;
-      console.log(this.resource.keywords);
     },
 
     showKeywordsInput() {
