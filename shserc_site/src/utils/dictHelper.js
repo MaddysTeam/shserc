@@ -8,7 +8,7 @@ export function initDic(store) {
 
             store.commit(types.DICTIONARY, data.listData);
 
-            bindDeformityData(store,data.listData);
+            bindDeformityData(store, data.listData);
 
         }
     });
@@ -18,7 +18,7 @@ export function initDic(store) {
  *  following function for dicionary business
  */
 
-function bindDeformityData(store,dict){
+function bindDeformityData(store, dict) {
     let deformityData = [];
     dict.map(o => {
         if (o.parentId == 5)
@@ -26,4 +26,13 @@ function bindDeformityData(store,dict){
     });
 
     store.commit(types.DEFORMITY, deformityData)
+}
+
+
+function getById(dict, id) {
+    if (dict && dict instanceof Array) {
+        return dict.find(o => o.id == id);
+    }
+
+    return null;
 }
