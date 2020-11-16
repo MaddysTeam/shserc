@@ -1,4 +1,4 @@
-import * as types from '@/business/static/type';
+import * as types from '@/app/static/type';
 export  default {
     namespaced: true,
     state: {

@@ -5,7 +5,7 @@
       <el-breadcrumb-item>资源列表</el-breadcrumb-item>
     </el-breadcrumb>
 
-    <div class="buttons">
+    <div class="btn-group">
       <el-button class="el-button--primary" type="danger" size="large" @click="addResource()">新增资源</el-button>
     </div>
     <div class="filters">
@@ -64,9 +64,16 @@ export default {
       pageSize: 10,
       index: 1,
       total: 0,
-      commands: [{}],
+       commands: [{
+          id: 1,
+          label: "编辑",
+          type: "primary",
+          method: (index, row) => {
+            this.$router.push('/admin/resource/edit/'+row.id)
+          },
+      }],
       // deformityOptions: [],
-      deformity: { name: "请选择", id: 0, value: 0 },
+      deformity: {  },
       deformityId: 0,
     };
   },
@@ -99,7 +106,7 @@ export default {
     },
 
     addResource(){
-      this.$router.push('/admin/resource/edit');
+      this.$router.push('/admin/resource/add');
     }
   },
 };
@@ -114,8 +121,10 @@ export default {
   margin-left: 10px;
 }
 
-.buttons{
-  display:flex;
-  margin:20px;
-}
+.btn-group,.filters {
+   display: flex;
+   flex-direction: row;
+   text-justify: auto;
+   margin: 20px 20px 20px 0;
+ }
 </style>

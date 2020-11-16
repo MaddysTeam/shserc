@@ -144,9 +144,9 @@ import {
   validateLessThan50,
   validateSelectValue,
 } from "@/static/validator";
-import { messages } from "@/business/static/message";
+import { messages } from "@/app/static/message";
 import { edit, uploadFile, uploadCover,resource } from "@/api/resource";
-import {resourceModel} from "@/business/models/resource"
+import {resourceModel} from "@/app/models/resource"
 
 export default {
   data() {

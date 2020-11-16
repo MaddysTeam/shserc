@@ -52,7 +52,7 @@ import Verify from "vue2-verify";
 import { login } from "@/api/user";
 import { Notification } from "element-ui";
 import { mapMutations } from "vuex";
-import * as types from '@/business/static/type';
+import * as types from '@/app/static/type';
 
 export default {
   data() {

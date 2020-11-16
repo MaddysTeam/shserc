@@ -31,7 +31,7 @@
 
 <script>
    import DynamicMenu from '@/components/DynamicMenus/index';
-   import * as types from '@/business/static/type';
+   import * as types from '@/app/static/type';
 
    export default{
      name:"layout",

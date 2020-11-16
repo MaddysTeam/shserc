@@ -1,5 +1,5 @@
-import { dicList } from '../api/dictionary';
-import * as types from '../business/static/type';
+import { dicList } from '@/api/dictionary';
+import * as types from '@/app/static/type';
 
 export function initDic(store) {
     dicList().then(res => {

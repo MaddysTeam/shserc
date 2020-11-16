@@ -9,7 +9,7 @@
         <div class="grid text_align_left">
           <div class="grid-item">
             <div>
-              <img class="cover" v-if=" resource.resourceTypeId != businessEnum.resourceVideoTypeKey" :src="resource.coverPath" />
+              <img class="cover" v-if=" resource.resourceTypeId != appEnum.resourceVideoTypeKey" :src="resource.coverPath" />
             </div>
           </div>
           <div class="grid-item font14">
@@ -101,17 +101,17 @@
 </template>
 
 <script>
-import { resourceModel } from "@/business/models/resource";
+import { resourceModel } from "@/app/models/resource";
 import { resource } from "@/api/resource";
 import { getById } from "@/utils/dictHelper";
-import { businessEnum } from "@/business/enum";
+import { appEnum } from "@/app/enum";
 import { mapState } from "vuex";
 
 export default {
   data() {
     return {
       resource: resourceModel,
-      businessEnum:businessEnum
+      appEnum:appEnum
     };
   },
   computed: {
