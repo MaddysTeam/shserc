@@ -10,7 +10,8 @@ import './static/validator.js'
 import './assets/css/global.css'
 import { initDic } from './utils/dictHelper'
 
-initDic(store);
+//console.log(store.state.app)
+initDic(store.state.app);
 
 Vue.prototype.instance = instance_;
 Vue.config.productionTip = false

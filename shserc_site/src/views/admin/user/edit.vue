@@ -41,7 +41,7 @@
 <script>
 import { Notification } from "element-ui";
 import { regexs } from "@/static/regex.js";
-import { messages } from "@/static/message.js";
+import { messages } from "@/business/static/message.js";
 import selectTree from "@/components/TreeSelector/index";
 import { companyList } from "@/api/company";
 import {

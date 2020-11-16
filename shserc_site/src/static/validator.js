@@ -36,24 +36,3 @@ export function validateCardNo(rule,value,callback,error) {
         callback();
     }
 }
-// /* is number */
-// export function validateNunmber() { }
-// /* email */
-// export function validateEmail() { }
-// /* phone */
-// export function validatePhone() { }
-// /* card Number*/
-// export function validateCardNo() { }
-// /* number range check */
-// export function validateMax20000(rule, value, callback) {
-//     if (value == '' || value == undefined || value == null) {
-//         callback();
-//     } else if (!Number(value)) {
-//         callback(new Error('请输入[1,20000]之间的数字'));
-//     } else if (value < 1 || value > 20000) {
-//         callback(new Error('请输入[1,20000]之间的数字'));
-//     } else {
-//         callback();
-//     }
-// }
-

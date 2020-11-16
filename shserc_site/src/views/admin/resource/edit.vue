@@ -144,37 +144,19 @@ import {
   validateLessThan50,
   validateSelectValue,
 } from "@/static/validator";
-import { messages } from "@/static/message";
-import { edit, uploadFile, uploadCover, resource } from "@/api/resource";
+import { messages } from "@/business/static/message";
+import { edit, uploadFile, uploadCover,resource } from "@/api/resource";
+import {resourceModel} from "@/business/models/resource"
 
 export default {
   data() {
     return {
-      resource: {
-        id: 0,
-        title: "",
-        deformityId: "",
-        author: "",
-        authorEmail: "",
-        authorCompany: "",
-        authorPhone: "",
-        keywords: null,
-        description: "",
-        resourcePath: "",
-        fileName: "",
-      },
-
+      resource: resourceModel,
       inputVisible: false,
       keywords: [],
       inputKeywordsValue: "",
       deformity: { name: "请选择", id: 0, value: 0 },
-      fileList: [
-        // {
-        //   name: "food.jpeg",
-        //   url:
-        //     "https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100",
-        // },
-      ],
+      fileList: [],
 
       rules: {
         title: [
@@ -213,23 +195,24 @@ export default {
           trigger: "change",
         },
 
-        keywords: {
-          validator: (rule, value, callback) => {
+        keywords:{
+           validator: (rule, value, callback) => {
+             alert(value);
             validateRequired(
               rule,
               value,
               callback,
-              messages.RESOURCE_KEYWORD_NOT_NULL
+             "测试下"
             );
           },
-          trigger: "blur",
-        },
+          trigger:'blur',
+        }
       },
     };
   },
   computed: {
     ...mapState({
-      deformityOptions: (state) => state.deformity,
+      deformityOptions: (state) => state.app.deformity,
     }),
   },
   mounted() {
@@ -238,17 +221,17 @@ export default {
 
   methods: {
     loadResource() {
-      let id = this.$router.currentRoute.params.id;
+      let id=this.$router.currentRoute.params.id
       if (id) {
-        resource(id).then((res) => {
-          this.resource = JSON.parse(res.data);
-          this.fileList.push({
-            name: this.resource.fileName,
-            url: this.resource.resourcePath,
+          resource(id).then(res=>{
+               this.resource = JSON.parse(res.data);
+               this.fileList.push({
+                 name: this.resource.fileName,
+                 url: this.resource.resourcePath
+               });
+              console.log(this.resource.keywords);
+              this.bindKeywords();
           });
-          console.log(this.resource.keywords);
-          this.bindKeywords();
-        });
       }
     },
 
@@ -260,21 +243,17 @@ export default {
 
     handleKeywordsClose(word) {
       this.keywords.splice(this.keywords.indexOf(word), 1);
-      this.handleKeywordsConfirm();
     },
 
     handleKeywordsConfirm() {
       const find = this.keywords.find((key) => key == this.inputKeywordsValue);
-      const isNotEmpty= !find && find != "" &&  this.inputKeywordsValue!=null && this.inputKeywordsValue.trim()!="";
-      if (isNotEmpty) {
+      if (!find && find != "") {
         this.keywords.push(this.inputKeywordsValue);
-        this.resource.keywords = this.keywords.join(",");
-      } else {
-        this.resource.keywords = null;
-      }   
-
-      this.inputKeywordsValue = null;
+      }
+      this.resource.keywords = this.keywords.join(",");
+      this.inputKeywordsValue = "";
       this.inputVisible = false;
+      console.log(this.resource.keywords);
     },
 
     showKeywordsInput() {

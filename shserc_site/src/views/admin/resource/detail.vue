@@ -101,10 +101,10 @@
 </template>
 
 <script>
-import { resourceModel } from "@/models/resource";
+import { resourceModel } from "@/business/models/resource";
 import { resource } from "@/api/resource";
 import { getById } from "@/utils/dictHelper";
-import { businessEnum } from "@/views/enum";
+import { businessEnum } from "@/business/enum";
 import { mapState } from "vuex";
 
 export default {
@@ -116,11 +116,11 @@ export default {
   },
   computed: {
     ...mapState({
-      deformities: (state) => state.deformity,
+      deformities: (state) => state.app.deformity,
     }),
   },
   mounted() {
-
+    console.log(this.deformities)
   },
   methods: {
     getResource(id) {
