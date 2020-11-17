@@ -50,7 +50,7 @@ export default {
       columns: [
         { prop: "id", label: "id" },
         { prop: "title", label: "资源标题", isLink: true,method:(index,row)=>{
-          this.$router.push('details?id='+row.id);
+          this.$router.push('detail/'+row.id);
         }},
         { prop: "author", label: "作者姓名" },
         { prop: "author", label: "作者邮箱" },
@@ -83,11 +83,10 @@ export default {
     }),
   },
   mounted() {
-    this.bindResourceList(this.index);
+    this.bindResourceList();
   },
   methods: {
-    bindResourceList(index) {
-      this.index = index;
+    bindResourceList() {
       let result = resourceList(
         this.index,
         this.pageSize,

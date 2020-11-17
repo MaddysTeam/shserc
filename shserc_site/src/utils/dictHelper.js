@@ -5,8 +5,8 @@ export function initDic(store) {
     dicList().then(res => {
         if (res && res.message && res.message == 'success' && store) {
             let data = JSON.parse(res.data);
-
-            store.commit(types.DICTIONARY, data.listData);
+            console.log(store)
+            store.commit("app/"+types.DICTIONARY, data.listData);
 
             bindDeformityData(store, data.listData);
 
@@ -25,7 +25,7 @@ function bindDeformityData(store, dict) {
             deformityData.push(o);
     });
 
-    store.commit(types.DEFORMITY, deformityData)
+    store.commit("app/"+types.DEFORMITY, deformityData)
 }
 
 

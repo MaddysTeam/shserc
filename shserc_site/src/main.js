@@ -11,7 +11,7 @@ import './assets/css/global.css'
 import { initDic } from './utils/dictHelper'
 
 //console.log(store.state.app)
-initDic(store.state.app);
+initDic(store);
 
 Vue.prototype.instance = instance_;
 Vue.config.productionTip = false
