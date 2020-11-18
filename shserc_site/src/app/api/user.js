@@ -1,4 +1,4 @@
-import axios from '../static/axios'
+import axios from '@/static/axios'
 
 export function login(params){
     console.log('login action')

@@ -102,9 +102,9 @@
 
 <script>
 import { resourceModel } from "@/app/models/resource";
-import { resource } from "@/api/resource";
-import { getById } from "@/utils/dictHelper";
-import { appEnum } from "@/app/enum";
+import { resource } from "@/app/api/resource";
+import { getById } from "@/app/utils/dictHelper";
+import { appEnum } from "@/app/static/enum";
 import { mapState } from "vuex";
 
 export default {

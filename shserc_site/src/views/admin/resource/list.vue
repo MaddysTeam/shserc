@@ -40,7 +40,7 @@
 </template>
 <script>
 import Table from "@/components/Tables/index";
-import { resourceList } from "@/api/resource.js";
+import { resourceList } from "@/app/api/resource.js";
 import { mapState } from "vuex";
 
 export default {

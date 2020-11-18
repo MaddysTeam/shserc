@@ -145,7 +145,7 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
-import { edit, uploadFile, uploadCover,resource } from "@/api/resource";
+import { edit, uploadFile, uploadCover,resource } from "@/app/api/resource";
 import {resourceModel} from "@/app/models/resource"
 
 export default {

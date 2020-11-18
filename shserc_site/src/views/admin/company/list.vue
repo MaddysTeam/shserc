@@ -17,7 +17,7 @@
 
 <script>
 import edit from './edit.vue';
-import {companyList} from '@/api/company'
+import {companyList} from '@/app/api/company'
 
 export default {
   components: { edit },

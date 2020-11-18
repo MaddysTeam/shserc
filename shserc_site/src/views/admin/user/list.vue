@@ -29,7 +29,7 @@
 <script>
 import edit from "./edit.vue";
 import Table from "@/components/Tables/index";
-import { userList } from "@/api/user";
+import { userList } from "@/app/api/user";
 
 export default {
   components: { Table, edit },

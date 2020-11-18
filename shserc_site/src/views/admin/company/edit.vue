@@ -24,7 +24,7 @@
 
 <script>
 import { Notification } from "element-ui";
-import { getChildren, edit } from "@/api/company.js";
+import { getChildren, edit } from "@/app/api/company.js";
 import { messages } from "@/app/static/message";
 import {validateRequired,validateLessThan50,validateSelectValue} from '@/static/validator';
 

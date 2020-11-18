@@ -1,7 +1,7 @@
 
 import Router from 'vue-router'
-import Admin from '@/layouts/admin/index'
-import Login from '@/views/admin/login'
+import Admin from '@/views/admin/layout/index'
+import Login from '@/views/admin/account/login'
 import UserList from '@/views/admin/user/list'
 import CompanyList from '@/views/admin/company/list'
 import ResourceList from '@/views/admin/resource/list'

@@ -19,7 +19,7 @@
        <el-container>
            <!-- left aside -->
             <el-aside>
-                <DynamicMenu ></DynamicMenu>
+                <DynamicMenu :dataSource="menus"></DynamicMenu>
             </el-aside>
             <!--right side-->
             <el-main>
@@ -32,6 +32,7 @@
 <script>
    import DynamicMenu from '@/components/DynamicMenus/index';
    import * as types from '@/app/static/type';
+   import {getMenusData} from '@/app/api/menu.js'
 
    export default{
      name:"layout",
@@ -39,7 +40,9 @@
          DynamicMenu
      },
      data(){
-         return {}
+         return {
+             menus:getMenusData()
+         }
      },
      methods:{
          logout:function(){

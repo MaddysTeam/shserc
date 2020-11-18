@@ -1,4 +1,4 @@
-import { dicList } from '@/api/dictionary';
+import { dicList } from '@/app/api/dictionary';
 import * as types from '@/app/static/type';
 
 export function initDic(store) {

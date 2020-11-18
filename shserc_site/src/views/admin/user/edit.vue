@@ -43,7 +43,7 @@ import { Notification } from "element-ui";
 import { regexs } from "@/static/regex.js";
 import { messages } from "@/app/static/message.js";
 import selectTree from "@/components/TreeSelector/index";
-import { companyList } from "@/api/company";
+import { companyList } from "@/app/api/company";
 import {
   validateRequired,
   validateLessThan50,

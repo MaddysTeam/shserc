@@ -7,19 +7,12 @@
 </template>
 <script>
 	import Menu from './components/Menu.vue';
-	import {getMenusData} from '../../api/menu.js'
 	export default {
 		name: 'dynamicMenus',
 		components: {
 			Menu
 		},
-		props: ['isCllapse'],
-		data: function() {
-			return {
-				dataSource: getMenusData()
-			}
-		}
-
+		props: ['isCllapse','dataSource'],
 	};
 </script>
 
