@@ -73,9 +73,12 @@ public class WangsuUploader implements IWangsuFileUploader {
 			
 			@Override
 			public void onSuccess( JsonNode jsonNode ) {
+				String fileName=jsonNode.findValue ( "fname" ).textValue ();
 				result.setSuccess ( true );
 				result.setFilePath (  jsonNode.findValue( "url" ).textValue ());
-				result.setFileName ( jsonNode.findValue ( "fname" ).textValue () );
+				result.setFileName ( fileName);
+				result.setFileExtName (fileName.substring ( fileName.lastIndexOf ( "." ) ));
+				result.setFileSize ( jsonNode.findValue ( "fsize" ).asLong ());
 			}
 			
 			@Override

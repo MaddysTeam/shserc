@@ -1,5 +1,5 @@
 import * as types from '@/app/static/type';
-export  default {
+export default {
     namespaced: true,
     state: {
         token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',

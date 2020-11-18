@@ -12,5 +12,7 @@ export const messages = {
     RESOURCE_TITLE_NOT_ALLOWED_MORE_THAN_50: '资源标题长度不能超过50!',
     RESOURCE_DEFORMITY_SELECT_NOT_NULL: '必须选择残疾类型!',
 
+    FILE_UPLOAD_COUNT_ALLOWED:"只能上传一个文件",
+
     SUCCESS:'success'
 }

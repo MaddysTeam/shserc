@@ -8,16 +8,16 @@
       <el-main>
         <div class="grid text_align_left">
           <div class="grid-item" >
-             <div class="cover" v-if="resource.resourceTypeId == appEnum.resourceVideoTypeKey">
-              <img :src="resource.coverPath" />
-            </div> 
-            <div class="video" v-else>
+            <div class="video" v-if="resource.fileExtName.indexOf(appEnum.fileExtNames.video)>=0">
               <video-player  class="video-player vjs-custom-skin"
                    ref="videoPlayer"
                    :playsinline="true"
                   :options="playerOptions"
                 ></video-player>
             </div>
+             <div class="cover" v-else>
+              <img :src="resource.coverPath" />
+            </div> 
           </div>
           <div class="grid-item font14">
             <div class="font20">
@@ -152,12 +152,13 @@ export default {
   },
   mounted() {
     console.log(this.deformities)
+    this.getResource()
   },
   methods: {
-    getResource(id) {
+    getResource() {
+      let id = this.$router.currentRoute.params.id;
       resource(id).then((res) => {
-        this.resource = JSON.parse(res.data);
-        //this.resource.deformity= getById(this.deformities,this.resource.deformityId)
+        this.resource=JSON.parse(res.data);
       });
     },
   },
@@ -197,8 +198,5 @@ export default {
   margin-right: 20px;
   transition: all 0.5s;
 }
-.el-card:hover,
-.cover:hover {
-  margin-top: -5px;
-}
+
 </style>

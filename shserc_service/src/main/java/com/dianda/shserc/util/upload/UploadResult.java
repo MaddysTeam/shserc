@@ -23,5 +23,7 @@ public class UploadResult {
 	private String message;
 	private String filePath;
 	private String fileName;
+	private String fileExtName;
+	private long fileSize;
 	
 }

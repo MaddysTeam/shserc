@@ -26,6 +26,8 @@ public class ResourceVo  implements Serializable {
 	
 	private  String deformity;
 	
+	private  long deformityId;
+	
 	private  String state;
 	
 	private  String mediumType;

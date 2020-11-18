@@ -145,8 +145,8 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
-import { edit, uploadFile, uploadCover,resource } from "@/app/api/resource";
-import {resourceModel} from "@/app/models/resource"
+import { edit, uploadFile, uploadCover, resource } from "@/app/api/resource";
+import { resourceModel } from "@/app/models/resource";
 
 export default {
   data() {
@@ -155,7 +155,7 @@ export default {
       inputVisible: false,
       keywords: [],
       inputKeywordsValue: "",
-      deformity: { name: "请选择", id: 0, value: 0 },
+      deformity: { name: "请选择", id: 0, value: "0" },
       fileList: [],
 
       rules: {
@@ -195,18 +195,17 @@ export default {
           trigger: "change",
         },
 
-        keywords:{
-           validator: (rule, value, callback) => {
-             alert(value);
+        keywords: {
+          validator: (rule, value, callback) => {
             validateRequired(
               rule,
               value,
               callback,
-             "测试下"
+              messages.RESOURCE_KEYWORD_NOT_NULL
             );
           },
-          trigger:'blur',
-        }
+          trigger: "blur",
+        },
       },
     };
   },
@@ -221,17 +220,17 @@ export default {
 
   methods: {
     loadResource() {
-      let id=this.$router.currentRoute.params.id
+      let id = this.$router.currentRoute.params.id;
       if (id) {
-          resource(id).then(res=>{
-               this.resource = JSON.parse(res.data);
-               this.fileList.push({
-                 name: this.resource.fileName,
-                 url: this.resource.resourcePath
-               });
-              console.log(this.resource.keywords);
-              this.bindKeywords();
+        resource(id).then((res) => {
+          this.resource = JSON.parse(res.data);
+          this.fileList.push({
+            name: this.resource.fileName,
+            url: this.resource.resourcePath,
           });
+          this.bindKeywords();
+          this.deformitySelectChanged(this.resource.deformity);
+        });
       }
     },
 
@@ -243,17 +242,18 @@ export default {
 
     handleKeywordsClose(word) {
       this.keywords.splice(this.keywords.indexOf(word), 1);
+      this.resource.keywords = this.keywords.join(",");
     },
 
     handleKeywordsConfirm() {
+      // forbidden input duplicate keywords or empty keywords
       const find = this.keywords.find((key) => key == this.inputKeywordsValue);
-      if (!find && find != "") {
-        this.keywords.push(this.inputKeywordsValue);
+      if (this.inputKeywordsValue && this.inputKeywordsValue != "" && !find && find != "") {
+          this.keywords.push(this.inputKeywordsValue);
       }
       this.resource.keywords = this.keywords.join(",");
       this.inputKeywordsValue = "";
       this.inputVisible = false;
-      console.log(this.resource.keywords);
     },
 
     showKeywordsInput() {
@@ -272,7 +272,7 @@ export default {
     uploadResourceHandleChange(file, fileList) {},
 
     uploadResourceHandleExceed() {
-      Notification.error({ message: "只能上传一个文件" });
+      Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
     },
 
     uploadResourceError(error) {
@@ -284,6 +284,8 @@ export default {
       console.log(data);
       this.resource.resourcePath = data.filePath;
       this.resource.fileName = data.fileName;
+      this.resource.fileExtName = data.fileExtName;
+      this.resource.fileSize = data.fileSize;
     },
 
     uploadResourceOnRemoveTxt() {},
@@ -291,7 +293,7 @@ export default {
     uploadResourceOnBeforeUpload() {},
 
     deformitySelectChanged(deformityId) {
-      this.resource.deformityPKID = deformityId;
+      this.resource.deformityId = deformityId;
     },
 
     handSubmit() {
@@ -299,15 +301,17 @@ export default {
       _this.$refs["resourceForm"].validate((isValid) => {
         if (isValid) {
           edit(this.resource).then((res) => {
-            if (res && res.data) {
-              alert("success!");
-            }
+            this.redirectToList();
           });
         }
       });
     },
 
     handCancel() {
+      this.redirectToList();
+    },
+
+    redirectToList() {
       this.$router.push("/admin/resource/list");
     },
   },
