@@ -2,7 +2,7 @@ package com.dianda.shserc.exceptions;
 
 public enum ExceptionType{
    
-   SERVER_ERROR(500), NOT_FOUND(404) {};
+   SERVER_ERROR(500), NOT_FOUND(404),TOKEN_INVALID(401) {} ;
    
 	int code;
  

@@ -24,6 +24,10 @@ public class JwtConfiguration {
 			return new JwtFilter();
 	}
 	
+	public static JwtRoleFilter buildPermissionFilter(){
+		return new JwtRoleFilter ();
+	}
+	
 	public static JwtLogoutFilter buildLogoutFilter(){
 		return new JwtLogoutFilter();
 	}
@@ -59,19 +63,26 @@ public class JwtConfiguration {
 		// setting filter
 		Map<String, Filter> filterMap = new HashMap<> ();
 		filterMap.put("jwt", buildJwtFilter());
+		filterMap.put("role",buildPermissionFilter() );
 		//filterMap.put("logout",buildLogoutFilter());
 		shiroFilter.setFilters(filterMap);
 
 		// setting filter chain map
 		Map<String, String> filterRuleMap = new LinkedHashMap<> ();
+		filterRuleMap.put("/swagger-ui.html","anon");
+		filterRuleMap.put("/swagger/**","anon");
+		filterRuleMap.put("/swagger-resources/**","anon");
+		filterRuleMap.put("/static/**", "anon");
+		
+		// TODO : will  dynamic get data from db
 		filterRuleMap.put("/account/login", "anon");
-		filterRuleMap.put("/company/*", "anon");
+		filterRuleMap.put("/company/*", "jwt");
 		filterRuleMap.put("/dictionary/*", "anon");
-		filterRuleMap.put("/resource/*", "anon");
-		filterRuleMap.put("/file/*", "anon");
-		filterRuleMap.put("/user/*", "anon");
+		filterRuleMap.put("/resource/*", "jwt");
+		filterRuleMap.put("/file/*", "jwt");
+		filterRuleMap.put("/user/*", "anon,role[admin],jwt");
 		filterRuleMap.put("/account/logout","jwt");
-		filterRuleMap.put("/**", "jwt");
+	//	filterRuleMap.put("/**", "jwt");
 		shiroFilter.setFilterChainDefinitionMap(filterRuleMap);
 		
 		return shiroFilter;

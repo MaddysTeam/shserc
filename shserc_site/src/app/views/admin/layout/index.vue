@@ -33,6 +33,8 @@
    import DynamicMenu from '@/components/DynamicMenus/index';
    import * as types from '@/app/static/type';
    import {getMenusData} from '@/app/api/menu.js'
+   import { mapMutations } from "vuex";
+   import {logout} from '@/app/api/account'
 
    export default{
      name:"layout",
@@ -43,11 +45,14 @@
          return {
              menus:getMenusData()
          }
-     },
+     }, 
      methods:{
          logout:function(){
-            this.$store.app.commit(types.LOGOUT)
-            this.$router.push('Login');
+            logout().then(res=>{
+                this.$store.commit(types.APP+"/"+types.LOGOUT)
+                this.$router.push({ path:'/admin/logout',replace:true});
+            });
+           
          }
      }
    }

@@ -4,8 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dianda.shserc.entity.ResUser;
+import com.dianda.shserc.exceptions.ExceptionType;
+import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResUserMapper;
+import com.dianda.shserc.util.SpringUtils;
 import com.dianda.shserc.util.basic.ObjectUtil;
+import com.dianda.shserc.util.nosql.redis.RedisUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,11 +18,15 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
 public class JwtCustomizeRealm extends AuthorizingRealm {
+	
+	@Autowired
+	RedisUtil redisUtil;
 	
 	@Resource
 	ResUserMapper userMapper;
@@ -41,7 +49,7 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		
 		// authenticate logic
 		JSONObject dto = JSON.parseObject ( account );
-		if(ObjectUtil.isNull ( dto ))
+		if ( ObjectUtil.isNull ( dto ) )
 			throw new AuthenticationException ( "用户名或密码错误" );
 		
 		try {
@@ -56,9 +64,13 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 				token = JwtOperation.Sign ( account , System.currentTimeMillis ( ) );
 			}
 			
-			
-			if ( JwtOperation.verifyToken ( token ) )
+			if ( JwtOperation.verifyToken ( token ) ) {
+				// put token into redis
+				redisUtil.saveString ( JwtConstant.CACHE_PREFIX + user.getId ( ) , token );
 				return new SimpleAuthenticationInfo ( token , credentials , account );
+			} else
+				throw new GlobalException ( ExceptionType.TOKEN_INVALID , "toke is invalid!" );
+			
 		} catch ( UnsupportedEncodingException e ) {
 			e.printStackTrace ( );
 		}

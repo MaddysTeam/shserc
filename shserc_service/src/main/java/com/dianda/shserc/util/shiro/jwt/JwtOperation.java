@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * @author zhangqiang
+ * @author huachao
  * @title JwtOperation
  * @Description jwt operation something like verify or get claims
  * @Date 2020/3/8 16:30
@@ -88,7 +88,7 @@ public class JwtOperation {
 	public static String Sign( String account, long currentTimeMillions) {
 		try {
 			String secret = account + JwtOperation.jwtOperation.jwtSettings;
-			Date date = new Date ( System.currentTimeMillis() + currentTimeMillions * 1000);
+			Date date = new Date ( System.currentTimeMillis() + 1000000);//currentTimeMillions * 1000);
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			return JWT.create()
 							.withClaim("account",account)

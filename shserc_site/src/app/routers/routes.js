@@ -12,17 +12,13 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    component: Admin, //TODO:这里改成前台
+    redirect: { name: 'AdminIndex' } //TODO:这里改成前台
   },
-  {
-    path: '/home',
-    name: 'home',
-    component: Admin, //TODO:这里改成前台
-  },
+
   // backend
   {
     path: '/admin',
-    name: 'Index',
+    name: 'AdminIndex',
     component: Admin,
     children: [{
       path: '/admin/user/list',
@@ -32,7 +28,10 @@ const routes = [
     {
       path: '/admin/company/list',
       name: 'CompanyList',
-      component: CompanyList
+      component: CompanyList,
+      meta:{
+        keepAlive:false
+      }
     }, {
       path: '/admin/resource/list',
       name: 'ResourceList',
@@ -54,14 +53,22 @@ const routes = [
   },
   {
     path: '/admin/login',
-    name: 'Login',
+    name: 'AdminLogin',
     component: Login
   },
-
-  // {
-  //   path: "*",
-  //   redirect: "/home"
-  // }
+  {
+    path: '/admin/logout',
+    name: 'AdminLogout',
+  },
+  {
+    path: '/404',
+    name: '404',
+    component:()=>import('@/app/views/404.vue')
+  },
+  {
+    path: "*",
+    redirect: "/404"
+  }
 ];
 
 export default routes;

@@ -1,9 +1,4 @@
-import axios from '@/static/axios'
-
-export function login(params){
-    console.log('login action')
-    return axios.post('api/account/login',params)
-}
+import axios from '@/app/static/axios'
 
 export function userList(pageIndex,pageSize){
     console.log(pageSize);

@@ -1,6 +1,7 @@
 package com.dianda.shserc.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,9 +18,20 @@ public class ResRole implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private long  Id ;
+	
 	private String roleName;
 	
-	private String description;
+	private  String description;
 	
+	private  long addUser;
+	
+	private LocalDateTime addTime;
+	
+	private long updateUser;
+	
+	private LocalDateTime updateTime;
+	
+	private boolean isDeleted;
 	
 }

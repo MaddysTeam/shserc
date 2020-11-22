@@ -49,7 +49,7 @@
 
 <script>
 import Verify from "vue2-verify";
-import { login } from "@/app/api/user";
+import { login } from "@/app/api/account";
 import { Notification } from "element-ui";
 import { mapMutations } from "vuex";
 import * as types from '@/app/static/type';
@@ -85,8 +85,8 @@ export default {
             password: _this.form.password,
           }).then((res) => {
             Notification.success({ message: "登录成功" });
-            _this.$store.commit(types.LOGIN,res.data.token)
-            _this.$router.push('/admin/users');
+            _this.$store.commit(types.APP+"/"+types.LOGIN,res.data.token)
+            _this.$router.push('/admin/user/list');
           });
         } else {
           console.log("error submit!!");

@@ -12,9 +12,9 @@ spring:
       datasource:
         source1:
           driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+          url: jdbc:mysql://192.168.1.6:32006/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
           username: root
-          password: root
+          password: password
           filters: stat
           maxActive: 20
           initialSize: 1
@@ -45,8 +45,8 @@ spring:
   #redis configuration
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6379
+    host: 192.168.1.6
+    port: 30379
     jedis:
       pool:
         # the max count for redis pool connection
@@ -57,6 +57,7 @@ spring:
 #jwt token configuration
 token:
   secret: secret
+  expiredSeconds: 1800
 
 logging:
   config: classpath:shserc-log.xml

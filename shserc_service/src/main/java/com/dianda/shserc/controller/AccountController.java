@@ -46,7 +46,7 @@ public class AccountController extends BaseController {
 	}
 	
 	@RequestMapping( value = "/logout", method = RequestMethod.POST )
-	@RequiresRoles( "admin" )
+	//@RequiresRoles( "admin" )
 	public JsonResult logout( ) {
 		boolean result = accountService.logout ( );
 		if ( result )

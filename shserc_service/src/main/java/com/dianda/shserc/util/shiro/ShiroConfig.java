@@ -113,7 +113,7 @@ public class ShiroConfig {
 		
 		RedisCacheManager cacheManager = new RedisCacheManager ( );
 		cacheManager.setRedisManager ( buildRedisCacheManager ( ) );
-		cacheManager.setExpire ( 2000000 );
+		cacheManager.setExpire ( 200000);
 		
 		return cacheManager;
 	}

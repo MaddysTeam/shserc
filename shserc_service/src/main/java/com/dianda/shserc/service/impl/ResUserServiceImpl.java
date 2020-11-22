@@ -8,6 +8,7 @@ import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
 import com.dianda.shserc.dto.mappers.IEditUserMapper;
 import com.dianda.shserc.entity.ResUser;
+import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IResUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -82,7 +83,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 			resUserMapper.updateById ( user );
 		}
 		
-		ResUserVo vo =IUserVoMapper.INSTANCE.mapFrom ( user );
+		ResUserVo vo = IUserVoMapper.INSTANCE.mapFrom ( user );
 		return vo;
 	}
 	
@@ -95,7 +96,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		user.setIsDeleted ( Constant.Status.DELETED );
 		int result = resUserMapper.updateById ( user );
 		
-		ResUserVo vo =IUserVoMapper.INSTANCE.mapFrom ( user );
+		ResUserVo vo = IUserVoMapper.INSTANCE.mapFrom ( user );
 		return vo;
 	}
 	
@@ -107,6 +108,32 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 			vo = IUserVoMapper.INSTANCE.mapFrom ( user );
 		
 		return vo;
+	}
+	
+	@Override
+	public ResUserVo getByNameAndPassword( String userName , String password ) {
+		ResUserVo vo = new ResUserVo ( );
+		ResUser user = resUserMapper.selectOne (
+				new QueryWrapper<ResUser> ( )
+						.eq ( "user_name" , userName )
+						.eq ( "password" ,password ) );
+		if ( ! ObjectUtil.isNull ( user ) )
+			vo = IUserVoMapper.INSTANCE.mapFrom ( user );
+		
+		return vo;
+	}
+	
+	@Override
+	public Boolean addUserRole( long userId , long roleId ) {
+		ResUserRole userRole = new ResUserRole ( );
+		userRole.setRoleId ( roleId );
+		userRole.setUserId ( userId );
+		return resUserMapper.addUserRole ( userRole ) > 0;
+	}
+	
+	@Override
+	public Boolean deleteUserRole( long userId , long roleId ) {
+		return null;
 	}
 	
 }

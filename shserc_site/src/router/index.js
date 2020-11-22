@@ -5,7 +5,8 @@ import protector from '@/app/routers/protector'
 
 Vue.use(Router)
 
-const router = new Router({ routes });
+const router = new Router({ 
+    routes });
 router.beforeEach(protector);
 
 export default router;
