@@ -15,7 +15,7 @@ public interface ICacheManager {
 	
 	List<String> getKeysFromList(String key) ;
 
-	void setCache( String key , CacheObject value , long expiredSeconds );
+	boolean setCache( String key , CacheObject value , long expiredSeconds );
 	
 	boolean removeCache(String key);
 	

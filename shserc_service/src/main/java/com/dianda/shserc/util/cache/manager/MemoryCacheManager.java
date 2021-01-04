@@ -4,6 +4,7 @@ import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.cache.CacheObject;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,8 +19,7 @@ import java.util.stream.Collectors;
  * @author huachao
  * @since 2020-08-17
  */
-@Component
-
+@Service("memoryCache")
 public class MemoryCacheManager implements ICacheManager {
 
 	static List<CacheObject> cacheObjects = new ArrayList<>();
@@ -72,7 +72,7 @@ public class MemoryCacheManager implements ICacheManager {
 
 
 	@Override
-	public void setCache(String key, CacheObject value, long expiredSeconds) {
+	public boolean setCache(String key, CacheObject value, long expiredSeconds) {
 		CacheObject cacheObject = getCache(key);
 		if (!ObjectUtil.isNull(cacheObject)) {
 			if (!this.removeCache(key)) {
@@ -84,6 +84,7 @@ public class MemoryCacheManager implements ICacheManager {
 		cacheObject.setCreateTime(new Date());
 		cacheObject.setExpiredSeconds(expiredSeconds);
 		cacheObjects.add(cacheObject);
+		return true;
 	}
 
 	@Override

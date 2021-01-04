@@ -5,9 +5,7 @@ import com.dianda.shserc.util.cache.CacheObject;
 import com.dianda.shserc.util.cache.manager.MemoryCacheManager;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest(classes = ServiceApplication.class)
 //@RunWith(SpringRunner.class)
@@ -38,13 +36,5 @@ public class MemoryCacheTest {
 		Assert.assertTrue(!o1.isExpire());
 	}
 
-	static class MockCacheDataFactory {
-
-		public static CacheObject mockSimpleObject() {
-			CacheObject o = new CacheObject();
-			return o;
-		}
-
-	}
-
 }
+

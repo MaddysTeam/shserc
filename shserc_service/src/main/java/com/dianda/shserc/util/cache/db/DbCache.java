@@ -4,11 +4,12 @@ import com.dianda.shserc.util.cache.CacheObject;
 import com.dianda.shserc.util.cache.manager.ICacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 public class DbCache {
 
-	@Autowired
+	@Resource( name = "memoryCache" )
 	ICacheManager manager;
 	
 	public CacheObject getCacheFromTable( String table ) {

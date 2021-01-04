@@ -26,7 +26,7 @@ public class DictionaryCache {
 	private static final String KEY = "dict";
 	private static final long EXPIRE_SECONDS = 100000;
 	
-	@Autowired
+	@Resource( name = "memoryCache" )
 	ICacheManager manager;
 	
 	@Resource
@@ -64,8 +64,8 @@ public class DictionaryCache {
 	}
 	
 	public void setCacheFromService( long expireSeconds ) {
-		CacheObject o =getCache ();
-		if(!ObjectUtil.isNull ( o ))
+		CacheObject o = getCache ( );
+		if ( ! ObjectUtil.isNull ( o ) )
 			return;
 		
 		DictionaryVo vo = service.findAll ( );

@@ -12,7 +12,7 @@ spring:
       datasource:
         source1:
           driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://192.168.1.6:32006/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+          url: jdbc:mysql://192.168.1.6:30070/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
           username: root
           password: password
           filters: stat

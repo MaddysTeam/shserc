@@ -19,7 +19,8 @@ import javax.annotation.Resource;
 @Component
 public class LogAspect {
 
-	private final String dataPoint = "execution(* com.dianda.shserc.util.*..*(..))";
+	//private final String dataPoint = "execution(* com.dianda.shserc.util.*..*(..))";
+	private final String dataPoint = "execution(* com.dianda.shserc.controller.*..*(..))";
 
 	@Resource
 	private IServiceLogger logger;
@@ -37,11 +38,10 @@ public class LogAspect {
 
 		// system log record
 		if(!ObjectUtil.isNull(logger)){
-			logger.system(new SystemLoggerMessage(className,method,args));
+			//logger.system(new SystemLoggerMessage(className,method,args));
 		}
-
-		Object result= joinPoint.proceed();
-		return result;
+		
+		return joinPoint.proceed();
 	}
 	
 }
