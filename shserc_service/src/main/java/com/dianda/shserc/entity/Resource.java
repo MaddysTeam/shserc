@@ -28,7 +28,7 @@ public class Resource {
 	
 	private String fileExtName;
 	
-	private  String fileName;
+	private String fileName;
 	
 	private long fileSize;
 	
@@ -68,22 +68,25 @@ public class Resource {
 	
 	private boolean isDeleted;
 	
-	@TableField(exist = false)
+	@TableField( exist = false )
 	private String deformity;
 	
-	@TableField(exist = false)
+	@TableField( exist = false )
 	private String resourceType;
 	
-	@TableField(exist = false)
+	@TableField( exist = false )
 	private String mediumType;
 	
-	@TableField(exist = false)
+	@TableField( exist = false )
 	private String state;
 	
 	public boolean isNewOne( ) {
 		return this.id <= 0;
 	}
 	
+	public void addViewCount( ) {
+		this.setViewCount ( this.getViewCount ( ) + 1 );
+	}
 	
 	public static void dictTranslate( Resource resource , DictionaryCache cache ) {
 		resource.deformity = cache.translate ( "deformity" , String.valueOf ( resource.getDeformityId ( ) ) );

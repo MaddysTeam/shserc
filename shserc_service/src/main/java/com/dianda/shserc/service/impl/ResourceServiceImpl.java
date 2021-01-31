@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.dto.mappers.IEditResourceMapper;
 import com.dianda.shserc.entity.Resource;
+import com.dianda.shserc.exceptions.ExceptionType;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.IResourceService;
@@ -19,6 +21,7 @@ import com.dianda.shserc.vo.ResourceVoList;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +59,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if ( ! StringUtil.IsNullOrEmpty ( phrase ) )
 			wrapper = wrapper.like ( "title" , phrase );
 		if ( deformityId > 0 ) {
-			wrapper=wrapper.eq ( "deformity_Id" , deformityId );
+			wrapper = wrapper.eq ( "deformity_Id" , deformityId );
 		}
 		if ( stateId > 0 ) {
-			wrapper=wrapper.eq ( "state_Id" , stateId );
+			wrapper = wrapper.eq ( "state_Id" , stateId );
 		}
 		//TODO: add more filter fields here
 		
@@ -109,15 +112,25 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 			Resource resource = mapper.selectById ( id );
 			Resource.dictTranslate ( resource , cache ); // 翻译字典
 			return IResourceVoMapper.INSTANCE.mapFrom ( resource );
-		}
-		catch ( Exception e ){
+		} catch ( Exception e ) {
 			return null;
 		}
 	}
 	
 	@Override
-	public boolean setViewCount( long userId , long id ) {
-		return false;
+	@Transactional( readOnly = false, rollbackFor = GlobalException.class )
+	public boolean addViewCount( ResourceOperation dto ) {
+		if ( ObjectUtil.isNull ( dto ) )
+			return false;
+		
+		Resource resource = mapper.selectById ( dto.getResourceId ( ) );
+		if ( ObjectUtil.isNull ( resource ) ) {
+			return false;
+		}
+		
+		resource.addViewCount ( );
+		//throw new GlobalException ( ExceptionType.SERVER_ERROR ); // for unit test only
+		return mapper.updateById ( resource ) + mapper.addViewCount ( dto ) == 2;
 	}
 	
 }

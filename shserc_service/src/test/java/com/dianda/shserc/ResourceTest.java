@@ -1,6 +1,8 @@
 package com.dianda.shserc;
 
 import com.dianda.shserc.bean.ResourceSelectParams;
+import com.dianda.shserc.entity.ResourceOperation;
+import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
@@ -23,6 +25,7 @@ public class ResourceTest {
 	int size = 2;
 	//String phrase = "jimmyPoor";
 	long resourceId = 1;
+	long userId = 1;
 	long zero = 0;
 	
 	@Test
@@ -36,6 +39,16 @@ public class ResourceTest {
 		Assert.assertNotNull ( voList.getListData ( ) );
 		Assert.assertTrue ( voList.getListData ( ).size ( ) > 0 );
 		Assert.assertNotNull ( voList );
+	}
+	
+	@Test
+	public void addResourceViewCountTransactionTest( ) {
+		try {
+			service.addViewCount ( new ResourceOperation ( resourceId , userId ) );  // when success
+		}catch ( GlobalException e ){  // throw global exception
+			com.dianda.shserc.vo.ResourceVo resource = service.getById ( resourceId );
+			Assert.assertTrue ( resource.getViewCount ( ) == 1 );
+		}
 	}
 	
 }

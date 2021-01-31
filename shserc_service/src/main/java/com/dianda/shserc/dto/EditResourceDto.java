@@ -45,3 +45,4 @@ public class EditResourceDto {
 	private long auditor;
 	
 }
+

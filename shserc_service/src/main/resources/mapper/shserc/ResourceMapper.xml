@@ -3,22 +3,26 @@
 <mapper namespace="com.dianda.shserc.mapper.ResourceMapper">
     <select id="selectResources" resultType="com.dianda.shserc.entity.Resource">
         select r.id,
-                r.title,
-                r.description,
-                r.state_id,
-                r.author,
-				r.author_address,
-				r.author_email,
-				r.author_phone,
-				r.deformity_id,
-				r.description,
-				r.title,
-				r.file_size,
-				r.keywords,
-				r.view_count
+        r.title,
+        r.description,
+        r.state_id,
+        r.author,
+        r.author_address,
+        r.author_email,
+        r.author_phone,
+        r.deformity_id,
+        r.description,
+        r.title,
+        r.file_size,
+        r.keywords,
+        r.view_count
         from resource r
         <where>
-			${ew.sqlSegment}
-		</where>
+            ${ew.sqlSegment}
+        </where>
     </select>
+
+    <insert id="addViewCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+		 insert into res_view (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
 </mapper>
