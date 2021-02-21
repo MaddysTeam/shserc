@@ -17,5 +17,13 @@ import org.apache.ibatis.annotations.Param;
 public interface ResourceMapper extends BaseMapper<Resource> {
 	IPage<Resource> selectResources( IPage<Resource> page , @Param( Constants.WRAPPER ) Wrapper<Resource> wrapper );
 	
-	int addViewCount( ResourceOperation operation);
+	int addViewCount( ResourceOperation operation );
+	
+	int addDownloadCount( ResourceOperation operation );
+	
+	int addFavoriteCount( ResourceOperation operation );
+	
+	int addCommentCount( ResourceOperation operation );
+	
+	int addStarCount( ResourceOperation operation );
 }

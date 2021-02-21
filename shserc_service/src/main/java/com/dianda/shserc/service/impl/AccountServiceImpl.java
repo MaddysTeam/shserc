@@ -3,6 +3,7 @@ package com.dianda.shserc.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.dianda.shserc.dto.ChangePasswordDto;
+import com.dianda.shserc.dto.ForgetPasswordDto;
 import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.mapper.ResUserMapper;
@@ -19,8 +20,7 @@ import javax.validation.Valid;
 
 /**
  * @author hauchao
- * @title AccountServiceImpl
- * @Description account service with following function: login , logout and change password
+ * @title Account Service Impl
  * @Date 2020/8/9 23:16
  * @Copyright 2019-2020
  */
@@ -77,6 +77,18 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		
 		return dto;
+	}
+	
+	/**
+	 * @title forget password
+	 * @Description this method to retrieve password by using mobile number
+	 * @author hauchao
+	 * @Date 2021/2/20 23:31
+	 * @Copyright 2019-2020
+	 */
+	@Override
+	public ForgetPasswordDto forgetPassword( ForgetPasswordDto dto ) {
+		return null;
 	}
 	
 }
