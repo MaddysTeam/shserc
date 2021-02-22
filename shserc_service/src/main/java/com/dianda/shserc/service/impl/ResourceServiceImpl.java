@@ -132,5 +132,15 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		//throw new GlobalException ( ExceptionType.SERVER_ERROR ); // for unit test only
 		return mapper.updateById ( resource ) + mapper.addViewCount ( dto ) == 2;
 	}
-	
+
+	@Override
+	public boolean addPraiseCount(ResourceOperation param) {
+		return false;
+	}
+
+	@Override
+	public boolean addDownloadCount(ResourceOperation param) {
+		return false;
+	}
+
 }

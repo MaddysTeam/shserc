@@ -13,4 +13,6 @@ public interface IResourceService extends IService<Resource> {
 	ResourceVo edit( EditResourceDto model );
 	ResourceVo getById( long id );
 	boolean addViewCount( ResourceOperation param);
+	boolean addPraiseCount(ResourceOperation param);
+	boolean addDownloadCount(ResourceOperation param);
 }
