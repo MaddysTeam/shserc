@@ -1,6 +1,7 @@
 package com.dianda.shserc.utils.logger;
 
 import com.dianda.shserc.ServiceApplication;
+import com.dianda.shserc.util.logger.system.SystemLog;
 import org.apache.shiro.util.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +12,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-@ActiveProfiles("local")
+//@ActiveProfiles("local")
 @SpringBootTest(classes = ServiceApplication.class)
 @RunWith( SpringRunner.class )
 public class LogTest{
+
+	@SystemLog
+	@Test
+	public void Log(){
+		Assert.isTrue(false);
+	}
 
 }

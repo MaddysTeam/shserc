@@ -28,11 +28,11 @@ public class ResReal {
 	private String State;
 	
 	private long addUser;
-	
+
 	private LocalDateTime addTime;
-	
+
 	private long updateUser;
-	
+
 	private LocalDateTime updateTime;
 	
 }

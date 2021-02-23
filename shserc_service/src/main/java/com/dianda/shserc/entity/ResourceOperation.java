@@ -4,11 +4,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Min;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode( callSuper = false )
-public class ResourceOperation {
+public class ResourceOperation implements Serializable {
 	
 	@Min( value = 1 )
 	private long resourceId;
