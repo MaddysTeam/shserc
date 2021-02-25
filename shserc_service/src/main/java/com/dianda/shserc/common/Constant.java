@@ -7,6 +7,7 @@ public final class Constant {
 
 	public static final class ErrorCode{
 		public static String TODO="002";
+		public static String PARAM_NULL_POINT_REFERENCE="008";
 		public static String PARAM_INVALIDATE="009";
 	}
 	
@@ -22,6 +23,9 @@ public final class Constant {
 		public final static String FILE_SIZE_IS_GREATER_THAN_ZERO="文件大小必须为大于0";
 		public final static String FILE_UPLOAD_DST_PATH="上传文件路径为必须";
 		public final static String FILE_TYPE_NOT_ALLOWED="不允许该文件类型上传";
+
+		public final static String EDIT_FAILURE="编辑失败";
+		public final static String OBJECT_IS_REQUIRED="对象不能为空";
 	}
 
 	public static final class Success{

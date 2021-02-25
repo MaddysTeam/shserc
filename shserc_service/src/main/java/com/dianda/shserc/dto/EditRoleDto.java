@@ -13,4 +13,6 @@ public class EditRoleDto {
 	private String roleName;
 
 	private String description;
+
+	private  long[] permissionIds;
 }

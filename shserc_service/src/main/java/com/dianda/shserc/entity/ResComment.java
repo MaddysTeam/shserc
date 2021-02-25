@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Comment {
+public class ResComment {
 
 	private static final long serialVersionUID = 1L;
 

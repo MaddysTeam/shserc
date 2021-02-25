@@ -25,4 +25,5 @@
     <insert id="addViewCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
 		 insert into res_view (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
+
 </mapper>

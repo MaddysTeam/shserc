@@ -24,7 +24,7 @@ public interface IResUserService extends IService<ResUser> {
 	
 	ResUserVo getByNameAndPassword(String userName,String password);
 	
-	Boolean addUserRole( long userId , long roleId );
-	
-	Boolean deleteUserRole( long userId , long roleId );
+//	Boolean addUserRole( long userId , long roleId );
+//
+//	Boolean deleteUserRole( long userId , long roleId );
 }

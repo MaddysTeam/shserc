@@ -82,6 +82,8 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		} else {
 			resUserMapper.updateById ( user );
 		}
+
+		//TODO: edit userRole
 		
 		ResUserVo vo = IUserVoMapper.INSTANCE.mapFrom ( user );
 		return vo;
@@ -123,17 +125,17 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		return vo;
 	}
 	
-	@Override
-	public Boolean addUserRole( long userId , long roleId ) {
-		ResUserRole userRole = new ResUserRole ( );
-		userRole.setRoleId ( roleId );
-		userRole.setUserId ( userId );
-		return resUserMapper.addUserRole ( userRole ) > 0;
-	}
-	
-	@Override
-	public Boolean deleteUserRole( long userId , long roleId ) {
-		return null;
-	}
+//	@Override
+//	public Boolean addUserRole( long userId , long roleId ) {
+//		ResUserRole userRole = new ResUserRole ( );
+//		userRole.setRoleId ( roleId );
+//		userRole.setUserId ( userId );
+//		return resUserMapper.addUserRole ( userRole ) > 0;
+//	}
+//
+//	@Override
+//	public Boolean deleteUserRole( long userId , long roleId ) {
+//		return null;
+//	}
 	
 }

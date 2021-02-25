@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 /**
  * <p>
- * Account 控制器
+ * Account controller
  * </p>
  *
  * @author huachao

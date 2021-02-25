@@ -7,6 +7,6 @@ import com.dianda.shserc.entity.ResReal;
 import com.dianda.shserc.vo.ResRealVoList;
 
 public interface IResRealService extends IService<ResReal> {
-	boolean edit(EditRealDto model);
 	ResRealVoList find(RealSelectParams params);
+	boolean edit(EditRealDto model);
 }
