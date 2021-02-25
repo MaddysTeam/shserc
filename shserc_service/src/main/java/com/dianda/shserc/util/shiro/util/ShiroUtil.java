@@ -9,12 +9,18 @@ import org.apache.shiro.subject.Subject;
 public class ShiroUtil {
 	
 	public static JSONObject  getLoginUser(){
-		Subject subject= SecurityUtils.getSubject ();
-		String token = subject.getPrincipal ( ).toString ( );
-		String account = JwtOperation.getClaim ( token , JwtConstant.ACCOUNT );
-		JSONObject o = JSONObject.parseObject ( account );
-		
-		return o;
+		try {
+			Subject subject = SecurityUtils.getSubject ( );
+			String token = subject.getPrincipal ( ).toString ( );
+			String account = JwtOperation.getClaim ( token , JwtConstant.ACCOUNT );
+			JSONObject o = JSONObject.parseObject ( account );
+			
+			return o;
+		}
+		catch ( Exception e ){
+			return null;
+		}
+	
 	}
 	
 }

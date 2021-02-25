@@ -9,6 +9,7 @@ import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -26,9 +27,9 @@ import java.lang.reflect.Method;
  */
 
 @Aspect
-@Component
+@Configuration
 public class SystemLogAspect {
-
+	
 	private final String systemLogDataPoint = "@annotation(com.dianda.shserc.util.logger.system.SystemLog)";
 	private final String exceptionDataPoint = "execution(* com.dianda.shserc.controller.*..*(..))";
 
@@ -70,14 +71,14 @@ public class SystemLogAspect {
 		return joinPoint.proceed();
 	}
 
-	@Pointcut(exceptionDataPoint)
-	public void exceptionPointCut() {
-	}
+//	@Pointcut(exceptionDataPoint)
+//	public void exceptionPointCut() {
+//	}
 
-	@AfterThrowing(pointcut = "exceptionPointCut()", throwing = "e")
-	public void occurExceptionLog(Joinpoint joinpoint, Throwable e) {
+//	@AfterThrowing(pointcut = "exceptionPointCut()", throwing = "e")
+//	public void occurExceptionLog(Joinpoint joinpoint, Throwable e) {
 
-	}
+//	}
 
 
 }

@@ -1,5 +1,7 @@
 package com.dianda.shserc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.dianda.shserc.validators.ICheckIdCard;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,7 @@ public class ResReal {
 
 	private String cardNo;
 
+	@ICheckIdCard()
 	private String idCard;
 
 	private String cardPassword;
@@ -28,11 +31,14 @@ public class ResReal {
 	private long stateId;
 
 	private long companyId;
-
+	
+	@TableField( exist = false )
 	private String company;
-
+	
+	@TableField( exist = false )
 	private LocalDateTime birthday;
-
+	
+	@TableField( exist = false )
 	private String State;
 
 	private long addUser;

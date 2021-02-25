@@ -40,7 +40,7 @@ public class ServiceLogger implements IServiceLogger {
 	@Override
 	public void system(LoggerMessage message) {
 		if (!ObjectUtil.isNull(message))
-			logger.warn(message.toString());
+			logger.info(message.toString());
 	}
 
 }

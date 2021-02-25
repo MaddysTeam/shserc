@@ -6,6 +6,8 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class EditRealDto {
+	
+	private long Id;
 
 	@NotBlank
 	private String cardNo;
@@ -15,6 +17,9 @@ public class EditRealDto {
 
 	@NotBlank
 	private long companyId;
+	
+	@NotBlank
+	private String realName;
 
 	@NotBlank
 	private String cardPassword;

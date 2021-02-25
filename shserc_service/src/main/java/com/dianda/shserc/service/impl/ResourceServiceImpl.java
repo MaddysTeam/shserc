@@ -16,6 +16,7 @@ import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
+import com.dianda.shserc.util.logger.system.SystemLog;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
@@ -119,6 +120,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	
 	@Override
 	@Transactional( readOnly = false, rollbackFor = GlobalException.class )
+	@SystemLog()
 	public boolean addViewCount( ResourceOperation dto ) {
 		if ( ObjectUtil.isNull ( dto ) )
 			return false;
@@ -129,6 +131,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		}
 		
 		resource.addViewCount ( );
+		//mapper.updateById ( resource );
+		//mapper.addViewCount ( dto );
 		//throw new GlobalException ( ExceptionType.SERVER_ERROR ); // for unit test only
 		return mapper.updateById ( resource ) + mapper.addViewCount ( dto ) == 2;
 	}

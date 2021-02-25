@@ -15,50 +15,74 @@ import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResRealMapper;
 import com.dianda.shserc.service.IResRealService;
 import com.dianda.shserc.util.basic.ObjectUtil;
+import com.dianda.shserc.vo.ResRealVo;
 import com.dianda.shserc.vo.ResRealVoList;
+import com.dianda.shserc.vo.mappers.IRealVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> implements IResRealService {
-
-	@Autowired
+	
+	@Resource
 	ResRealMapper mapper;
-
-
+	
+	
 	@Override
-	public boolean edit(EditRealDto model) {
-		if (ObjectUtil.isNull(model)) {
-			throw new GlobalException(Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE, Constant.Error.OBJECT_IS_REQUIRED);
+	public boolean edit( EditRealDto model ) {
+		if ( ObjectUtil.isNull ( model ) ) {
+			throw new GlobalException ( Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE , Constant.Error.OBJECT_IS_REQUIRED );
 		}
-
-		ResReal o = IEditRealMapper.INSTANCE.mapFrom(model);
-		if (o.isNewOne()) {
-			mapper.insert(o);
+		
+		int result = 0;
+		ResReal resReal = IEditRealMapper.INSTANCE.mapFrom ( model );
+		ResRealVo resRealVo = findByIdCard ( resReal.getIdCard ( ) );
+		if ( resReal.isNewOne ( ) && ObjectUtil.isNull ( resRealVo ) ) {
+			result = mapper.insert ( resReal );
+			return result > 0;
 		} else {
-			mapper.updateById(o);
+			result = mapper.updateById ( resReal );
+			return result >= 0;
 		}
-
-		return false;
 	}
-
+	
 	@Override
-	public ResRealVoList find(RealSelectParams params) {
-		QueryWrapper<ResReal> queryWrapper = new QueryWrapper<>();
-		int current = params.getCurrent();
-		int size = params.getSize();
-		IPage<ResReal> page = new Page<>(current, size);
-		page = mapper.selectReal(page, queryWrapper);
-		List<ResReal> data = page.getRecords();
-
+	public ResRealVo findById( long id ) {
+		ResReal resReal = mapper.selectById ( id );
+		ResRealVo vo = ObjectUtil.isNull ( resReal ) ? null : IRealVoMapper.INSTANCE.mapFrom ( resReal );
+		
+		return vo;
+	}
+	
+	@Override
+	public ResRealVo findByIdCard( String idCard ) {
+		QueryWrapper<ResReal> queryWrapper = new QueryWrapper<> ( );
+		queryWrapper.eq ( "id_card" , idCard );
+		ResReal resReal = mapper.selectOne ( queryWrapper );
+		ResRealVo vo = ObjectUtil.isNull ( resReal ) ? null : IRealVoMapper.INSTANCE.mapFrom ( resReal );
+		
+		return vo;
+	}
+	
+	@Override
+	public ResRealVoList find( RealSelectParams params ) {
+		QueryWrapper<ResReal> queryWrapper = new QueryWrapper<> ( );
+		int current = params.getCurrent ( );
+		int size = params.getSize ( );
+		IPage<ResReal> page = new Page<> ( current , size );
+		page = mapper.selectReal ( page , queryWrapper );
+		List<ResReal> data = page.getRecords ( );
+		
 		ResRealVoList voList = new ResRealVoList ( );
-		voList.setListData(data);
+		voList.setListData ( data );
 		voList.setCurrent ( current );
 		voList.setSize ( size );
 		voList.setTotal ( page.getTotal ( ) );
-
+		
 		return voList;
 	}
-
+	
 }
