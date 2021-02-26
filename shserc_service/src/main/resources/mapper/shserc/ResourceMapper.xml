@@ -26,4 +26,16 @@
 		 insert into res_view (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
+    <insert id="addDownloadCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+		 insert into res_download (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
+
+    <insert id="addFavoriteCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+		 insert into res_favorite (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
+
+    <insert id="addStarCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+         insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+    </insert>
+
 </mapper>

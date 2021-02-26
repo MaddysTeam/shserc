@@ -50,9 +50,7 @@ public class Resource {
 	
 	private long stateId;
 	
-	private long viewCount;
-	
-	private long starTotal;
+	private int viewCount;
 	
 	private long auditor;
 	
@@ -79,7 +77,42 @@ public class Resource {
 	
 	@TableField( exist = false )
 	private String state;
-	
+
+	//20210226
+	private int downloadCount;
+
+	private int favoriteCount;
+
+	private int commentCount;
+
+	private int starCount;
+
+	private int starTotal;
+
+	private long subjectId;
+
+	private long gradeId;
+
+	private long stageId;
+
+	private long importSourceId;
+
+	private long schoolTypeId;
+
+	private long domainId;
+
+//	@TableField( exist = false )
+//	private String grade;
+//
+//	@TableField( exist = false )
+//	private String importType;
+//
+//	@TableField( exist = false )
+//	private String subject;
+//
+//	@TableField( exist = false )
+//	private String domain;
+
 	public boolean isNewOne( ) {
 		return this.id <= 0;
 	}

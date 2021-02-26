@@ -44,4 +44,19 @@ public class ResourceController {
 		return JsonResult.success(Constant.Success.EDIT_SUCCESS);
 	}
 
+	@PostMapping(path="/download/{id}")
+	public JsonResult download(@PathVariable  long id){
+		return null;
+	}
+
+	@PostMapping(path="/download/{id}")
+	public JsonResult favorite(@PathVariable long id){
+		return null;
+	}
+
+	@PostMapping(path="/star/{id}")
+	public JsonResult start(@PathVariable long id, int score){
+		return null;
+	}
+
 }

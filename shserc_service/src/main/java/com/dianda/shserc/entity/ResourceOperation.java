@@ -15,7 +15,11 @@ public class ResourceOperation implements Serializable {
 	private long resourceId;
 	@Min( value = 1 )
 	private long userId;
-	
+
+	private int operIntResult;
+
+	private String operStringResult;
+
 	private LocalDateTime addTime;
 	
 	public ResourceOperation( long resourceId , long userId ) {

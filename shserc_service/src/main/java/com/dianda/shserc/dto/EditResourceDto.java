@@ -43,6 +43,18 @@ public class EditResourceDto {
 	private long deformityId;
 	
 	private long auditor;
+
+	private long subjectId;
+
+	private long gradeId;
+
+	private long stageId;
+
+	private long importSourceId;
+
+	private long schoolTypeId;
+
+	private long domainId;
 	
 }
 

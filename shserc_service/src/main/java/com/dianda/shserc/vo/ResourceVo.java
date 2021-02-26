@@ -49,6 +49,28 @@ public class ResourceVo  implements Serializable {
 	private  String fileName;
 	
 	private  String keywords;
+
+	private  int starTotal;
+
+	private  int starCount;
+
+	private  int downloadCount;
+
+	private  int favoriteCount;
+
+	private  int commentCount;
+
+	private long subjectId;
+
+	private long gradeId;
+
+	private long stageId;
+
+	private long importSourceId;
+
+	private long schoolTypeId;
+
+	private long domainId;
 	
 }
 

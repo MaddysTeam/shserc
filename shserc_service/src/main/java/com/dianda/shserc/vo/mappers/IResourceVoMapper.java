@@ -22,6 +22,20 @@ public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {
 			@Mapping( source = "author", target = "author" ) ,
 			@Mapping( source = "authorEmail", target = "authorEmail" ) ,
 			@Mapping( source = "viewCount", target = "viewCount" ) ,
+
+			@Mapping( source = "downloadCount", target = "downloadCount" ) ,
+			@Mapping( source = "favoriteCount", target = "favoriteCount" ) ,
+			@Mapping( source = "commentCount", target = "commentCount" ) ,
+			@Mapping( source = "starCount", target = "starCount" ) ,
+			@Mapping( source = "starTotal", target = "starTotal" ) ,
+
+			@Mapping( source = "subjectId", target = "subjectId" ) ,
+			@Mapping( source = "gradeId", target = "gradeId" ) ,
+			@Mapping( source = "stageId", target = "stageId" ) ,
+			@Mapping( source = "importSourceId", target = "importSourceId" ) ,
+			@Mapping( source = "schoolTypeId", target = "schoolTypeId" ) ,
+			@Mapping( source = "domainId", target = "domainId" ) ,
+
 			@Mapping( source = "addTime", target = "addTime" ) ,
 			@Mapping( source = "fileExtName", target = "fileExtName" ) ,
 			@Mapping( source = "state", target = "state" ) ,
