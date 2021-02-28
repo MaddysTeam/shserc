@@ -10,7 +10,7 @@ axios.interceptors.request.use(
         if (app.isAuth) {
             config.headers['Authorization'] = app.token;
             if(localStorage.getItem('Authorization')!=app.token){
-                window.location.reload();
+                //window.location.reload();
             }
         }   
         return config;
@@ -21,6 +21,7 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(res => {
+    //alert('hello')
     if (typeof res.data !== 'object') {
         Toast.fail('服务端异常！')
         return Promise.reject(res);

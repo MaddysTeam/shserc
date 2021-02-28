@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb>
       <el-breadcrumb-item :to="{path:'/'}">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>用户查询</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- <el-form>
       <el-form-item>
@@ -37,8 +37,10 @@ export default {
   data() {
     return {
       columns: [
-        { prop: "id", label: "id" },
-        { prop: "userName", label: "name" },
+        { prop: "id", label: "用户编号" },
+        { prop: "userName", label: "用户名" },
+        { prop: "company", label: "所在单位" },
+        { prop: "realName", label: "真实姓名"}
       ],
       source: [],
       pageSize: 2,

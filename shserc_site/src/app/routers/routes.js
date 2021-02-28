@@ -6,6 +6,8 @@ import CompanyList from '@/app/views/admin/company/list'
 import ResourceList from '@/app/views/admin/resource/list'
 import ResourceEdit from '@/app/views/admin/resource/edit'
 import ResourceDetail from '@/app/views/admin/resource/detail'
+import Summary from '@/app/views/admin/dashboard/summary'
+import RoleList from  '@/app/views/admin/role/list'
 
 const routes = [
   // frontend
@@ -21,16 +23,27 @@ const routes = [
     name: 'AdminIndex',
     component: Admin,
     children: [{
+      path: '/admin/dashboard/summary',
+      name: 'Summary',
+      component: Summary
+    }
+      ,
+    {
       path: '/admin/user/list',
       name: 'UserList',
       component: UserList
     },
     {
+      path: '/admin/role/list',
+      name: 'RoleList',
+      component: RoleList
+    },
+    {
       path: '/admin/company/list',
       name: 'CompanyList',
       component: CompanyList,
-      meta:{
-        keepAlive:false
+      meta: {
+        keepAlive: false
       }
     }, {
       path: '/admin/resource/list',
@@ -63,7 +76,7 @@ const routes = [
   {
     path: '/404',
     name: '404',
-    component:()=>import('@/app/views/404.vue')
+    component: () => import('@/app/views/404.vue')
   },
   {
     path: "*",

@@ -3,19 +3,19 @@
 		<template v-for="item in this.dataSource">
 			<el-submenu v-if="item.children.length>0" :key="item.id" :index="item.name">
 				<template slot="title" >
-                    <i class="el-icon-menu"></i>
-					<span slot="title"  >{{ item.name}}</span>
+                    <i :class="item.icon"></i>
+					<span slot="title" style="text-align:left"  >{{item.name}}</span>
 				</template>
 				<Menu :dataSource="item.children"></Menu>
             </el-submenu>
             <el-menu-item v-else-if="item.level==1" :index="item.path" :key="item.id"  >
                 <template slot="title" >
-                    <i class="el-icon-menu"></i>
+                    <i :class="item.icon"></i>
 					<span slot="title">{{ item.name}}</span>
 				</template>
 			</el-menu-item>
-			<el-menu-item v-else :index="item.path" :key="item.id"  >
-                <i class="el-icon-setting" style="margin-left:10%"></i>
+	 			<el-menu-item v-else :index="item.path" :key="item.id"  >
+                <i :class="item.icon" ></i>
                 <template slot="title" >
 					<span slot="title">{{ item.name}}</span>
 				</template>
@@ -48,7 +48,8 @@
 
     .el-menu-item,.el-submenu,.el-submenu__title{
         background:#333744 !important;
-        color:#fff
+        color:#fff;
+		text-align: left;
     }
 
      .el-submenu:hover{

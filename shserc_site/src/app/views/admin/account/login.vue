@@ -84,9 +84,12 @@ export default {
             userName: _this.form.name,
             password: _this.form.password,
           }).then((res) => {
+            console.log(res);
+            if(res){
             Notification.success({ message: "登录成功" });
             _this.$store.commit(types.APP+"/"+types.LOGIN,res.data.token)
             _this.$router.push('/admin/user/list');
+            }
           });
         } else {
           console.log("error submit!!");

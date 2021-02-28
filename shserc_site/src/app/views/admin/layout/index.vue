@@ -61,6 +61,7 @@
 <style scoped>
 .container{
     height:100%;
+    font-family: Microsoft YaHei;
 }
 
 .el-header{
