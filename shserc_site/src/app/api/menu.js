@@ -18,7 +18,7 @@ export function getMenusData() {
                 id: 4,
                 level: 2,
                 name: '实名管理',
-                path: '#',
+                path: '/admin/real/list',
                 icon: 'el-icon-user',
                 children: []
             },

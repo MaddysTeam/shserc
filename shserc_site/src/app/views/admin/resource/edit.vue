@@ -145,7 +145,7 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
-import { edit, uploadFile, uploadCover, resource } from "@/app/api/resource";
+import { edit, uploadFile, uploadCover, info } from "@/app/api/resource";
 import { resourceModel } from "@/app/models/resource";
 
 export default {
@@ -222,7 +222,7 @@ export default {
     loadResource() {
       let id = this.$router.currentRoute.params.id;
       if (id) {
-        resource(id).then((res) => {
+        info(id).then((res) => {
           this.resource = JSON.parse(res.data);
           this.fileList.push({
             name: this.resource.fileName,

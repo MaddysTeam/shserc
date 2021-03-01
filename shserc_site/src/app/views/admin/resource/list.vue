@@ -40,7 +40,7 @@
 </template>
 <script>
 import Table from "@/components/Tables/index";
-import { resourceList } from "@/app/api/resource.js";
+import { list } from "@/app/api/resource.js";
 import { mapState } from "vuex";
 
 export default {
@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     bindResourceList() {
-      let result = resourceList(
+      let result = list(
         this.index,
         this.pageSize,
         this.deformityId

@@ -3,8 +3,8 @@
     title: "", 
     state:"",
     stateId: 0,
-    deformityId: '',
-    deformity:'',
+    deformityId: "",
+    deformity:"",
     author: "",
     authorEmail: "",
     authorCompany: "",
@@ -19,6 +19,6 @@
     mediumTypeId:0,
     resourceType:"",
     resourceTypeId:10002,
-    coverPath:''
+    coverPath:""
  };
  

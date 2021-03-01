@@ -17,7 +17,7 @@
 
 <script>
 import edit from './edit.vue';
-import {companyList} from '@/app/api/company'
+import {list} from '@/app/api/company'
 
 export default {
   components: { edit },
@@ -49,7 +49,7 @@ export default {
       this.dialogVisible=false;
     },
     bind(){
-      companyList().then((res)=>{
+      list().then((res)=>{
         if(res && res.data){
         console.log(res.data);
         this.source=[JSON.parse(res.data)];

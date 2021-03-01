@@ -1,10 +1,13 @@
 import axios from '@/app/static/axios'
 
-export function userList(pageIndex,pageSize){
-    console.log(pageSize);
-    return axios.post('api/user/list',{'current':pageIndex,'size':pageSize}) //[{id:1,name:"jimmypoor"},{id:2,name:"jimmypoor"}]
+export function list(pageIndex, pageSize) {
+    return axios.post('api/user/list', { 'current': pageIndex, 'size': pageSize })
 }
 
-export function edit(params){
+export function edit(params) {
+    return axios.post('api/user/edit', params)
+}
 
+export function info(id) {
+    return axios.post('api/user/' + id);
 }

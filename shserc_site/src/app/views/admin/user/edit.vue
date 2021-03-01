@@ -43,13 +43,15 @@ import { Notification } from "element-ui";
 import { regexs } from "@/static/regex.js";
 import { messages } from "@/app/static/message.js";
 import selectTree from "@/components/TreeSelector/index";
-import { companyList } from "@/app/api/company";
+import { list } from "@/app/api/company";
 import {
   validateRequired,
   validateLessThan50,
   validateSelectValue,
   validateCardNo,
 } from "@/static/validator";
+import { edit } from "@/app/api/user";
+import { userModel } from "@/app/models/user";
 
 export default {
   name: "edit",
@@ -82,16 +84,11 @@ export default {
     };
 
     return {
-      user: {
-        id: 0,
-        username: "",
-        idCard: "",
-        companyId: "",
-      },
+      user: userModel,
       rules: {
         username: { validator: nameValidator, trigger: "blur" },
         idCard: { validator: cardIdValidator, trigger: "blur" },
-        companyId:{validator:companyValidator,trigger:'change'}
+        companyId: { validator: companyValidator, trigger: "change" },
       },
 
       source: [],
@@ -109,6 +106,9 @@ export default {
       let _this = this;
       _this.$refs[formName].validate((isValid) => {
         if (isValid) {
+          edit(this.user).then((res) => {
+            Notification.success("");
+          });
           _this.handleClose();
         }
       });
@@ -119,7 +119,7 @@ export default {
     },
 
     handleBindCompanyList() {
-      companyList().then((res) => {
+      list().then((res) => {
         if (res && res.data) {
           this.source = [JSON.parse(res.data)];
         }

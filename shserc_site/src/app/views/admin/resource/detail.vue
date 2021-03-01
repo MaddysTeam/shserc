@@ -109,7 +109,7 @@
 
 <script>
 import { resourceModel } from "@/app/models/resource";
-import { resource } from "@/app/api/resource";
+import { info } from "@/app/api/resource";
 import { getById } from "@/app/utils/dictHelper";
 import { appEnum } from "@/app/static/enum";
 import { mapState } from "vuex";
@@ -157,7 +157,7 @@ export default {
   methods: {
     getResource() {
       let id = this.$router.currentRoute.params.id;
-      resource(id).then((res) => {
+      info(id).then((res) => {
         this.resource=JSON.parse(res.data);
       });
     },

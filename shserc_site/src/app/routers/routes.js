@@ -7,7 +7,8 @@ import ResourceList from '@/app/views/admin/resource/list'
 import ResourceEdit from '@/app/views/admin/resource/edit'
 import ResourceDetail from '@/app/views/admin/resource/detail'
 import Summary from '@/app/views/admin/dashboard/summary'
-import RoleList from  '@/app/views/admin/role/list'
+import RoleList from '@/app/views/admin/role/list'
+import RealList from '@/app/views/admin/real/list'
 
 const routes = [
   // frontend
@@ -26,12 +27,16 @@ const routes = [
       path: '/admin/dashboard/summary',
       name: 'Summary',
       component: Summary
-    }
-      ,
+    },
     {
       path: '/admin/user/list',
       name: 'UserList',
       component: UserList
+    },
+    {
+      path: '/admin/real/list',
+      name: 'RealList',
+      component: RealList
     },
     {
       path: '/admin/role/list',

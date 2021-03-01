@@ -1,6 +1,6 @@
 import axios from '@/app/static/axios' 
 
-export function companyList(){
+export function list(){
     return axios.post('api/company/search');
 }   
 
@@ -10,4 +10,8 @@ export function getChildren(parentId){
 
 export function edit(params){
     return axios.post('api/company/edit',params);
+}
+
+export function info(id){
+
 }

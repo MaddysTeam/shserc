@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-breadcrumb>
-      <el-breadcrumb-item :to="{path:'/'}">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户查询</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- <el-form>
@@ -15,6 +15,7 @@
       </el-button>
     </div>
     <edit @close="handleCloseEdit" :visible="dialogVisible"></edit>
+   
     <Table
       :list="source"
       :columns="columns"
@@ -29,7 +30,7 @@
 <script>
 import edit from "./edit.vue";
 import Table from "@/components/Tables/index";
-import { userList } from "@/app/api/user";
+import { list } from "@/app/api/user";
 
 export default {
   components: { Table, edit },
@@ -40,12 +41,12 @@ export default {
         { prop: "id", label: "用户编号" },
         { prop: "userName", label: "用户名" },
         { prop: "company", label: "所在单位" },
-        { prop: "realName", label: "真实姓名"}
+        { prop: "realName", label: "真实姓名" },
       ],
       source: [],
       pageSize: 2,
       total: 0,
-      current:1,
+      current: 1,
       commands: [
         {
           id: 1,
@@ -65,10 +66,10 @@ export default {
   },
   methods: {
     bindUserList(index) {
-      this.current=index;
-      let result = userList(index, this.pageSize).then((res) => {
+      this.current = index;
+      let result = list(index, this.pageSize).then((res) => {
         if (res && res.data) {
-          let data=JSON.parse(res.data);
+          let data = JSON.parse(res.data);
           this.total = data.total;
           this.source = data.listData;
         }
@@ -83,10 +84,10 @@ export default {
 </script>
 
 <style  scoped>
-.btn-group{
+.btn-group {
   display: flex;
   flex-direction: row;
   text-justify: auto;
-  margin:20px 20px 20px 0
+  margin: 20px 20px 20px 0;
 }
 </style>

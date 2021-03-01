@@ -1,6 +1,6 @@
 <template>
   <div class="login_area">
-    <div style="height: 30%;"></div>
+    <div style="height: 30%"></div>
     <div class="login_box">
       <div class="avatar_box">
         <h3>特教资源库后台管理</h3>
@@ -8,10 +8,20 @@
 
       <div>
         <!--login form-->
-        <el-form :model="form" :rules="rules" ref="form" label-width="0px" class="login-form">
+        <el-form
+          :model="form"
+          :rules="rules"
+          ref="form"
+          label-width="0px"
+          class="login-form"
+        >
           <!-- user name -->
           <el-form-item prop="name">
-            <el-input prefix-icon="el-icon-search" v-model="form.name" placeholder="用户名"></el-input>
+            <el-input
+              prefix-icon="el-icon-search"
+              v-model="form.name"
+              placeholder="用户名"
+            ></el-input>
           </el-form-item>
 
           <!-- password -->
@@ -28,16 +38,21 @@
           <el-form-item>
             <Verify
               :type="3"
-              style="width:100%"
+              style="width: 100%"
               @success="success"
               :showButton="false"
-              :barSize="{width:'100%',height:'40px'}"
+              :barSize="{ width: '100%', height: '40px' }"
             ></Verify>
           </el-form-item>
 
           <!-- buttons -->
           <el-form-item class="btns">
-            <el-button :disabled="form.isAble" type="primary" @click="submitForm('form')">登录</el-button>
+            <el-button
+              :disabled="form.isAble"
+              type="primary"
+              @click="submitForm('form')"
+              >登录</el-button
+            >
             <el-button :disabled="form.isAble" type="info">重置</el-button>
           </el-form-item>
         </el-form>
@@ -50,18 +65,15 @@
 <script>
 import Verify from "vue2-verify";
 import { login } from "@/app/api/account";
+import { loginModel } from "@/app/models/login.js";
 import { Notification } from "element-ui";
 import { mapMutations } from "vuex";
-import * as types from '@/app/static/type';
+import * as types from "@/app/static/type";
 
 export default {
   data() {
     return {
-      form: {
-        name: "",
-        password: "",
-        isAble: true,
-      },
+      form: loginModel,
       rules: {
         name: [
           { required: true, message: "请输入用户名或邮箱", trigger: "blur" },
@@ -77,7 +89,7 @@ export default {
     },
 
     submitForm(formName) {
-      let _this=this;
+      let _this = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
           login({
@@ -85,10 +97,13 @@ export default {
             password: _this.form.password,
           }).then((res) => {
             console.log(res);
-            if(res){
-            Notification.success({ message: "登录成功" });
-            _this.$store.commit(types.APP+"/"+types.LOGIN,res.data.token)
-            _this.$router.push('/admin/user/list');
+            if (res) {
+              Notification.success({ message: "登录成功" });
+              _this.$store.commit(
+                types.APP + "/" + types.LOGIN,
+                res.data.token
+              );
+              _this.$router.push("/admin/user/list");
             }
           });
         } else {
