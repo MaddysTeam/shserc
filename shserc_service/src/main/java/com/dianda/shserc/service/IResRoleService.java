@@ -13,7 +13,11 @@ import com.dianda.shserc.vo.ResRoleVoList;
  * @since 2020-08-12
  */
 public interface IResRoleService extends IService<ResRole> {
-	ResRoleVoList find( RoleSelectParams params);
+
+	ResRoleVoList find(RoleSelectParams params);
+
 	ResRole edit(EditRoleDto role);
+
 	boolean delete(String id);
+
 }

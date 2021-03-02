@@ -6,6 +6,7 @@ import com.dianda.shserc.dto.LoginDto;
 
 
 public interface IAccountService {
+
 	LoginDto login( LoginDto login );
 	
 	boolean logout( );
@@ -13,4 +14,5 @@ public interface IAccountService {
 	ChangePasswordDto changePassword( ChangePasswordDto dto );
 	
 	ForgetPasswordDto forgetPassword( ForgetPasswordDto dto );
+
 }

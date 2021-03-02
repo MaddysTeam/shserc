@@ -25,7 +25,7 @@ public class RedisCacheManager implements ICacheManager {
 	@Override
 	public CacheObject getCache( String key ) {
 		String v = redisUtil.get ( key );
-		if ( StringUtil.IsNullOrEmpty ( v ) )
+		if ( StringUtil.isNullOrEmpty ( v ) )
 			return null;
 		
 		JSONObject jsonObject = JSONObject.parseObject ( v );

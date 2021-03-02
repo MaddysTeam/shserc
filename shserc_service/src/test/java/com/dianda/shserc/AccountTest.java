@@ -45,14 +45,14 @@ public class AccountTest {
 	}
 	
 	@Test
-	 public void VerifyTokenTest() throws UnsupportedEncodingException {
+	 public void verify_token_test() throws UnsupportedEncodingException {
 		String token = JwtOperation.Sign(loginDTO.getUserName (),System.currentTimeMillis ());
 		boolean verifyResult=JwtOperation.verifyToken(token);
 		Assert.isTrue ( verifyResult);
 	 }
 	 
 	 @Test
-	public void LoginTest(){
+	public void login_test(){
 		 LoginDto result= accountService.login ( loginDTO );
 		 Assert.notNull ( result.getToken () );
 	 }

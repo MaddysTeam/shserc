@@ -92,7 +92,7 @@ public class JwtOperation {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			return JWT.create()
 							.withClaim("account",account)
-							.withClaim("currentTimeMillis", StringUtil.ToString(currentTimeMillions))
+							.withClaim("currentTimeMillis", StringUtil.toString(currentTimeMillions))
 							.withExpiresAt(date)
 							.sign(algorithm);
 			

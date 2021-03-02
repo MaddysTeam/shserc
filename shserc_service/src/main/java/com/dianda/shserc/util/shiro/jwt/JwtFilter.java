@@ -53,7 +53,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 			redisUtil=getRedisClient ();
 			String token=redisUtil.get ( JwtConstant.CACHE_PREFIX+user.get ( "id" ));
 			
-			return !StringUtil.IsNullOrEmpty( token);
+			return !StringUtil.isNullOrEmpty( token);
 		}
 //		else if ( isLoginAttempt ( request , response ) ) {
 //			try {

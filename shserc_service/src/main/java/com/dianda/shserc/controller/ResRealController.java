@@ -25,8 +25,12 @@ public class ResRealController {
 	IResRealService service;
 
 	@PostMapping("/register")
-	public JsonResult register(@RequestBody RegistRealDto model) {
-		throw new GlobalException(Constant.ErrorCode.TODO, "");
+	public JsonResult register(@RequestBody RegistRealDto model,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return JsonResult.error(Constant.Error.PARAMS_IS_INVALID);
+		}
+
+		return null;
 	}
 
 	@PostMapping("/list")

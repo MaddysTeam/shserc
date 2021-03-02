@@ -85,6 +85,12 @@ export default {
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
     handleChange: { type: Function },
+    handleSearch: { type: Function },
+  },
+  data() {
+    return {
+      search: "",
+    };
   },
   methods: {
     handleCurrentChange: function (val) {
@@ -94,6 +100,8 @@ export default {
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {
       return "font-weight:normal;font-size:14px;text-align:center";
     },
+
+    
   },
 };
 </script>

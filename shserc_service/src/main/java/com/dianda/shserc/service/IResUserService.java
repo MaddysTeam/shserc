@@ -6,6 +6,7 @@ import com.dianda.shserc.entity.ResUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.vo.ResUserVo;
+import com.dianda.shserc.vo.ResUserVoList;
 
 /**
  * user service
@@ -14,7 +15,8 @@ import com.dianda.shserc.vo.ResUserVo;
  * @since 2020-08-08
  */
 public interface IResUserService extends IService<ResUser> {
-	ResUserVo find( UserSelectParams params );
+
+	ResUserVoList find(UserSelectParams params );
 	
 	ResUserVo edit( EditUserDto user );
 	
@@ -24,7 +26,8 @@ public interface IResUserService extends IService<ResUser> {
 	
 	ResUserVo getByNameAndPassword(String userName,String password);
 	
-//	Boolean addUserRole( long userId , long roleId );
-//
-//	Boolean deleteUserRole( long userId , long roleId );
+	Boolean addUserRole( long userId , long roleId );
+
+	Boolean deleteUserRole( long userId , long roleId );
+
 }

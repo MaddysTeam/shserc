@@ -9,6 +9,7 @@ import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
 
 public interface IResourceService extends IService<Resource> {
+
 	ResourceVoList find( ResourceSelectParams params);
 
 	ResourceVo edit(EditResourceDto model);
@@ -20,4 +21,12 @@ public interface IResourceService extends IService<Resource> {
 	boolean addPraiseCount(ResourceOperation param);
 
 	boolean addDownloadCount(ResourceOperation param);
+
+	// 加精或者取消
+	boolean setOrCancelElite(long id);
+
+	//TODO:
+	//boolean addStart(ResStar)
+
+
 }

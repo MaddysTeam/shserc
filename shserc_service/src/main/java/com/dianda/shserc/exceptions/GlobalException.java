@@ -15,11 +15,11 @@ public class GlobalException extends RuntimeException implements IException {
 	}
 
 	public GlobalException(ExceptionType exceptionType) {
-		this.code = StringUtil.ToString(exceptionType.code);
+		this.code = StringUtil.toString(exceptionType.code);
 	}
 	
 	public GlobalException(ExceptionType exceptionType,String message) {
-		this.code = StringUtil.ToString(exceptionType.code);
+		this.code = StringUtil.toString(exceptionType.code);
 		this.message=message;
 	}
 

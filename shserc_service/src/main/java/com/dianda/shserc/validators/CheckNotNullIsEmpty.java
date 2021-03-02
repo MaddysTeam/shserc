@@ -10,7 +10,7 @@ public class CheckNotNullIsEmpty implements ConstraintValidator<ICheckNotNullOrE
 	
 	@Override
 	public boolean isValid( Object o , ConstraintValidatorContext constraintValidatorContext ) {
-		return !ObjectUtil.isNull ( o )  && ! StringUtil.IsNullOrEmpty ( o.toString () );
+		return !ObjectUtil.isNull ( o )  && ! StringUtil.isNullOrEmpty ( o.toString () );
 	}
 	
 }

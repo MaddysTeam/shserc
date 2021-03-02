@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.vo.DictionaryVo;
 
 /**
- * <p>
- * 服务类
- * </p>
+ * 字典服务
  *
  * @author huachao
  *@since 2020-10-05
-		*/
+ */
 public interface IDictionaryService extends IService<Dictionary> {
+
 	 DictionaryVo findAll();
+
 }

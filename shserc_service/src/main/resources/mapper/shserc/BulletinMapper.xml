@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dianda.shserc.mapper.BulletinMapper">
+
+    <select id="selectBulletins" parameterType="com.dianda.shserc.entity.Bulletin">
+        select
+            b.id,
+            b.title,
+            b.type_id,
+            u.user_name
+            b.add_user,
+            b.add_time
+        from
+        bulletin b join res_user u  on b.add_user=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+   </select>
+
+</mapper>

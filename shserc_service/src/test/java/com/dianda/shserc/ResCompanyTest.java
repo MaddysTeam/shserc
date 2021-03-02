@@ -28,13 +28,18 @@ public class ResCompanyTest {
 	long areaId = 3; // 虹口区
 	
 	@Test
-	public void companyDataRecursiveMappingTest( ) {
+	public void get_company_data_test( ) {
 		ResCompanyVo result = service.find ( );
 		Assert.assertTrue ( result != null );
 		// test for area
 		Assert.assertTrue ( result.getChildren ( ) != null && result.getChildren ( ).size ( ) > 0 );
 		// test for school
 		//Assert.assertTrue ( result.getChildren ( ).get ( areaId ).getChildren ( ).size ( ) > 0 );
+	}
+
+	@Test
+	public void edit_company_test(){
+
 	}
 	
 }

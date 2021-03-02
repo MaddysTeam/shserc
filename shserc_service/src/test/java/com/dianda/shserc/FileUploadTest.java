@@ -27,17 +27,27 @@ public class FileUploadTest {
 	
 	public FileUploadTest( ) {
 	}
-	
+
 	@Test
-	public void SliceUploadTestSuccess( ) throws FileNotFoundException {
+	public void upload_test(){
+		this.sliceUploadTestSuccess();
+	}
+
+	private void sliceUploadTestSuccess( ) {
 		uploader = new WangsuUploader ( );
 		File file = new File ( filePath );
-		FileInputStream fs = new FileInputStream ( file );
+		FileInputStream fs = null;
+		try {
+			fs = new FileInputStream( file );
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 		UploadResult result = uploader.sliceUpload ( file.getName ( ) , fs );
 		
 		Assert.isTrue ( !ObjectUtil.isNull ( result )
 				&& result.isSuccess ()
-				&& !StringUtil.IsNullOrEmpty (result.getFilePath ()  ) );
+				&& !StringUtil.isNullOrEmpty (result.getFilePath ()  ) );
 	}
 	
 	

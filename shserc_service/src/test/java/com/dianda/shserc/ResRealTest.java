@@ -30,7 +30,7 @@ public class ResRealTest {
 	ResRealVo vo;
 	
 	@Test
-	public void add_real_service_with_correct_result_Test( ) {
+	public void edit_real_test( ) {
 		model = new EditRealDto ( );
 		model.setCardNo ( cardNo );
 		model.setCardPassword ( password );
@@ -46,5 +46,14 @@ public class ResRealTest {
 		vo = service.findByIdCard ( idCard );
 		Assert.isTrue ( model.getIdCard ( ) .equals (  vo.getIdCard ( )) );
 	}
+
+	@Test
+	public void edit_real_with_wrong_para_test(){}
+
+	@Test
+	public void get_page_data_test(){ }
+
+	@Test
+	public void get_page_data_with_wrong_para_test(){}
 	
 }

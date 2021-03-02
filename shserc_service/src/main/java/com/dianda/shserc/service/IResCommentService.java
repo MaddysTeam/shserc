@@ -7,6 +7,9 @@ import com.dianda.shserc.entity.ResComment;
 import com.dianda.shserc.vo.CommentVoList;
 
 public interface IResCommentService extends IService<ResComment> {
+
 	CommentVoList find(CommentSelectParams params);
+
 	boolean editComment(EditCommentDto model);
+
 }

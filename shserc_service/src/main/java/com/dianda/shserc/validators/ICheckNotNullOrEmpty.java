@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  *  @Copyright 2019-2020 
  */
 
-@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD  })
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD,ElementType.TYPE_PARAMETER  })
 @Retention( RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = { CheckNotNullIsEmpty.class})
 public @interface ICheckNotNullOrEmpty {

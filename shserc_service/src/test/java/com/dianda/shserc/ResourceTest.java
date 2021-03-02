@@ -29,7 +29,7 @@ public class ResourceTest {
 	long zero = 0;
 	
 	@Test
-	public void pageResourceDataWithEmptyPhraseTest( ) {
+	public void get_page_data_test( ) {
 		ResourceSelectParams params = new ResourceSelectParams ( );
 		params.setSize ( this.size );
 		params.setCurrent ( this.current );
@@ -40,9 +40,14 @@ public class ResourceTest {
 		Assert.assertTrue ( voList.getListData ( ).size ( ) > 0 );
 		Assert.assertNotNull ( voList );
 	}
-	
+
 	@Test
-	public void addResourceViewCountTransactionTest( ) {
+	public void edit_resource_test( ){
+		editResourceViewCountTest();
+	}
+	
+
+	private void editResourceViewCountTest( ) {
 		try {
 			service.addViewCount ( new ResourceOperation ( resourceId , userId ) );  // when success
 		}catch ( GlobalException e ){  // throw global exception

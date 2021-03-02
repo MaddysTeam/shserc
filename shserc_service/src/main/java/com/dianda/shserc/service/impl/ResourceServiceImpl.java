@@ -92,7 +92,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if (gradeId > 0) {
 			wrapper = wrapper.eq("grade_id", stageId);
 		}
-		if (!StringUtil.IsNullOrEmpty(phrase))
+		if (!StringUtil.isNullOrEmpty(phrase))
 			wrapper = wrapper.like("title", phrase);
 
 		// TODO: will implement later
@@ -192,6 +192,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
 	@Override
 	public boolean addDownloadCount(ResourceOperation param) {
+		return false;
+	}
+
+	@Override
+	public boolean setOrCancelElite(long id) {
 		return false;
 	}
 
