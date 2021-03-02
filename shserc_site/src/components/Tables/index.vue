@@ -6,7 +6,8 @@
           placeholder="请输入关键字"
           icon="search"
           class="search"
-          v-model="search"
+          v-model="searchPhrase"
+          @change="searchTextChanged"
         ></el-input>
         <el-button class="el-button--primary"
           ><i class="el-icon-search"></i
@@ -89,11 +90,12 @@ export default {
   },
   data() {
     return {
-      search: "",
+      searchPhrase: "",
     };
   },
   methods: {
     handleCurrentChange: function (val) {
+      val["searchPhrase"] = this.searchPhrase;
       this.handleChange(val);
     },
 
@@ -101,7 +103,9 @@ export default {
       return "font-weight:normal;font-size:14px;text-align:center";
     },
 
-    
+    searchTextChanged(){
+      this.$emit("handleSearch",this.searchPhrase)
+    }
   },
 };
 </script>

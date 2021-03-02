@@ -6,31 +6,38 @@
     </el-breadcrumb>
 
     <div class="btn-group">
-      <el-button class="el-button--danger" @click="dialogVisible = true">
+      <el-button class="el-button--danger" @click="dialogVisible = true;">
         <i class="el-icon-edit"></i> 新增实名卡
       </el-button>
     </div>
-    <edit @close="handleCloseEdit" :visible="dialogVisible"></edit>
+    <edit
+      @close="handleCloseEdit"
+      :visible="dialogVisible"
+      :model="editModel"
+    ></edit>
     <Table
       :list="source"
       :columns="columns"
       :commands="commands"
-      :handleChange="bindRealList"
-      :pageSize="pageSize"
-      :total="total"
+      :handleChange="loadRealList"
+      @handleSearch="handleSearch"
+      :pageSize="selectParam.pageSize"
+      :total="selectParam.total"
     >
     </Table>
   </div>
 </template>
 
 <script>
-import edit from "@/app/views/admin/real/edit"
+import edit from "@/app/views/admin/real/edit";
 import Table from "@/components/Tables/index";
-import { list } from "@/app/api/real";
+import { selectParam, realModel } from "@/app/models/real";
+import { list, info } from "@/app/api/real";
 
 export default {
   components: {
-    Table,edit
+    Table,
+    edit,
   },
   data() {
     return {
@@ -40,42 +47,50 @@ export default {
         { prop: "idCard", label: "身份证件号" },
         { prop: "realName", label: "真实姓名" },
       ],
-      commands:[{
-        id:1,
-        label:'编辑',
-        type:'primary',
-        method:(index,row)=>{
-          //this.$router.push('/admin/real/edit/'+row.id);
-        }
-      }],
-      source:[],
-      index:1,
-      total:0,
-      pageSize:10,
-      dialogVisible:false
+      commands: [
+        {
+          id: 1,
+          label: "编辑",
+          type: "primary",
+          method: (index, row) => {
+            info(row.id).then((res) => {
+              if (res && res.data) {
+                this.editModel = res.data;
+                this.dialogVisible = true;
+              }
+            });
+          },
+        },
+      ],
+      source: [],
+      selectParam: selectParam,
+      dialogVisible: false,
+      editModel: realModel,
     };
   },
   mounted() {
-    this.bindRealList()
+    this.loadRealList();
   },
   methods: {
-    bindRealList() {
-      list(
-        this.index,
-        this.pageSize,
-      ).then((res) => {
-        if(res & res.data){
-          let data=JSON.parse(res.data);
-          this.total=data.total,
-          this.index=data.current
-          this.source=data.listData
+    loadRealList() {
+      list(this.selectParam).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          this.selectParam.total = data.total;
+          this.selectParam.current = data.current;
+          this.selectParam.source = data.listData;
         }
       });
     },
 
-    handleCloseEdit(){
-       this.dialogVisible=false;
-    }
+    handleCloseEdit() {
+      this.dialogVisible = false;
+    },
+
+    handleSearch(val) {
+      this.selectParam.searchPhrase = val;
+      loadRealList();
+    },
   },
 };
 </script>

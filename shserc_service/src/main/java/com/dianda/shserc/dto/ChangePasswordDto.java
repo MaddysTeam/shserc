@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
  *  @Description Dto class only for change password
  *  @author huachao
  *  @Date 2020/8/15 11:26
- *  @Copyright 2019-2020 
+ *  @Copyright 2019-2020
  */
 
 @Data

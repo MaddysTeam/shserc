@@ -1,11 +1,11 @@
 import axios from '@/app/static/axios'
 
-export function list(pageIndex, pageSize) {
-    return axios.post('api/real/list', { 'current': pageIndex, 'size': pageSize })
+export function list(selectParam) {
+    return axios.post('api/real/list', selectParam)
 }
 
-export function edit(params) {
-    return axios.post('api/real/edit', params)
+export function edit(editParam) {
+    return axios.post('api/real/edit', editParam)
 }
 
 export function info(id) {

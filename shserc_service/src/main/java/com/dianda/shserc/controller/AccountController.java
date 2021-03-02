@@ -55,7 +55,7 @@ public class AccountController extends BaseController {
 			return JsonResult.error ( );
 	}
 	
-	public JsonResult ChangePassword( @RequestBody @Valid ChangePasswordDto changePasswordDto , BindingResult bindingResult ) {
+	public JsonResult changePassword( @RequestBody @Valid ChangePasswordDto changePasswordDto , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error ( );
 		}

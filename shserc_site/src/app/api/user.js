@@ -1,7 +1,8 @@
 import axios from '@/app/static/axios'
 
-export function list(pageIndex, pageSize) {
-    return axios.post('api/user/list', { 'current': pageIndex, 'size': pageSize })
+export function list(params) {
+    console.log(params)
+    return axios.post('api/user/list', params)
 }
 
 export function edit(params) {

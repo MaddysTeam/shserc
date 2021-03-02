@@ -58,7 +58,7 @@ public class ResUserTest {
 	private void pageUserDataWithEmptyPhraseTest() {
 		UserSelectParams params = new UserSelectParams();
 		params.setCompanyId(zero);
-		params.setPhrase("");
+		params.setSearchPhrase (""  );
 		params.setCurrent(current);
 		params.setSize(size);
 
@@ -71,7 +71,7 @@ public class ResUserTest {
 	private void pageUserDataWithPhraseTest() {
 		UserSelectParams params = new UserSelectParams();
 		params.setCompanyId(zero);
-		params.setPhrase(phrase);
+		params.setSearchPhrase(phrase);
 		params.setCurrent(current);
 		params.setSize(size);
 
@@ -84,7 +84,7 @@ public class ResUserTest {
 	private void pageUserDataWithCompanyId() {
 		UserSelectParams params = new UserSelectParams();
 		params.setCompanyId(companyId);
-		params.setPhrase(phrase);
+		params.setSearchPhrase(phrase);
 		params.setCurrent(current);
 		params.setSize(size);
 

@@ -14,15 +14,20 @@
         <i class="el-icon-edit"></i> 新增用户
       </el-button>
     </div>
-    <edit @close="handleCloseEdit" :visible="dialogVisible"></edit>
-   
+    <edit
+      @close="handleCloseEdit"
+      :visible="dialogVisible"
+      v-model="editModel"
+    ></edit>
+
     <Table
       :list="source"
       :columns="columns"
       :commands="commands"
-      :handleChange="bindUserList"
-      :pageSize="pageSize"
-      :total="total"
+      :handleChange="loadUserList"
+      @handleSearch="handleSearch"
+      :pageSize="selectParam.pageSize"
+      :total="selectParam.total"
     ></Table>
   </div>
 </template>
@@ -30,7 +35,8 @@
 <script>
 import edit from "./edit.vue";
 import Table from "@/components/Tables/index";
-import { list } from "@/app/api/user";
+import { list, info } from "@/app/api/user";
+import { selectParam, userModel } from "@/app/models/user";
 
 export default {
   components: { Table, edit },
@@ -43,10 +49,6 @@ export default {
         { prop: "company", label: "所在单位" },
         { prop: "realName", label: "真实姓名" },
       ],
-      source: [],
-      pageSize: 2,
-      total: 0,
-      current: 1,
       commands: [
         {
           id: 1,
@@ -54,20 +56,27 @@ export default {
           type: "primary",
           method: (index, row) => {
             console.log("编辑:" + index, row);
+             info(row.id).then((res) => {
+              if (res && res.data) {
+                this.editModel = JSON.parse(res.data);
+                this.dialogVisible = true;
+              }
+            });
           },
         },
       ],
-
+      source: [],
+      selectParam: selectParam,
       dialogVisible: false,
+      editModel: userModel,
     };
   },
   mounted() {
-    this.bindUserList(0);
+    this.loadUserList();
   },
   methods: {
-    bindUserList(index) {
-      this.current = index;
-      let result = list(index, this.pageSize).then((res) => {
+    loadUserList() {
+      let result = list(selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.total = data.total;
@@ -78,6 +87,11 @@ export default {
 
     handleCloseEdit() {
       this.dialogVisible = false;
+    },
+
+    handleSearch(val) {
+      this.selectParam.searchPhrase = val;
+      this.loadUserList();
     },
   },
 };

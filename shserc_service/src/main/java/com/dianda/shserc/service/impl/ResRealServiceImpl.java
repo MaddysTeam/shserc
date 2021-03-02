@@ -81,7 +81,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 	public ResRealVoList find(RealSelectParams params) {
 		QueryWrapper<ResReal> queryWrapper = new QueryWrapper<>();
 		long companyId = params.getCompanyId();
-		String phrase = params.getPhrase();
+		String phrase = params.getSearchPhrase();
 
 		if (companyId > 0) {
 			queryWrapper = queryWrapper.eq("company_id", companyId);

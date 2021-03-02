@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       columns: [
-        { prop: "id", label: "id" },
+        { prop: "id", label: "资源编号" },
         { prop: "title", 
           label: "资源标题", 
           isLink: true, 

@@ -64,7 +64,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long importSourceId = params.getImportSourceId();
 		long domainId = params.getDomainId();
 		long gradeId = params.getGradeId();
-		String phrase = params.getPhrase();
+		String phrase = params.getSearchPhrase ();
 
 		// filter fields
 

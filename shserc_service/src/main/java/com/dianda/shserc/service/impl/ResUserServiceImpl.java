@@ -47,7 +47,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 			throw new GlobalException(Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE, Constant.Error.OBJECT_IS_REQUIRED);
 
 		long companyId = params.getCompanyId();
-		String phrase = params.getPhrase();
+		String phrase = params.getSearchPhrase();
 		int current = params.getCurrent();
 		int size = params.getSize();
 

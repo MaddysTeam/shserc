@@ -24,6 +24,6 @@ public class EditRealDto {
 	@NotBlank
 	private String cardPassword;
 
-	@NotBlank
-	private String confrimPassword;
+	//@NotBlank
+	//private String confrimPassword;
 }
