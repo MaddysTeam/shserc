@@ -2,11 +2,12 @@
   <div>
     <el-breadcrumb>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>实名卡管理</el-breadcrumb-item>
     </el-breadcrumb>
 
     <div class="btn-group">
-      <el-button class="el-button--danger" @click="dialogVisible = true;">
+      <el-button class="el-button--danger" @click="handleEditButtonClick()">
         <i class="el-icon-edit"></i> 新增实名卡
       </el-button>
     </div>
@@ -89,8 +90,12 @@ export default {
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;
-      loadRealList();
+      this.loadRealList();
     },
+
+    handleEditButtonClick(){
+      this.dialogVisible = true ;
+    }
   },
 };
 </script>

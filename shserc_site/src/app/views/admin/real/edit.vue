@@ -4,10 +4,7 @@
     :visible.sync="visible"
     :before-close="handleClose"
   >
-    <!-- <el-form>
-      <el-form-item></el-form-item>
-    </el-form> -->
-    <!-- <span>{{ value.realName }}</span> -->
+    <!-- real edit form start -->
     <el-form :model="model" ref="realForm" :rules="rules">
       <el-form-item prop="realName">
         <el-input
@@ -38,32 +35,38 @@
           placeholder="输入身份证件号"
         ></el-input>
       </el-form-item>
-      <!-- <el-form-item prop="companyId">
+      <el-form-item prop="companyId">
         <selectTree
-          :data="source"
+          :data="companySource"
           placeholder="所属单位"
           :nodeKey="model.companyId"
           @input="handleSelectCompany"
         >
         </selectTree>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item class="btns">
-        <el-button type="primary" @click="submitForm('userForm')"
+        <el-button type="primary" @click="handleSubmit('realForm')"
           >确定</el-button
         >
-        <el-button type="info" @click="handleClose()">取消</el-button>
+        <el-button type="info" @click="handleClose('realForm')">取消</el-button>
       </el-form-item>
     </el-form>
+    <!-- real edit form end -->
   </el-dialog>
 </template>
 
 <script>
+import { edit } from "@/app/api/real";
+import { companyList } from "@/app/api/company";
+import { messages } from "@/app/static/message";
+import { clean } from "@/app/utils/objectHelper";
 import selectTree from "@/components/TreeSelector/index";
 import { Notification } from "element-ui";
 import {
   validateRequired,
   validateLessThan50,
   validateSelectValue,
+  validateIdCard,
 } from "@/static/validator";
 
 export default {
@@ -73,24 +76,77 @@ export default {
     model: { type: Object },
   },
   data() {
+    var nameValidator = (rule, value, callback) => {
+      validateRequired(rule, value, callback, messages.REAL_NAME_IS_REQUIRED);
+      validateLessThan50(
+        rule,
+        value,
+        callback,
+        messages.REAL_NAME_LENGHT_NOT_ALLOWED_MORE_THAN_50
+      );
+    };
+
+    var cardIdValidator = (rule, value, callback) => {
+      validateIdCard(rule, value, callback, messages.USER_CARD_ID_NOT_VAILD);
+    };
+
+    var cardNoValidator = (rule, value, callback) => {
+      validateRequired(rule, value, callback, messages.REAL_CARDNO_IS_REQUIRED);
+    };
+
+    var companyValidator = (rule, value, callback) => {
+      validateSelectValue(
+        rule,
+        value,
+        callback,
+        messages.COMPANY_SELECT_NOT_NULL
+      );
+    };
+
     return {
-      source: [],
-      rules: {},
-      model:{}
+      companySource: [],
+      rules: {
+        realName: { validator: nameValidator, trigger: "blur" },
+        idCard: { validator: cardIdValidator, trigger: "blur" },
+        cardNo: { validator: cardNoValidator, trigger: "blur" },
+        companyId: { validator: companyValidator, trigger: "change" },
+      },
     };
   },
   mounted() {
-    let _this = this;
-    this.model=_this._props.model;
-    console.log(this.model);
+    this.loadCompanyList();
   },
   methods: {
-    handleClose() {
+    loadCompanyList() {
+      companyList().then((res) => {
+        if (res && res.data) {
+          this.companySource = [JSON.parse(res.data)];
+        }
+      });
+    },
+
+    handleSubmit(formName) {
+      let _this = this;
+      _this.$refs[formName].validate((isValid) => {
+        if (isValid) {
+          edit(this.model).then((res) => {
+            if (res) {
+              Notification.success(res.message);
+              this.handleClose(formname);
+            }
+          });
+        }
+      });
+    },
+
+    handleClose(formName) {
       this.$emit("close");
+      clean(this.model);
+      this.$refs[formName].clearValidate();
     },
 
     handleSelectCompany(id) {
-      //this.user.companyId = id + "";
+      this.model.companyId = id + "";
     },
   },
 };

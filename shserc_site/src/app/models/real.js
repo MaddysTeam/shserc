@@ -1,7 +1,9 @@
+// import { clean } from "semver"
+
 export const realModel = {
     id:0,
     idCard:'',
-    companyId:0,
+    companyId:'',
     realName:'',
     cardPassword:'',
     cardNo:''
@@ -13,3 +15,4 @@ export const selectParam = {
     size: 10,
     searchPhrase: "",
 }
+

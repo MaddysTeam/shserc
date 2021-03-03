@@ -6,6 +6,7 @@ import CompanyList from '@/app/views/admin/company/list'
 import ResourceList from '@/app/views/admin/resource/list'
 import ResourceEdit from '@/app/views/admin/resource/edit'
 import ResourceDetail from '@/app/views/admin/resource/detail'
+import ResourceIndex from '@/app/views/admin/resource/index'
 import Summary from '@/app/views/admin/dashboard/summary'
 import RoleList from '@/app/views/admin/role/list'
 import RealList from '@/app/views/admin/real/list'
@@ -50,7 +51,13 @@ const routes = [
       meta: {
         keepAlive: false
       }
-    }, {
+    },
+    {
+      path: '/admin/resource/index',
+      name: 'ResourceIndex',
+      component: ResourceIndex
+    },
+    {
       path: '/admin/resource/list',
       name: 'ResourceList',
       component: ResourceList

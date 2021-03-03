@@ -50,7 +50,7 @@ export function getMenusData() {
         id: 5,
         level: 1,
         name: '入库资源',
-        path: '/admin/resource/list',
+        path: '/admin/resource/index',
         icon: 'el-icon-tickets',
         children: []
     },

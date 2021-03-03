@@ -48,7 +48,7 @@ import {
   validateRequired,
   validateLessThan50,
   validateSelectValue,
-  validateCardNo,
+  validateIdCard,
 } from "@/static/validator";
 import { edit } from "@/app/api/user";
 import { userModel } from "@/app/models/user";
@@ -71,17 +71,17 @@ export default {
     };
 
     var cardIdValidator = (rule, value, callback) => {
-      validateCardNo(rule, value, callback, messages.USER_CARD_ID_NOT_VAILD);
+      validateIdCard(rule, value, callback, messages.USER_CARD_ID_NOT_VAILD);
     };
 
-    var companyValidator = (rule, value, callback) => {
-      validateSelectValue(
-        rule,
-        value,
-        callback,
-        messages.COMPANY_SELECT_NOT_NULL
-      );
-    };
+      var companyValidator = (rule, value, callback) => {
+        validateSelectValue(
+          rule,
+          value,
+          callback,
+          messages.COMPANY_SELECT_NOT_NULL
+        );
+      };
 
     return {
       user: userModel,
@@ -91,11 +91,11 @@ export default {
         companyId: { validator: companyValidator, trigger: "change" },
       },
 
-      source: [],
+      companySource: [],
     };
   },
   mounted() {
-    this.handleBindCompanyList();
+    this.loadCompanyList();
   },
   methods: {
     handleClose() {
@@ -118,10 +118,10 @@ export default {
       this.user.companyId = id + "";
     },
 
-    handleBindCompanyList() {
+    loadCompanyList() {
       list().then((res) => {
         if (res && res.data) {
-          this.source = [JSON.parse(res.data)];
+          this.companySource = [JSON.parse(res.data)];
         }
       });
     },
