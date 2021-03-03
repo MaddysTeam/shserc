@@ -56,7 +56,7 @@ export default {
           method: (index, row) => {
             info(row.id).then((res) => {
               if (res && res.data) {
-                this.editModel = res.data;
+                this.editModel = JSON.parse(res.data);
                 this.dialogVisible = true;
               }
             });
@@ -73,23 +73,29 @@ export default {
     this.loadRealList();
   },
   methods: {
-    loadRealList() {
+    loadRealList(current) {
+      if(current){
+        this.selectParam.current=current;
+      }
       list(this.selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.selectParam.total = data.total;
           this.selectParam.current = data.current;
           this.selectParam.source = data.listData;
+          this.source = data.listData;
         }
       });
     },
 
     handleCloseEdit() {
       this.dialogVisible = false;
+      this.loadRealList();
     },
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;
+      this.source=[];
       this.loadRealList();
     },
 

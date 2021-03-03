@@ -7,6 +7,8 @@
         u.user_name,
         u.real_name,
         u.email,
+        u.register_time,
+        u.last_login_time,
         c.company_name
         from res_user
         u left join res_company c on u.company_id=c.id

@@ -14,8 +14,8 @@ public class EditRealDto {
 
 	@NotBlank
 	private String idCard;
-
-	@NotBlank
+	
+	
 	private long companyId;
 	
 	@NotBlank

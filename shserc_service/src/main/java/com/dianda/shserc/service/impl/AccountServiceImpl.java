@@ -1,6 +1,7 @@
 package com.dianda.shserc.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.dianda.shserc.dto.ChangePasswordDto;
 import com.dianda.shserc.dto.ForgetPasswordDto;
@@ -8,6 +9,7 @@ import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IAccountService;
+import com.dianda.shserc.util.basic.EncoderUtil;
 import com.dianda.shserc.util.shiro.jwt.JwtOperation;
 import com.dianda.shserc.util.shiro.jwt.JwtToken;
 import org.apache.shiro.SecurityUtils;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author hauchao
@@ -30,25 +33,31 @@ public class AccountServiceImpl implements IAccountService {
 	@Resource
 	ResUserMapper userMapper;
 	
+	
 	@Override
-	public LoginDto login( @Valid LoginDto login ) {
+	public LoginDto login( @Valid LoginDto loginDto ) {
 		try {
-			String loginJson = JSON.toJSONString ( login );
+			String loginJson = JSON.toJSONString ( loginDto );
 			String loginToken = JwtOperation.Sign ( loginJson , System.currentTimeMillis ( ) );
 			Subject subject = SecurityUtils.getSubject ( );
 			subject.login ( new JwtToken ( loginToken ) );
 			
 			// if login success,we can get token from subject
 			String token = subject.getPrincipal ( ).toString ( );
-			login.setIsSuccess ( true );
-			login.setToken ( token );
+			loginDto.setIsSuccess ( true );
+			loginDto.setToken ( token );
 			
-			return login;
+			QueryWrapper<ResUser> queryWrapper=new QueryWrapper<> (  );
+			ResUser user = userMapper.selectOne (queryWrapper.eq ( "user_name",loginDto.getUserName () ));
+			user.setLastLoginTime ( LocalDateTime.now () );
+			userMapper.updateById ( user );
+			
+			return loginDto;
 		} catch ( AuthenticationException e ) {
-			login.setIsSuccess ( false );
-			login.setMessage ( e.getMessage ( ) );
+			loginDto.setIsSuccess ( false );
+			loginDto.setMessage ( e.getMessage ( ) );
 		}
-		return login;
+		return loginDto;
 	}
 	
 	
@@ -64,7 +73,7 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public ChangePasswordDto changePassword( @Valid ChangePasswordDto dto ) {
 		ResUser user = new ResUser ( );
-		user.setPassword ( dto.getNewPassword ( ) );
+		user.setPassword ( EncoderUtil.SHA ( dto.getNewPassword ( ) ) );
 		
 		LambdaUpdateWrapper<ResUser> wrapper = new LambdaUpdateWrapper<> ( );
 		wrapper.eq ( ResUser :: getUserName , dto.getUserName ( ) );

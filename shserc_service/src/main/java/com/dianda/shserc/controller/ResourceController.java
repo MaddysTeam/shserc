@@ -49,7 +49,7 @@ public class ResourceController {
 		return null;
 	}
 
-	@PostMapping(path="/download/{id}")
+	@PostMapping(path="/favorite/{id}")
 	public JsonResult favorite(@PathVariable long id){
 		return null;
 	}

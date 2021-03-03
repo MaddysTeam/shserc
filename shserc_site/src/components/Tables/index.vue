@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     handleCurrentChange: function (val) {
-      val["searchPhrase"] = this.searchPhrase;
+     // val["searchPhrase"] = this.searchPhrase;
       this.handleChange(val);
     },
 

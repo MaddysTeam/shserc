@@ -1,6 +1,5 @@
 package com.dianda.shserc.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,10 +8,8 @@ import com.dianda.shserc.bean.RealSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditRealDto;
 import com.dianda.shserc.dto.RegistRealDto;
-import com.dianda.shserc.dto.mappers.IEditCompanyMapper;
 import com.dianda.shserc.dto.mappers.IEditRealMapper;
 import com.dianda.shserc.entity.ResReal;
-import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResRealMapper;
 import com.dianda.shserc.service.IResRealService;
@@ -21,11 +18,10 @@ import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.vo.ResRealVo;
 import com.dianda.shserc.vo.ResRealVoList;
 import com.dianda.shserc.vo.mappers.IRealVoMapper;
-import com.dianda.shserc.vo.mappers.IUserVoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +42,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 		ResReal resReal = IEditRealMapper.INSTANCE.mapFrom(model);
 		ResRealVo resRealVo = findByIdCard(resReal.getIdCard());
 		if (resReal.isNewOne() && ObjectUtil.isNull(resRealVo)) {
+			resReal.setCardPassword ( com.dianda.shserc.util.basic.EncoderUtil.SHA ( resReal.getCardPassword () ) );
 			result = mapper.insert(resReal);
 			return result > 0;
 		} else {
@@ -88,7 +85,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 		}
 		if (!StringUtil.isNullOrEmpty(phrase)) {
 			queryWrapper = queryWrapper.and(wrapper ->
-					wrapper.like("rean_name", phrase)
+					wrapper.like("real_name", phrase)
 							.or()
 							.like("id_card", phrase)
 							.or()

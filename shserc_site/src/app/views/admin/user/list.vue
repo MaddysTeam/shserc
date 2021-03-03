@@ -72,26 +72,27 @@ export default {
     };
   },
   mounted() {
-    this.loadUserList();
+   // this.loadUserList();
   },
   methods: {
-    loadUserList() {
-      let result = list(selectParam).then((res) => {
-        if (res && res.data) {
-          let data = JSON.parse(res.data);
-          this.total = data.total;
-          this.source = data.listData;
-        }
-      });
-    },
+    // loadUserList() {
+    //   let result = list(selectParam).then((res) => {
+    //     if (res && res.data) {
+    //       let data = JSON.parse(res.data);
+    //       this.total = data.total;
+    //       this.source = data.listData;
+    //     }
+    //   });
+    // },
 
     handleCloseEdit() {
       this.dialogVisible = false;
+        //this.loadUserList();
     },
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;
-      this.loadUserList();
+      //this.loadUserList();
     },
   },
 };

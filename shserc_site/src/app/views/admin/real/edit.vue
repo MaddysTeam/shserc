@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="新建实名卡"
+    title="编辑实名卡"
     :visible.sync="visible"
     :before-close="handleClose"
   >
@@ -132,7 +132,7 @@ export default {
           edit(this.model).then((res) => {
             if (res) {
               Notification.success(res.message);
-              this.handleClose(formname);
+              this.handleClose(formName);
             }
           });
         }

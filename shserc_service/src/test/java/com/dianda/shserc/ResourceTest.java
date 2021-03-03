@@ -42,7 +42,7 @@ public class ResourceTest {
 	}
 
 	@Test
-	public void edit_resource_test( ){
+	public void edit_resource_view_count_test( ){
 		editResourceViewCountTest();
 	}
 	

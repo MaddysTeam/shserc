@@ -9,7 +9,7 @@ import lombok.Data;
 
 
 @Data
-@ICheckNotNullOrEmpty()
+@ICheckNotNullOrEmpty
 public class LoginDto {
 	
 	@NotBlank( message = Constant.Error.USER_NAME_IS_REQUIRED )

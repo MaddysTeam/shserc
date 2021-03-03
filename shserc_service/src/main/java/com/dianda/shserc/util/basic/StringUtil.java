@@ -16,8 +16,13 @@ public final class StringUtil {
 	}
 	
 	public static final boolean isNullOrEmpty( String value ) {
-		return null == value || "" == value || StringUtils.isNotBlank(value);
+		return null == value || "" == value ;
 	}
+	
+	public static final String empty(){
+		return "";
+	}
+	
 	
 }
 

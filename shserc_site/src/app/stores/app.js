@@ -3,7 +3,7 @@ export default {
     namespaced: true,
     state: {
         token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-        isAuth: true ,// localStorage.getItem('Authorization') ? true:false,
+        isAuth:  localStorage.getItem('Authorization') ? true:false,
         
         //following for dictionary
         dict:[],
@@ -13,8 +13,8 @@ export default {
         [types.LOGIN]: (state, data) => {
           if (data) {
             localStorage.setItem('Authorization', data);
-            state.isAuth = true;
-            state.token = data;
+           state.isAuth = true;
+           state.token = data;
           }
         },
         [types.LOGOUT]: (state) => {

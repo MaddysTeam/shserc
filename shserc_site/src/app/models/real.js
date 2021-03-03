@@ -12,7 +12,7 @@ export const realModel = {
 export const selectParam = {
     current: 1,
     total: 0,
-    size: 10,
+    size: 2,
     searchPhrase: "",
 }
 

@@ -79,8 +79,9 @@ public class JwtConfiguration {
 		filterRuleMap.put("/company/*", "jwt");
 		filterRuleMap.put("/dictionary/*", "anon");
 		filterRuleMap.put("/resource/*", "jwt");
+		filterRuleMap.put("/real/*", "jwt");
 		filterRuleMap.put("/file/*", "jwt");
-		filterRuleMap.put("/user/*", "anon,role[admin],jwt");
+		filterRuleMap.put("/user/*", "anon");
 		filterRuleMap.put("/account/logout","jwt");
 	//	filterRuleMap.put("/**", "jwt");
 		shiroFilter.setFilterChainDefinitionMap(filterRuleMap);

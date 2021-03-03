@@ -9,7 +9,9 @@ import com.dianda.shserc.service.IBulletinService;
 import com.dianda.shserc.vo.BulletinVo;
 import com.dianda.shserc.vo.BulletinVoList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> implements IBulletinService {
 
 	@Autowired
