@@ -15,17 +15,21 @@ import com.dianda.shserc.mapper.ResRealMapper;
 import com.dianda.shserc.service.IResRealService;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
+import com.dianda.shserc.validators.NotNull;
 import com.dianda.shserc.vo.ResRealVo;
 import com.dianda.shserc.vo.ResRealVoList;
 import com.dianda.shserc.vo.mappers.IRealVoMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Validated
 public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> implements IResRealService {
 
 	@Resource
@@ -33,11 +37,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 
 
 	@Override
-	public boolean edit(EditRealDto model) {
-		if (ObjectUtil.isNull(model)) {
-			throw new GlobalException(Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE, Constant.Error.OBJECT_IS_REQUIRED);
-		}
-
+	public boolean edit( @Valid @NotNull EditRealDto model) {
 		int result = 0;
 		ResReal resReal = IEditRealMapper.INSTANCE.mapFrom(model);
 		ResRealVo resRealVo = findByIdCard(resReal.getIdCard());
@@ -58,7 +58,9 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 
 	@Override
 	public ResRealVo findById(long id) {
-		ResReal resReal = mapper.selectById(id);
+		QueryWrapper<ResReal> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq ( "r.id",id );
+		ResReal resReal = mapper.selectSingle (queryWrapper);
 		ResRealVo vo = ObjectUtil.isNull(resReal) ? null : IRealVoMapper.INSTANCE.mapFrom(resReal);
 
 		return vo;

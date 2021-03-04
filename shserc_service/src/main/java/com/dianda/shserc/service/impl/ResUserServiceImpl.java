@@ -15,7 +15,7 @@ import com.dianda.shserc.service.IResUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
-import com.dianda.shserc.validators.ICheckNotNullOrEmpty;
+import com.dianda.shserc.validators.NotNull;
 import com.dianda.shserc.vo.ResRealVoList;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResUserVoList;

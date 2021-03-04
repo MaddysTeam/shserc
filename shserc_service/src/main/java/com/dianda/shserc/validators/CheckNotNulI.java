@@ -6,7 +6,7 @@ import com.dianda.shserc.util.basic.StringUtil;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckNotNullIsEmpty implements ConstraintValidator<ICheckNotNullOrEmpty,Object> {
+public class CheckNotNulI implements ConstraintValidator<NotNull,Object> {
 	
 	@Override
 	public boolean isValid( Object o , ConstraintValidatorContext constraintValidatorContext ) {

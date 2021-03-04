@@ -4,11 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.entity.ResReal;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ResRealMapper extends BaseMapper<ResReal> {
 	IPage<ResReal> selectReal(IPage<ResReal> page, @Param(Constants.WRAPPER)Wrapper<ResReal> wrapper);
+	
+	ResReal selectSingle(@Param( Constants.WRAPPER )Wrapper<ResReal> wrapper);
+	
 	int editReal(ResReal real);
 
 }

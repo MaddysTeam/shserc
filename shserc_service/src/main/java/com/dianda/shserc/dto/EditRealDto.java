@@ -1,7 +1,10 @@
 package com.dianda.shserc.dto;
 
+import com.dianda.shserc.validators.NotNull;
 import lombok.Data;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Data
@@ -15,7 +18,7 @@ public class EditRealDto {
 	@NotBlank
 	private String idCard;
 	
-	
+	@Min(value = 1)
 	private long companyId;
 	
 	@NotBlank
@@ -23,7 +26,5 @@ public class EditRealDto {
 
 	@NotBlank
 	private String cardPassword;
-
-	//@NotBlank
-	//private String confrimPassword;
+	
 }

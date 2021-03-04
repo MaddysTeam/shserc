@@ -3,7 +3,7 @@ package com.dianda.shserc.entity;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-import com.dianda.shserc.validators.ICheckNotNullOrEmpty;
+import com.dianda.shserc.validators.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ICheckNotNullOrEmpty()
+@NotNull
 public class ResCompany implements Serializable {
 
 	private static final long serialVersionUID = 1L;

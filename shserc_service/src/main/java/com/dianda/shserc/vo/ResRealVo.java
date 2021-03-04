@@ -14,5 +14,7 @@ public class ResRealVo implements Serializable {
 	private String cardNo;
 	
 	private String idCard;
+	
+	private  String companyName;
 
 }

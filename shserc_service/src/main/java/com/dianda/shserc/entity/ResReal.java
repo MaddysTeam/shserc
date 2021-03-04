@@ -33,7 +33,7 @@ public class ResReal {
 	private long companyId;
 	
 	@TableField( exist = false )
-	private String company;
+	private String companyName;
 	
 	@TableField( exist = false )
 	private LocalDateTime birthday;

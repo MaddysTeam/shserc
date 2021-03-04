@@ -22,7 +22,7 @@ public class EditBulletinDto {
 	private String title;
 
 	@NotBlank
-	@Length
+	@Length(max=10000)
 	private String content;
 
 	private boolean isTop;

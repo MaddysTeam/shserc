@@ -1,23 +1,31 @@
 package com.dianda.shserc.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Data
 public class ResComment {
 
 	private static final long serialVersionUID = 1L;
-
-	public long id;
-
-	public long userId;
-
-	public long resourceId;
-
-	public String content;
-
-	public long auditTypeId;
+	
+	private long id;
+	
+	private long userId;
+	
+	private long resourceId;
+	
+	private String content;
+	
+	private long auditTypeId;
+	
+	@TableField( exist = false )
+	private String addUserName;
+	
+	@TableField( exist = false )
+	private  String resourceTitle;
 
 	private long addUser;
 
@@ -29,4 +37,9 @@ public class ResComment {
 
 	@TableField(exist = false)
 	private String  auditType;
+	
+	public boolean isNewOne( ) {
+		return this.id <= 0;
+	}
+	
 }

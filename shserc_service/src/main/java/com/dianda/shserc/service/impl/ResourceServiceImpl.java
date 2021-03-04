@@ -95,7 +95,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if (!StringUtil.isNullOrEmpty(phrase))
 			wrapper = wrapper.like("title", phrase);
 
-		// TODO: will implement later
+		// order phrase
 		Map<String, String> orderPhrases = params.getOrderPhrases();
 		if (!ObjectUtil.isNull(orderPhrases) && orderPhrases.size() > 0) {
 			for (Map.Entry<String, String> entry : orderPhrases.entrySet()) {

@@ -1,6 +1,6 @@
 package com.dianda.shserc.dto;
 
-import com.dianda.shserc.validators.ICheckNotNullOrEmpty;
+import com.dianda.shserc.validators.NotNull;
 import com.dianda.shserc.common.*;
 
 import javax.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import lombok.Data;
 
 
 @Data
-@ICheckNotNullOrEmpty
+@NotNull
 public class LoginDto {
 	
 	@NotBlank( message = Constant.Error.USER_NAME_IS_REQUIRED )

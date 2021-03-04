@@ -6,19 +6,22 @@ import com.dianda.shserc.dto.EditBulletinDto;
 import com.dianda.shserc.entity.Bulletin;
 import com.dianda.shserc.mapper.BulletinMapper;
 import com.dianda.shserc.service.IBulletinService;
+import com.dianda.shserc.validators.NotNull;
 import com.dianda.shserc.vo.BulletinVo;
 import com.dianda.shserc.vo.BulletinVoList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @Service
 public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> implements IBulletinService {
 
-	@Autowired
+	@Resource
 	BulletinMapper mapper;
 
 	@Override
-	public boolean edit(EditBulletinDto model) {
+	public boolean edit( @Valid @NotNull EditBulletinDto model ) {
 		return false;
 	}
 

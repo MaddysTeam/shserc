@@ -15,11 +15,11 @@ import java.lang.annotation.Target;
  *  @Copyright 2019-2020 
  */
 
-@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD,ElementType.TYPE_PARAMETER  })
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD,ElementType.PARAMETER  })
 @Retention( RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = { CheckNotNullIsEmpty.class})
-public @interface ICheckNotNullOrEmpty {
-	String message( ) default "{service validation}";
+@Constraint(validatedBy = { CheckNotNulI.class})
+public @interface NotNull{
+	String message( ) default "object reference cannot be null!";
 	Class<?>[] groups( ) default {};
 	Class<? extends Payload>[] payload( ) default {};
 }

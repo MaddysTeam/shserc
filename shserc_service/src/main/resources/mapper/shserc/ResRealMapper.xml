@@ -9,13 +9,29 @@
         r.id_card,
         r.state_id,
         r.company_id,
-        c.company_name
+        c.company_name  as company_name
         from res_real
         r left join res_company c on r.company_id=c.id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
+
+    <select id="selectSingle"  resultType="com.dianda.shserc.entity.ResReal">
+        select r.id as id,
+        r.card_no,
+        r.real_name,
+        r.id_card,
+        r.state_id,
+        r.company_id,
+        c.company_name as company_name
+        from res_real r
+        left join res_company c on r.company_id=c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
 
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.dianda.shserc;
 
+import com.dianda.shserc.bean.RealSelectParams;
 import com.dianda.shserc.dto.EditRealDto;
 import com.dianda.shserc.entity.ResReal;
 import com.dianda.shserc.service.IResRealService;
@@ -20,8 +21,9 @@ public class ResRealTest {
 	@Resource
 	IResRealService service;
 	
-	long userId = 1;
+	long realId = 7;
 	long zero = 0;
+	long companyId=1;
 	String cardNo = "kv2002";
 	String idCard = "310115198610191992";
 	String realName = "华超";
@@ -32,28 +34,35 @@ public class ResRealTest {
 	@Test
 	public void edit_real_test( ) {
 		model = new EditRealDto ( );
+		model.setCompanyId ( companyId );
 		model.setCardNo ( cardNo );
 		model.setCardPassword ( password );
 		model.setRealName ( realName );
 		model.setIdCard ( idCard );
-		boolean result = service.edit ( model );
+		boolean result = service.edit ( null );
 		Assert.isTrue ( result );
 		
+		model.setId ( realId);
 		model.setRealName ( "张三" );
 		result = service.edit ( model );
 		Assert.isTrue ( result );
 		
 		vo = service.findByIdCard ( idCard );
-		Assert.isTrue ( model.getIdCard ( ) .equals (  vo.getIdCard ( )) );
+		Assert.isTrue ( model.getIdCard ( ).equals ( vo.getIdCard ( ) ) );
 	}
-
+	
 	@Test
-	public void edit_real_with_wrong_para_test(){}
-
+	public void edit_real_with_wrong_para_test( ) {
+	}
+	
 	@Test
-	public void get_page_data_test(){ }
-
+	public void get_data_by_id_test( ) {
+		ResRealVo vo = service.findById ( realId);
+		Assert.isTrue (!vo.getCompanyName () .isEmpty ());
+	}
+	
 	@Test
-	public void get_page_data_with_wrong_para_test(){}
+	public void get_page_data_with_wrong_para_test( ) {
+	}
 	
 }

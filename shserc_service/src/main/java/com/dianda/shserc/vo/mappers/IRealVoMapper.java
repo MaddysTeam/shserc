@@ -17,7 +17,8 @@ public interface IRealVoMapper extends BasicMapper<ResRealVo, ResReal> {
 			@Mapping(source = "id", target = "id"),
 			@Mapping(source = "cardNo", target = "cardNo"),
 			@Mapping(source="idCard",target="idCard"),
-			@Mapping(source="realName",target="realName")
+			@Mapping(source="realName",target="realName"),
+			@Mapping(source="companyName",target="companyName")
 	} )
 	ResRealVo mapFrom( ResReal resReal );
 }

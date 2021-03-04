@@ -2,20 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.shserc.mapper.ResCommentMapper">
 
-<!--    <select id="selectReal"  resultType="com.dianda.shserc.entity.ResReal">-->
-<!--        select r.id as id,-->
-<!--        r.card_no,-->
-<!--        r.real_name,-->
-<!--        r.id_card,-->
-<!--        r.company_id,-->
-<!--        c.company_name-->
-<!--        c.state_id-->
-<!--        from res_real-->
-<!--        r left join res_company c on r.company_id=c.id-->
-<!--        <where>-->
-<!--            ${ew.sqlSegment}-->
-<!--        </where>-->
-<!--    </select>-->
+    <select id="selectResComments"  resultType="com.dianda.shserc.entity.ResComment">
+        select rc.id as id,
+        rc.user_id,
+        rc.resource_id,
+        rc.audit_type_id,
+        u.user_name as add_user_name,
+        r.title as resource_title,
+        from res_comment rc
+        join res_user u on rc.user_id=u.id
+        join resource r on rc.resource_id=r.id
+
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 
 
 </mapper>
