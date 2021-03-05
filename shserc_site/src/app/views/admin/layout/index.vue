@@ -92,6 +92,6 @@
     background:#333744;
 }
 .el-main{
-    background: #eaedf1
+    background: #eaedf1;
 }
 </style>

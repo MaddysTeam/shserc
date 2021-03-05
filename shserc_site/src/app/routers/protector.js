@@ -1,5 +1,4 @@
 import store from '@/store/store'
-import { WindowsToaster } from 'node-notifier';
 
 const protector = (to, from, next) => {
     const module = store.state.app;
