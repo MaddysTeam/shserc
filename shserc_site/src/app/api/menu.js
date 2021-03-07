@@ -66,8 +66,23 @@ export function getMenusData() {
         id: 7,
         level: 1,
         name: '公告管理',
+        path:'/admin/bulletin/list',
         icon: 'el-icon-folder',
         children: []
+    },
+    {
+        id: 8,
+        level: 1,
+        name: '评论管理',
+        icon: 'el-icon-folder',
+        children: [  {
+            id: 4,
+            level: 2,
+            name: '资源评论管理',
+            path:"/admin/comment/list",
+            icon: 'el-icon-files',
+            children: []
+        },]
     }
 ];
 }

@@ -3,7 +3,7 @@ import store from '@/store/store'
 const protector = (to, from, next) => {
     const module = store.state.app;
     if (to.path.indexOf('/404') >= 0 || to.path.indexOf('/login') >= 0){
-        next()
+        next();
     }
     else if(to.path.indexOf('/logout')>=0){
         window.location.reload();
@@ -15,7 +15,7 @@ const protector = (to, from, next) => {
             });
         }
         else {
-            next()
+            next();
         }
     }
     else{

@@ -22,22 +22,22 @@
 
   <div >
     <!-- card area start-->
-      <el-row style="margin-top:100px">
-        <el-col  v-for="(o) in 5" :key="o"  style="width:30%; padding:20px;">
+      <el-row style="margin-top:100px;">
+        <el-col   :md="10" :lg="8"  v-for="(o) in 4" :key="o"  style=" padding:20px;">
             <el-card :body-style="{padding: '0px'}">
               <div class="widget">
 
                  <!-- widget header start-->
 									<div class="widget-header">
 										<!-- <h3><i class=""></i> 政策与文献</h3> -->
-                    <img style="width:100%" src="https://gzmooc.edu.sh.cn/mooc/upload/cover/205062/20210126/20210126162545_878.jpg" />
+                    <img style="width:100%; height:100%;" src="https://gzmooc.edu.sh.cn/mooc/upload/cover/205062/20210126/20210126162545_878.jpg" />
 									</div>
                    <!-- widget content end-->
 
                    <!-- widget content start-->
 									<div class="widget-content">
                     <el-row style="padding:20px">
-                      <el-col v-for="o in 5" :key="o" style="text-align:left">
+                      <el-col v-for="(o) in 5" :key="o" style="text-align:left">
                           <b>这里是链接</b>
                       </el-col>
                     </el-row>
@@ -74,19 +74,22 @@ export default {
 </script>
 
 <style scoped>
+.search-Box{
+ padding: 0px;
+}
  .search{
      margin-top: 20px;
      max-width: 500px;
+    width:50%;
  }
  .el-row{
-   display:flex;
-   flex-wrap: wrap;
+   /* display:flex;
+   flex-wrap: wrap; */
  }
  .widget > .widget-header, .widget > .widget-content{
   
  }
  .el-card {
-   height:100%;
    font-size:12px;
  }
 </style>

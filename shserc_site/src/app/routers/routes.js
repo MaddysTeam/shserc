@@ -10,6 +10,8 @@ import ResourceIndex from '@/app/views/admin/resource/index'
 import Summary from '@/app/views/admin/dashboard/summary'
 import RoleList from '@/app/views/admin/role/list'
 import RealList from '@/app/views/admin/real/list'
+import CommentList from '@/app/views/admin/comment/list'
+import BulletinList from '@/app/views/admin/bulletin/list'
 
 const routes = [
   // frontend
@@ -73,6 +75,14 @@ const routes = [
       path: '/admin/resource/detail/:id',
       name: 'ResourceDetail',
       component: ResourceDetail
+    }, {
+      path: '/admin/comment/list',
+      name: 'CommentList',
+      component: CommentList
+    }, {
+      path: '/admin/bulletin/list',
+      name: 'BulletinList',
+      component: BulletinList
     }
     ]
   },

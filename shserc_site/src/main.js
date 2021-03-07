@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import router from '@/router'
@@ -10,6 +11,7 @@ import '@/static/validator.js'
 import '@/assets/css/global.css'
 import { initDic } from '@/app/utils/dictHelper'
 import VideoPlayer  from 'vue-video-player'
+
 
 /** initial global dictionary */
 initDic(store);

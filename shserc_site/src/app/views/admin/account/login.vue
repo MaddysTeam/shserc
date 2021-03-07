@@ -1,6 +1,6 @@
 <template>
   <div class="login_area">
-    <div style="height: 30%"></div>
+    <div style="height: 20%"></div>
     <div class="login_box">
       <div class="avatar_box">
         <h3>特教资源库后台管理</h3>
@@ -20,7 +20,7 @@
             <el-input
               prefix-icon="el-icon-search"
               v-model="form.name"
-              placeholder="用户名"
+              placeholder="请输入用户名、邮箱或者手机号"
             ></el-input>
           </el-form-item>
 
@@ -37,7 +37,9 @@
           <!-- verify -->
           <el-form-item>
             <Verify
-              :type="3"
+              :imgUrl ="validateImageUrl"
+              :imgName="validateImageNames"
+              :type="4"
               style="width: 100%"
               @success="success"
               :showButton="false"
@@ -73,10 +75,12 @@ import * as types from "@/app/static/type";
 export default {
   data() {
     return {
+      validateImageUrl:"http://tjcdn.shec.edu.cn/",
+      validateImageNames:["404.jpg"],
       form: loginModel,
       rules: {
         name: [
-          { required: true, message: "请输入用户名或邮箱", trigger: "blur" },
+          { required: true, message: "请输入用户名、邮箱或者手机号", trigger: "blur" },
         ],
       },
     };
@@ -126,7 +130,7 @@ export default {
   background-color: #fff;
   padding: 5px;
   margin: 0 auto;
-  width: 400px;
+  width: 445px;
 }
 .login-form {
   bottom: 0;

@@ -111,8 +111,7 @@ export default {
 </script>
 
 <style scoped>
-.outer {
-  width: 100%;
+.outer {  
   display: flex;
   align-items: center;
 }

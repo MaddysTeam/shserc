@@ -22,7 +22,7 @@
                 <DynamicMenu :dataSource="menus"></DynamicMenu>
             </el-aside>
             <!--right side-->
-            <el-main>
+            <el-main >
                 <router-view></router-view>
             </el-main>
        </el-container>
@@ -93,5 +93,6 @@
 }
 .el-main{
     background: #eaedf1;
+    width:60%;
 }
 </style>
