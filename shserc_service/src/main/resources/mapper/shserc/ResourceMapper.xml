@@ -6,16 +6,28 @@
         r.title,
         r.description,
         r.state_id,
+        r.stage_id,
+        r.grade_id,
+        r.domain_id,
+        r.subject_id,
+        r.school_type_id,
+        r.import_source_id,
+        r.deformity_id,
         r.author,
         r.author_address,
         r.author_email,
         r.author_phone,
-        r.deformity_id,
         r.description,
         r.title,
+        r.is_link,
         r.file_size,
         r.keywords,
-        r.view_count
+        r.view_count,
+        r.download_count,
+        r.favorite_count
+        r.comment_count,
+        r.star_count,
+
         from resource r
         <where>
             ${ew.sqlSegment}

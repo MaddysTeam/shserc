@@ -30,7 +30,7 @@ public class ResourceController {
 
 	@PostMapping(path = "/{id}")
 	public JsonResult findById(@PathVariable long id) {
-		ResourceVo o = service.getById(id);
+		ResourceVo o = service.findById(id);
 		return JsonResult.success(o);
 	}
 

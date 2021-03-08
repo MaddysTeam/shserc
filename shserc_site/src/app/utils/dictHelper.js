@@ -8,7 +8,7 @@ export function initDic(store) {
             console.log(store)
             store.commit("app/"+types.DICTIONARY, data.listData);
 
-            bindDeformityData(store, data.listData);
+            bindDeformity(store, data.listData);
 
         }
     });
@@ -18,7 +18,7 @@ export function initDic(store) {
  *  following function for dicionary business
  */
 
-function bindDeformityData(store, dict) {
+function bindDeformity(store, dict) {
     let deformityData = [];
     dict.map(o => {
         if (o.parentId == 5)
@@ -28,6 +28,17 @@ function bindDeformityData(store, dict) {
     store.commit("app/"+types.DEFORMITY, deformityData)
 }
 
+function bindResourceType(store,dict){}
+
+function bindStage(store,dict){}
+
+function bindGrade(store,dict){}
+
+function bindDomain(store,dict){}
+
+function bindImportSource(store,dict){}
+
+function bindSubject(store,dict){}
 
 function getById(dict, id) {
     if (dict && dict instanceof Array) {

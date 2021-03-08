@@ -19,13 +19,17 @@ import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import com.dianda.shserc.util.logger.system.SystemLog;
+import com.dianda.shserc.validators.NotNull;
+import com.dianda.shserc.vo.ResRealVo;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,11 +42,11 @@ import java.util.Map;
  */
 
 @Service
+@Validated
 public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
 
 	@javax.annotation.Resource
 	ResourceMapper mapper;
-
 
 	DictionaryCache cache;
 
@@ -51,7 +55,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		this.cache = cache;
 		this.cache.setCacheFromService(0);
 	}
-
 
 	@Override
 	public ResourceVoList find(ResourceSelectParams params) {
@@ -64,7 +67,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long importSourceId = params.getImportSourceId();
 		long domainId = params.getDomainId();
 		long gradeId = params.getGradeId();
-		String phrase = params.getSearchPhrase ();
+		String phrase = params.getSearchPhrase();
 
 		// filter fields
 
@@ -139,24 +142,19 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	}
 
 	@Override
-	public ResourceVo edit(EditResourceDto resourceDto) {
-		if (ObjectUtil.isNull(resourceDto))
-			return null;
-
+	public boolean edit(@Valid @NotNull EditResourceDto resourceDto) {
 		// execute user mapping from dto
 		Resource resource = IEditResourceMapper.INSTANCE.mapFrom(resourceDto);
-		if (resource.isNewOne()) {
-			mapper.insert(resource);
+		ResourceVo resourceVo = findById(resource.getId());
+		if (resource.isNewOne() && ObjectUtil.isNull(resourceVo)) {
+			return mapper.insert(resource) > 0;
 		} else {
-			mapper.updateById(resource);
+			return mapper.updateById(resource) >= 0;
 		}
-
-		ResourceVo vo = null; // ResourceVoMapper.INSTANCE.mapFrom ( resource );
-		return vo;
 	}
 
 	@Override
-	public ResourceVo getById(long id) {
+	public ResourceVo findById(long id) {
 		try {
 			Resource resource = mapper.selectById(id);
 			Resource.dictTranslate(resource, cache); // 翻译字典
@@ -169,34 +167,35 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Override
 	@Transactional(readOnly = false, rollbackFor = GlobalException.class)
 	@SystemLog()
-	public boolean addViewCount(ResourceOperation dto) {
-		if (ObjectUtil.isNull(dto))
-			return false;
-
-		Resource resource = mapper.selectById(dto.getResourceId());
+	public boolean addViewCount(@Valid @NotNull ResourceOperation resourceOperation) {
+		Resource resource = mapper.selectById(resourceOperation.getResourceId());
 		if (ObjectUtil.isNull(resource)) {
 			return false;
 		}
 
 		resource.addViewCount();
-		//mapper.updateById ( resource );
-		//mapper.addViewCount ( dto );
-		//throw new GlobalException ( ExceptionType.SERVER_ERROR ); // for unit test only
-		return mapper.updateById(resource) + mapper.addViewCount(dto) == 2;
+		return mapper.updateById(resource) + mapper.addViewCount(resourceOperation) == 2;
 	}
 
-	@Override
-	public boolean addPraiseCount(ResourceOperation param) {
-		return false;
-	}
 
 	@Override
-	public boolean addDownloadCount(ResourceOperation param) {
-		return false;
+	public boolean addDownloadCount(@Valid @NotNull ResourceOperation resourceOperation) {
+		Resource resource = mapper.selectById(resourceOperation.getResourceId());
+		if (ObjectUtil.isNull(resource)) {
+			return false;
+		}
+
+		resource.addDownloadCount();
+		return mapper.updateById(resource) + mapper.addDownloadCount(resourceOperation) == 2;
 	}
 
 	@Override
 	public boolean setOrCancelElite(long id) {
+		return false;
+	}
+
+	@Override
+	public boolean setOrCancelFavorite(long id) {
 		return false;
 	}
 

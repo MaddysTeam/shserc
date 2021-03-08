@@ -33,8 +33,8 @@
       :columns="columns"
       :commands="commands"
       :handleChange="bindResourceList"
-      :pageSize="pageSize"
-      :total="total"
+      :pageSize="selectParam.pageSize"
+      :total="selectParam.total"
     ></Table>
   </div>
 </template>
@@ -57,18 +57,21 @@ export default {
           console.log(row);
           this.$router.push('/admin/resource/detail/'+row.id);
         }},
-        { prop: "author", label: "作者姓名" },
-        { prop: "author", label: "作者邮箱" },
-        { prop: "resourceType", label: "资源类型" },
-        { prop: "deformity", label: "残疾类型" },
-        { prop: "state", label: "资源状态" },
         { prop: "mediumType", label: "媒体类型" },
-        { prop: "viewCount", label: "访问次数" },
+        { prop: "author", label: "作者姓名" },
+        { prop: "authorEmail", label: "作者邮箱" },
+        // { prop: "resourceType", label: "资源类型" },
+        // { prop: "deformity", label: "残疾类型" },
+        { prop: "viewCount", label: "点击量" },
+        { prop: "downloadCount", label: "下载量" },
+        { prop: "favoriteCount", label: "收藏量" },
+        { prop: "commentCount", label: "评论量" },
+        { prop: "state", label: "资源状态" }
       ],
       source: [],
-      pageSize: 10,
-      index: 1,
-      total: 0,
+      // pageSize: 10,
+      // index: 1,
+      // total: 0,
        commands: [{
           id: 1,
           label: "编辑",
@@ -77,9 +80,13 @@ export default {
             this.$router.push('/admin/resource/edit/'+row.id)
           },
       }],
-      // deformityOptions: [],
-      deformity: {  },
-      deformityId: 0,
+
+      deformityOptions: [],
+      resourceTypes:[],
+
+      selectParam:selectParam
+      // deformity: {  },
+      // deformityId: 0,
     };
   },
   computed: {
@@ -93,9 +100,10 @@ export default {
   methods: {
     bindResourceList() {
       let result = list(
-        this.index,
-        this.pageSize,
-        this.deformityId
+        selectParam
+        // this.index,
+        // this.pageSize,
+        // this.deformityId
       ).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
@@ -106,7 +114,7 @@ export default {
     },
 
     deformitySelectChange(val) {
-      this.deformityId = val;
+      this.selectParam.deformityId = val;
     },
 
     addResource(){

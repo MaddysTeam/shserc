@@ -1,5 +1,6 @@
 package com.dianda.shserc.util.cache.dictionary;
 
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.service.IDictionaryService;
 import com.dianda.shserc.util.basic.ObjectUtil;
@@ -36,7 +37,7 @@ public class DictionaryCache {
 		//TODO: parent code ->  children -> find name by value
 		CacheObject o = manager.getCache ( KEY );
 		if ( ObjectUtil.isNull ( o ) || ObjectUtil.isNull ( o.getMap ( ) ) ) {
-			throw new GlobalException ( "" , "" );
+			throw new GlobalException (Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE , Constant.Error.OBJECT_IS_REQUIRED );
 		}
 		
 		Map<String, Object> map = o.getMap ( );

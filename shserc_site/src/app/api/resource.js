@@ -1,8 +1,8 @@
 import { Form } from 'element-ui';
 import axios from '@/app/static/axios'
 
-export function list(pageIndex, pageSize, deformityId) {
-    return axios.post('api/resource/list', { 'current': pageIndex, 'size': pageSize, 'deformityId': deformityId });
+export function list(selectParam) {
+    return axios.post('api/resource/list', selectParam);
 }
 
 export function info(id) {

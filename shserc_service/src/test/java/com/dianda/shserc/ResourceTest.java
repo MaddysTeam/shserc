@@ -51,7 +51,7 @@ public class ResourceTest {
 		try {
 			service.addViewCount ( new ResourceOperation ( resourceId , userId ) );  // when success
 		}catch ( GlobalException e ){  // throw global exception
-			com.dianda.shserc.vo.ResourceVo resource = service.getById ( resourceId );
+			com.dianda.shserc.vo.ResourceVo resource = service.findById ( resourceId );
 			Assert.assertTrue ( resource.getViewCount ( ) == 1 );
 		}
 	}
