@@ -2,7 +2,7 @@ export const resourceModel = {
    id: 0,
    title: "",
    state: "",
-   stateId: 0,
+   stateId: 10002,
    deformityId: "",
    deformity: "",
    author: "",
@@ -18,7 +18,7 @@ export const resourceModel = {
    mediumType: "",
    mediumTypeId: 0,
    resourceType: "",
-   resourceTypeId: 10002,
+   resourceTypeId: 0,
    coverPath: ""
 };
 
@@ -26,7 +26,7 @@ export const selectParam = {
 
    current: 1,
    total: 0,
-   size: 2,
+   size: 10,
    searchPhrase: "",
 
    userId: 0,

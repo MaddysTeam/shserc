@@ -18,9 +18,9 @@ public interface IResUserService extends IService<ResUser> {
 
 	ResUserVoList find(UserSelectParams params );
 	
-	ResUserVo edit( EditUserDto user );
+	boolean edit( EditUserDto user );
 	
-	ResUserVo delete( long id );
+	boolean delete( long id );
 	
 	ResUserVo getById( long id );
 	

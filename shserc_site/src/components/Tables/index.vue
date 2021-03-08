@@ -66,8 +66,8 @@
         class="pagenation"
         background
         :current-page="current"
-        :page-sizes="[2, 5, 10]"
         :page-size="pageSize"
+        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -86,6 +86,7 @@ export default {
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
     handleChange: { type: Function },
+    handlePageSizeChange:{type:Function},
     handleSearch: { type: Function },
   },
   data() {
@@ -97,6 +98,10 @@ export default {
     handleCurrentChange: function (val) {
      // val["searchPhrase"] = this.searchPhrase;
       this.handleChange(val);
+    },
+
+    handleSizeChange:function(val){
+      this.handlePageSizeChange(val);
     },
 
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {

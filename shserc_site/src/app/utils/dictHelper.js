@@ -5,27 +5,44 @@ export function initDic(store) {
     dicList().then(res => {
         if (res && res.message && res.message == 'success' && store) {
             let data = JSON.parse(res.data);
-            console.log(store)
             store.commit("app/"+types.DICTIONARY, data.listData);
 
-            bindDeformity(store, data.listData);
-
+            loadResourceDeformity(store, data.listData);
+            laodResourceStatus(store,data.listData)
         }
     });
+}
+
+function getById(dict, id) {
+    if (dict && dict instanceof Array) {
+        return dict.find(o => o.id == id);
+    }
+
+    return null;
+}
+
+function getChildrenByParentId(parentId,dict){
+    let children = [];
+    dict.map(o => {
+        if (o.parentId == parentId)
+        children.push(o);
+    });
+
+    return children;
 }
 
 /**
  *  following function for dicionary business
  */
 
-function bindDeformity(store, dict) {
-    let deformityData = [];
-    dict.map(o => {
-        if (o.parentId == 5)
-            deformityData.push(o);
-    });
+function loadResourceDeformity(store, dict) {
+    let deformity = getChildrenByParentId(5,dict)
+    store.commit("app/"+types.DEFORMITY, deformity)
+}
 
-    store.commit("app/"+types.DEFORMITY, deformityData)
+function laodResourceStatus(store,dict){
+    let resourceStatus = getChildrenByParentId(12,dict)
+    store.commit("app/"+types.RESOURCE_STATUS, resourceStatus)
 }
 
 function bindResourceType(store,dict){}
@@ -39,11 +56,3 @@ function bindDomain(store,dict){}
 function bindImportSource(store,dict){}
 
 function bindSubject(store,dict){}
-
-function getById(dict, id) {
-    if (dict && dict instanceof Array) {
-        return dict.find(o => o.id == id);
-    }
-
-    return null;
-}

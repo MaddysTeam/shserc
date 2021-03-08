@@ -6,10 +6,7 @@ import com.dianda.shserc.service.IResUserService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResUserVoList;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,8 +29,8 @@ public class ResUserController {
 		return JsonResult.success(resUserVoList);
 	}
 
-	@RequestMapping(path = "/id", method = RequestMethod.POST)
-	public JsonResult findById(@RequestBody long id) {
+	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
+	public JsonResult findById(@PathVariable long id) {
 		ResUserVo resUserVo = resUserService.getById(id);
 		return JsonResult.success(resUserVo);
 	}

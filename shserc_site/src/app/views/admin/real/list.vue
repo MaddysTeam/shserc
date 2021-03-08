@@ -21,6 +21,7 @@
       :columns="columns"
       :commands="commands"
       :handleChange="loadRealList"
+      :handlePageSizeChange="handlePageSizeChange"
       @handleSearch="handleSearch"
       :pageSize="selectParam.pageSize"
       :total="selectParam.total"
@@ -78,14 +79,19 @@ export default {
         this.selectParam.current=current;
       }
       list(this.selectParam).then((res) => {
-        if (res && res.data) {
+        if (res && res.data) {        
           let data = JSON.parse(res.data);
           this.selectParam.total = data.total;
           this.selectParam.current = data.current;
-          this.selectParam.source = data.listData;
+         // this.selectParam.source = data.listData;
           this.source = data.listData;
         }
       });
+    },
+
+    handlePageSizeChange(val) {
+      this.selectParam.size = val;
+      this.loadRealList();
     },
 
     handleCloseEdit() {

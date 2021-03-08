@@ -4,3 +4,4 @@ export const LOGOUT='logout';
 // following keys for dictionary
 export const DEFORMITY="deformity";
 export const DICTIONARY="dictionary";
+export const RESOURCE_STATUS="resource_status";

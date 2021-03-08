@@ -6,14 +6,20 @@
     </el-breadcrumb>
 
     <div class="btn-group">
-      <el-button class="el-button--primary" type="danger" size="large" @click="addResource()">新增资源</el-button>
+      <el-button
+        class="el-button--primary"
+        type="danger"
+        size="large"
+        @click="addResource()"
+        >新增资源</el-button
+      >
     </div>
     <div class="filters">
       <el-select
-        v-model="deformity"
+        v-model="selesctOptions[0]"
         value-key="id"
         placeholder="残疾类型选择"
-        @change="deformitySelectChange"
+        @change="handleDeformitySelectChange"
       >
         <el-option
           v-for="item in deformityOptions"
@@ -24,7 +30,22 @@
         </el-option>
       </el-select>
 
-      <el-button @click="bindResourceList()" class="el-button--primary search">
+      <el-select
+        v-model="selesctOptions[1]"
+        value-key="id"
+        placeholder="资源状态选择"
+        @change="handleStatusSelectChange"
+      >
+        <el-option
+          v-for="item in resourceStatusOptions"
+          :key="item.id"
+          :label="item.name"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+
+      <el-button @click="loadResourceList()" class="el-button--primary search">
         <i class="el-icon-edit"></i> 查询
       </el-button>
     </div>
@@ -32,7 +53,9 @@
       :list="source"
       :columns="columns"
       :commands="commands"
-      :handleChange="bindResourceList"
+      :handleChange="loadResourceList"
+      :handlePageSizeChange="handlePageSizeChange"
+      @handleSearch="handleSearch"
       :pageSize="selectParam.pageSize"
       :total="selectParam.total"
     ></Table>
@@ -41,6 +64,7 @@
 <script>
 import Table from "@/components/Tables/index";
 import { list } from "@/app/api/resource.js";
+import { selectParam } from "@/app/models/resource.js";
 import { mapState } from "vuex";
 
 export default {
@@ -49,14 +73,15 @@ export default {
     return {
       columns: [
         { prop: "id", label: "资源编号" },
-        { prop: "title", 
-          label: "资源标题", 
-          isLink: true, 
-          currentRoute:'/admin/resource/list',
-          method:(index,row)=>{
-          console.log(row);
-          this.$router.push('/admin/resource/detail/'+row.id);
-        }},
+        {
+          prop: "title",
+          label: "资源标题",
+          isLink: true,
+          currentRoute: "/admin/resource/list",
+          method: (index, row) => {
+            this.$router.push("/admin/resource/detail/" + row.id);
+          },
+        },
         { prop: "mediumType", label: "媒体类型" },
         { prop: "author", label: "作者姓名" },
         { prop: "authorEmail", label: "作者邮箱" },
@@ -66,60 +91,70 @@ export default {
         { prop: "downloadCount", label: "下载量" },
         { prop: "favoriteCount", label: "收藏量" },
         { prop: "commentCount", label: "评论量" },
-        { prop: "state", label: "资源状态" }
+        { prop: "state", label: "资源状态" },
       ],
-      source: [],
-      // pageSize: 10,
-      // index: 1,
-      // total: 0,
-       commands: [{
+      commands: [
+        {
           id: 1,
           label: "编辑",
           type: "primary",
           method: (index, row) => {
-            this.$router.push('/admin/resource/edit/'+row.id)
+            this.$router.push("/admin/resource/edit/" + row.id);
           },
-      }],
+        },
+      ],
 
-      deformityOptions: [],
-      resourceTypes:[],
-
-      selectParam:selectParam
-      // deformity: {  },
-      // deformityId: 0,
+      source: [],
+      selectParam: selectParam,
+      selesctOptions: ["", ""],
     };
   },
   computed: {
     ...mapState({
-      deformityOptions: (state) => state.app.deformity,
+      deformityOptions: (state) => state.app.deformity, // 残疾类型下拉框数据源
+      resourceStatusOptions: (state) => state.app.resourceStatus, // 资源状态类型下拉框数据源
     }),
   },
   mounted() {
-    this.bindResourceList();
+    this.loadResourceList();
   },
   methods: {
-    bindResourceList() {
-      let result = list(
-        selectParam
-        // this.index,
-        // this.pageSize,
-        // this.deformityId
-      ).then((res) => {
+    loadResourceList(current) {
+      if (current) {
+        this.selectParam.current = current;
+      }
+      let result = list(selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
-          this.total = data.total;
-          this.source = data.listData;
+          this.selectParam.total = data.total;
+          console.log(data.listData);
+          this.source = data.listData ? data.listData : [];
         }
       });
     },
 
-    deformitySelectChange(val) {
+    handlePageSizeChange(val) {
+      this.selectParam.size = val;
+      this.loadResourceList();
+    },
+
+    handleDeformitySelectChange(val) {
       this.selectParam.deformityId = val;
     },
 
-    addResource(){
-      this.$router.push('/admin/resource/add');
-    }
+    handleStatusSelectChange(val) {
+      this.selectParam.stateId = val;
+    },
+
+    handleSearch(val) {
+      this.selectParam.searchPhrase = val;
+      this.source = [];
+      this.loadResourceList();
+    },
+
+    addResource() {
+      this.$router.push("/admin/resource/add");
+    },
   },
 };
 </script>
@@ -133,10 +168,11 @@ export default {
   margin-left: 10px;
 }
 
-.btn-group,.filters {
-   display: flex;
-   flex-direction: row;
-   text-justify: auto;
-   margin: 20px 20px 20px 0;
- }
+.btn-group,
+.filters {
+  display: flex;
+  flex-direction: row;
+  text-justify: auto;
+  margin: 20px 20px 20px 0;
+}
 </style>

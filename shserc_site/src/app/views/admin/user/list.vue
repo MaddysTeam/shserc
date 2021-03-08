@@ -17,7 +17,7 @@
     <edit
       @close="handleCloseEdit"
       :visible="dialogVisible"
-      v-model="editModel"
+      :model="editModel"
     ></edit>
 
     <Table
@@ -58,6 +58,7 @@ export default {
             console.log("编辑:" + index, row);
              info(row.id).then((res) => {
               if (res && res.data) {
+                console.log(res.data)
                 this.editModel = JSON.parse(res.data);
                 this.dialogVisible = true;
               }
@@ -72,27 +73,30 @@ export default {
     };
   },
   mounted() {
-   // this.loadUserList();
+    this.loadUserList();
   },
   methods: {
-    // loadUserList() {
-    //   let result = list(selectParam).then((res) => {
-    //     if (res && res.data) {
-    //       let data = JSON.parse(res.data);
-    //       this.total = data.total;
-    //       this.source = data.listData;
-    //     }
-    //   });
-    // },
+    loadUserList(current) {
+       if(current){
+        this.selectParam.current=current;
+      }
+      let result = list(selectParam).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          selectParam.total = data.total;
+          this.source = data.listData;
+        }
+      });
+    },
 
     handleCloseEdit() {
       this.dialogVisible = false;
-        //this.loadUserList();
+        this.loadUserList();
     },
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;
-      //this.loadUserList();
+      this.loadUserList();
     },
   },
 };

@@ -63,7 +63,7 @@
           <el-form-item label="残疾类型" prop="deformityId">
             <el-select
               @change="deformitySelectChanged"
-              v-model="resource.deformityId"
+              v-model="resource.deformity"
               value-key="id"
               placeholder="选择残疾类型"
               style="width: 100%"
@@ -229,7 +229,7 @@ export default {
             url: this.resource.resourcePath,
           });
           this.bindKeywords();
-          this.deformitySelectChanged(this.resource.deformity);
+          //this.deformitySelectChanged(this.resource.deformityId);
         });
       }
     },
@@ -300,9 +300,10 @@ export default {
       let _this = this;
       _this.$refs["resourceForm"].validate((isValid) => {
         if (isValid) {
-          edit(this.resource).then((res) => {
-            this.redirectToList();
-          });
+          console.log(this.resource);
+           edit(this.resource).then((res) => {
+             this.redirectToList();
+           });
         }
       });
     },

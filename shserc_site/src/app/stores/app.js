@@ -8,6 +8,7 @@ export default {
         //following for dictionary
         dict:[],
         deformity:[],
+        resourceStatus:[]
       },
       mutations: {
         [types.LOGIN]: (state, data) => {
@@ -21,16 +22,23 @@ export default {
           localStorage.removeItem('Authorization');
         },
     
-         //following for dictionary
+         //dictionary
         [types.DICTIONARY]: (state, data) => {
           state.dict = data ;
         },
-    
-        [types.DEFORMITY]: (state, data) => {
+        
+        // dict for resource
+        [types.DEFORMITY]: (state,data) => {
           state.deformity = data ;
+        },
+
+        [types.RESOURCE_STATUS]: (state,data) => {
+          state.resourceStatus = data ;
         }
     
       },
     actions:{},
     getters:{}
 }
+
+

@@ -85,35 +85,27 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 
 	@Override
 	@Transactional(readOnly = false, rollbackFor = Exception.class)
-	public ResUserVo edit(EditUserDto userDto) {
-		if (ObjectUtil.isNull(userDto))
-			return null;
-
+	public boolean edit(EditUserDto userDto) {
 		// execute user mapping from dto
 		ResUser user = IEditUserMapper.INSTANCE.mapFrom(userDto);
 		if (user.isNewOne()) {
-			resUserMapper.insert(user);
+			return resUserMapper.insert(user)>0;
 		} else {
-			resUserMapper.updateById(user);
+			return resUserMapper.updateById(user)>=0;
 		}
-
-		//TODO: edit userRole
-
-		ResUserVo vo = IUserVoMapper.INSTANCE.mapFrom(user);
-		return vo;
+		
 	}
 
 	@Override
-	public ResUserVo delete(long id) {
+	public boolean delete(long id) {
 		if (id <= 0)
-			return null;
+			return false;
 
 		ResUser user = resUserMapper.selectById(id);
 		user.setIsDeleted(Constant.Status.DELETED);
 		int result = resUserMapper.updateById(user);
-
-		ResUserVo vo = IUserVoMapper.INSTANCE.mapFrom(user);
-		return vo;
+		
+		return result>1;
 	}
 
 	@Override

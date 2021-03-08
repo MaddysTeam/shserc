@@ -4,26 +4,26 @@
     :visible.sync="visible"
     :before-close="handleClose"
   >
-    <el-form :model="user" ref="userForm" :rules="rules">
+    <el-form :model="model" ref="userForm" :rules="rules">
       <el-form-item prop="username">
         <el-input
-          v-model="user.username"
+          v-model="model.userName"
           prefix-icon="el-icon-user"
           placeholder="输入用户名"
         ></el-input>
       </el-form-item>
       <el-form-item prop="idCard">
         <el-input
-          v-model="user.idCard"
+          v-model="model.idCard"
           prefix-icon="el-icon-user"
           placeholder="输入身份证件号"
         ></el-input>
       </el-form-item>
       <el-form-item prop="companyId">
         <selectTree
-          :data="source"
+          :data="companySource"
           placeholder="所属单位"
-          :nodeKey="user.companyId"
+          :nodeKey="model.companyId"
           @input="handleSelectCompany"
         >
         </selectTree>
@@ -32,7 +32,7 @@
         <el-button type="primary" @click="submitForm('userForm')"
           >确定</el-button
         >
-        <el-button type="info" @click="handleClose()">取消</el-button>
+        <el-button type="info" @click="handleClose('userForm')">取消</el-button>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -40,7 +40,7 @@
 
 <script>
 import { Notification } from "element-ui";
-import { regexs } from "@/static/regex.js";
+import { clean } from "@/app/utils/objectHelper";
 import { messages } from "@/app/static/message.js";
 import selectTree from "@/components/TreeSelector/index";
 import { list } from "@/app/api/company";
@@ -51,13 +51,13 @@ import {
   validateIdCard,
 } from "@/static/validator";
 import { edit } from "@/app/api/user";
-import { userModel } from "@/app/models/user";
 
 export default {
   name: "edit",
   components: { selectTree },
   props: {
     visible: { type: Boolean, required: true },
+    model: { type: Object }
   },
   data() {
     var nameValidator = (rule, value, callback) => {
@@ -84,7 +84,6 @@ export default {
       };
 
     return {
-      user: userModel,
       rules: {
         username: { validator: nameValidator, trigger: "blur" },
         idCard: { validator: cardIdValidator, trigger: "blur" },
@@ -116,6 +115,12 @@ export default {
 
     handleSelectCompany(id) {
       this.user.companyId = id + "";
+    },
+
+    handleClose(formName) {
+      this.$emit("close");
+      clean(this.model);
+      this.$refs[formName].clearValidate();
     },
 
     loadCompanyList() {
