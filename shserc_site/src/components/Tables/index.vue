@@ -16,7 +16,6 @@
     </div>
     <el-table
       :data="list"
-      style="width: 100%"
       :header-cell-style="tableHeaderColor"
       border
     >
@@ -40,15 +39,25 @@
         <el-table-column
           :prop="item.prop"
           :width="item.width"
-          :key="item.label"
+          :key="item.prop"
           :align="item.align"
-          v-else
+          v-else-if="item.isTemplate"
           :label="item.label"
         >
+          <template slot-scope="scope">
+            <slot :name="item.prop" :scope="scope"></slot>
+          </template>
         </el-table-column>
-      </template>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
+      <el-table-column
+          :prop="item.prop"
+          :width="item.width"
+          :min-width="item.minWith"
+          :key="item.prop"
+          :align="item.align"
+          v-else-if="item.isCommand"
+          :label="item.label"
+        >
+         <template slot-scope="scope">
           <!-- scope.row相当于当前行的数据对象 -->
           <el-button
             size="mini"
@@ -59,7 +68,18 @@
             >{{ item.label }}</el-button
           >
         </template>
-      </el-table-column>
+        </el-table-column>
+
+        <el-table-column
+          :prop="item.prop"
+          :width="item.width"
+          :key="item.label"
+          :align="item.align"
+          v-else
+          :label="item.label"
+        >
+        </el-table-column>
+      </template>
     </el-table>
     <div class="outer">
       <el-pagination
@@ -81,6 +101,7 @@ export default {
   props: {
     list: { type: Array, default: [] },
     columns: { type: Array, default: [] },
+    // commandColumnWidth:{type:Number,default:'200px'},
     commands: {},
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },

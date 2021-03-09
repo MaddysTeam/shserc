@@ -267,8 +267,11 @@
         <el-upload 
         action="#" 
         list-type="picture-card" 
+        :limit="1"
         :on-preview="handlePictureCardPreview"
-        :auto-upload="false">
+        :on-exceed="uploadResourceCoverHandleExceed"
+        :http-request="uploadResourceCover"
+        :auto-upload="true">
           <i
             slot="default"
             class="el-icon-upload"
@@ -276,8 +279,8 @@
             ><br />
             <div style="font-size: 22px">点击上传封面</div></i
           >
-           <!--
-          <div slot="file" slot-scope="{ file }">
+           
+         <!-- <div slot="file" slot-scope="{ file }">
             <img
               class="el-upload-list__item-thumbnail"
               :src="file.url"
@@ -305,8 +308,8 @@
                 <i class="el-icon-delete"></i>
               </span>
             </span>
-          </div>
-          -->
+          </div> -->
+     
         </el-upload>
         <el-dialog :visible.sync="dialogVisible" size="tiny">
           <img width="100%" :src="dialogImageUrl" alt="">
@@ -338,6 +341,7 @@ export default {
       fileList: [],
       dialogVisible:false,
       dialogImageUrl:'',
+      disabled:false,
 
       rules: {
         title: [
@@ -503,6 +507,15 @@ export default {
 
     uploadResourceOnBeforeUpload() {},
 
+    
+    uploadResourceCover(options){
+        
+    },
+
+    uploadResourceCoverHandleExceed(){
+        Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
+    },
+
     handlePictureCardPreview(file){
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
@@ -594,5 +607,7 @@ export default {
 .upload-file {
   display: flex;
 }
+
+.el-upload-list{width:70%;}
 
 </style>

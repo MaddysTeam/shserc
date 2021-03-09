@@ -92,6 +92,7 @@ export default {
         { prop: "favoriteCount", label: "收藏量" },
         { prop: "commentCount", label: "评论量" },
         { prop: "state", label: "资源状态" },
+        { prop: "command", label: "操作" ,isCommand:true,align:"right"}
       ],
       commands: [
         {
@@ -154,8 +155,8 @@ export default {
 
     addResource() {
       this.$router.push("/admin/resource/add");
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

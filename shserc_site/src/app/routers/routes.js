@@ -12,6 +12,7 @@ import RoleList from '@/app/views/admin/role/list'
 import RealList from '@/app/views/admin/real/list'
 import CommentList from '@/app/views/admin/comment/list'
 import BulletinList from '@/app/views/admin/bulletin/list'
+import BulletinEdit from '@/app/views/admin/bulletin/edit'
 
 const routes = [
   // frontend
@@ -83,6 +84,16 @@ const routes = [
       path: '/admin/bulletin/list',
       name: 'BulletinList',
       component: BulletinList
+    },
+    {
+      path: '/admin/bulletin/add',
+      name: 'ResourceAdd',
+      component: BulletinEdit
+    }, 
+    {
+      path: '/admin/bulletin/edit/:id',
+      name: 'bulletinEdit',
+      component:BulletinEdit
     }
     ]
   },

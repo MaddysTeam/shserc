@@ -48,6 +48,7 @@ export default {
         { prop: "userName", label: "用户名" },
         { prop: "company", label: "所在单位" },
         { prop: "realName", label: "真实姓名" },
+        { prop: "command", label: "操作" ,isCommand:true,align:"right"}
       ],
       commands: [
         {

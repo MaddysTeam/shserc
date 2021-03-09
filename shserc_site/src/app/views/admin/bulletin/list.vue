@@ -23,7 +23,11 @@
       @handleSearch="handleSearch"
       :pageSize="selectParam.pageSize"
       :total="selectParam.total"
-    ></Table>
+    >
+      <template slot-scope="scopes" slot="content">
+        <div>{{scopes.scope.row.content}}</div>
+      </template>
+    </Table>
   </div>
 </template>
 <script>
@@ -40,23 +44,28 @@ export default {
         {
           prop: "title",
           label: "公告标题",
-        //   isLink: true,
-        //   currentRoute: "/admin/resource/list",
-        //   method: (index, row) => {
-        //     this.$router.push("/admin/resource/detail/" + row.id);
-        //   },
+          align:"center",
+          width:"100px"
         },
-        { prop: "content", label: "公告内容" },
+        { prop: "content", label: "公告内容" ,isTemplate:true,},
+        { prop: "command", label: "操作" ,isCommand:true, width:'100px',align:"right"},
       ],
-      commands: [
+      commands: [ 
         {
           id: 1,
           label: "编辑",
           type: "primary",
           method: (index, row) => {
-            this.$router.push("/admin/resource/edit/" + row.id);
+            this.$router.push("/admin/bulletin/edit/" + row.id);
           },
-        },
+        }, {
+          id: 2,
+          label: "删除",
+          type: "danger",
+          method: (index, row) => {
+            //TODO:
+          },
+        }
       ],
 
       source: [],
@@ -69,23 +78,23 @@ export default {
   },
   methods: {
     loadBulletinList(current) {
-      if (current) {
-        this.selectParam.current = current;
-      }
-      let result = list(selectParam).then((res) => {
-        if (res && res.data) {
-          let data = JSON.parse(res.data);
-          this.selectParam.total = data.total;
-          this.source = data.listData ? data.listData : [];
-        }
-      });
+      // if (current) {
+      //   this.selectParam.current = current;
+      // }
+      // let result = list(selectParam).then((res) => {
+      //   if (res && res.data) {
+      //     let data = JSON.parse(res.data);
+      //     this.selectParam.total = data.total;
+      //     this.source = data.listData ? data.listData : [];
+      //   }
+      // });
+      this.source=[{"title":"123","content":"1231231231231231231231231231"}]
     },
 
     handlePageSizeChange(val) {
       this.selectParam.size = val;
       this.loadBulletinList();
     },
-
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;

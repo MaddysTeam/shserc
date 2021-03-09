@@ -43,6 +43,7 @@ export default {
   name: "Editor",
    props: {
      value: Object,
+     height: Number,
    },
   data() {
     return {
@@ -148,3 +149,6 @@ export default {
 };
 </script>
 
+<style>
+
+</style>

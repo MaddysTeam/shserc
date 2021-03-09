@@ -48,6 +48,7 @@ export default {
         { prop: "cardNo", label: "实名卡号" },
         { prop: "idCard", label: "身份证件号" },
         { prop: "realName", label: "真实姓名" },
+        { prop: "command", label: "操作" ,isCommand:true,align:"right"},
       ],
       commands: [
         {
