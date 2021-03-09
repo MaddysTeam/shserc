@@ -19,10 +19,9 @@ public interface IEditBulletinMapper extends BasicMapper<Bulletin, EditBulletinD
 	@Mappings({
 			@Mapping(source = "id", target = "id"),
 			@Mapping(source = "typeId", target = "typeId"),
-			@Mapping(source = "addUser", target = "addUser"),
 			@Mapping(source = "title", target = "title"),
 			@Mapping(source = "content",target="content"),
-			//@Mapping(source = "isTop",target="isTop")
+			@Mapping(source = "top",target="top")
 	})
 	Bulletin mapFrom(EditBulletinDto editUserDto);
 

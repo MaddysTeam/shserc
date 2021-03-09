@@ -12,9 +12,6 @@ public class EditBulletinDto {
 	@Min(value = 0)
 	private long Id;
 
-	@Min(value = 1)
-	private long addUser;
-
 	@Min(value = 0)
 	private long typeId;
 
@@ -25,6 +22,6 @@ public class EditBulletinDto {
 	@Length(max=10000)
 	private String content;
 
-	private boolean isTop;
+	private boolean top;
 
 }

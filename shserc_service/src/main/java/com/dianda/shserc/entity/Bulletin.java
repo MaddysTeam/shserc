@@ -16,7 +16,7 @@ public class Bulletin {
 
 	private String content;
 
-	private boolean isTop;
+	private boolean top;
 
 	private long addUser;
 

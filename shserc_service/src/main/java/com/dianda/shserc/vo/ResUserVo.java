@@ -5,12 +5,22 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 public class ResUserVo implements Serializable {
-	 private  long  id;
-	 private  String userName;
-	 private  long companyId;
-	 private  boolean isDeleted;
+
+	private long id;
+	private String userName;
+	private long companyId;
+	private String idCard;
+	private String mobile;
+	private String email;
+	private String companyName;
+	private String state;
+	private LocalDateTime registerTime;
+	private LocalDateTime lastLoginTime;
+	private int loginCount;
+
 }
 

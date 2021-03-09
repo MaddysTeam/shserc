@@ -3,6 +3,7 @@ package com.dianda.shserc.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.shserc.validators.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +34,7 @@ public class ResUser implements Serializable {
 	
 	//TODO: 20210220
 	
-	private String IdCard;
+	private String idCard;
 	
 	private String realName;
 	
@@ -48,6 +49,14 @@ public class ResUser implements Serializable {
 	private LocalDateTime lastLoginTime;
 	
 	private long stateId;
+
+	private int loginCount;
+
+	@TableField(exist = false)
+	private String companyName;
+
+	@TableField(exist = false)
+	private  String state;
 	
 	private long addUser;
 	

@@ -3,12 +3,19 @@ export default {
     namespaced: true,
     state: {
         token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-        isAuth: localStorage.getItem('Authorization') ? true:false,
+        isAuth: true, //localStorage.getItem('Authorization') ? true:false,
         
         //following for dictionary
         dict:[],
         deformity:[],
-        resourceStatus:[]
+        resourceStatus:[],
+        resourceDomains:[],
+        resourceTypes:[],
+        stages:[],
+        grades:[],
+        subjects:[],
+        schoolTypes:[],
+        learnFrom:[]
       },
       mutations: {
         [types.LOGIN]: (state, data) => {
@@ -34,8 +41,35 @@ export default {
 
         [types.RESOURCE_STATUS]: (state,data) => {
           state.resourceStatus = data ;
+        },
+
+        [types.RESOURCE_DOMAINS]: (state,data) => {
+          state.resourceDomains = data ;
+        },
+
+        [types.RESOURCE_TYPES]: (state,data) => {
+          state.resourceTypes = data ;
+        },
+
+        [types.STAGES]: (state,data) => {
+          state.stages = data ;
+        },
+
+        [types.GRADES]: (state,data) => {
+          state.grades = data ;
+        },
+
+        [types.SUBJECTS]: (state,data) => {
+          state.subjects = data ;
+        },
+
+        [types.SCHOOLTYPES]: (state,data) => {
+          state.schoolTypes = data ;
+        },
+
+        [types.LEARNFROM]: (state,data) => {
+          state.learnFrom = data ;
         }
-    
       },
     actions:{},
     getters:{}

@@ -4,8 +4,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.shiro.util.ShiroUtil;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+/**
+ * 用户控制器父类
+ *
+ * @author huachao
+ * @since 2020-08-08
+ */
 @RestController
 public class BaseController {
 
@@ -30,5 +40,14 @@ public class BaseController {
 		return null;
 	}
 
+	public String generateErrorMessage(BindingResult result){
+		StringBuilder builder=new StringBuilder();
+		List<ObjectError> errors= result.getAllErrors();
+		for(ObjectError error : errors){
+			builder.append(error.getDefaultMessage());
+		}
+
+		return builder.toString();
+	}
 
 }

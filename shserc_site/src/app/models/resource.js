@@ -19,6 +19,12 @@ export const resourceModel = {
    mediumTypeId: 0,
    resourceType: "",
    resourceTypeId: 0,
+   domainId:0,
+   learnFromId:0,
+   schoolTypeId:0,
+   subjectId:0,
+   stageId:0,
+   gradeId:0,
    coverPath: ""
 };
 

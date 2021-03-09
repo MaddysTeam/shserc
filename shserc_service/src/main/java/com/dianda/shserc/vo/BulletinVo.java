@@ -7,7 +7,7 @@ public class BulletinVo implements Serializable {
 	long id;
 	String title;
 	String content;
-	boolean isTop;
+	boolean top;
 
 }
 

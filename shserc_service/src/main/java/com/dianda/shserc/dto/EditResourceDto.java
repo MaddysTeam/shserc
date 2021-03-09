@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class EditResourceDto {
+
 	private long id;
 	
 	@NotBlank
@@ -23,21 +24,24 @@ public class EditResourceDto {
 	
 	@NotBlank
 	private String resourcePath;
-	
+
+	@NotBlank
 	private String fileExtName;
 	
 	private long fileSize;
-	
+
+	@NotBlank
 	private String fileName;
 	
 	private boolean isLink;
-	
+
+	@NotBlank
 	private String authorCompany;
 	
 	private String authorAddress;
 	
 	private String authorEmail;
-	
+
 	private String authorPhone;
 	
 	private long deformityId;
@@ -55,6 +59,10 @@ public class EditResourceDto {
 	private long schoolTypeId;
 
 	private long domainId;
-	
+
+	private long learnFromId;
+
+	private long resourceTypeId;
+
 }
 

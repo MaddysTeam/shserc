@@ -7,7 +7,7 @@
     <el-form :model="model" ref="userForm" :rules="rules">
       <el-form-item prop="username">
         <el-input
-          v-model="model.userName"
+          v-model="model.username"
           prefix-icon="el-icon-user"
           placeholder="输入用户名"
         ></el-input>
@@ -15,13 +15,34 @@
       <el-form-item prop="idCard">
         <el-input
           v-model="model.idCard"
-          prefix-icon="el-icon-user"
+          prefix-icon="el-icon-postcard"
           placeholder="输入身份证件号"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="realName">
+        <el-input
+          v-model="model.realName"
+          prefix-icon="el-icon-postcard"
+          placeholder="输入真实姓名"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="mobile">
+        <el-input
+          v-model="model.mobile"
+          prefix-icon="el-icon-message"
+          placeholder="输入手机号"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="email">
+        <el-input
+          v-model="model.email"
+          prefix-icon="el-icon-message"
+          placeholder="输入邮箱"
         ></el-input>
       </el-form-item>
       <el-form-item prop="companyId">
         <selectTree
-          :data="companySource"
+          :data="source"
           placeholder="所属单位"
           :nodeKey="model.companyId"
           @input="handleSelectCompany"
@@ -40,27 +61,29 @@
 
 <script>
 import { Notification } from "element-ui";
-import { clean } from "@/app/utils/objectHelper";
 import { messages } from "@/app/static/message.js";
 import selectTree from "@/components/TreeSelector/index";
-import { list } from "@/app/api/company";
+import { companyList } from "@/app/api/company";
 import {
   validateRequired,
   validateLessThan50,
   validateSelectValue,
   validateIdCard,
+  validateMobile,
+  validateEmail,
 } from "@/static/validator";
 import { edit } from "@/app/api/user";
+import { clean } from "@/app/utils/objectHelper";
 
 export default {
   name: "edit",
   components: { selectTree },
   props: {
     visible: { type: Boolean, required: true },
-    model: { type: Object }
+    model: { type: Object },
   },
   data() {
-    var nameValidator = (rule, value, callback) => {
+    let nameValidator = (rule, value, callback) => {
       validateRequired(rule, value, callback, messages.USER_NOT_NULL);
       validateLessThan50(
         rule,
@@ -70,61 +93,68 @@ export default {
       );
     };
 
-    var cardIdValidator = (rule, value, callback) => {
+    let cardIdValidator = (rule, value, callback) => {
       validateIdCard(rule, value, callback, messages.USER_CARD_ID_NOT_VAILD);
     };
 
-      var companyValidator = (rule, value, callback) => {
-        validateSelectValue(
-          rule,
-          value,
-          callback,
-          messages.COMPANY_SELECT_NOT_NULL
-        );
-      };
+    let mobileValidator = (rule, value, callback) => {
+      validateMobile(rule, value, callback, messages.MOBILE_NOT_VAILD);
+    };
+
+    let emailValidator = (rule, value, callback) => {
+      emailValidator(rule, value, callback, messages.EMAIL_NOT_VAILD);
+    };
+
+    let companyValidator = (rule, value, callback) => {
+      validateSelectValue(
+        rule,
+        value,
+        callback,
+        messages.COMPANY_SELECT_NOT_NULL
+      );
+    };
 
     return {
+      companySource: [],
       rules: {
         username: { validator: nameValidator, trigger: "blur" },
         idCard: { validator: cardIdValidator, trigger: "blur" },
         companyId: { validator: companyValidator, trigger: "change" },
+        mobile: { validator: mobileValidator, trigger: "change" },
+        email: { validator: emailValidator, trigger: "change" }
       },
-
-      companySource: [],
     };
   },
   mounted() {
     this.loadCompanyList();
   },
   methods: {
-    handleClose() {
-      this.$emit("close");
-    },
-
-    submitForm(formName) {
-      let _this = this;
-      _this.$refs[formName].validate((isValid) => {
-        if (isValid) {
-          edit(this.user).then((res) => {
-            Notification.success("");
-          });
-          _this.handleClose();
-        }
-      });
-    },
-
-    handleSelectCompany(id) {
-      this.user.companyId = id + "";
-    },
-
     handleClose(formName) {
       this.$emit("close");
       clean(this.model);
       this.$refs[formName].clearValidate();
     },
 
+    submitForm(formName) {
+      let _this = this;
+      _this.$refs[formName].validate((isValid) => {
+        if (isValid) {
+          edit(this.model).then((res) => {
+            if (res) {
+              Notification.success(res.message);
+            }
+          });
+          _this.handleClose(formName);
+        }
+      });
+    },
+
+    handleSelectCompany(id) {
+      this.model.companyId = id + "";
+    },
+
     loadCompanyList() {
-      list().then((res) => {
+      companyList().then((res) => {
         if (res && res.data) {
           this.companySource = [JSON.parse(res.data)];
         }

@@ -18,7 +18,7 @@ public interface IBulletinVoMapper extends BasicMapper<Bulletin, BulletinVo> {
 			@Mapping( source = "id", target = "id" ) ,
 			@Mapping( source = "title", target = "title" ) ,
 			@Mapping( source = "content", target = "content" ) ,
-			@Mapping( source = "isTop", target = "isTop" )
+			@Mapping( source = "top", target = "top" )
 	} )
 	BulletinVo mapFrom(Bulletin bulletin);
 	

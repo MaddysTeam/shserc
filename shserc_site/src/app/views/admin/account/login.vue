@@ -67,7 +67,7 @@
 <script>
 import Verify from "vue2-verify";
 import { login } from "@/app/api/account";
-import { loginModel } from "@/app/models/login.js";
+import { loginModel } from "@/app/models/account.js";
 import { Notification } from "element-ui";
 import { mapMutations } from "vuex";
 import * as types from "@/app/static/type";

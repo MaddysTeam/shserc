@@ -13,10 +13,16 @@ public final class Constant {
 
 	public static final class Error {
 		public final static String USER_NAME_IS_REQUIRED = "用户名为必须";
+		public final static String USER_IDCard_IS_REQUIRED="用戶身份证件号为必须";
+		public final static String USER_REAL_NAME_IS_REQUIRED="用戶真实姓名为必须";
+		public final static String USER_MOBILE_IS_REQUIRED="用戶手机号为必须";
 		public final static String PASSWORD_IS_REQUIRE = "密码不能为空";
+		public final static String EMAIL_FORMAT_INVALID = "邮件格式不正确";
+
 		public final static String ROLE_NAME_IS_REQUIRED = "角色名称为必须";
+
+		public final static String COMPANY_ID_IS_REQUIRED = "单位ID为必须";
 		public final static String COMPANY_NAME_IS_REQUIRED = "单位(地区)名称为必填";
-		public final static String PARAMS_IS_INVALID = "传入参数有误";
 
 		public final static String FILE_OBJECT_IS_REQUIRED = "文件数据是必须的";
 		public final static String FILE_NAME_IS_REQUIRED = "文件名称为必须";
@@ -24,6 +30,7 @@ public final class Constant {
 		public final static String FILE_UPLOAD_DST_PATH = "上传文件路径为必须";
 		public final static String FILE_TYPE_NOT_ALLOWED = "不允许该文件类型上传";
 
+		public final static String PARAMS_IS_INVALID = "传入参数有误";
 		public final static String EDIT_FAILURE = "编辑失败";
 		public final static String OBJECT_IS_REQUIRED = "对象不能为空";
 	}

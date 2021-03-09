@@ -36,3 +36,21 @@ export function validateIdCard(rule,value,callback,error) {
         callback();
     }
 }
+
+export function validateMobile(rule,value,callback,error){
+    if(!regexs.mobile.test(value)){
+        callback(new Error(error));
+    }
+    else{
+        callback();
+    }
+}
+
+export function validateEmail(rule,value,callback,error){
+    if(!regexs.email.test(value)){
+        callback(new Error(error));
+    }
+    else{
+        callback();
+    }
+}
