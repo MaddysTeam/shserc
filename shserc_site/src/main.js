@@ -11,7 +11,8 @@ import '@/static/validator.js'
 import '@/assets/css/global.css'
 import { initDic } from '@/app/utils/dictHelper'
 import VideoPlayer  from 'vue-video-player'
-
+import TEditor from '@/components/Editor/index'
+Vue.component('TinymceEditor',TEditor)
 
 /** initial global dictionary */
 initDic(store);

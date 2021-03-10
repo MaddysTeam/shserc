@@ -13,12 +13,13 @@ public interface IDictionaryVoMapper extends BasicMapper<DictionaryVo, Dictionar
 	IDictionaryVoMapper INSTANCE = Mappers.getMapper(IDictionaryVoMapper.class);
 
 	@Mappings({
-			@Mapping(source = "id",target = "id"),
-			@Mapping(source = "parentId",target = "parentId"),
-			@Mapping(source = "name", target="name"),
-			@Mapping(source = "code", target="code"),
-			@Mapping(source = "value", target="value"),
-			@Mapping(source = "sort", target="sort")
+			@Mapping(source = "id", target = "id"),
+			@Mapping(source = "parentId", target = "parentId"),
+			@Mapping(source = "relevantId", target = "relevantId"),
+			@Mapping(source = "name", target = "name"),
+			@Mapping(source = "code", target = "code"),
+			@Mapping(source = "value", target = "value"),
+			@Mapping(source = "sort", target = "sort")
 	})
 	DictionaryVo mapFrom(Dictionary dictionary);
 }

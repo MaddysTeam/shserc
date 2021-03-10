@@ -26,13 +26,15 @@ public class Dictionary implements Serializable {
 	private String name;
 	
 	@TableField( "parentId" )
-	private Long parentId;
+	private long parentId;
+
+	private long relevantId;
 	
 	private String description;
 	
 	private String code;
 	
-	private Long sort;
+	private int sort;
 	
 	private String value;
 	

@@ -330,6 +330,7 @@ import {
 import { messages } from "@/app/static/message";
 import { edit, uploadFile, uploadCover, info } from "@/app/api/resource";
 import { resourceModel } from "@/app/models/resource";
+import {getRelevantByRelevantId} from "@/app/utils/dictHelper"
 
 export default {
   data() {
@@ -368,6 +369,8 @@ export default {
             trigger: "blur",
           },
         ],
+        
+        // TODO: will remove later
         // deformityId: {
         //   validator: (rule, value, callback) => {
         //     validateSelectValue(
@@ -533,6 +536,9 @@ export default {
 
     domainSelectChanged(domainId) {
       this.resource.domainId = domainId;
+       //relavent items
+      let relavents= getRelevantByRelevantId(deformityId,typeOptions);
+       //TODO: re-bind resource type dropdown data
     },
 
     schoolTypeSelectChanged(schoolTypeId) {
@@ -545,6 +551,9 @@ export default {
 
     stageSelectChanged(stageId) {
       this.resource.stageId = stageId;
+      //relavent items
+      let relavents= getRelevantByRelevantId(stageId,gradeOptions);
+      //TODO: re-bind grade dropdown data
     },
 
     gradeSelectChanged(gradeId) {
@@ -588,9 +597,7 @@ export default {
 .row {
   margin: 20px;
 }
-/* .el-form-item__content{
-  display:flex;
-} */
+
 .input-keywords {
   display: flex;
 }

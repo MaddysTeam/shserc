@@ -1,154 +1,145 @@
 <template>
-  <keep-alive>
-    <div>
-      <div class="editor"></div>
-    </div>
-  </keep-alive>
+  <div class="tinymce-editor">
+    <Editor
+      :id="tinymceId"
+      :init="init"
+      v-model="myValue"
+      @onClick="onClick"
+    ></Editor>
+  </div>
 </template>
 
 <script>
-import Quill from 'quill';
-import "quill/dist/quill.snow.css";
-const titleConfig = {
-  "ql-bold": "加粗",
-  "ql-color": "颜色",
-  "ql-font": "字体",
-  "ql-code": "插入代码",
-  "ql-italic": "斜体",
-  "ql-link": "添加链接",
-  "ql-background": "颜色",
-  "ql-size": "字体大小",
-  "ql-strike": "删除线",
-  "ql-script": "上标/下标",
-  "ql-underline": "下划线",
-  "ql-blockquote": "引用",
-  "ql-header": "标题",
-  "ql-indent": "缩进",
-  "ql-list": "列表",
-  "ql-align": "文本对齐",
-  "ql-direction": "文本方向",
-  "ql-code-block": "代码块",
-  "ql-formula": "公式",
-  "ql-image": "图片",
-  "ql-video": "视频",
-  "ql-clean": "清除字体样式",
-  "ql-upload": "文件",
-  "ql-table": "插入表格",
-  "ql-table-insert-row": "插入行",
-  "ql-table-insert-column": "插入列",
-  "ql-table-delete-row": "删除行",
-  "ql-table-delete-column": "删除列",
-};
+//import  {upload} from "../../app/api/file";
+import tinymce from "tinymce/tinymce"; //tinymce默认hidden，不引入不显示
+import Editor from "@tinymce/tinymce-vue"; //编辑器引入
+import "tinymce/themes/silver/theme"; //编辑器主题
+import "tinymce/skins/ui/oxide/skin.css";
+// 引入编辑器插件（基本免费插件都在这儿了）
+import "tinymce/plugins/advlist"; //高级列表
+import "tinymce/plugins/autolink"; //自动链接
+import "tinymce/plugins/link"; //超链接
+import "tinymce/plugins/image"; //插入编辑图片
+import "tinymce/plugins/lists"; //列表插件
+import "tinymce/plugins/charmap"; //特殊字符
+import "tinymce/plugins/media"; //插入编辑媒体
+import "tinymce/plugins/wordcount"; // 字数统计
+import "tinymce/plugins/table";
+import "tinymce/langs/zh_CN.js";
+
+// import Cookies from "js-cookie";
+
+const fonts = [
+  "宋体=宋体",
+  "微软雅黑=微软雅黑",
+  "新宋体=新宋体",
+  "黑体=黑体",
+  "楷体=楷体",
+  "隶书=隶书",
+  "Courier New=courier new,courier",
+  "AkrutiKndPadmini=Akpdmi-n",
+  "Andale Mono=andale mono,times",
+  "Arial=arial,helvetica,sans-serif",
+  "Arial Black=arial black,avant garde",
+  "Book Antiqua=book antiqua,palatino",
+  "Comic Sans MS=comic sans ms,sans-serif",
+  "Courier New=courier new,courier",
+  "Georgia=georgia,palatino",
+  "Helvetica=helvetica",
+  "Impact=impact,chicago",
+  "Symbol=symbol",
+  "Tahoma=tahoma,arial,helvetica,sans-serif",
+  "Terminal=terminal,monaco",
+  "Times New Roman=times new roman,times",
+  "Trebuchet MS=trebuchet ms,geneva",
+  "Verdana=verdana,geneva",
+  "Webdings=webdings",
+  "Wingdings=wingdings,zapf dingbats",
+];
 export default {
-  name: "Editor",
-   props: {
-     value: Object,
-     height: Number,
-   },
+  components: {
+    Editor,
+  },
+  props: {
+    //内容
+    value: {
+      type: String,
+      default: "",
+    },
+    //是否禁用
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    //插件
+    plugins: {
+      type: [String, Array],
+      default:
+        "advlist autolink link image lists charmap table media wordcount",
+    },
+    //工具栏
+    toolbar: {
+      type: [String, Array],
+      default:
+        "undo redo |  formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table",
+    },
+    uploadImage: {
+      type: Function,
+    },
+  },
   data() {
     return {
-      quill: null,
-      options: {
-        theme: "snow",
-        modules: {
-          toolbar: {
-            container: [
-              ["bold", "italic", "underline", "strike"],
-              [{ header: 1 }, { header: 2 }],
-              [{ list: "ordered" }, { list: "bullet" }],
-              [{ indent: "-1" }, { indent: "+1" }],
-              [{ color: [] }, { background: [] }],
-              [{ font: [] }],
-              [{ align: [] }],
-              ["clean"],
-              [
-                { table: "TD" },
-                { "table-insert-row": "TIR" },
-                { "table-insert-column": "TIC" },
-                { "table-delete-row": "TDR" },
-                { "table-delete-column": "TDC" },
-              ],
-            ],
-            handlers: {
-              table: function (val) {
-                this.quill.getModule("table").insertTable(2, 3);
-              },
-              "table-insert-row": function () {
-                this.quill.getModule("table").insertRowBelow();
-              },
-              "table-insert-column": function () {
-                this.quill.getModule("table").insertColumnRight();
-              },
-              "table-delete-row": function () {
-                this.quill.getModule("table").deleteRow();
-              },
-              "table-delete-column": function () {
-                this.quill.getModule("table").deleteColumn();
-              },
-            },
-          },
-          table: true,
-        },
-        placeholder: "",
+      //初始化配置
+      tinymceId: "tinymce",
+      myValue: this.value,
+      init: {
+        selector: "#tinymce",
+        language_url: "tinymce/langs/zh_CN.js", //汉化路径是自定义的，一般放在public或static里面
+        language: "zh_CN",
+        plugins: this.plugins, //插件
+        //工具栏
+        toolbar: this.toolbar,
+        toolbar_location: "/",
+        fontsize_formats:
+          "12px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 56px 72px", //字体大小
+        font_formats: fonts.join(";"),
+
+        height: 500, //高度
+        placeholder: "在这里输入文字",
+
+        branding: false, //隐藏右下角技术支持
+        //图片上传
+        images_upload_handler:this.uploadFiles,
       },
     };
   },
-  methods: {
-    addQuillTitle() {
-      const oToolBar = document.querySelector(".ql-toolbar");
-      const aButton = oToolBar.querySelectorAll("button");
-      const aSelect = oToolBar.querySelectorAll("select");
-      aButton.forEach(function (item) {
-        if (item.className === "ql-script") {
-          item.value === "sub" ? (item.title = "下标") : (item.title = "上标");
-        } else if (item.className === "ql-indent") {
-          item.value === "+1"
-            ? (item.title = "向右缩进")
-            : (item.title = "向左缩进");
-        } else {
-          item.title = titleConfig[item.classList[0]];
-        }
-      });
-      aSelect.forEach(function (item) {
-        item.parentNode.title = titleConfig[item.classList[0]];
-      });
+  watch: {
+    //监听内容变化
+    value(newValue) {
+      this.myValue = newValue == null ? "" : newValue;
     },
-    getContentData() {
-      return this.quill.getContents();
+    myValue(newValue) {
+      if (this.triggerChange) {
+        this.$emit("change", newValue);
+      } else {
+        this.$emit("input", newValue);
+      }
     },
   },
   mounted() {
-    const dom = this.$el.querySelector(".editor");
-    this.quill = new Quill(dom, this.options);
-    //console.log(this.value)
-    this.quill.setContents(this.value)
-    this.quill.root.innerHTML= this.value.html
-    this.quill.on("text-change", () => {
-         console.log(this.quill.getContents())
-         //this.$emit('contentData', this.quill.getContents())
-         console.log(this.quill.root.innerHTML)
-         this.$emit("contentData", this.quill.root.innerHTML);
-    });
-    this.$el.querySelector(
-      ".ql-table-insert-row"
-    ).innerHTML = `<svg t="1591862376726" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6306" width="18" height="200"><path d="M500.8 604.779L267.307 371.392l-45.227 45.27 278.741 278.613L779.307 416.66l-45.248-45.248z" p-id="6307"></path></svg>`;
-    this.$el.querySelector(
-      ".ql-table-insert-column"
-    ).innerHTML = `<svg t="1591862238963" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6509" width="18" height="200"><path d="M593.450667 512.128L360.064 278.613333l45.290667-45.226666 278.613333 278.762666L405.333333 790.613333l-45.226666-45.269333z" p-id="6510"></path></svg>`;
-    this.$el.querySelector(
-      ".ql-table-delete-row"
-    ).innerHTML = `<svg t="1591862253524" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6632" width="18" height="200"><path d="M500.8 461.909333L267.306667 695.296l-45.226667-45.269333 278.741333-278.613334L779.306667 650.026667l-45.248 45.226666z" p-id="6633"></path></svg>`;
-    this.$el.querySelector(
-      ".ql-table-delete-column"
-    ).innerHTML = `<svg t="1591862261059" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6755" width="18" height="200"><path d="M641.28 278.613333l-45.226667-45.226666-278.634666 278.762666 278.613333 278.485334 45.248-45.269334-233.365333-233.237333z" p-id="6756"></path></svg>`;
-    this.addQuillTitle();
+    tinymce.init({});
   },
-  activated() {
-   // this.quill.setContents({});
-  },
+  methods: {
+    onClick(e) {
+      this.$emit("onClick", e, tinymce);
+    },
+    //可以添加一些自己的自定义事件，如清空内容
+    clear() {
+      this.myValue = "";
+    },
+    uploadFiles(blobInfo, success, failure){
+      this.$emit("uploadImage",blobInfo, success, failure);
+    }
+  }
 };
 </script>
-
-<style>
-
-</style>
