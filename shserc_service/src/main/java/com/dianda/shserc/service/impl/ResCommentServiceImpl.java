@@ -41,7 +41,9 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 		long resourceId = params.getResourceId ( );
 		long auditTypeId = params.getAuditTypeId ( );
 		String phrase = params.getSearchPhrase ( );
-		
+
+		// where phrase
+		queryWrapper=queryWrapper.eq("isDeleted", 0);
 		if ( resourceId > 0 ) {
 			queryWrapper = queryWrapper.eq ( "resource_id" , resourceId );
 		}
@@ -56,6 +58,7 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 		}
 		
 		// order phrase
+
 		Map<String, String> orderPhrases = params.getOrderPhrases ( );
 		if ( ! ObjectUtil.isNull ( orderPhrases ) && orderPhrases.size ( ) > 0 ) {
 			for ( Map.Entry<String, String> entry : orderPhrases.entrySet ( ) ) {

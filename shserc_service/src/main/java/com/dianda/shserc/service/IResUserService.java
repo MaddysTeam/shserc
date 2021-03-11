@@ -2,6 +2,7 @@ package com.dianda.shserc.service;
 
 import com.dianda.shserc.bean.UserSelectParams;
 import com.dianda.shserc.dto.EditUserDto;
+import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.entity.ResUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.entity.ResUserRole;
@@ -26,8 +27,8 @@ public interface IResUserService extends IService<ResUser> {
 	
 	ResUserVo getByNameAndPassword(String userName,String password);
 	
-	Boolean addUserRole( long userId , long roleId );
+	Boolean editUserRole(EditUserRoleDto model);
 
-	Boolean deleteUserRole( long userId , long roleId );
+	Boolean deleteUserRole( EditUserRoleDto model);
 
 }

@@ -14,5 +14,4 @@ public interface IResCommentService extends IService<ResComment> {
 	CommentVoList find(CommentSelectParams params);
 
 	boolean edit(@Valid @NotNull EditCommentDto model);
-
 }

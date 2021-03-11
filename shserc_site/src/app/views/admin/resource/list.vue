@@ -92,7 +92,7 @@ export default {
         { prop: "favoriteCount", label: "收藏量" },
         { prop: "commentCount", label: "评论量" },
         { prop: "state", label: "资源状态" },
-        { prop: "command", label: "操作" ,isCommand:true,align:"right"}
+        { prop: "command", label: "操作", isCommand: true, align: "right" },
       ],
       commands: [
         {
@@ -112,11 +112,14 @@ export default {
   },
   computed: {
     ...mapState({
-      deformityOptions: (state) => state.app.deformity, // 残疾类型下拉框数据源
-      resourceStatusOptions: (state) => state.app.resourceStatus, // 资源状态类型下拉框数据源
+      deformityOptions: (state) => state.app.deformity, //  deformity dropdown soruce
+      resourceStatusOptions: (state) => state.app.resourceStatus, // resource status dropdown source
     }),
   },
   mounted() {
+    if (this.$route.query.searchPhrase !== "") {
+      this.selectParam.searchPhrase = this.$route.query.searchPhrase; // get search phrase
+    }
     this.loadResourceList();
   },
   methods: {
@@ -155,8 +158,8 @@ export default {
 
     addResource() {
       this.$router.push("/admin/resource/add");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

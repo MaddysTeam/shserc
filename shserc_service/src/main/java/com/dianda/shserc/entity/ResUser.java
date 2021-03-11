@@ -57,6 +57,9 @@ public class ResUser implements Serializable {
 
 	@TableField(exist = false)
 	private  String state;
+
+	@TableField(exist = false)
+	private String roleName;
 	
 	private long addUser;
 	

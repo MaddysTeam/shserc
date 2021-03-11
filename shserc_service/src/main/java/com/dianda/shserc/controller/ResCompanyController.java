@@ -42,7 +42,7 @@ public class ResCompanyController extends  BaseController {
 	
 	@RequestMapping(path="/edit", method = RequestMethod.POST)
 	public JsonResult edit( @RequestBody @Valid EditCompanyDto companyDto , BindingResult bindingResult ) {
-		ResUser user=getUserInfo ();
+		ResUser user=getLoginUserInfo ();
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error (Constant.Error.PARAMS_IS_INVALID);
 		}

@@ -33,19 +33,33 @@
         </where>
     </select>
 
-    <insert id="addViewCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+    <insert id="addView" parameterType="com.dianda.shserc.entity.ResourceOperation">
 		 insert into res_view (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
-    <insert id="addDownloadCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+    <insert id="addDownload" parameterType="com.dianda.shserc.entity.ResourceOperation">
 		 insert into res_download (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
-    <insert id="addFavoriteCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+    <insert id="addFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">
 		 insert into res_favorite (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
-    <insert id="addStarCount" parameterType="com.dianda.shserc.entity.ResourceOperation">
+    <delete id="deleteFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">
+        delete from res_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
+    </delete>
+
+    <select id="selectFavorite" resultType="com.dianda.shserc.entity.ResourceOperation">
+        select
+        resource_id,
+        user_id
+        from res_favorite
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
          insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
     </insert>
 

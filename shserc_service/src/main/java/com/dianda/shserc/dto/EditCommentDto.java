@@ -21,5 +21,8 @@ public class EditCommentDto {
 	
 	@Min ( value = 1)
 	private long resourceId;
+
+	@Min ( value = 0)
+	private  long isDeleted;
 	
 }

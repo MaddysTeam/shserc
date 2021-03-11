@@ -42,10 +42,27 @@ public class ResourceTest {
 	}
 
 	@Test
+	public void edit_resource_test(){
+
+	}
+
+	@Test
 	public void edit_resource_view_count_test( ){
 		editResourceViewCountTest();
 	}
-	
+
+	@Test
+	public void set_resource_favorite_test(){}
+
+	@Test
+	public void add_resource_download_test(){
+
+	}
+
+	@Test
+	public void add_resource_view_test(){
+
+	}
 
 	private void editResourceViewCountTest( ) {
 		try {

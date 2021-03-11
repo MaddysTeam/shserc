@@ -4,6 +4,7 @@ package com.dianda.shserc.controller;
 import com.dianda.shserc.bean.UserSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
+import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.service.IResUserService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResUserVo;
@@ -46,6 +47,17 @@ public class ResUserController extends BaseController {
 		}
 
 		return service.edit ( model ) ?
+				JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
+				JsonResult.error ( Constant.Error.EDIT_FAILURE );
+	}
+
+	@PostMapping("/role/edit")
+	public JsonResult editUserRole(@RequestBody @Valid EditUserRoleDto model, BindingResult bindingResult){
+		if(bindingResult.hasErrors()){
+			return JsonResult.error ( generateErrorMessage(bindingResult));
+		}
+
+		return service. editUserRole(model) ?
 				JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}

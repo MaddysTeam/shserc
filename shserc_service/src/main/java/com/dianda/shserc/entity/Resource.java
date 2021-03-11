@@ -135,8 +135,17 @@ public class Resource {
 		this.setFavoriteCount(this.getFavoriteCount() + 1);
 	}
 
+	public void deleteFavoriteCount() {
+		this.setFavoriteCount(this.getFavoriteCount() - 1);
+	}
+
 	public void addCommentCount() {
 		this.setCommentCount(this.getCommentCount() + 1);
+	}
+
+	public void addStarCount(int score) {
+		this.setStarCount(this.getStarCount() + 1);
+		this.setStarTotal(this.getStarTotal() + score);
 	}
 
 	public static void dictTranslate(Resource resource, DictionaryCache cache) {

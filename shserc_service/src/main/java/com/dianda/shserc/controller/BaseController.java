@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 public class BaseController {
 
-	public ResUser getUserInfo() {
+	public ResUser getLoginUserInfo() {
 		JSONObject user = ShiroUtil.getLoginUser();
 		if(!ObjectUtil.isNull(user)){
 			ResUser resUser=new ResUser();

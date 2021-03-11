@@ -15,7 +15,13 @@ import org.apache.ibatis.annotations.Param;
  * @since 2020-08-17
  */
 public interface ResUserMapper extends BaseMapper<ResUser> {
-	IPage<ResUser> selectUsers( IPage<ResUser> page , @Param( Constants.WRAPPER ) Wrapper<ResUser> wrapper );
-	int addUserRole( ResUserRole resUserRole );
+
+	IPage<ResUser> selectUsers(IPage<ResUser> page, @Param(Constants.WRAPPER) Wrapper<ResUser> wrapper);
+
+	ResUserRole selectUserRole(@Param(Constants.WRAPPER) Wrapper<ResUserRole> wrapper);
+
+	int addUserRole(ResUserRole resUserRole);
+
 	int deleteUserRole(ResUserRole resUserRole);
+
 }

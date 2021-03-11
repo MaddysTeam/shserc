@@ -21,17 +21,15 @@ public interface IResourceService extends IService<Resource> {
 
 	boolean addViewCount(@Valid @NotNull ResourceOperation param);
 
-	//boolean addPraiseCount(@Valid @NotNull ResourceOperation param);
-
 	boolean addDownloadCount(@Valid @NotNull ResourceOperation param);
 
-	// 加精或者取消
-	boolean setOrCancelElite(long id);
+	// favor resource or not
+	boolean setOrCancelFavorite(@Valid @NotNull ResourceOperation resourceOperation);
 
-	boolean setOrCancelFavorite(long id);
+	// set elite resource or not
+	boolean setEliteScore(@Valid @NotNull ResourceOperation resourceOperation);
 
 	//TODO:
-	//boolean addStart(ResStar)
-
+	boolean setStar(@Valid @NotNull ResourceOperation param);
 
 }

@@ -3,6 +3,8 @@ package com.dianda.shserc.controller;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.entity.ResUser;
+import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.util.logger.system.SystemLog;
@@ -17,7 +19,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/resource")
-public class ResourceController {
+public class ResourceController extends BaseController {
 
 	@Resource
 	IResourceService service;
@@ -40,23 +42,38 @@ public class ResourceController {
 			return JsonResult.error(Constant.Error.PARAMS_IS_INVALID);
 		}
 
-		service.edit(resourceDto);
-		return JsonResult.success(Constant.Success.EDIT_SUCCESS);
+		boolean result = service.edit(resourceDto);
+		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
-	@PostMapping(path="/download/{id}")
-	public JsonResult download(@PathVariable  long id){
-		return null;
+	@PostMapping(path = "/download/{id}")
+	public JsonResult download(@PathVariable long id) {
+		ResUser loginUser = getLoginUserInfo();
+		boolean result = service.addDownloadCount(new ResourceOperation(id, loginUser.getId()));
+		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
-	@PostMapping(path="/favorite/{id}")
-	public JsonResult favorite(@PathVariable long id){
-		return null;
+	@PostMapping(path = "/favorite/{id}")
+	public JsonResult favorite(@PathVariable long id) {
+		ResUser loginUser = getLoginUserInfo();
+		boolean result = service.setOrCancelFavorite(new ResourceOperation(id, loginUser.getId()));
+		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
-	@PostMapping(path="/star/{id}")
-	public JsonResult start(@PathVariable long id, int score){
-		return null;
+	@PostMapping(path = "/star/{id}")
+	public JsonResult star(@PathVariable long id, int score) {
+		ResUser loginUser = getLoginUserInfo();
+		ResourceOperation operation = new ResourceOperation();
+		operation.setResourceId(id);
+		operation.setUserId(loginUser.getId());
+		operation.setOperIntResult(score);
+
+		boolean result = service.setStar(operation);
+		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
 }

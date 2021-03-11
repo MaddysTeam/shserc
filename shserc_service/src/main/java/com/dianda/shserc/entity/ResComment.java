@@ -20,7 +20,9 @@ public class ResComment {
 	private String content;
 	
 	private long auditTypeId;
-	
+
+	private  long auditor;
+
 	@TableField( exist = false )
 	private String addUserName;
 	
@@ -34,6 +36,8 @@ public class ResComment {
 	private long updateUser;
 
 	private LocalDateTime updateTime;
+
+	private long isDeleted;
 
 	@TableField(exist = false)
 	private String  auditType;

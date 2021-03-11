@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dianda.shserc.bean.UserSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
+import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.dto.mappers.IEditUserMapper;
+import com.dianda.shserc.dto.mappers.IEditUserRoleMapper;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.exceptions.GlobalException;
@@ -25,7 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author huachao
@@ -66,7 +70,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		IPage<ResUser> page = new Page<>(current, size);
 		page = resUserMapper.selectUsers(page, wrapper);
 		List<ResUser> listData = page.getRecords();
-		List<ResUserVo> userVoListData= new ArrayList<>();
+		List<ResUserVo> userVoListData = new ArrayList<>();
 
 		for (ResUser user : listData) {
 			userVoListData.add(IUserVoMapper.INSTANCE.mapFrom(user));
@@ -89,11 +93,11 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		// execute user mapping from dto
 		ResUser user = IEditUserMapper.INSTANCE.mapFrom(userDto);
 		if (user.isNewOne()) {
-			return resUserMapper.insert(user)>0;
+			return resUserMapper.insert(user) > 0;
 		} else {
-			return resUserMapper.updateById(user)>=0;
+			return resUserMapper.updateById(user) >= 0;
 		}
-		
+
 	}
 
 	@Override
@@ -104,8 +108,8 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		ResUser user = resUserMapper.selectById(id);
 		user.setIsDeleted(Constant.Status.DELETED);
 		int result = resUserMapper.updateById(user);
-		
-		return result>1;
+
+		return result > 1;
 	}
 
 	@Override
@@ -132,16 +136,24 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 	}
 
 	@Override
-	public Boolean addUserRole( long userId , long roleId ) {
-		ResUserRole userRole = new ResUserRole ( );
-		userRole.setRoleId ( roleId );
-		userRole.setUserId ( userId );
-		return resUserMapper.addUserRole ( userRole ) > 0;
+	public Boolean editUserRole(EditUserRoleDto model) {
+		ResUserRole userRole = IEditUserRoleMapper.INSTANCE.mapFrom(model);
+
+		QueryWrapper<ResUserRole> wrapper = new QueryWrapper<>();
+		wrapper.eq("user_id", userRole.getUserId()).eq("role_id", userRole.getRoleId());
+		userRole = resUserMapper.selectUserRole(wrapper);
+		if (ObjectUtil.isNull(userRole)) {
+			return resUserMapper.addUserRole(userRole) > 0;
+		}
+
+		return false;
 	}
 
 	@Override
-	public Boolean deleteUserRole( long userId , long roleId ) {
-		return null;
+	public Boolean deleteUserRole(EditUserRoleDto model) {
+		ResUserRole userRole = IEditUserRoleMapper.INSTANCE.mapFrom(model);
+
+		return resUserMapper.deleteUserRole(userRole) > 0;
 	}
 
 }

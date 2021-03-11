@@ -21,7 +21,9 @@ public class ResourceOperation implements Serializable {
 	private String operStringResult;
 
 	private LocalDateTime addTime;
-	
+
+	public ResourceOperation(){}
+
 	public ResourceOperation( long resourceId , long userId ) {
 		this.setResourceId ( resourceId );
 		this.setUserId ( userId );

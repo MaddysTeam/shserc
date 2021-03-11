@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.dto.mappers.IEditResourceMapper;
 import com.dianda.shserc.entity.Resource;
@@ -67,6 +68,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long importSourceId = params.getImportSourceId();
 		long domainId = params.getDomainId();
 		long gradeId = params.getGradeId();
+		Map<String, String> orderPhrases = params.getOrderPhrases();
 		String phrase = params.getSearchPhrase();
 
 		// filter fields
@@ -99,14 +101,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 			wrapper = wrapper.like("title", phrase);
 
 		// order phrase
-		Map<String, String> orderPhrases = params.getOrderPhrases();
 		if (!ObjectUtil.isNull(orderPhrases) && orderPhrases.size() > 0) {
 			for (Map.Entry<String, String> entry : orderPhrases.entrySet()) {
-				String diretion = entry.getValue();
+				String direction = entry.getValue();
 				String orderPhrase = entry.getKey();
-				if (diretion.equals(Constant.OrderDirection.ASC)) {
+				if (direction.equals(Constant.OrderDirection.ASC)) {
 					wrapper = wrapper.orderByAsc(orderPhrase);
-				} else if (diretion.equals(Constant.OrderDirection.DESC)) {
+				} else if (direction.equals(Constant.OrderDirection.DESC)) {
 					wrapper = wrapper.orderByDesc(orderPhrase);
 				}
 			}
@@ -174,7 +175,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		}
 
 		resource.addViewCount();
-		return mapper.updateById(resource) + mapper.addViewCount(resourceOperation) == 2;
+		return mapper.updateById(resource) + mapper.addView(resourceOperation) == 2;
 	}
 
 
@@ -186,17 +187,46 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		}
 
 		resource.addDownloadCount();
-		return mapper.updateById(resource) + mapper.addDownloadCount(resourceOperation) == 2;
+		return mapper.updateById(resource) + mapper.addDownload(resourceOperation) == 2;
 	}
 
 	@Override
-	public boolean setOrCancelElite(long id) {
+	public boolean setEliteScore(@Valid @NotNull ResourceOperation resourceOperation) {
 		return false;
 	}
 
 	@Override
-	public boolean setOrCancelFavorite(long id) {
-		return false;
+	@Transactional(readOnly = false, rollbackFor = GlobalException.class)
+	@SystemLog
+	public boolean setOrCancelFavorite(@Valid @NotNull ResourceOperation resourceOperation) {
+		long userId = resourceOperation.getUserId();
+		long resourceId = resourceOperation.getResourceId();
+
+		Resource resource = mapper.selectById(resourceId);
+		if (ObjectUtil.isNull(resource)) return false;
+
+		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<>();
+		wrapper.eq("resource_id", userId).eq("resource_id", resourceId);
+		resourceOperation = mapper.selectFavorite(wrapper);
+		if (ObjectUtil.isNull(resourceOperation)) {
+			resource.addFavoriteCount();
+			return mapper.updateById(resource) + mapper.addFavorite(resourceOperation) == 2;
+		} else {
+			resource.deleteFavoriteCount();
+			return mapper.updateById(resource) + mapper.deleteFavorite(resourceOperation) == 2;
+		}
+	}
+
+	@Override
+	public boolean setStar(@Valid ResourceOperation resourceOperation) {
+		long userId = resourceOperation.getUserId();
+		long resourceId = resourceOperation.getResourceId();
+
+		Resource resource = mapper.selectById(resourceId);
+		if (ObjectUtil.isNull(resource)) return false;
+
+		resource.addStarCount(resourceOperation.getOperIntResult());
+		return mapper.updateById(resource) + mapper.addStar(resourceOperation) == 2;
 	}
 
 }

@@ -15,7 +15,7 @@ public class EditUserDto {
 	@NotBlank(message = Constant.Error.USER_NAME_IS_REQUIRED)
 	private String userName;
 
-	@Min(value = 1,message = Constant.Error.COMPANY_ID_IS_REQUIRED)
+	@Min(value = 1, message = Constant.Error.COMPANY_ID_IS_REQUIRED)
 	private long companyId;
 
 	@NotBlank(message = Constant.Error.USER_IDCard_IS_REQUIRED)
@@ -33,3 +33,4 @@ public class EditUserDto {
 
 
 }
+
