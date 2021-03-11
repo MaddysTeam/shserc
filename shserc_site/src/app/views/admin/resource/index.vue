@@ -70,7 +70,15 @@ export default {
   methods: {
     searchTextChanged() {},
     handleSearchButtonClick() {
-      this.$router.push({path:"/admin/resource/list",query:{searchPhrase: this.searchPhrase}});
+      if (this.searchPhrase === "")
+        this.$router.push({
+          path: "/admin/resource/list"
+        });
+      else
+        this.$router.push({
+          path: "/admin/resource/list",
+          query: { searchPhrase: this.searchPhrase },
+        });
     },
     addResource() {
       this.$router.push("/admin/resource/add");

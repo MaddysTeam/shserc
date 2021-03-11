@@ -229,7 +229,7 @@
                 </el-select>
               </el-form-item>
             </el-col>
-          </el-row> 
+          </el-row>
 
           <!-- dropdown end -->
 
@@ -263,15 +263,15 @@
         </el-form>
       </el-col>
       <el-col :span="10">
-
-        <el-upload 
-        action="#" 
-        list-type="picture-card" 
-        :limit="1"
-        :on-preview="handlePictureCardPreview"
-        :on-exceed="uploadResourceCoverHandleExceed"
-        :http-request="uploadResourceCover"
-        :auto-upload="true">
+        <el-upload
+          action="#"
+          list-type="picture-card"
+          :limit="1"
+          :on-preview="handlePictureCardPreview"
+          :on-exceed="uploadResourceCoverHandleExceed"
+          :http-request="uploadResourceCover"
+          :auto-upload="true"
+        >
           <i
             slot="default"
             class="el-icon-upload"
@@ -279,8 +279,8 @@
             ><br />
             <div style="font-size: 22px">点击上传封面</div></i
           >
-           
-         <!-- <div slot="file" slot-scope="{ file }">
+
+          <!-- <div slot="file" slot-scope="{ file }">
             <img
               class="el-upload-list__item-thumbnail"
               :src="file.url"
@@ -309,10 +309,9 @@
               </span>
             </span>
           </div> -->
-     
         </el-upload>
         <el-dialog :visible.sync="dialogVisible" size="tiny">
-          <img width="100%" :src="dialogImageUrl" alt="">
+          <img width="100%" :src="dialogImageUrl" alt="" />
         </el-dialog>
       </el-col>
     </el-row>
@@ -330,7 +329,7 @@ import {
 import { messages } from "@/app/static/message";
 import { edit, uploadFile, uploadCover, info } from "@/app/api/resource";
 import { resourceModel } from "@/app/models/resource";
-import {getRelevantByRelevantId} from "@/app/utils/dictHelper"
+import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
 
 export default {
   data() {
@@ -340,9 +339,9 @@ export default {
       keywords: [],
       inputKeywordsValue: "",
       fileList: [],
-      dialogVisible:false,
-      dialogImageUrl:'',
-      disabled:false,
+      dialogVisible: false,
+      dialogImageUrl: "",
+      disabled: false,
 
       rules: {
         title: [
@@ -369,7 +368,7 @@ export default {
             trigger: "blur",
           },
         ],
-        
+
         // TODO: will remove later
         // deformityId: {
         //   validator: (rule, value, callback) => {
@@ -395,8 +394,8 @@ export default {
           trigger: "blur",
         },
 
-        authorCompany:{
-           validator: (rule, value, callback) => {
+        authorCompany: {
+          validator: (rule, value, callback) => {
             validateRequired(
               rule,
               value,
@@ -405,12 +404,13 @@ export default {
             );
           },
           trigger: "blur",
-        }
-      }
+        },
+      },
     };
   },
   computed: {
     ...mapState({
+      dict: (state) => state.app.dict,
       deformityOptions: (state) => state.app.deformity,
       domainOptions: (state) => state.app.resourceDomains,
       typeOptions: (state) => state.app.resourceTypes,
@@ -418,7 +418,7 @@ export default {
       gradeOptions: (state) => state.app.grades,
       subjectOptions: (state) => state.app.subjects,
       schoolTypeOptions: (state) => state.app.schoolTypes,
-      learnFromOptions: (state) => state.app.learnFrom
+      learnFromOptions: (state) => state.app.learnFrom,
     }),
   },
   mounted() {
@@ -484,8 +484,8 @@ export default {
     },
 
     uploadResourceHandleChange(file, fileList) {
-      if(fileList.length>0){
-         //TODO: will force upload  one file which will replace previous one
+      if (fileList.length > 0) {
+        //TODO: will force upload  one file which will replace previous one
       }
     },
 
@@ -510,18 +510,15 @@ export default {
 
     uploadResourceOnBeforeUpload() {},
 
-    
-    uploadResourceCover(options){
-        
+    uploadResourceCover(options) {},
+
+    uploadResourceCoverHandleExceed() {
+      Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
     },
 
-    uploadResourceCoverHandleExceed(){
-        Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
-    },
-
-    handlePictureCardPreview(file){
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
     },
 
     // select select changed
@@ -534,13 +531,6 @@ export default {
       this.resource.learnFromId = learnFromId;
     },
 
-    domainSelectChanged(domainId) {
-      this.resource.domainId = domainId;
-       //relavent items
-      let relavents= getRelevantByRelevantId(deformityId,typeOptions);
-       //TODO: re-bind resource type dropdown data
-    },
-
     schoolTypeSelectChanged(schoolTypeId) {
       this.resource.schoolTypeId = schoolTypeId;
     },
@@ -551,9 +541,11 @@ export default {
 
     stageSelectChanged(stageId) {
       this.resource.stageId = stageId;
-      //relavent items
-      let relavents= getRelevantByRelevantId(stageId,gradeOptions);
-      //TODO: re-bind grade dropdown data
+       // clean value of  grade dropdown
+      this.resource.grade= "";
+       // relavent items
+      let relavents = getRelevantByRelevantId(stageId, this.dict);
+      this.$store.dispatch("app/changeGrades", relavents);
     },
 
     gradeSelectChanged(gradeId) {
@@ -561,11 +553,17 @@ export default {
     },
 
     domainSelectChanged(domainId) {
+      // set domain id in resource model
       this.resource.domainId = domainId;
+      // clean  value of resource type dropdown
+      this.resource.resourceType = "";
+      // relavent items
+      let relavents = getRelevantByRelevantId(domainId, this.dict);
+      this.$store.dispatch("app/changeResourceTypes", relavents);
     },
 
     resourceTypeSelectChanged(resourceTypeId) {
-      this.resouce.resourceTypeId = resourceTypeId;
+      this.resource.resourceTypeId = resourceTypeId;
     },
 
     // submit
@@ -615,6 +613,7 @@ export default {
   display: flex;
 }
 
-.el-upload-list{width:70%;}
-
+.el-upload-list {
+  width: 70%;
+}
 </style>

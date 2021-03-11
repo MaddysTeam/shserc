@@ -18,7 +18,7 @@
       :list="source"
       :columns="columns"
       :commands="commands"
-      :handleChange="loadResourceList"
+      :handleChange="loadBulletinList"
       :handlePageSizeChange="handlePageSizeChange"
       @handleSearch="handleSearch"
       :pageSize="selectParam.pageSize"

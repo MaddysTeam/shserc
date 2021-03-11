@@ -61,6 +61,7 @@ export default {
               if (res && res.data) {
                 console.log(res.data)
                 this.editModel = JSON.parse(res.data);
+                  console.log(this.editModel)
                 this.dialogVisible = true;
               }
             });

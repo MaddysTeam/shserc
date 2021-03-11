@@ -49,10 +49,18 @@ export function getMenusData() {
     }, {
         id: 5,
         level: 1,
-        name: '入库资源',
-        path: '/admin/resource/index',
+        name: '资源管理',
         icon: 'el-icon-tickets',
-        children: []
+        children: [
+            {
+                id: 9,
+                level: 2,
+                name: '入库资源',
+                path: "/admin/resource/index",
+                icon: 'el-icon-files',
+                children: []
+            }
+        ]
     },
     {
         id: 6,
@@ -66,23 +74,31 @@ export function getMenusData() {
         id: 7,
         level: 1,
         name: '公告管理',
-        path:'/admin/bulletin/list',
         icon: 'el-icon-folder',
-        children: []
+        children: [
+            {
+                id: 10,
+                level: 2,
+                name: '资源库公告',
+                path: '/admin/bulletin/list',
+                icon: 'el-icon-files',
+                children: []
+            }
+        ]
     },
     {
         id: 8,
         level: 1,
         name: '评论管理',
         icon: 'el-icon-folder',
-        children: [  {
+        children: [{
             id: 4,
             level: 2,
-            name: '资源评论管理',
-            path:"/admin/comment/list",
+            name: '入库资源评论管理',
+            path: "/admin/comment/list",
             icon: 'el-icon-files',
             children: []
-        },]
+        }]
     }
-];
+    ];
 }

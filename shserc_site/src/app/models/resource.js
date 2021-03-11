@@ -22,8 +22,10 @@ export const resourceModel = {
    domainId:0,
    learnFromId:0,
    schoolTypeId:0,
+   subject: "",
    subjectId:0,
    stageId:0,
+   grade:"",
    gradeId:0,
    coverPath: ""
 };

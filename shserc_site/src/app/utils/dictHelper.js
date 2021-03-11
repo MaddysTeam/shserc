@@ -8,7 +8,15 @@ export function initDic(store) {
             store.commit("app/" + types.DICTIONARY, data.listData);
 
             loadResourceDeformity(store, data.listData);
-            laodResourceStatus(store, data.listData)
+            laodResourceStatus(store, data.listData);
+            bindResourceType(store, data.listData);
+            bindStage(store, data.listData);
+            bindGrade(store, data.listData);
+            bindDomain(store, data.listData);
+            bindImportSource(store, data.listData);
+            bindSubject(store, data.listData);
+            bindSchoolTypes(store, data.listData);
+            bindLearnFrom(store, data.listData);
         }
     });
 }
@@ -37,6 +45,8 @@ export function getRelevantByRelevantId(relevantId, dict) {
         if (o.relevantId == relevantId)
             relevants.push(o);
     });
+    
+    return relevants;
 }
 
 /**
@@ -53,14 +63,42 @@ function laodResourceStatus(store, dict) {
     store.commit("app/" + types.RESOURCE_STATUS, resourceStatus)
 }
 
-function bindResourceType(store, dict) { }
+function bindResourceType(store, dict) { 
+    let resourceTypes = getChildrenByParentId(87, dict)
+    store.commit("app/" + types.RESOURCE_TYPES, resourceTypes)
+}
 
-function bindStage(store, dict) { }
+function bindStage(store, dict) { 
+    let stages = getChildrenByParentId(35, dict)
+    store.commit("app/" + types.STAGES, stages)
+}
 
-function bindGrade(store, dict) { }
+function bindGrade(store, dict) { 
+    let grades = getChildrenByParentId(43, dict)
+    store.commit("app/" + types.GRADES, grades)
+}
 
-function bindDomain(store, dict) { }
+function bindDomain(store, dict) {
+    let domains = getChildrenByParentId(15, dict)
+    store.commit("app/" + types.RESOURCE_DOMAINS, domains)
+ }
 
-function bindImportSource(store, dict) { }
+function bindImportSource(store, dict) { 
+    let source = getChildrenByParentId(77, dict)
+    store.commit("app/" + types.SOURCE, source)
+}
 
-function bindSubject(store, dict) { }
+function bindSubject(store, dict) { 
+    let subjects = getChildrenByParentId(139, dict)
+    store.commit("app/" + types.SUBJECTS, subjects)
+}
+
+function bindSchoolTypes(store, dict) { 
+    let schoolTypes = getChildrenByParentId(27, dict)
+    store.commit("app/" + types.SCHOOLTYPES, schoolTypes)
+}
+
+function bindLearnFrom(store, dict) { 
+    let learnFrom = getChildrenByParentId(21, dict)
+    store.commit("app/" + types.LEARNFROM, learnFrom)
+}

@@ -218,7 +218,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	}
 
 	@Override
-	public boolean setStar(@Valid ResourceOperation resourceOperation) {
+	public boolean setStar(@Valid  @NotNull ResourceOperation resourceOperation) {
 		long userId = resourceOperation.getUserId();
 		long resourceId = resourceOperation.getResourceId();
 

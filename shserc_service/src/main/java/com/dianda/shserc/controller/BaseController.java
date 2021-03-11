@@ -27,15 +27,6 @@ public class BaseController {
 			resUser.setUserName(user.getString("userName"));
 			return resUser;
 		}
-
-//		ResUser user = new ResUser ( );
-//		String token = (String) SecurityUtils.getSubject().getPrincipal();
-//		String account = JwtOperation.getClaim(token, JwtConstant.ACCOUNT);
-//		if( null != account  ){
-//			JSONObject dto = JSON.parseObject ( account );
-//			user.setId ( dto.getInteger ( "id" ) );
-//			user.setUserName ( dto.getString ( "userName" ) );
-//		}
 		
 		return null;
 	}

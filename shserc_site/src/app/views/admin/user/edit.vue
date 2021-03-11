@@ -7,7 +7,7 @@
     <el-form :model="model" ref="userForm" :rules="rules">
       <el-form-item prop="username">
         <el-input
-          v-model="model.username"
+          v-model="model.userName"
           prefix-icon="el-icon-user"
           placeholder="输入用户名"
         ></el-input>
@@ -42,7 +42,7 @@
       </el-form-item>
       <el-form-item prop="companyId">
         <selectTree
-          :data="source"
+          :data="companySource"
           placeholder="所属单位"
           :nodeKey="model.companyId"
           @input="handleSelectCompany"
@@ -102,7 +102,7 @@ export default {
     };
 
     let emailValidator = (rule, value, callback) => {
-      emailValidator(rule, value, callback, messages.EMAIL_NOT_VAILD);
+      validateEmail(rule, value, callback, messages.EMAIL_NOT_VAILD);
     };
 
     let companyValidator = (rule, value, callback) => {
@@ -157,6 +157,7 @@ export default {
       companyList().then((res) => {
         if (res && res.data) {
           this.companySource = [JSON.parse(res.data)];
+          console.log(this.companySource)
         }
       });
     },

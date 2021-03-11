@@ -45,6 +45,7 @@ public class DictionaryCache {
 		DictionaryVo child;
 		
 		for ( String key : map.keySet ( ) ) {
+			if(ObjectUtil.isNull ( key )) continue;
 			if ( key.equals ( code ) ) {
 				parent = ( DictionaryVo ) ( map.get ( key ) );
 				for ( String childKey : map.keySet ( ) ) {
