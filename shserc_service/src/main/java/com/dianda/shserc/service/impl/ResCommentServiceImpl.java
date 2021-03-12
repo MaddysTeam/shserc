@@ -37,18 +37,19 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 	@Override
 	public CommentVoList find( CommentSelectParams params ) {
 		QueryWrapper<ResComment> queryWrapper = new QueryWrapper<> ( );
-		long userId = params.getUserId ( );
+		long auditor = params.getAuditor ( );
 		long resourceId = params.getResourceId ( );
 		long auditTypeId = params.getAuditTypeId ( );
 		String phrase = params.getSearchPhrase ( );
 
 		// where phrase
-		queryWrapper=queryWrapper.eq("isDeleted", 0);
+
+		queryWrapper=queryWrapper.eq("is_deleted", 0);
 		if ( resourceId > 0 ) {
 			queryWrapper = queryWrapper.eq ( "resource_id" , resourceId );
 		}
-		if ( userId > 0 ) {
-			queryWrapper = queryWrapper.eq ( "user_id" , userId );
+		if ( auditor > 0 ) {
+			queryWrapper = queryWrapper.eq ( "auditor" , auditor );
 		}
 		if ( auditTypeId > 0 ) {
 			queryWrapper = queryWrapper.eq ( "audit_type_id" , auditTypeId );

@@ -19,7 +19,11 @@ export const messages = {
     RESOURCE_DEFORMITY_SELECT_NOT_NULL: '必须选择残疾类型!',
     RESOURCE_AUTHOR_COMPANY_NOT_NULL: '必须填写作者单位!',
 
+    BULLETIN_TITLE_REQUIRED: '必须填写公告标题!',
+    BULLETIN_TITLE_LENGHT_NOT_ALLOWED_MORE_THAN_50: '公告标题长度不能超过50!',
+    BULLETIN_CONTENT_REQUIRED: '必须填写公告内容!',
+
     FILE_UPLOAD_COUNT_ALLOWED:"只能上传一个文件",
 
-    SUCCESS:'success'
+    SUCCESS:'编辑成功'
 }

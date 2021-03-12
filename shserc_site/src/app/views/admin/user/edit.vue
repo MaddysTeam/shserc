@@ -5,7 +5,7 @@
     :before-close="handleClose"
   >
     <el-form :model="model" ref="userForm" :rules="rules">
-      <el-form-item prop="username">
+      <el-form-item prop="userName">
         <el-input
           v-model="model.userName"
           prefix-icon="el-icon-user"
@@ -84,13 +84,13 @@ export default {
   },
   data() {
     let nameValidator = (rule, value, callback) => {
-      validateRequired(rule, value, callback, messages.USER_NOT_NULL);
-      validateLessThan50(
+      validateRequired(rule, value, callback, messages.USER_NOT_NULL,
+      ()=>validateLessThan50(
         rule,
         value,
         callback,
         messages.USER_LENGHT_NOT_ALLOWED_MORE_THAN_50
-      );
+      ))
     };
 
     let cardIdValidator = (rule, value, callback) => {
@@ -117,7 +117,7 @@ export default {
     return {
       companySource: [],
       rules: {
-        username: { validator: nameValidator, trigger: "blur" },
+        userName: { validator: nameValidator, trigger: "blur" },
         idCard: { validator: cardIdValidator, trigger: "blur" },
         companyId: { validator: companyValidator, trigger: "change" },
         mobile: { validator: mobileValidator, trigger: "change" },

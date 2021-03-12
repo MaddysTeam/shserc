@@ -25,4 +25,12 @@ public class EditBulletinDto {
 
 	private boolean top;
 
+	private String filePath;
+
+	private String fileName;
+
+	private String fileExtName;
+
+	private long fileSize;
+
 }

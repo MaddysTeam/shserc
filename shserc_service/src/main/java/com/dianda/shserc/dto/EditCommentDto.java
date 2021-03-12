@@ -24,5 +24,8 @@ public class EditCommentDto {
 
 	@Min ( value = 0)
 	private  long isDeleted;
+
+	@Min ( value = 1)
+	private long auditor;
 	
 }

@@ -327,7 +327,8 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
-import { edit, uploadFile, uploadCover, info } from "@/app/api/resource";
+import { edit, info } from "@/app/api/resource";
+import { uploadFile } from "@/app/api/file";
 import { resourceModel } from "@/app/models/resource";
 import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
 
@@ -335,10 +336,12 @@ export default {
   data() {
     return {
       resource: resourceModel,
-      inputVisible: false,
+     
       keywords: [],
       inputKeywordsValue: "",
       fileList: [],
+
+      inputVisible: false,
       dialogVisible: false,
       dialogImageUrl: "",
       disabled: false,
@@ -541,9 +544,9 @@ export default {
 
     stageSelectChanged(stageId) {
       this.resource.stageId = stageId;
-       // clean value of  grade dropdown
-      this.resource.grade= "";
-       // relavent items
+      // clean value of  grade dropdown
+      this.resource.grade = "";
+      // relavent items
       let relavents = getRelevantByRelevantId(stageId, this.dict);
       this.$store.dispatch("app/changeGrades", relavents);
     },

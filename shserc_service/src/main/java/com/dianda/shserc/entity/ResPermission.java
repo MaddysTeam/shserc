@@ -6,9 +6,21 @@ import lombok.Data;
 public class ResPermission {
 
 	private long id;
-	private long targetId;
-	private int type;
+
+	//target types : menu, button, interface
+	private long targetTypeId;
+
+	//typeId: for example: button -> (show, enable),(show,disable)
+	private long typeId;
+
 	private String name;
+
 	private String desc;
 
 }
+
+class Menu{}
+
+class Button{}
+
+class ServiceInterface{}

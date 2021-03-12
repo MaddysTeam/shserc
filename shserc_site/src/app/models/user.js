@@ -1,6 +1,6 @@
 export const userModel={
     id: 0,
-    username: "",
+    userName: "",
     idCard: "",
     realName:"",
     mobile:"",

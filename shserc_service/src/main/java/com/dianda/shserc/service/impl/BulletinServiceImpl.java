@@ -46,6 +46,7 @@ public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> i
 
 		// where phrase
 
+		wrapper.eq("is_deleted", 0);
 		if (typeId > 0) {
 			wrapper.eq("type_id", typeId);
 		}

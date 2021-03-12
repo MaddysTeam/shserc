@@ -18,6 +18,14 @@ public class Bulletin {
 
 	private boolean top;
 
+	private String filePath;
+
+	private String fileName;
+
+	private String fileExtName;
+
+	private long fileSize;
+
 	private long addUser;
 
 	private LocalDateTime addTime;

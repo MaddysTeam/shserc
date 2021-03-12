@@ -6,9 +6,10 @@ import com.dianda.shserc.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IEditCommentMapper extends BasicMapper<ResComment, EditCommentDto> {
 
 	IEditCommentMapper INSTANCE = Mappers.getMapper(IEditCommentMapper.class);
@@ -17,7 +18,7 @@ public interface IEditCommentMapper extends BasicMapper<ResComment, EditCommentD
 			@Mapping(source = "id", target = "id"),
 			@Mapping(source = "auditTypeId", target = "auditTypeId"),
 			@Mapping(source="resourceId",target="resourceId"),
-			@Mapping(source="userId",target="userId"),
+			@Mapping(source="auditor",target="auditor"),
 			@Mapping(source="content",target="content"),
 			@Mapping(source = "isDeleted",target="isDeleted")
 	})

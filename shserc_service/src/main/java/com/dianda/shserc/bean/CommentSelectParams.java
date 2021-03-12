@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CommentSelectParams extends BaseSelectParams {
 	private long resourceId;
-	private long userId;
+	private long auditor;
 	private long auditTypeId;
 }

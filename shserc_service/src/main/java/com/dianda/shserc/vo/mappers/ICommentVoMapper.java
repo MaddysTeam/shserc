@@ -14,9 +14,13 @@ public interface ICommentVoMapper extends BasicMapper<CommentVo, ResComment> {
 
 	@Mappings({
 			@Mapping(source = "id", target = "id"),
-			@Mapping(source = "resourceId",target="resourceId"),
-			@Mapping(source = "content",target = "content"),
-			@Mapping(source="auditType",target = "auditType")
+			@Mapping(source = "resourceId", target = "resourceId"),
+			@Mapping(source = "content", target = "content"),
+			@Mapping(source = "auditType", target = "auditType"),
+			@Mapping(source = "auditorName", target = "auditorName"),
+			@Mapping(source = "addUserName", target = "addUserName"),
+			@Mapping(source = "resourceTitle", target = "resourceTitle"),
+			@Mapping(source = "addTime", target = "commentTime"),
 	})
 	CommentVo mapFrom(ResComment comment);
 }

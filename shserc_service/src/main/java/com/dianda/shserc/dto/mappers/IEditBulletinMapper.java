@@ -21,7 +21,10 @@ public interface IEditBulletinMapper extends BasicMapper<Bulletin, EditBulletinD
 			@Mapping(source = "typeId", target = "typeId"),
 			@Mapping(source = "title", target = "title"),
 			@Mapping(source = "content",target="content"),
-			@Mapping(source = "top",target="top")
+			@Mapping(source = "filePath",target="filePath"),
+			@Mapping(source = "fileName",target="fileName"),
+			@Mapping(source = "fileExtName",target="fileExtName"),
+			@Mapping(source = "fileSize",target="fileSize")
 	})
 	Bulletin mapFrom(EditBulletinDto editUserDto);
 

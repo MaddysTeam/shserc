@@ -1,5 +1,3 @@
-// import { clean } from "semver"
-
 export const realModel = {
     id:0,
     idCard:'',

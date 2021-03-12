@@ -73,6 +73,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
 		// filter fields
 
+		wrapper = wrapper.eq("is_deleted", 0);
 		if (userId > 0) {
 			wrapper = wrapper.eq("user_id", userId);
 		}
@@ -177,7 +178,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		resource.addViewCount();
 		return mapper.updateById(resource) + mapper.addView(resourceOperation) == 2;
 	}
-
 
 	@Override
 	public boolean addDownloadCount(@Valid @NotNull ResourceOperation resourceOperation) {
