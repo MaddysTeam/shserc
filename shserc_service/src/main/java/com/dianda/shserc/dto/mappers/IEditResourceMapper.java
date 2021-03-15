@@ -1,6 +1,7 @@
 package com.dianda.shserc.dto.mappers;
 
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.Resource;
 import com.dianda.shserc.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
@@ -34,3 +35,6 @@ public interface IEditResourceMapper extends BasicMapper<Resource, EditResourceD
 	} )
 	Resource mapFrom(EditResourceDto editUserDto );
 }
+
+
+

@@ -5,7 +5,6 @@ import store from '@/store/store.js'
 
 axios.interceptors.request.use(
     config => {
-        console.log(store);
         var app = store.state.app;
         if (app.isAuth) {
             config.headers['Authorization'] = app.token;
@@ -25,6 +24,7 @@ axios.interceptors.response.use(res => {
         Toast.fail('服务端异常！')
         return Promise.reject(res);
     }
+
     if (res.data.resultCode != 200) {
         if (res.data.message) Notification.error({ message: res.data.message })
         if (res.data.resultCode == 416 || res.data.resultCode == 401) {

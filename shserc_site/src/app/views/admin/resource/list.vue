@@ -49,6 +49,13 @@
         <i class="el-icon-edit"></i> 查询
       </el-button>
     </div>
+
+    <audit
+      @close="handleCloseAudit"
+      :visible="dialogVisible"
+      :model="auditModel"
+    ></audit>
+
     <Table
       :list="source"
       :columns="columns"
@@ -66,9 +73,11 @@ import Table from "@/components/Tables/index";
 import { list } from "@/app/api/resource.js";
 import { selectParam } from "@/app/models/resource.js";
 import { mapState } from "vuex";
+import audit  from "@/app/views/admin/resource/audit";
+import { auditModel } from "@/app/models/resource";
 
 export default {
-  components: { Table },
+  components: { Table, audit },
   data() {
     return {
       columns: [
@@ -102,9 +111,18 @@ export default {
           method: (index, row) => {
             this.$router.push("/admin/resource/edit/" + row.id);
           },
+
+          id: 2,
+          label: "审核",
+          type: "danger",
+          method: (index, row) => {
+             this.dialogVisible=!this.dialogVisible
+          },
         },
       ],
 
+      dialogVisible: false,
+      auditModel: auditModel,
       source: [],
       selectParam: selectParam,
       selesctOptions: ["", ""],
@@ -159,6 +177,11 @@ export default {
     addResource() {
       this.$router.push("/admin/resource/add");
     },
+
+    handleCloseAudit(){
+       this.dialogVisible = !this.dialogVisible;
+      this.loadResourceList();
+    }
   },
 };
 </script>

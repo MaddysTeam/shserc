@@ -12,6 +12,13 @@ import '@/assets/css/global.css'
 import { initDic } from '@/app/utils/dictHelper'
 import VideoPlayer  from 'vue-video-player'
 import TEditor from '@/components/Editor/index'
+
+/** initial mock data */
+const mock=true;
+if(mock){
+  require('./app/mock/mock');
+}
+
 Vue.component('TinymceEditor',TEditor)
 
 /** initial global dictionary */

@@ -27,8 +27,16 @@ export const resourceModel = {
    stageId:0,
    grade:"",
    gradeId:0,
-   coverPath: ""
+   coverPath: "",
+   
 };
+
+export const  auditModel={
+   resourceId:0,
+   stateId: 0,
+   auditorId:0,
+   auditOpinion:""
+}
 
 export const selectParam = {
 

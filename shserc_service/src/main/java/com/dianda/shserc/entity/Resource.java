@@ -54,6 +54,8 @@ public class Resource {
 
 	private long auditor;
 
+	private String auditorOpinion;
+
 	private LocalDateTime auditorTime;
 
 	private long addUser;

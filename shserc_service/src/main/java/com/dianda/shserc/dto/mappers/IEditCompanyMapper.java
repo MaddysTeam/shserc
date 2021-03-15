@@ -6,9 +6,10 @@ import com.dianda.shserc.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IEditCompanyMapper extends BasicMapper<ResCompany, EditCompanyDto> {
 	
 	IEditCompanyMapper INSTANCE = Mappers.getMapper ( IEditCompanyMapper.class );

@@ -156,8 +156,8 @@ export default {
     loadCompanyList() {
       companyList().then((res) => {
         if (res && res.data) {
-          this.companySource = [JSON.parse(res.data)];
-          console.log(this.companySource)
+           console.log(res.data)
+          this.companySource =[JSON.parse(res.data)];
         }
       });
     },

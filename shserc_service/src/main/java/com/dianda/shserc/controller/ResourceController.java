@@ -3,6 +3,7 @@ package com.dianda.shserc.controller;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.service.IResourceService;
@@ -46,6 +47,18 @@ public class ResourceController extends BaseController {
 		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
+
+	@PostMapping(path = "/audit")
+	public JsonResult edit(@RequestBody @Valid ResourceAuditDto resourceAuditDto, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return JsonResult.error(Constant.Error.PARAMS_IS_INVALID);
+		}
+
+		boolean result = service.audit(resourceAuditDto);
+		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
+	}
+
 
 	@PostMapping(path = "/download/{id}")
 	public JsonResult download(@PathVariable long id) {

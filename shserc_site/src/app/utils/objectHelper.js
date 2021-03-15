@@ -3,3 +3,8 @@ export  function clean(model){
         model[p]=''
     }
 }
+
+
+export function deepCopy(target){
+   return JSON.parse(JSON.stringify(target));
+}

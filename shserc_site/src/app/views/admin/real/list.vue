@@ -11,11 +11,13 @@
         <i class="el-icon-edit"></i> 新增实名卡
       </el-button>
     </div>
+
     <edit
       @close="handleCloseEdit"
       :visible="dialogVisible"
       :model="editModel"
     ></edit>
+    
     <Table
       :list="source"
       :columns="columns"

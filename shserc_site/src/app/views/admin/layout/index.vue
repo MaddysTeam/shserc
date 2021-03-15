@@ -32,7 +32,8 @@
 <script>
    import DynamicMenu from '@/components/DynamicMenus/index';
    import * as types from '@/app/static/type';
-   import {getMenusData} from '@/app/api/menu.js'
+   //TODO: import {getMenusData} from '@/app/api/menu.js'
+   import {menuRoutes} from '@/app/routers/routes'
    import { mapMutations } from "vuex";
    import {logout} from '@/app/api/account'
 
@@ -43,7 +44,7 @@
      },
      data(){
          return {
-             menus:getMenusData()
+             menus: menuRoutes //TODO:getMenusData()
          }
      }, 
      methods:{

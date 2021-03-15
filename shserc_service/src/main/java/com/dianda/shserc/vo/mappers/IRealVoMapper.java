@@ -6,9 +6,10 @@ import com.dianda.shserc.vo.ResRealVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IRealVoMapper extends BasicMapper<ResRealVo, ResReal> {
 	
 	IRealVoMapper INSTANCE = Mappers.getMapper ( IRealVoMapper.class );

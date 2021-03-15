@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class DictionaryVo extends BaseVoList<DictionaryVo> implements Serializable {
 
 	private long id;

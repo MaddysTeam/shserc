@@ -71,6 +71,10 @@ public class ResourceVo  implements Serializable {
 	private long schoolTypeId;
 
 	private long domainId;
-	
+
+	private long auditor;
+
+	private String auditorOpinion;
+
 }
 

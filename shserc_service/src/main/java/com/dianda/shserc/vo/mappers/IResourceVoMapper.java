@@ -6,11 +6,12 @@ import com.dianda.shserc.vo.ResourceVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import javax.crypto.spec.PSource;
 
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {
 	
 	IResourceVoMapper INSTANCE = Mappers.getMapper ( IResourceVoMapper.class );
@@ -44,7 +45,10 @@ public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {
 			@Mapping( source = "resourcePath", target = "resourcePath" ) ,
 			@Mapping( source = "coverPath", target = "coverPath" ) ,
 			@Mapping( source = "fileName", target = "fileName" ) ,
-			@Mapping( source = "fileSize", target = "fileSize" )
+			@Mapping( source = "fileSize", target = "fileSize" ),
+
+			@Mapping( source = "auditor", target = "auditor" ),
+			@Mapping( source = "auditorOpinion", target = "auditorOpinion" )
 	} )
 	ResourceVo mapFrom( Resource resource );
 }

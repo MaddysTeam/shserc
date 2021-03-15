@@ -1,6 +1,8 @@
 package com.dianda.shserc.util.mapper;
 
 import org.mapstruct.InheritConfiguration;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 

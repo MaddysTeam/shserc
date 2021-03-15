@@ -17,9 +17,15 @@
     <el-table
       :data="list"
       :header-cell-style="tableHeaderColor"
+      @selection-change="selectChanged"
+      @cell-click="cellClick"
+      @row-click="rowClick"
+      ref= "inner"
       border
     >
+    <el-table-column v-if="isMultiSelect" align="center"   type="selection" width="45"></el-table-column>
       <template v-for="(item, index) in columns">
+        
         <el-table-column
           :prop="item.prop"
           :width="item.width"
@@ -54,7 +60,7 @@
           :min-width="item.minWith"
           :key="item.prop"
           :align="item.align"
-          v-else-if="item.isCommand"
+          v-else-if="item.isCommand && true"
           :label="item.label"
         >
          <template slot-scope="scope">
@@ -71,12 +77,14 @@
         </el-table-column>
 
         <el-table-column
+          sortable
           :prop="item.prop"
           :width="item.width"
           :key="item.label"
           :align="item.align"
-          v-else
+          v-else-if="true"
           :label="item.label"
+          :show-overflow-tooltip="true"
         >
         </el-table-column>
       </template>
@@ -87,8 +95,8 @@
         background
         :current-page="current"
         :page-size="pageSize"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        @size-change="pageSizeChange"
+        @current-change="currentChange"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
       >
@@ -103,12 +111,16 @@ export default {
     columns: { type: Array, default: [] },
     // commandColumnWidth:{type:Number,default:'200px'},
     commands: {},
+    isMultiSelect:{type:Boolean,default:false},
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
     handleChange: { type: Function },
     handlePageSizeChange:{type:Function},
     handleSearch: { type: Function },
+    handleRowSelectChange:{type:Function},
+    handleCellClick:{type:Function},
+    handleRowClick:{type:Function}
   },
   data() {
     return {
@@ -116,12 +128,12 @@ export default {
     };
   },
   methods: {
-    handleCurrentChange: function (val) {
+    currentChange: function (val) {
      // val["searchPhrase"] = this.searchPhrase;
       this.handleChange(val);
     },
 
-    handleSizeChange:function(val){
+    pageSizeChange:function(val){
       this.handlePageSizeChange(val);
     },
 
@@ -131,7 +143,20 @@ export default {
 
     searchTextChanged(){
       this.$emit("handleSearch",this.searchPhrase)
+    },
+
+    selectChanged(val){ 
+      this.$emit("handleRowSelectChange",val);
+    },
+
+    cellClick(row, column, cell, event){
+      this.$emit("handleCellClick",row, column, cell, event);
+    },
+    
+    rowClick(	row, column, event){
+       this.$emit("handleRowClick");
     }
+    
   },
 };
 </script>

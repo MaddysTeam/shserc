@@ -1,4 +1,3 @@
-import { Form } from 'element-ui';
 import axios from '@/app/static/axios'
 
 export function list(selectParam) {
@@ -11,4 +10,8 @@ export function info(id) {
 
 export function edit(params) {
     return axios.post('api/resource/edit', params);
+}
+
+export function audit(auditParams){
+    return axios.post('api/resource/audit', auditParams);
 }

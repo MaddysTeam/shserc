@@ -4,7 +4,7 @@ export default {
   state: {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     isAuth: true,// localStorage.getItem('Authorization') ? true : false,
-
+    loginUserInfo:{},
     //following for dictionary
     dict: [],
     deformity: [],

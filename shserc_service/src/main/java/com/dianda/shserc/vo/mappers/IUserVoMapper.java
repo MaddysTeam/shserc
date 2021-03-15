@@ -4,7 +4,6 @@ package com.dianda.shserc.vo.mappers;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.util.mapper.BasicMapper;
 import com.dianda.shserc.vo.ResUserVo;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

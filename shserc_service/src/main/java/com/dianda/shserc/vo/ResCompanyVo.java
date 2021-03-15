@@ -2,12 +2,13 @@ package com.dianda.shserc.vo;
 
 import com.dianda.shserc.entity.ResCompany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 @Data
-public class ResCompanyVo extends BaseVoList<ResCompany> implements Serializable {
+public class ResCompanyVo implements Serializable {
 
 	private long id;
 	private long value;

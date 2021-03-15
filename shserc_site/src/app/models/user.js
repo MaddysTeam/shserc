@@ -5,6 +5,7 @@ export const userModel={
     realName:"",
     mobile:"",
     companyId: "",
+    companyName:"",
     email:"",
 }
 

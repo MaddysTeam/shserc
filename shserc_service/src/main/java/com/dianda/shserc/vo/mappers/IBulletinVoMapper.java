@@ -1,16 +1,16 @@
 package com.dianda.shserc.vo.mappers;
 
-
 import com.dianda.shserc.entity.Bulletin;
-import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.util.mapper.BasicMapper;
 import com.dianda.shserc.vo.BulletinVo;
-import com.dianda.shserc.vo.ResUserVo;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-public interface IBulletinVoMapper extends BasicMapper<Bulletin, BulletinVo> {
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IBulletinVoMapper extends BasicMapper<BulletinVo,Bulletin> {
 
 	IBulletinVoMapper INSTANCE = Mappers.getMapper ( IBulletinVoMapper.class );
 

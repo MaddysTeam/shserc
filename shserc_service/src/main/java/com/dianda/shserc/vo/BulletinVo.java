@@ -1,7 +1,10 @@
 package com.dianda.shserc.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class BulletinVo implements Serializable {
 
 	long id;

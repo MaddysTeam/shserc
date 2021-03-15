@@ -1,0 +1,39 @@
+{
+    "userList": [
+        {
+            "id": 1001,
+            "userName": "mock",
+            "idCard": "310115***",
+            "realName": "华超",
+            "mobile": "",
+            "companyId": 0,
+            "companyName": "开放大学",
+            "email": "kissnana3@163.com"
+        },
+        {
+            "id": 1001,
+            "userName": "mock",
+            "idCard": "310115***",
+            "realName": "华超",
+            "mobile": "",
+            "companyId": 0,
+            "companyName": "开放大学",
+            "email": "kissnana3@163.com"
+        }
+    ],
+    
+    "companyList":
+        {
+            "id": 1001,
+            "value": 1001,
+            "label": "上海市",
+            "children": [
+                {
+                    "id": 1002,
+                    "value": 1002,
+                    "label": "黄浦区"
+                }
+            ]
+        }
+    
+}

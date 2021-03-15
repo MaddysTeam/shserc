@@ -3,6 +3,7 @@ package com.dianda.shserc.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.entity.Resource;
 import com.dianda.shserc.validators.NotNull;
@@ -16,6 +17,8 @@ public interface IResourceService extends IService<Resource> {
 	ResourceVoList find( ResourceSelectParams params);
 
 	boolean edit(@Valid @NotNull EditResourceDto model);
+
+	boolean audit(@Valid @NotNull ResourceAuditDto model);
 
 	ResourceVo findById(long id);
 

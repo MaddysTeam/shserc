@@ -45,8 +45,6 @@ public class EditResourceDto {
 	private String authorPhone;
 	
 	private long deformityId;
-	
-	private long auditor;
 
 	private long subjectId;
 
