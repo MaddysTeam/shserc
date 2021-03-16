@@ -29,6 +29,7 @@ export default {
         state.isAuth = true;
         state.token = token;
         state.loginUserInfo = data;
+        console.log(state.loginUserInfo)
       }
     },
     [types.LOGOUT]: (state) => {

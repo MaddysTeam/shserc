@@ -73,7 +73,11 @@
               <el-col :span="8">
                 <el-row>
                   <el-col :span="12" class="font14">资源类型：</el-col>
-                  <el-col :span="12" class="font14"></el-col>
+                  <el-col :span="12" class="font14">
+                    {{
+                    resource.resourceType
+                  }}
+                  </el-col>
                 </el-row>
               </el-col>
               <el-col :span="8">
@@ -180,9 +184,10 @@ export default {
 }
 
 .grid-item {
+  padding: 30px;
   margin: 5px;
   border-radius: 8px;
-  background: #EDEDED;
+  background: #fafafa;
   flex: 1;
   min-width: 500px;
   margin: 20px;

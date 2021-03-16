@@ -37,6 +37,7 @@ import edit from "@/app/views/admin/real/edit";
 import Table from "@/components/Tables/index";
 import { selectParam, realModel } from "@/app/models/real";
 import { list, info } from "@/app/api/real";
+import {deepCopy} from "@/app/utils/objectHelper"
 
 export default {
   components: {
@@ -60,8 +61,11 @@ export default {
           method: (index, row) => {
             info(row.id).then((res) => {
               if (res && res.data) {
+              
                 this.editModel = JSON.parse(res.data);
+                this.editModel.companyId = "" + this.editModel.companyId; //fix bugs for key node type is string
                 this.dialogVisible = true;
+                  console.log(this.editModel)
               }
             });
           },
@@ -70,7 +74,7 @@ export default {
       source: [],
       selectParam: selectParam,
       dialogVisible: false,
-      editModel: realModel,
+      editModel: deepCopy(realModel),
     };
   },
   mounted() {
@@ -100,6 +104,7 @@ export default {
     handleCloseEdit() {
       this.dialogVisible = false;
       this.loadRealList();
+      this.editModel=deepCopy(realModel);
     },
 
     handleSearch(val) {

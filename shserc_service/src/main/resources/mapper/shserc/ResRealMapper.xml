@@ -7,6 +7,7 @@
         r.card_no,
         r.real_name,
         r.id_card,
+        r.card_password,
         r.state_id,
         r.company_id,
         c.company_name  as company_name
@@ -21,6 +22,7 @@
         select r.id as id,
         r.card_no,
         r.real_name,
+        r.card_password,
         r.id_card,
         r.state_id,
         r.company_id,

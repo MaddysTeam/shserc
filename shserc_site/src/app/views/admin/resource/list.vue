@@ -204,7 +204,7 @@ export default {
     handleClearSearchOptoins() {
       this.selectParam = deepCopy(selectParam);
       this.loadResourceList();
-      this.selesctOptions=["", ""];
+      this.selesctOptions=[];
     },
   },
 };

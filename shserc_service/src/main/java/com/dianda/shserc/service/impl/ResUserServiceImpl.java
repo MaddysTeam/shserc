@@ -93,6 +93,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		// execute user mapping from dto
 		ResUser user = IEditUserMapper.INSTANCE.mapFrom(userDto);
 		if (user.isNewOne()) {
+			user.setPassword ( com.dianda.shserc.util.basic.EncoderUtil.SHA ( user.getPassword ( ) ) );
 			return resUserMapper.insert(user) > 0;
 		} else {
 			return resUserMapper.updateById(user) >= 0;

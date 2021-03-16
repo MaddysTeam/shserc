@@ -32,6 +32,14 @@ Vue.use(VideoPlayer)
 require('video.js/dist/video-js.css')
 require('vue-video-player/src/custom-theme.css')
 
+/** definition v-fouce directive */
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus();
+    el.querySelector('input').focus();
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

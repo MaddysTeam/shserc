@@ -37,7 +37,7 @@
           <template slot-scope="scope">
             <router-link
               :to="item.currentRoute"
-              @click.native.prevent="item.method(index, scope.row)"
+              @click.native.prevent="item.method(index, scope.row)" style="color:blue"
               >{{ scope.row.title }}</router-link
             >
           </template>

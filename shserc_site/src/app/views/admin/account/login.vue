@@ -108,18 +108,18 @@ export default {
             trigger: "blur",
           },
         ],
-        password: 
-          {
-            validator: (rule, value, callback) => {
-              validatePassword(
-                rule,
-                value,
-                callback,
-                messages.ACCOUNT_PASSWORD_INVALID
-              );
-            },
-            trigger: "blur",
-          }
+        // password: 
+        //   {
+        //     validator: (rule, value, callback) => {
+        //       validatePassword(
+        //         rule,
+        //         value,
+        //         callback,
+        //         messages.ACCOUNT_PASSWORD_INVALID
+        //       );
+        //     },
+        //     trigger: "blur",
+        //   }
       }
     };
   },
@@ -149,7 +149,7 @@ export default {
               // save login info to store
               _this.$store.commit(types.APP + "/" + types.LOGIN,res.data);       
               // redirect to admin index page   
-              _this.$router.push("/admin/dashboard/summar");
+              _this.$router.push("/admin/dashboard/summary");
             }
           });
         } else {

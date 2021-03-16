@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="编辑实名卡"
+    title="编辑实名信息"
     :visible.sync="visible"
     :before-close="handleClose"
   >
@@ -40,15 +40,16 @@
           :data="companySource"
           placeholder="所属单位"
           :nodeKey="model.companyId"
+          :value="model.companyId"
           @input="handleSelectCompany"
         >
         </selectTree>
       </el-form-item>
       <el-form-item class="btns">
-        <el-button type="primary" @click="handleSubmit('realForm')"
+        <el-button type="primary" @click="handleSubmit()"
           >确定</el-button
         >
-        <el-button type="info" @click="handleClose('realForm')">取消</el-button>
+        <el-button type="info" @click="handleClose()">取消</el-button>
       </el-form-item>
     </el-form>
     <!-- real edit form end -->
@@ -59,7 +60,6 @@
 import { edit } from "@/app/api/real";
 import { companyList } from "@/app/api/company";
 import { messages } from "@/app/static/message";
-import { clean } from "@/app/utils/objectHelper";
 import selectTree from "@/components/TreeSelector/index";
 import { Notification } from "element-ui";
 import {
@@ -125,24 +125,25 @@ export default {
       });
     },
 
-    handleSubmit(formName) {
+    handleSubmit() {
       let _this = this;
-      _this.$refs[formName].validate((isValid) => {
+      _this.$refs["realForm"].validate((isValid) => {
         if (isValid) {
           edit(this.model).then((res) => {
             if (res) {
               Notification.success(res.message);
-              this.handleClose(formName);
+              this.handleClose();
             }
           });
         }
       });
     },
 
-    handleClose(formName) {
+    handleClose() {
       this.$emit("close");
-      clean(this.model);
-      this.$refs[formName].clearValidate();
+      setTimeout(() => {
+        this.$refs["realForm"].clearValidate();
+      }, 500);
     },
 
     handleSelectCompany(id) {

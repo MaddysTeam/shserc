@@ -50,7 +50,7 @@ public class AccountServiceImpl implements IAccountService {
 			ResUser user = new ResUser();
 			user.setId(userObject.getInteger("id"));
 			user.setLastLoginTime(LocalDateTime.now());  // record last login time
-			user.setLoginCount(user.getLoginCount() + 1);  // record login count++
+			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
 			userMapper.updateById(user);
 
 			// if login success,we can get token from subject and save it

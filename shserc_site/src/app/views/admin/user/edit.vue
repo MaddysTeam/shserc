@@ -7,6 +7,7 @@
     <el-form :model="model" ref="userForm" :rules="rules">
       <el-form-item prop="userName">
         <el-input
+          v-focus
           v-model="model.userName"
           prefix-icon="el-icon-user"
           placeholder="输入用户名"
@@ -45,6 +46,7 @@
           :data="companySource"
           placeholder="所属单位"
           :nodeKey="model.companyId"
+          :value="model.companyId"
           @input="handleSelectCompany"
         >
         </selectTree>
@@ -73,7 +75,6 @@ import {
   validateEmail,
 } from "@/static/validator";
 import { edit } from "@/app/api/user";
-import { clean } from "@/app/utils/objectHelper";
 
 export default {
   name: "edit",
@@ -84,13 +85,14 @@ export default {
   },
   data() {
     let nameValidator = (rule, value, callback) => {
-      validateRequired(rule, value, callback, messages.USER_NOT_NULL,
-      ()=>validateLessThan50(
-        rule,
-        value,
-        callback,
-        messages.USER_LENGHT_NOT_ALLOWED_MORE_THAN_50
-      ))
+      validateRequired(rule, value, callback, messages.USER_NOT_NULL, () =>
+        validateLessThan50(
+          rule,
+          value,
+          callback,
+          messages.USER_LENGHT_NOT_ALLOWED_MORE_THAN_50
+        )
+      );
     };
 
     let cardIdValidator = (rule, value, callback) => {
@@ -121,7 +123,7 @@ export default {
         idCard: { validator: cardIdValidator, trigger: "blur" },
         companyId: { validator: companyValidator, trigger: "change" },
         mobile: { validator: mobileValidator, trigger: "change" },
-        email: { validator: emailValidator, trigger: "change" }
+        email: { validator: emailValidator, trigger: "change" },
       },
     };
   },
@@ -131,20 +133,22 @@ export default {
   methods: {
     handleClose(formName) {
       this.$emit("close");
-      clean(this.model);
-      this.$refs[formName].clearValidate();
+      setTimeout(() => {
+        this.$refs["userForm"].clearValidate();
+      }, 500);
     },
 
     submitForm(formName) {
       let _this = this;
       _this.$refs[formName].validate((isValid) => {
         if (isValid) {
+          console.log(this.model);
           edit(this.model).then((res) => {
             if (res) {
               Notification.success(res.message);
+              _this.handleClose(formName);
             }
           });
-          _this.handleClose(formName);
         }
       });
     },
@@ -156,8 +160,7 @@ export default {
     loadCompanyList() {
       companyList().then((res) => {
         if (res && res.data) {
-           console.log(res.data)
-          this.companySource =[JSON.parse(res.data)];
+          this.companySource = [JSON.parse(res.data)];
         }
       });
     },

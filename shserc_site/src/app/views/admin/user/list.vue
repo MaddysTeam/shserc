@@ -10,7 +10,7 @@
       </el-form-item>
     </el-form> -->
     <div class="btn-group">
-      <el-button class="el-button--primary" @click="dialogVisible = true">
+      <el-button class="el-button--primary" @click="handleAdd()">
         <i class="el-icon-edit"></i> 新增用户
       </el-button>
     </div>
@@ -37,6 +37,7 @@ import edit from "./edit.vue";
 import Table from "@/components/Tables/index";
 import { list, info } from "@/app/api/user";
 import { selectParam, userModel } from "@/app/models/user";
+import {deepCopy} from "@/app/utils/objectHelper"
 
 export default {
   components: { Table, edit },
@@ -44,11 +45,12 @@ export default {
   data() {
     return {
       columns: [
-        { prop: "id", label: "用户编号",align:"center" },
-        { prop: "userName", label: "用户名" ,align:"center"},
-        { prop: "companyName", label: "所在单位",align:"center" },
-        { prop: "realName", label: "真实姓名",align:"center" },
-        { prop: "command", label: "操作" ,isCommand:true,align:"right"}
+        { prop: "id", label: "用户编号", align: "center" },
+        { prop: "userName", label: "用户名", align: "center" },
+        { prop: "companyName", label: "所在单位", align: "center" },
+        { prop: "realName", label: "真实姓名", align: "center" },
+         { prop: "roleName", label: "角色", align: "center" },
+        { prop: "command", label: "操作", isCommand: true, align: "right" },
       ],
       commands: [
         {
@@ -57,21 +59,24 @@ export default {
           type: "primary",
           method: (index, row) => {
             console.log("编辑:" + index, row);
-             info(row.id).then((res) => {
+            info(row.id).then((res) => {
               if (res && res.data) {
-                console.log(res.data)
                 this.editModel = JSON.parse(res.data);
-                  console.log(this.editModel)
+                this.editModel.companyId = "" + this.editModel.companyId; //fix bugs for key node type is string
                 this.dialogVisible = true;
               }
             });
-          },
-        },
+          }
+        },{
+          id: 2,
+          label: "设置角色",
+          type: "danger",
+        }
       ],
       source: [],
-      selectParam: selectParam,
+      selectParam: deepCopy(selectParam),
       dialogVisible: false,
-      editModel: userModel,
+      editModel: deepCopy(userModel),
     };
   },
   mounted() {
@@ -79,8 +84,8 @@ export default {
   },
   methods: {
     loadUserList(current) {
-       if(current){
-        this.selectParam.current=current;
+      if (current) {
+        this.selectParam.current = current;
       }
       let result = list(selectParam).then((res) => {
         if (res && res.data) {
@@ -93,13 +98,18 @@ export default {
 
     handleCloseEdit() {
       this.dialogVisible = false;
-        this.loadUserList();
+      this.loadUserList();
+      this.editModel=deepCopy(userModel);
     },
 
     handleSearch(val) {
       this.selectParam.searchPhrase = val;
       this.loadUserList();
     },
+
+    handleAdd(){
+      this.dialogVisible = true;
+    }
   },
 };
 </script>
