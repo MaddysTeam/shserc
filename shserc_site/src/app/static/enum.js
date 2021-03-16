@@ -5,5 +5,8 @@ export const appEnum = {
 
     fileExtNames:{
         video:'.mp4'
-    }
+    },
+    
+    ValidateImageUrls:"http://tjcdn.shec.edu.cn/",
+    validateImageNames:["404.jpg"]
 }

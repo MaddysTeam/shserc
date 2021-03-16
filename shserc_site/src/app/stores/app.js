@@ -4,7 +4,8 @@ export default {
   state: {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     isAuth: localStorage.getItem('Authorization') ? true : false,
-    loginUserInfo:{},
+    loginUserInfo: {},
+
     //following for dictionary
     dict: [],
     deformity: [],
@@ -20,15 +21,19 @@ export default {
     source: []
   },
   mutations: {
+    // login 
     [types.LOGIN]: (state, data) => {
       if (data) {
-        localStorage.setItem('Authorization', data);
+        let token = data.token;
+        localStorage.setItem('Authorization', token); // store and used by backend api
         state.isAuth = true;
-        state.token = data;
+        state.token = token;
+        state.loginUserInfo = data;
       }
     },
     [types.LOGOUT]: (state) => {
       localStorage.removeItem('Authorization');
+      state.loginUserInfo = {}
     },
 
     //dictionary

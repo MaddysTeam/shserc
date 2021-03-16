@@ -33,6 +33,7 @@ import {audit} from "@/app/api/resource"
 import { clean } from "@/app/utils/objectHelper";
 import { Notification } from "element-ui";
 import { mapState } from 'vuex';
+
 export default {
   name: "audit",
   props: {
@@ -53,7 +54,6 @@ export default {
   },
 
   methods: {
-
     handleSubmit(formName) {
        audit(this.model).then((res) => {
             if (res) {
@@ -67,8 +67,6 @@ export default {
       this.$emit("close");
       clean(this.model);
     },
-
-
   }
 };
 </script>

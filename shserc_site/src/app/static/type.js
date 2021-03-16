@@ -1,6 +1,7 @@
 export const APP="app";
 export const LOGIN='login';
 export const LOGOUT='logout';
+//export const LOGIN_USER='login_user';
 
 // following keys for dictionary
 export const DICTIONARY="dictionary";

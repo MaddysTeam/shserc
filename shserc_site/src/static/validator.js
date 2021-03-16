@@ -34,6 +34,15 @@ export function validateSelectValue(rule, value, callback, error) {
     }
 }
 
+export function validatePassword(rule,value,callback,error){
+    if(!regexs.password.test(value)){
+        callback(new Error(error));
+    }
+    else{
+        callback();
+    }
+}
+
 export function validateIdCard(rule, value, callback, error) {
     if (!regexs.idCard.test(value)) {
         callback(new Error(error));

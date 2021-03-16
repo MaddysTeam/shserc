@@ -23,5 +23,7 @@ public class ResUserVo implements Serializable {
 	private LocalDateTime lastLoginTime;
 	private int loginCount;
 
+	private  String token;
+
 }
 

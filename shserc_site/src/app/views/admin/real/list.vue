@@ -3,12 +3,12 @@
     <el-breadcrumb>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
        <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>实名卡管理</el-breadcrumb-item>
+      <el-breadcrumb-item>实名管理</el-breadcrumb-item>
     </el-breadcrumb>
 
     <div class="btn-group">
       <el-button class="el-button--danger" @click="handleEditButtonClick()">
-        <i class="el-icon-edit"></i> 新增实名卡
+        <i class="el-icon-edit"></i> 新增实名
       </el-button>
     </div>
 
@@ -17,7 +17,7 @@
       :visible="dialogVisible"
       :model="editModel"
     ></edit>
-    
+
     <Table
       :list="source"
       :columns="columns"

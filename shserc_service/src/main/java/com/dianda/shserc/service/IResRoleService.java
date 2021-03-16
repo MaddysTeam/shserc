@@ -4,6 +4,7 @@ import com.dianda.shserc.bean.RoleSelectParams;
 import com.dianda.shserc.dto.EditRoleDto;
 import com.dianda.shserc.entity.ResRole;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.dianda.shserc.vo.ResRoleVo;
 import com.dianda.shserc.vo.ResRoleVoList;
 
 /**
@@ -16,7 +17,9 @@ public interface IResRoleService extends IService<ResRole> {
 
 	ResRoleVoList find(RoleSelectParams params);
 
-	ResRole edit(EditRoleDto role);
+	ResRoleVo findById(long id);
+
+	boolean edit(EditRoleDto role);
 
 	boolean delete(String id);
 

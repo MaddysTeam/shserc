@@ -30,15 +30,15 @@
               prefix-icon="el-icon-search"
               type="password"
               v-model="form.password"
-              placeholder="密码"
+              placeholder="请输入密码"
             ></el-input>
           </el-form-item>
 
           <!-- verify -->
           <el-form-item>
             <Verify
-              :imgUrl ="validateImageUrl"
-              :imgName="validateImageNames"
+              :imgUrl="appEnum.ValidateImageUrls"
+              :imgName="appEnum.validateImageNames"
               :type="4"
               style="width: 100%"
               @success="success"
@@ -69,29 +69,72 @@ import Verify from "vue2-verify";
 import { login } from "@/app/api/account";
 import { loginModel } from "@/app/models/account.js";
 import { Notification } from "element-ui";
+import { appEnum } from "@/app/static/enum";
+import { messages } from "@/app/static/message";
+import {
+  validateRequired,
+  validateLessThan50,
+  validatePassword,
+} from "@/static/validator";
 import { mapMutations } from "vuex";
 import * as types from "@/app/static/type";
 
 export default {
   data() {
     return {
-      validateImageUrl:"http://tjcdn.shec.edu.cn/",
-      validateImageNames:["404.jpg"],
+      appEnum: appEnum,
       form: loginModel,
       rules: {
         name: [
-          { required: true, message: "请输入用户名、邮箱或者手机号", trigger: "blur" },
+          {
+            validator: (rule, value, callback) => {
+              validateRequired(
+                rule,
+                value,
+                callback,
+                messages.ACCOUNT_NAME_REQUIRED
+              );
+            },
+          },
+          {
+            validator: (rule, value, callback) => {
+              validateLessThan50(
+                rule,
+                value,
+                callback,
+                messages.ACCOUNT_LENGHT_NOT_ALLOWED_MORE_THAN_50
+              );
+            },
+            trigger: "blur",
+          },
         ],
-      },
+        password: 
+          {
+            validator: (rule, value, callback) => {
+              validatePassword(
+                rule,
+                value,
+                callback,
+                messages.ACCOUNT_PASSWORD_INVALID
+              );
+            },
+            trigger: "blur",
+          }
+      }
     };
   },
+
   components: { Verify },
+
   methods: {
     success() {
       console.log("success!");
       this.form.isAble = false;
     },
 
+    /**
+     *  submit login from
+     */
     submitForm(formName) {
       let _this = this;
       this.$refs[formName].validate((valid) => {
@@ -103,11 +146,10 @@ export default {
             console.log(res);
             if (res) {
               Notification.success({ message: "登录成功" });
-              _this.$store.commit(
-                types.APP + "/" + types.LOGIN,
-                res.data.token
-              );
-              _this.$router.push("/admin/user/list");
+              // save login info to store
+              _this.$store.commit(types.APP + "/" + types.LOGIN,res.data);       
+              // redirect to admin index page   
+              _this.$router.push("/admin/dashboard/summar");
             }
           });
         } else {

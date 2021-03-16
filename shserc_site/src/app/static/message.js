@@ -1,4 +1,9 @@
 export const messages = {
+
+    ACCOUNT_NAME_REQUIRED: '必须填写用户名、邮箱或者手机号',
+    ACCOUNT_PASSWORD_INVALID: '密码必须包含数字和字母且长度为8到13位',
+    ACCOUNT_LENGHT_NOT_ALLOWED_MORE_THAN_50: '长度不能超过50!',
+
     COMPANY_LENGHT_NOT_ALLOWED_MORE_THAN_50: '长度不能超过50!',
     COMPANY_NOT_NULL: '必须填写单位名称!',
     COMPANY_SELECT_NOT_NULL: '必须选择单位!',

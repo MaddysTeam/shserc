@@ -3,9 +3,11 @@ package com.dianda.shserc.controller;
 
 import com.dianda.shserc.dto.ChangePasswordDto;
 import com.dianda.shserc.dto.LoginDto;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IAccountService;
 import com.dianda.shserc.util.json.JsonResult;
-import org.apache.shiro.authz.annotation.RequiresRoles;
+import com.dianda.shserc.vo.ResUserVo;
+import com.dianda.shserc.vo.mappers.IUserVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -17,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * <p>
  * Account controller
- * </p>
  *
  * @author huachao
  * @since 2020-08-05
@@ -36,10 +36,14 @@ public class AccountController extends BaseController {
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error ("validate error");
 		}
-		
+		//try to login
 		loginDto = accountService.login ( loginDto );
 		if ( loginDto.getIsSuccess ( ) ) {
-			return JsonResult.success ( loginDto , "success" );
+			// get login user info
+			ResUserVo resUserVo = IUserVoMapper.INSTANCE.mapFrom( super.getLoginUserInfo());
+			//set token to user vo and transfer to frontend
+			resUserVo.setToken(loginDto.getToken());
+			return JsonResult.success ( resUserVo , "success" );
 		} else {
 			return JsonResult.error ( loginDto.getMessage ( ) );
 		}

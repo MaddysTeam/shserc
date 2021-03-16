@@ -2,7 +2,7 @@ export const resourceModel = {
    id: 0,
    title: "",
    state: "",
-   stateId: 0, // 未审核
+   stateId: 10002,
    deformityId: "",
    deformity: "",
    author: "",
@@ -20,26 +20,22 @@ export const resourceModel = {
    resourceType: "",
    resourceTypeId: 0,
    domainId: 0,
-   domain:"",
-   learnFrom:"",
    learnFromId: 0,
-   schoolType:"",
    schoolTypeId: 0,
    subject: "",
    subjectId: 0,
-   stage:"",
    stageId: 0,
    grade: "",
    gradeId: 0,
    coverPath: "",
-   auditOpinion: ""
+
 };
 
 export const auditModel = {
    resourceId: 0,
-   resourceTitle:"",
-   auditOpinion: "",
-   auditResult: false
+   stateId: 0,
+   auditorId: 0,
+   auditOpinion: ""
 }
 
 export const selectParam = {

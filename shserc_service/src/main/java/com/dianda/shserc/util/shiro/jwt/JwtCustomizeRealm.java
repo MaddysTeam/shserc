@@ -51,12 +51,20 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		JSONObject dto = JSON.parseObject ( account );
 		if ( ObjectUtil.isNull ( dto ) )
 			throw new AuthenticationException ( "用户名或密码错误" );
-		
+
+		String userName=dto.getString("userName");
 		try {
 			ResUser user = userMapper.selectOne (
 					new QueryWrapper<ResUser> ( )
-							.eq ( "user_name" , dto.getString ( "userName" ) )
-							.eq ( "password" , dto.getString ( "password" ) ) );
+							.eq ( "password" , dto.getString ( "password" ) )
+							.and(wrapper->
+									wrapper.eq ( "user_name" , userName)
+											.or()
+											.eq("email", userName)
+											.or()
+											.eq("mobile",userName)
+							)
+			);
 			if ( ObjectUtil.isNull ( user ) ) {
 				throw new AuthenticationException ( "用户名或密码错误" );
 			} else {
