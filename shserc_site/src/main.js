@@ -14,7 +14,7 @@ import VideoPlayer  from 'vue-video-player'
 import TEditor from '@/components/Editor/index'
 
 /** initial mock data */
-const mock=true;
+const mock=false;
 if(mock){
   require('./app/mock/mock');
 }

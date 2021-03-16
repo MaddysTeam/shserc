@@ -48,6 +48,9 @@
       <el-button @click="loadResourceList()" class="el-button--primary search">
         <i class="el-icon-edit"></i> 查询
       </el-button>
+      <el-button @click="handleClearSearchOptoins()" class="el-button">
+        <i class="el-icon-close"></i> 清除
+      </el-button>
     </div>
 
     <audit
@@ -73,15 +76,16 @@ import Table from "@/components/Tables/index";
 import { list } from "@/app/api/resource.js";
 import { selectParam } from "@/app/models/resource.js";
 import { mapState } from "vuex";
-import audit  from "@/app/views/admin/resource/audit";
+import audit from "@/app/views/admin/resource/audit";
 import { auditModel } from "@/app/models/resource";
+import { deepCopy } from "@/app/utils/objectHelper";
 
 export default {
   components: { Table, audit },
   data() {
     return {
       columns: [
-        { prop: "id", label: "资源编号" },
+        { prop: "id", label: "编号", width: 50 },
         {
           prop: "title",
           label: "资源标题",
@@ -101,7 +105,13 @@ export default {
         { prop: "favoriteCount", label: "收藏量" },
         { prop: "commentCount", label: "评论量" },
         { prop: "state", label: "资源状态" },
-        { prop: "command", label: "操作", isCommand: true, align: "right" },
+        {
+          prop: "command",
+          label: "操作",
+          isCommand: true,
+          align: "right",
+          width: 200,
+        },
       ],
       commands: [
         {
@@ -111,12 +121,20 @@ export default {
           method: (index, row) => {
             this.$router.push("/admin/resource/edit/" + row.id);
           },
-
+        },
+        {
           id: 2,
           label: "审核",
           type: "danger",
           method: (index, row) => {
-             this.dialogVisible=!this.dialogVisible
+            this.auditModel = {
+              resourceId: row.id,
+              resourceTitle: row.title,
+              auditOpinion: row.auditOpinion,
+              auditResult: row.stateId == this.resourceStatusOptions[2].id,
+            };
+
+            this.dialogVisible = true;
           },
         },
       ],
@@ -124,7 +142,7 @@ export default {
       dialogVisible: false,
       auditModel: auditModel,
       source: [],
-      selectParam: selectParam,
+      selectParam: deepCopy(selectParam),
       selesctOptions: ["", ""],
     };
   },
@@ -145,7 +163,7 @@ export default {
       if (current) {
         this.selectParam.current = current;
       }
-      let result = list(selectParam).then((res) => {
+      let result = list(this.selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.selectParam.total = data.total;
@@ -178,10 +196,16 @@ export default {
       this.$router.push("/admin/resource/add");
     },
 
-    handleCloseAudit(){
-       this.dialogVisible = !this.dialogVisible;
+    handleCloseAudit() {
+      this.dialogVisible = !this.dialogVisible;
       this.loadResourceList();
-    }
+    },
+
+    handleClearSearchOptoins() {
+      this.selectParam = deepCopy(selectParam);
+      this.loadResourceList();
+      this.selesctOptions=["", ""];
+    },
   },
 };
 </script>

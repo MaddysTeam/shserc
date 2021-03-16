@@ -17,8 +17,7 @@ public interface IResourceAuditMapper extends BasicMapper<Resource, ResourceAudi
 	@Mappings( {
 			@Mapping(source="resourceId",target="id"),
 			@Mapping(source="auditorId",target="auditor"),
-			@Mapping(source="auditOpinion",target="auditorOpinion"),
-			@Mapping(source="stateId",target="stateId"),
+			@Mapping(source="auditOpinion",target="auditorOpinion")
 	} )
 	Resource mapFrom(ResourceAuditDto editUserDto);
 }

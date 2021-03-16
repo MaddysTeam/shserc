@@ -105,7 +105,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		ResCompany company = resCompanyMapper.selectById ( id );
 		//TODO: if this used by user and resource then cannot been deleted
 		
-		company.setIsDeleted ( Constant.Status.DELETED );
+		company.setIsDeleted ( Constant.State.DELETED );
 		resCompanyMapper.updateById ( company );
 		
 		return company;

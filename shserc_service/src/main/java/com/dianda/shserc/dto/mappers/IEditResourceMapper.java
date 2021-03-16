@@ -32,6 +32,9 @@ public interface IEditResourceMapper extends BasicMapper<Resource, EditResourceD
 			@Mapping(source="importSourceId",target="importSourceId"),
 			@Mapping(source="schoolTypeId",target="schoolTypeId"),
 			@Mapping(source="domainId",target="domainId"),
+			@Mapping(source="coverPath",target="coverPath"),
+			@Mapping(source="stateId",target="stateId"),
+			@Mapping(source="resourceTypeId",target="resourceTypeId")
 	} )
 	Resource mapFrom(EditResourceDto editUserDto );
 }

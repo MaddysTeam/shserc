@@ -214,7 +214,7 @@
               <el-form-item label="安置类型" prop="learnfromId">
                 <el-select
                   @change="learnFromSelectChanged"
-                  v-model="resource.learnfrom"
+                  v-model="resource.learnFrom"
                   value-key="id"
                   placeholder="不分安置形式"
                   style="width: 100%"
@@ -269,6 +269,7 @@
           :limit="1"
           :on-preview="handlePictureCardPreview"
           :on-exceed="uploadResourceCoverHandleExceed"
+          :on-success="uploadResourceCoverSuccess"
           :http-request="uploadResourceCover"
           :auto-upload="true"
         >
@@ -421,7 +422,7 @@ export default {
       gradeOptions: (state) => state.app.grades,
       subjectOptions: (state) => state.app.subjects,
       schoolTypeOptions: (state) => state.app.schoolTypes,
-      learnFromOptions: (state) => state.app.learnFrom,
+      learnFromOptions: (state) => state.app.learnFrom
     }),
   },
   mounted() {
@@ -434,12 +435,12 @@ export default {
       if (id) {
         info(id).then((res) => {
           this.resource = JSON.parse(res.data);
+          console.log(this.resource);
           this.fileList.push({
             name: this.resource.fileName,
             url: this.resource.resourcePath,
           });
           this.bindKeywords();
-          //this.deformitySelectChanged(this.resource.deformityId);
         });
       }
     },
@@ -513,7 +514,9 @@ export default {
 
     uploadResourceOnBeforeUpload() {},
 
-    uploadResourceCover(options) {},
+    uploadResourceCover(options) {
+      uploadFile(options);
+    },
 
     uploadResourceCoverHandleExceed() {
       Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
@@ -522,6 +525,11 @@ export default {
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
       this.dialogVisible = true;
+    },
+
+    uploadResourceCoverSuccess(response, file, fileList){
+       var data = JSON.parse(response.data);
+      this.resource.coverPath = data.filePath;
     },
 
     // select select changed

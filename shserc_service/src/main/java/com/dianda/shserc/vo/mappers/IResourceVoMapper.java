@@ -20,7 +20,9 @@ public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {
 			@Mapping( source = "id", target = "id" ) ,
 			@Mapping( source = "title", target = "title" ) ,
 			@Mapping( source = "keywords", target = "keywords" ) ,
+			@Mapping( source = "description", target = "description" ) ,
 			@Mapping( source = "author", target = "author" ) ,
+			@Mapping( source = "authorCompany", target = "authorCompany" ) ,
 			@Mapping( source = "authorEmail", target = "authorEmail" ) ,
 			@Mapping( source = "viewCount", target = "viewCount" ) ,
 
@@ -36,7 +38,19 @@ public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {
 			@Mapping( source = "importSourceId", target = "importSourceId" ) ,
 			@Mapping( source = "schoolTypeId", target = "schoolTypeId" ) ,
 			@Mapping( source = "domainId", target = "domainId" ) ,
-
+			@Mapping( source = "stateId", target = "stateId" ) ,
+			@Mapping( source = "learnFromId", target = "learnFromId" ) ,
+			@Mapping( source = "resourceTypeId", target = "resourceTypeId" ) ,
+			
+			//@Mapping( source = "subject", target = "subject" ) ,
+			//@Mapping( source = "grade", target = "grade" ) ,
+			@Mapping( source = "stage", target = "stage" ) ,
+			@Mapping( source = "importSource", target = "importSource" ) ,
+			@Mapping( source = "schoolType", target = "schoolType" ) ,
+			@Mapping( source = "domain", target = "domain" ) ,
+			@Mapping( source = "learnFrom", target = "learnFrom" ) ,
+			@Mapping( source = "resourceType", target = "resourceType" ) ,
+			
 			@Mapping( source = "addTime", target = "addTime" ) ,
 			@Mapping( source = "fileExtName", target = "fileExtName" ) ,
 			@Mapping( source = "state", target = "state" ) ,

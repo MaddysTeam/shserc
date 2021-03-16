@@ -102,6 +102,8 @@ public class Resource {
 	private long schoolTypeId;
 
 	private long domainId;
+	
+	private long learnFromId;
 
 	@TableField(exist = false)
 	private String subject;
@@ -120,7 +122,10 @@ public class Resource {
 
 	@TableField(exist = false)
 	private String schoolType;
-
+	
+	@TableField(exist = false)
+	private  String learnFrom;
+	
 	public boolean isNewOne() {
 		return this.id <= 0;
 	}
@@ -158,6 +163,9 @@ public class Resource {
 		resource.schoolType = cache.translate("schoolType", String.valueOf(resource.getSchoolTypeId()));
 		resource.stage = cache.translate("stage", String.valueOf(resource.getStageId()));
 		resource.grade = cache.translate("grade", String.valueOf(resource.getGradeId()));
+		resource.learnFrom=cache.translate("learnFrom", String.valueOf(resource.getLearnFromId ()));
+		resource.resourceType=cache.translate("resourceType", String.valueOf(resource.getResourceTypeId ()));
+		resource.subject=cache.translate("subject", String.valueOf(resource.getSubjectId ()));
 	}
 }
 

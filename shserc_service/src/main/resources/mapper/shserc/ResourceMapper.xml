@@ -26,7 +26,10 @@
         r.download_count,
         r.favorite_count,
         r.comment_count,
-        r.star_count
+        r.star_count,
+        r.auditor,
+        r.auditor_time,
+        r.auditor_opinion
         from resource r
         <where>
             ${ew.sqlSegment}

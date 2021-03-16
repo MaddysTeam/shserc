@@ -109,11 +109,13 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 				String direction = entry.getValue();
 				String orderPhrase = entry.getKey();
 				if (direction.equals(Constant.OrderDirection.ASC)) {
-					wrapper = wrapper.orderByAsc(orderPhrase);
+					wrapper = wrapper.orderByAsc (orderPhrase);
 				} else if (direction.equals(Constant.OrderDirection.DESC)) {
 					wrapper = wrapper.orderByDesc(orderPhrase);
 				}
 			}
+		}else{
+			wrapper = wrapper.orderByDesc ("id");
 		}
 
 		// get paged list data
@@ -129,7 +131,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
 		for (Resource res : resources) {
 			Resource.dictTranslate(res, cache); // 翻译字典
-			resourceVoList.add(IResourceVoMapper.INSTANCE.mapFrom(res));
+			ResourceVo vo=IResourceVoMapper.INSTANCE.mapFrom(res);
+			vo.setGrade ( res.getGrade () );
+			vo.setSubject ( res.getSubject () );
+			resourceVoList.add(vo);
 		}
 
 		// get vo list data
@@ -160,6 +165,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Override
 	public boolean audit(@Valid @NotNull  ResourceAuditDto model) {
 		Resource resource = IResourceAuditMapper.INSTANCE.mapFrom(model);
+		resource.setStateId ( model.getAuditResult () ? Constant.State.AUDITSUCCESS:Constant.State.AUDITFALURE );
+		
 		return mapper.updateById(resource) >= 0;
 	}
 
@@ -168,7 +175,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		try {
 			Resource resource = mapper.selectById(id);
 			Resource.dictTranslate(resource, cache); // 翻译字典
-			return IResourceVoMapper.INSTANCE.mapFrom(resource);
+			ResourceVo vo= IResourceVoMapper.INSTANCE.mapFrom(resource);
+			vo.setGrade ( resource.getGrade () );
+			vo.setSubject ( resource.getSubject () );
+			
+			return vo;
 		} catch (Exception e) {
 			return null;
 		}

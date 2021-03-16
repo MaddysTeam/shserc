@@ -106,7 +106,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 			return false;
 
 		ResUser user = resUserMapper.selectById(id);
-		user.setIsDeleted(Constant.Status.DELETED);
+		user.setIsDeleted(Constant.State.DELETED);
 		int result = resUserMapper.updateById(user);
 
 		return result > 1;

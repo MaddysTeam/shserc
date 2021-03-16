@@ -7,7 +7,7 @@
             b.id,
             b.title,
             b.type_id,
-            u.user_name
+            u.user_name,
             b.add_user,
             b.add_time
         from

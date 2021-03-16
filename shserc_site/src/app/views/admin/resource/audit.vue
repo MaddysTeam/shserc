@@ -1,11 +1,14 @@
 <template>
-  <el-dialog>
-    <el-form ref="resourceAuditForm" v-model="model">
+  <el-dialog :visible.sync="visible" :before-close="handleClose" title="资源审核" width="30%">
+    <el-form ref="resourceAuditForm" v-model="model" label-width="80px">
+      <el-form-item label="资源标题" > 
+        <el-input v-model="model.resourceTitle" :disabled="true" />
+      </el-form-item>
       <el-form-item label="审核资源">
-        <el-switch
-          v-model="model.stateId"
+        <el-switch 
+          v-model="model.auditResult"
           active-color="#13ce66"
-          inactive-color="#ff4949"
+          inactive-color="#ff4949"      
         >
         </el-switch>
       </el-form-item>
@@ -29,6 +32,7 @@
 import {audit} from "@/app/api/resource"
 import { clean } from "@/app/utils/objectHelper";
 import { Notification } from "element-ui";
+import { mapState } from 'vuex';
 export default {
   name: "audit",
   props: {
@@ -37,29 +41,31 @@ export default {
   },
 
   data() {
-      return{}
+      return{
+       
+      }
+  },
+
+  computed:{
+     ...mapState({
+        resourceStatus:(state)=> state.app.resourceStatus
+     })
   },
 
   methods: {
 
     handleSubmit(formName) {
-      let _this = this;
-      _this.$refs[formName].validate((isValid) => {
-        if (isValid) {
-          audit(this.model).then((res) => {
+       audit(this.model).then((res) => {
             if (res) {
               Notification.success(res.message);
               this.handleClose(formName);
             }
           });
-        }
-      });
     },
 
      handleClose(formName) {
       this.$emit("close");
       clean(this.model);
-      this.$refs[formName].clearValidate();
     },
 
 
@@ -68,4 +74,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

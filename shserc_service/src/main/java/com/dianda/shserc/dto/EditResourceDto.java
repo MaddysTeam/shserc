@@ -51,6 +51,8 @@ public class EditResourceDto {
 	private long gradeId;
 
 	private long stageId;
+	
+	private  long stateId;
 
 	private long importSourceId;
 

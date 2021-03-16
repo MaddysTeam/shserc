@@ -20,9 +20,14 @@ public class ResourceVo  implements Serializable {
 	
 	private  String title;
 	
+	private  String description;
+	
 	private  String author;
 	
-	private  String resourceType;
+	private String authorCompany;
+	
+	private String authorEmail;
+	
 	
 	private  String deformity;
 	
@@ -35,8 +40,6 @@ public class ResourceVo  implements Serializable {
 	private  String fileExtName;
 	
 	private  long  fileSize;
-	
-	private String authorEmail;
 	
 	private  long viewCount;
 	
@@ -59,18 +62,40 @@ public class ResourceVo  implements Serializable {
 	private  int favoriteCount;
 
 	private  int commentCount;
+	
+	private String subject;
 
 	private long subjectId;
+	
+	private String grade;
 
 	private long gradeId;
+	
+	private  String stage;
 
 	private long stageId;
+	
+	private long stateId;
+	
+	private  String importSource;
 
 	private long importSourceId;
+	
+	private  String  schoolType;
 
 	private long schoolTypeId;
+	
+	private String domain;
 
 	private long domainId;
+	
+	private  String learnFrom;
+	
+	private long resourceTypeId;
+	
+	private  String resourceType;
+	
+	private long learnFromId;
 
 	private long auditor;
 

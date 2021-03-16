@@ -3,7 +3,7 @@ export default {
   namespaced: true,
   state: {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-    isAuth: true,// localStorage.getItem('Authorization') ? true : false,
+    isAuth: localStorage.getItem('Authorization') ? true : false,
     loginUserInfo:{},
     //following for dictionary
     dict: [],

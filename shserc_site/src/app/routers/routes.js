@@ -81,7 +81,7 @@ export const menuRoutes = [
         name: '入库资源',
         path: "/admin/resource/index",
         icon: 'el-icon-files',
-        component:ResourceList,
+        component:ResourceIndex,
         children: []
       }
     ]
@@ -159,10 +159,11 @@ const routes = [
       menuRoutes[7],
 
     {
-      path: '/admin/resource/index',
-      name: 'ResourceIndex',
-      component: ResourceIndex
-    }, {
+      path: '/admin/resource/list',
+      name: 'ResourceList',
+      component: ResourceList
+    }, 
+    {
       path: '/admin/resource/add/',
       name: 'ResourceAdd',
       component: ResourceEdit

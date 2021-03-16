@@ -1,7 +1,9 @@
 package com.dianda.shserc.dto;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -11,13 +13,12 @@ public class ResourceAuditDto{
 	@Min(value = 1)
 	private long resourceId;
 
-	@Min(value = 1)
+	@Min(value = 0)
 	private long auditorId;
-
-	@NotBlank
+	
+	@Length( max=500)
 	private String auditOpinion;
-
-	@Min(value = 1)
-	private long stateId;
+	
+	private Boolean auditResult;
 
 }
