@@ -8,17 +8,17 @@ import java.io.Serializable;
 public class ResRealVo implements Serializable {
 
 	private  long id;
-	
+
 	private String realName;
-	
+
 	private String cardNo;
-	
+
 	private String idCard;
-	
+
 	private String cardPassword;
-	
+
 	private  String companyName;
-	
+
 	private long companyId;
 
 }

@@ -1,6 +1,8 @@
 package com.dianda.shserc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dianda.shserc.bean.RoleSelectParams;
 import com.dianda.shserc.dto.EditRoleDto;
 import com.dianda.shserc.dto.mappers.IEditRoleMapper;
@@ -9,12 +11,15 @@ import com.dianda.shserc.mapper.ResRoleMapper;
 import com.dianda.shserc.service.IResRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.util.basic.ObjectUtil;
+import com.dianda.shserc.util.basic.StringUtil;
 import com.dianda.shserc.vo.ResRoleVo;
 import com.dianda.shserc.vo.ResRoleVoList;
 import com.dianda.shserc.vo.mappers.IRoleVoMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 角色服务实现类
@@ -30,9 +35,35 @@ public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> impl
 	
 	@Override
 	public ResRoleVoList find( RoleSelectParams params ) {
-		QueryWrapper<ResRole>  roleQueryWrapper = new QueryWrapper<> (  );
+		QueryWrapper<ResRole>  queryWrapper = new QueryWrapper<> (  );
+
+		String phrase = params.getSearchPhrase ( );
+		if ( ! StringUtil.isNullOrEmpty ( phrase ) ) {
+			queryWrapper = queryWrapper.and ( wrapper ->
+					wrapper.like ( "role_name" , phrase )
+							.or ( )
+							.like ( "description" , phrase ));
+		}
+
+		// get paged list data
+
+		int current = params.getCurrent ( );
+		int size = params.getSize ( );
+		IPage<ResRole> page = new Page<>( current , size );
+		page = mapper.selectRole ( page , queryWrapper );
+		List<ResRole> listData = page.getRecords ( );
+		List<ResRoleVo> listVoData = new ArrayList<>( );
+		for ( ResRole resRole : listData ) {
+			listVoData.add (IRoleVoMapper.INSTANCE.mapFrom ( resRole ) );
+		}
+
+		ResRoleVoList resRoleVoList=new ResRoleVoList();
+		resRoleVoList.setListData(listVoData);
+		resRoleVoList.setCurrent ( current );
+		resRoleVoList.setSize ( size );
+		resRoleVoList.setTotal ( page.getTotal ( ) );
 		
-		return null;
+		return resRoleVoList;
 	}
 
 	@Override

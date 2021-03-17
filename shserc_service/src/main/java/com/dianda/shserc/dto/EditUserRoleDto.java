@@ -8,8 +8,8 @@ import javax.validation.constraints.Min;
 public class EditUserRoleDto {
 
 	@Min(value = 1)
-	private long userId
-			;
+	private long userId;
+
 	@Min(value = 1)
 	private long roleId;
 

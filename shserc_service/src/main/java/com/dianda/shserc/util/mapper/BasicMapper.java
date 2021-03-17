@@ -1,21 +1,19 @@
 package com.dianda.shserc.util.mapper;
 
 import org.mapstruct.InheritConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
 public interface BasicMapper<Source, Target> {
 	@InheritConfiguration
-	Source mapFrom( Target target );
-	
+	Source mapFrom(Target target);
+
 	@InheritConfiguration
-	Target mapTo( Source source );
-	
+	Target mapTo(Source source);
+
 	@InheritConfiguration
-	List<Source> mapFrom2( List<Target> targets );
-	
+	List<Source> mapFrom2(List<Target> targets);
+
 	@InheritConfiguration
-	List<Target> mapTo( List<Source> sources );
+	List<Target> mapTo(List<Source> sources);
 }

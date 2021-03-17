@@ -2,14 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.shserc.mapper.ResRoleMapper">
 
-<!--    <select id="selectMenu" resultType="com.dianda.shserc.entity.Menu">-->
-<!--        select r.id as id,-->
-<!--        r.role_name,-->
-<!--        r.description-->
-<!--        from menu-->
-<!--        <where>-->
-<!--            ${ew.sqlSegment}-->
-<!--        </where>-->
-<!--    </select>-->
+    <select id="selectMenus" resultType="com.dianda.shserc.entity.Menu">
+        select r.id as id,
+        m.title,
+        m.path,
+        m.level,
+        m.state_id,
+        r.id as roleId,
+        r.role_name
+        from menu m
+         join menu_role mr on mr.menu_id=m.id
+         join res_role r on role.id= mr.role_id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <insert id="addMenuRole" parameterType="com.dianda.shserc.entity.MenuRole">
+         insert into menu_role (resource_id, user_id,) values(#{resourceId} ,#{userId})
+    </insert>
+
+    <delete id="deleteMenuRoles" parameterType="com.dianda.shserc.entity.MenuRole">
+        delete from menu_role where menu_id= #{menuId}
+    </delete>
 
 </mapper>

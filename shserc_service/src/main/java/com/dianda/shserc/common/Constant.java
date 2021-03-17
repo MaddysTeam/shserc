@@ -57,7 +57,14 @@ public final class Constant {
 		public static final String[] ALLOW_FILE_TYPES = { };
 		public static final String UPLOAD_FILE_PATH = "";
 	}
-	
+
+	public static final class LENGTH{
+		public static final int MAX_PATH_LENGTH=500;
+		public static final int MIN_PATH_LENGTH=1;
+		public static final int MAX_NAME_LENGTH=100;
+		public static final int MIN_NAME_LENGTH=1;
+	}
+
 	public static final class State {
 		public final static int DELETED = 171;
 		public final static int AUDITSUCCESS = 169;

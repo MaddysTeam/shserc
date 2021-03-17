@@ -24,4 +24,5 @@ public class ResCompanyVo implements Serializable {
 		this.label = name;
 		this.children = children;
 	}
+
 }

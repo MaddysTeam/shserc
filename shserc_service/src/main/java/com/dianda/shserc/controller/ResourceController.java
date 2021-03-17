@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+/**
+ * resource controller
+ * @author huachao
+ * @since 2020-08-12
+ */
 @RestController
 @RequestMapping( "/resource" )
 public class ResourceController extends BaseController {
