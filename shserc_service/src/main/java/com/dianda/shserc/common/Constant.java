@@ -9,6 +9,7 @@ public final class Constant {
 		public static String TODO = "002";
 		public static String PARAM_NULL_POINT_REFERENCE = "008";
 		public static String PARAM_INVALIDATE = "009";
+		public static String LOGIC_RESULT_INVALID="005";
 	}
 	
 	public static final class Error {
@@ -39,6 +40,9 @@ public final class Constant {
 		public final static String BULLETIN_TITLE_IS_REQUIRE = "公告标题为必填";
 		public final static String BULLETIN_CONTENT_IS_REQUIRE = "公告内容为必填";
 		public final static String BULLETIN_CONTENT_MAX_LENGTH = "公告内容过多";
+		
+		// menu error mesage
+		public final static String PARENT_MENU_IS_NOT_EXISTS="父菜单不存在";
 		
 		// common
 		public final static String PARAMS_IS_INVALID = "传入参数有误";

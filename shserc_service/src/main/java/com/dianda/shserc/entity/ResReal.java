@@ -13,12 +13,10 @@ import java.time.LocalDateTime;
  * @since 2020-10-05
  */
 @Data
-public class ResReal {
+public class ResReal extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-
-	private long id;
-
+	
 	private String realName;
 
 	private String cardNo;
@@ -41,16 +39,16 @@ public class ResReal {
 	@TableField( exist = false )
 	private String State;
 
-	private long addUser;
-
-	private LocalDateTime addTime;
-
-	private long updateUser;
-
-	private LocalDateTime updateTime;
-
-	public boolean isNewOne() {
-		return this.id <= 0;
-	}
+//	private long addUser;
+//
+//	private LocalDateTime addTime;
+//
+//	private long updateUser;
+//
+//	private LocalDateTime updateTime;
+//
+//	public boolean isNewOne() {
+//		return this.id <= 0;
+//	}
 
 }

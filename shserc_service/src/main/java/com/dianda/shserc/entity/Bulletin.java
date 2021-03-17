@@ -1,15 +1,14 @@
 package com.dianda.shserc.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class Bulletin {
-
-	private long id;
-
+public class Bulletin extends BaseEntity{
+	
 	private long typeId;
 
 	private String title;
@@ -26,22 +25,9 @@ public class Bulletin {
 
 	private long fileSize;
 
-	private long addUser;
-
-	private LocalDateTime addTime;
-
-	private long updateUser;
-
-	private LocalDateTime updateTime;
-
+	@TableField(exist=false)
 	private String type;
-
-	private boolean isDeleted;
-
-	public boolean isNewOne() {
-		return this.id <= 0;
-	}
-
+	
 	public static void dictTranslate( Bulletin bulletin , DictionaryCache cache ) {
 		//bulletin.type = cache.translate ( "bulltinType" , String.valueOf ( bulletin.getTypeId ( ) ) );
 	}

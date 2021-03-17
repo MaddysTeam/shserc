@@ -148,16 +148,9 @@ const routes = [
     name: 'AdminIndex',
     component: Admin,
     children: [
-      ...menuRoutes
-      // menuRoutes[0],
-      // menuRoutes[1],
-      // menuRoutes[2],
-      // menuRoutes[3],
-      // menuRoutes[4],
-      // menuRoutes[5],
-      // menuRoutes[6],
-      // menuRoutes[7],
 
+      ...menuRoutes,
+      
     {
       path: '/admin/resource/list',
       name: 'ResourceList',

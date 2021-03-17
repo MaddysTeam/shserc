@@ -3,6 +3,7 @@ package com.dianda.shserc;
 import com.dianda.shserc.bean.UserSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
+import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IResUserService;
 import com.dianda.shserc.vo.ResUserVo;
@@ -51,9 +52,19 @@ public class ResUserTest {
 		userDto.setId(userId);
 		userDto.setUserName("jimmyPoor2031");
 
-		boolean user = service.edit(userDto);
-		Assert.notNull(user);
+		boolean result = service.edit(userDto);
+		Assert.isTrue (result);
 		//Assert.isTrue(user.getId() == userId && user.getUserName() == userDto.getUserName());
+	}
+	
+	@Test
+	public void edit_user_role_test(){
+		EditUserRoleDto userRoleDto=new EditUserRoleDto();
+		userRoleDto.setRoleId ( 1 );
+		userRoleDto.setUserId ( 1 );
+        boolean result= service.editUserRole ( userRoleDto );
+        
+        Assert.isTrue ( result );
 	}
 
 

@@ -15,7 +15,7 @@ public interface MenuMapper extends BaseMapper<Menu> {
 
 	List<Menu> selectMenus(@Param(Constants.WRAPPER)Wrapper<Menu> wrapper);
 
-	int addMenuRole(MenuRole menuRole);
+	int insertMenuRole(MenuRole menuRole);
 
 	int deleteMenuRoles(MenuRole menuRole);
 }

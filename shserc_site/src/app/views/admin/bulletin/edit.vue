@@ -36,7 +36,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="handleSubmit()">提交</el-button>
-      <el-button type="info" @click="handleSubmit()">取消</el-button>
+      <el-button type="info" @click="handCancel()">取消</el-button>
     </el-form-item>
   </el-form>
 </template>

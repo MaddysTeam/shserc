@@ -6,7 +6,7 @@
         select r.id as id,
         r.role_name,
         r.description
-        from res_role
+        from res_role r
         <where>
             ${ew.sqlSegment}
         </where>

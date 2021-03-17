@@ -23,12 +23,10 @@ public interface IResUserService extends IService<ResUser> {
 	
 	boolean delete( long id );
 	
-	ResUserVo getById( long id );
+	ResUserVo findById( long id );
 	
 	ResUserVo getByNameAndPassword(String userName,String password);
 	
 	Boolean editUserRole(EditUserRoleDto model);
-
-	Boolean deleteUserRole( EditUserRoleDto model);
 
 }

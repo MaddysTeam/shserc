@@ -17,28 +17,25 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@NotNull
-public class ResCompany implements Serializable {
+public class ResCompany extends  BaseEntity  {
 
 	private static final long serialVersionUID = 1L;
-
-	private long id;
-
+	
 	private String companyName;
 
 	private Long parentId;
 
-	private Long addUser;
+//	private Long addUser;
+//
+//	private LocalDateTime addTime;
+//
+//	private Long updateUser;
+//
+//	private LocalDateTime updateTime;
+//
+//	private int isDeleted;
 
-	private LocalDateTime addDate;
-
-	private Long updateUser;
-
-	private LocalDateTime updateDate;
-
-	private int isDeleted;
-
-	public boolean isNewOne() {
-		return id <= 0;
-	}
+//	public boolean isNewOne() {
+//		return id <= 0;
+//	}
 }

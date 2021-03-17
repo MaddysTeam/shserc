@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 public class EditBulletinDto {
@@ -32,5 +33,9 @@ public class EditBulletinDto {
 	private String fileExtName;
 
 	private long fileSize;
+	
+	private  long operatorId;
+	
+	private LocalDateTime operateDate;
 
 }

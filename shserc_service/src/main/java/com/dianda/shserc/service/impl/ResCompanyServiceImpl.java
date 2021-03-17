@@ -83,11 +83,11 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		
 		int result = 0;
 		if ( o.isNewOne ( ) ) {
-			o.setAddDate (LocalDateTime.now ());
+			o.setAddTime (LocalDateTime.now ());
 			o.setAddUser (userId  );
 			result = resCompanyMapper.insert ( o );
 		} else {
-			o.setUpdateDate ( LocalDateTime.now () );
+			o.setUpdateTime ( LocalDateTime.now () );
 			o.setUpdateUser ( userId );
 			result = resCompanyMapper.updateById ( o );
 		}

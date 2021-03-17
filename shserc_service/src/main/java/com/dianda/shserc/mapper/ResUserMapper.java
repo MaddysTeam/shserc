@@ -20,7 +20,7 @@ public interface ResUserMapper extends BaseMapper<ResUser> {
 
 	ResUserRole selectUserRole(@Param(Constants.WRAPPER) Wrapper<ResUserRole> wrapper);
 
-	int addUserRole(ResUserRole resUserRole);
+	int insertUserRole(ResUserRole resUserRole);
 
 	int deleteUserRole(ResUserRole resUserRole);
 

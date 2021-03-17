@@ -36,7 +36,7 @@ public class ResUserController extends BaseController {
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.POST)
 	public JsonResult findById(@PathVariable long id) {
-		ResUserVo resUserVo = service.getById(id);
+		ResUserVo resUserVo = service.findById (id);
 		return JsonResult.success(resUserVo);
 	}
 

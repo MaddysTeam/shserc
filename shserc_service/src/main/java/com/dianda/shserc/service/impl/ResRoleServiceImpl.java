@@ -18,6 +18,7 @@ import com.dianda.shserc.vo.mappers.IRoleVoMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,64 +36,66 @@ public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> impl
 	
 	@Override
 	public ResRoleVoList find( RoleSelectParams params ) {
-		QueryWrapper<ResRole>  queryWrapper = new QueryWrapper<> (  );
-
+		QueryWrapper<ResRole> queryWrapper = new QueryWrapper<> ( );
+		
 		String phrase = params.getSearchPhrase ( );
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) ) {
 			queryWrapper = queryWrapper.and ( wrapper ->
 					wrapper.like ( "role_name" , phrase )
 							.or ( )
-							.like ( "description" , phrase ));
+							.like ( "description" , phrase ) );
 		}
-
+		
 		// get paged list data
-
+		
 		int current = params.getCurrent ( );
 		int size = params.getSize ( );
-		IPage<ResRole> page = new Page<>( current , size );
+		IPage<ResRole> page = new Page<> ( current , size );
 		page = mapper.selectRole ( page , queryWrapper );
 		List<ResRole> listData = page.getRecords ( );
-		List<ResRoleVo> listVoData = new ArrayList<>( );
+		List<ResRoleVo> listVoData = new ArrayList<> ( );
 		for ( ResRole resRole : listData ) {
-			listVoData.add (IRoleVoMapper.INSTANCE.mapFrom ( resRole ) );
+			listVoData.add ( IRoleVoMapper.INSTANCE.mapFrom ( resRole ) );
 		}
-
-		ResRoleVoList resRoleVoList=new ResRoleVoList();
-		resRoleVoList.setListData(listVoData);
+		
+		ResRoleVoList resRoleVoList = new ResRoleVoList ( );
+		resRoleVoList.setListData ( listVoData );
 		resRoleVoList.setCurrent ( current );
 		resRoleVoList.setSize ( size );
 		resRoleVoList.setTotal ( page.getTotal ( ) );
 		
 		return resRoleVoList;
 	}
-
+	
 	@Override
-	public ResRoleVo findById(long id) {
-		QueryWrapper<ResRole> queryWrapper = new QueryWrapper<>();
-		queryWrapper.eq ( "r.id",id );
-		ResRole resRole = mapper.selectOne(queryWrapper);
-		ResRoleVo vo = ObjectUtil.isNull(resRole) ? null : IRoleVoMapper.INSTANCE.mapFrom(resRole);
-
+	public ResRoleVo findById( long id ) {
+		QueryWrapper<ResRole> queryWrapper = new QueryWrapper<> ( );
+		queryWrapper.eq ( "r.id" , id );
+		ResRole resRole = mapper.selectOne ( queryWrapper );
+		ResRoleVo vo = ObjectUtil.isNull ( resRole ) ? null : IRoleVoMapper.INSTANCE.mapFrom ( resRole );
+		
 		return vo;
 	}
-
+	
 	@Override
-	public boolean edit(EditRoleDto roleDto) {
-		int result = 0;
-		ResRole resRole = IEditRoleMapper.INSTANCE.mapFrom(roleDto);
-		ResRoleVo resRealVo = findById(resRole.getId());
-		if (resRole.isNewOne() && ObjectUtil.isNull(resRealVo)) {
-			result = mapper.insert(resRole);
-			return result > 0;
+	public boolean edit( EditRoleDto roleDto ) {
+		ResRole resRole = IEditRoleMapper.INSTANCE.mapFrom ( roleDto );
+		if ( resRole.isNewOne ( ) ) {
+			resRole.setAddUser ( roleDto.getOperatorId ( ) );
+			resRole.setAddTime ( LocalDateTime.now ( ) );
+			
+			return mapper.insert ( resRole ) > 0;
 		} else {
-			result = mapper.updateById(resRole);
-			return result >= 0;
+			resRole.setUpdateUser ( roleDto.getOperatorId ( ) );
+			resRole.setUpdateTime ( LocalDateTime.now ( ) );
+			
+			return mapper.updateById ( resRole ) > 0;
 		}
 	}
-
+	
 	@Override
-	public boolean delete(String id) {
+	public boolean delete( String id ) {
 		return false;
 	}
-
+	
 }

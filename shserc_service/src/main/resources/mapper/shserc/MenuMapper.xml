@@ -11,14 +11,14 @@
         r.id as roleId,
         r.role_name
         from menu m
-         join menu_role mr on mr.menu_id=m.id
-         join res_role r on role.id= mr.role_id
+         letf join menu_role mr on mr.menu_id=m.id
+         left join res_role r on role.id= mr.role_id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
-    <insert id="addMenuRole" parameterType="com.dianda.shserc.entity.MenuRole">
+    <insert id="insertMenuRole" parameterType="com.dianda.shserc.entity.MenuRole">
          insert into menu_role (resource_id, user_id,) values(#{resourceId} ,#{userId})
     </insert>
 

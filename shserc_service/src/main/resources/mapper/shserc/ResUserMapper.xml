@@ -33,12 +33,12 @@
         </where>
     </select>
 
-    <insert id="'addUserRole" parameterType="com.dianda.shserc.entity.ResUserRole">
+    <insert id="insertUserRole" parameterType="com.dianda.shserc.entity.ResUserRole">
          insert  into  res_user_role (user_id,role_id) values(#{userId},#{roleId})
     </insert>
 
     <delete id="deleteUserRole" parameterType="com.dianda.shserc.entity.ResUserRole">
-        delete from res_user_role where role_id= #{userId} and user_id= #{roleId}
+        delete from res_user_role where  user_id= #{userId}
     </delete>
 
 </mapper>

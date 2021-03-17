@@ -32,22 +32,25 @@ export default {
     this.bind();
   },
   methods: {
+
     renderContent(h, { node, data, store }) {
       return (
-        <span class="node">
+        <div class="node" style="">
           <span
             class="tree-img"
-            style="color:#409EFF;padding:20px;font-size:18px;transition:color .15s linear"
+            style="color:#409EFF;padding:30px;font-size:18px;transition:color .15s linear"
           >
             <i class="el-icon-location"></i>
           </span>
-          <span class="tree-spt">{node.label}</span>
-        </span>
+          <span class="tree-spt" style="padding-top:20px; color:333;">{node.label}</span>
+        </div>
       );
     },
+
     handleCloseEdit(){
       this.dialogVisible=false;
     },
+
     bind(){
       list().then((res)=>{
         if(res && res.data){
@@ -55,8 +58,9 @@ export default {
         this.source=[JSON.parse(res.data)];
         }
       })
-    } 
-  },
+    }
+
+  }
 };
 </script>
 
@@ -72,4 +76,5 @@ export default {
   overflow: auto;
   border: 1px solid #e3e3e3;
 }
+
 </style>

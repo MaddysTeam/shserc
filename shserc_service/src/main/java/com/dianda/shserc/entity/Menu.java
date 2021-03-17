@@ -2,11 +2,11 @@ package com.dianda.shserc.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class Menu {
-
-	private long id;
+@EqualsAndHashCode(callSuper = false)
+public class Menu extends BaseEntity {
 
 	private long parentId;
 
@@ -15,12 +15,11 @@ public class Menu {
 	private String path;
 
 	private String title;
-
-	private long stateId;
-
+	
 	@TableField(exist = false)
 	private  long roleId;
 
 	@TableField(exist = false)
 	private  String roleName;
+	
 }

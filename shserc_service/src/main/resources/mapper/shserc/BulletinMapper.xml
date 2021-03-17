@@ -2,19 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.shserc.mapper.BulletinMapper">
 
-    <select id="selectBulletins" parameterType="com.dianda.shserc.entity.Bulletin">
+    <select id="selectBulletins" resultType="com.dianda.shserc.entity.Bulletin">
         select
-            b.id,
-            b.title,
-            b.type_id,
-            u.user_name,
-            b.add_user,
-            b.add_time
+        bulletin.id,
+        bulletin.title,
+        bulletin.content,
+        bulletin.type_id,
+        u.user_name,
+        bulletin.add_user,
+        bulletin.add_time
         from
-        bulletin b join res_user u  on b.add_user=u.id
+        bulletin bulletin left join res_user u on bulletin.add_user=u.id
         <where>
             ${ew.sqlSegment}
         </where>
-   </select>
+    </select>
 
 </mapper>

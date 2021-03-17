@@ -332,12 +332,13 @@ import { edit, info } from "@/app/api/resource";
 import { uploadFile } from "@/app/api/file";
 import { resourceModel } from "@/app/models/resource";
 import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
+import { deepCopy } from "@/app/utils/objectHelper";
 
 export default {
   data() {
     return {
-      resource: resourceModel,
-     
+      resource: deepCopy(resourceModel),
+
       keywords: [],
       inputKeywordsValue: "",
       fileList: [],
@@ -422,7 +423,7 @@ export default {
       gradeOptions: (state) => state.app.grades,
       subjectOptions: (state) => state.app.subjects,
       schoolTypeOptions: (state) => state.app.schoolTypes,
-      learnFromOptions: (state) => state.app.learnFrom
+      learnFromOptions: (state) => state.app.learnFrom,
     }),
   },
   mounted() {
@@ -527,8 +528,8 @@ export default {
       this.dialogVisible = true;
     },
 
-    uploadResourceCoverSuccess(response, file, fileList){
-       var data = JSON.parse(response.data);
+    uploadResourceCoverSuccess(response, file, fileList) {
+      var data = JSON.parse(response.data);
       this.resource.coverPath = data.filePath;
     },
 
@@ -583,8 +584,8 @@ export default {
       let _this = this;
       _this.$refs["resourceForm"].validate((isValid) => {
         if (isValid) {
-          console.log(this.resource);
           edit(this.resource).then((res) => {
+            this.cleanForm();
             this.redirectToList();
           });
         }
@@ -592,11 +593,16 @@ export default {
     },
 
     handCancel() {
+      this.cleanForm();
       this.redirectToList();
     },
 
     redirectToList() {
       this.$router.push("/admin/resource/list");
+    },
+
+    cleanForm() {
+      this.resource = deepCopy(resourceModel);
     },
   },
 };

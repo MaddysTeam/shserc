@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 @Data
-public class MenuRole {
+public class MenuRole extends BaseEntity {
 
 	private  long menuId;
 

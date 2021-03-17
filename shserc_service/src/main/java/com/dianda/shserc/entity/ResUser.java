@@ -17,12 +17,9 @@ import org.apache.tomcat.jni.Local;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@NotNull
-public class ResUser implements Serializable {
+public class ResUser extends  BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-
-	private int id;
 	
 	private String userName;
 	
@@ -61,20 +58,17 @@ public class ResUser implements Serializable {
 	@TableField(exist = false)
 	private String roleName;
 	
-	private long addUser;
-	
-	private LocalDateTime addTime;
-	
-	private long updateUser;
-	
-	private LocalDateTime updateTime;
+//	private long addUser;
+//
+//	private LocalDateTime addTime;
+//
+//	private long updateUser;
+//
+//	private LocalDateTime updateTime;
 	
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
-
-	public boolean isNewOne() {
-		return id <= 0;
-	}
+	
 	
 }

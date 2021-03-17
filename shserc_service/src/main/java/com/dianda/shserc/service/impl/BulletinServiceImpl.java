@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +32,12 @@ public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> i
 	public boolean edit(@Valid @NotNull EditBulletinDto editBulletinDto) {
 		Bulletin bulletin = IEditBulletinMapper.INSTANCE.mapFrom(editBulletinDto);
 		if (bulletin.isNewOne()) {
+			bulletin.setAddUser ( editBulletinDto.getOperatorId () );
+			bulletin.setAddTime (editBulletinDto.getOperateDate () );
 			return mapper.insert(bulletin) > 0;
 		} else {
+			bulletin.setUpdateUser ( editBulletinDto.getOperatorId () );
+			bulletin.setUpdateTime ( editBulletinDto.getOperateDate ()   );
 			return mapper.updateById(bulletin) >= 0;
 		}
 	}
@@ -46,7 +51,7 @@ public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> i
 
 		// where phrase
 
-		wrapper.eq("is_deleted", 0);
+	//	wrapper.eq("bulletin.is_deleted", 0);
 		if (typeId > 0) {
 			wrapper.eq("type_id", typeId);
 		}

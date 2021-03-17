@@ -25,13 +25,13 @@
       :total="selectParam.total"
     >
       <template slot-scope="scopes" slot="title">
-        <div v-if="scopes.row.top">
+        <!-- <div v-if="scopes.row.top">
           <strong font="color:red">【置顶】</strong>
-        </div>
+        </div> -->
         <div>{{ scopes.scope.row.title }}</div>
       </template>
       <template slot-scope="scopes" slot="content">
-        <div>{{ scopes.scope.row.content }}</div>
+        <div v-html="scopes.scope.row.content "></div>
       </template>
     </Table>
   </div>
@@ -43,6 +43,7 @@ import Table from "@/components/Tables/index";
 import { list, edit, del, info } from "@/app/api/bulletin.js";
 import { selectParam } from "@/app/models/bulletin.js";
 import { mapState } from "vuex";
+import {deepCopy} from "@/app/utils/objectHelper"
 
 export default {
   components: { Table },
@@ -103,7 +104,7 @@ export default {
       ],
 
       source: [],
-      selectParam: [],
+      selectParam: deepCopy(selectParam),
       selesctOptions: ["", ""],
     };
   },
@@ -115,14 +116,13 @@ export default {
       if (current) {
         this.selectParam.current = current;
       }
-      let result = list(selectParam).then((res) => {
+      let result = list(this.selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.selectParam.total = data.total;
           this.source = data.listData ? data.listData : [];
         }
       });
-      // this.source=[{"title":"123","content":"1231231231231231231231231231"}]
     },
 
     handlePageSizeChange(val) {
@@ -138,8 +138,8 @@ export default {
 
     addBulletin() {
       this.$router.push("/admin/bulletin/add");
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

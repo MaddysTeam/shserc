@@ -3,6 +3,8 @@ package com.dianda.shserc.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Data
 public class ResUserRole {
 	
@@ -10,8 +12,7 @@ public class ResUserRole {
 
 	private  long userId;
 
-	@TableField(exist = false)
-	private  String roleName;
+	private LocalDateTime addTime;
 
 }
 
