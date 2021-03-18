@@ -37,7 +37,7 @@ public final class FileUploader  implements IFileUploader {
 			return new UploadResult ( false , Constant.Error.FILE_SIZE_IS_GREATER_THAN_ZERO);
 		}
 		if ( directoryPath.isEmpty ( ) ) {
-			return new UploadResult ( false , Constant.Error.FILE_UPLOAD_DST_PATH );
+			return new UploadResult ( false , Constant.Error.FILE_UPLOAD_DST_PATH_IS_REQUIRED );
 		}
 		
 		String fileName = source.getName ( );

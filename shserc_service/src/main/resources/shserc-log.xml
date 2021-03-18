@@ -1,7 +1,7 @@
 <configuration>
     <Properties>
         <Property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}:%L -%m%n"></Property>
-       <Property name="displayName" value="ShsercService"></Property>
+        <Property name="displayName" value="ShsercService"></Property>
         <Property name="filepath" value="D:\temp\logs\shserc"></Property>
     </Properties>
     <Appenders>
@@ -10,22 +10,34 @@
         <File name="File" fileName="d:/temp/logs/shserc/test.log" append="false">
             <PatternLayout pattern="${pattern}"/>
         </File>
-<!--        <RollingFile name="RollingFile">-->
-<!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
-<!--            <PatternLayout pattern="${pattern}"/>-->
-<!--            <Policies>-->
-<!--                <TimeBasedTriggeringPolicy interval="1"/>-->
-<!--                <SizeBasedTriggeringPolicy size="10MB"/>-->
-<!--            </Policies>-->
-<!--            <DefaultRolloverStrategy max="15"/>-->
-<!--        </RollingFile>-->
+        <!--        <RollingFile name="RollingFile">-->
+        <!--            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>-->
+        <!--            <PatternLayout pattern="${pattern}"/>-->
+        <!--            <Policies>-->
+        <!--                <TimeBasedTriggeringPolicy interval="1"/>-->
+        <!--                <SizeBasedTriggeringPolicy size="10MB"/>-->
+        <!--            </Policies>-->
+        <!--            <DefaultRolloverStrategy max="15"/>-->
+        <!--        </RollingFile>-->
 
     </Appenders>
     <Loggers>
-        <logger name="org.springframework" level="info" additivity="false">
-            <AppenderRef ref="File"/>
+        <logger name="com.springframework" level="info" additivity="false">
             <AppenderRef ref="Console"/>
-<!--            <AppenderRef ref="RollingFile"/>-->
+            <AppenderRef ref="File"/>
+
+            <!--            <AppenderRef ref="RollingFile"/>-->
         </logger>
+        <logger name="com.dianda.shserc" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+
+            <!--            <AppenderRef ref="RollingFile"/>-->
+        </logger>
+
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="File"/>
+        </root>
     </Loggers>
 </configuration>

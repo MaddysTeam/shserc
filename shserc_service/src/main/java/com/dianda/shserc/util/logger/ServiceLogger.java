@@ -2,15 +2,14 @@ package com.dianda.shserc.util.logger;
 
 
 import com.dianda.shserc.util.basic.ObjectUtil;
-import org.apache.log4j.LogManager;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ServiceLogger implements IServiceLogger {
 
-	static Logger logger = (Logger) LogManager.getLogger(ServiceLogger.class);
+	static Logger logger = (Logger) LoggerFactory.getLogger(ServiceLogger.class);
 
 	@Override
 	public void fatal(LoggerMessage message) {

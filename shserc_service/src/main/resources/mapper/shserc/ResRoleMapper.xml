@@ -3,7 +3,7 @@
 <mapper namespace="com.dianda.shserc.mapper.ResRoleMapper">
 
     <select id="selectRole" resultType="com.dianda.shserc.entity.ResRole">
-        select r.id as id,
+        select r.id ,
         r.role_name,
         r.description
         from res_role r

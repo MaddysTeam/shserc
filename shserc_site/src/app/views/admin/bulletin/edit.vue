@@ -108,7 +108,7 @@ export default {
 
     uploadResourceSuccess(response, file, fileList) {
       var data = JSON.parse(response.data);
-      this.bulletin.resourcePath = data.filePath;
+      this.bulletin.filePath = data.filePath;
       this.bulletin.fileName = data.fileName;
       this.bulletin.fileExtName = data.fileExtName;
       this.bulletin.fileSize = data.fileSize;

@@ -8,10 +8,10 @@ axios.interceptors.request.use(
         var app = store.state.app;
         if (app.isAuth) {
             config.headers['Authorization'] = app.token;
-            if(localStorage.getItem('Authorization')!=app.token){
-               // window.location.reload();
+            if (localStorage.getItem('Authorization') != app.token) {
+                // window.location.reload();
             }
-        }   
+        }
         return config;
     },
     error => {
@@ -26,8 +26,11 @@ axios.interceptors.response.use(res => {
     }
 
     if (res.data.resultCode != 200) {
-        if (res.data.message) Notification.error({ message: res.data.message })
-        if (res.data.resultCode == 416 || res.data.resultCode == 401) {
+        if (res.data.message) Notification.error({
+            dangerouslyUseHTMLString: true,
+            message: res.data.message.replace(/\r\n/g, "<br>")
+        })
+        if (res.data.resultCode == 416 || res.data.resultCode == 401 || res.data.resultCode == 400) {
             router.push({ path: '/login' })
         }
         return Promise.reject(res.data)
@@ -36,7 +39,7 @@ axios.interceptors.response.use(res => {
     return res.data
 }, error => {
     console.log(error)
-    store.commit('app/logout');
+    //store.commit('app/logout');
     if (error.message) {
         Notification.error(error.message);
     }
@@ -44,7 +47,7 @@ axios.interceptors.response.use(res => {
         Notification.error(error.response);
     } else if (error.request) {
         Notification.error(error.request);
-        
+
     } else {
 
     }

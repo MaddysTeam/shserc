@@ -11,8 +11,6 @@ public class ResComment extends  BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
-//	private long id;
-
 	private long userId;
 
 	private long resourceId;
@@ -31,22 +29,8 @@ public class ResComment extends  BaseEntity {
 
 	@TableField(exist = false)
 	private String resourceTitle;
-
-//	private long addUser;
-
+	
 	@TableField(exist = false)
 	private String addUserName;
-
-//	private LocalDateTime addTime;
-//
-//	private long updateUser;
-//
-//	private LocalDateTime updateTime;
-//
-//	private long isDeleted;
-
-//	public boolean isNewOne() {
-//		return this.id <= 0;
-//	}
 
 }

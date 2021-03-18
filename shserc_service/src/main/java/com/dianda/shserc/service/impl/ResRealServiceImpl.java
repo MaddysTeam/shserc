@@ -49,6 +49,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 			result = mapper.insert ( resReal );
 			return result > 0;
 		} else {
+			resReal.setCardPassword ( null );
 			result = mapper.updateById ( resReal );
 			return result >= 0;
 		}

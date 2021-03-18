@@ -39,19 +39,11 @@ public class BaseController {
 		List<ObjectError> errors= result.getAllErrors();
 		for(ObjectError error : errors){
 			builder.append(error.getDefaultMessage());
+			builder.append ( "\r\n" );
 		}
 
 		return builder.toString();
 	}
-
-	protected boolean checkIsUnAuthorized(){
-		return ObjectUtil.isNull(getLoginUserInfo());
-//		if(ObjectUtil.isNull(loginUser)){
-//			return JsonResult.unAuthorized(Constant.Error.LOGIN_USER_INFO_INVALID);
-//		}
-//
-//		return JsonResult.success();
-	}
-
+	
 
 }

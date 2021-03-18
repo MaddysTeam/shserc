@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode( callSuper = false )
-public class ResourceOperation implements Serializable {
+public class ResourceOperation {
 	
 	@Min( value = 1 )
 	private long resourceId;

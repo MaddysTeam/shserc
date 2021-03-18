@@ -45,7 +45,7 @@ public class ResourceController extends BaseController {
 	@PostMapping( path = "/edit" )
 	public JsonResult edit( @RequestBody @Valid EditResourceDto resourceDto , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( Constant.Error.PARAMS_IS_INVALID );
+			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}
 		
 		boolean result = service.edit ( resourceDto );
@@ -56,7 +56,7 @@ public class ResourceController extends BaseController {
 	@PostMapping( path = "/audit" )
 	public JsonResult audit( @RequestBody @Valid ResourceAuditDto resourceAuditDto , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( Constant.Error.PARAMS_IS_INVALID );
+			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}
 		
 		ResUser loginUser = getLoginUserInfo ( );

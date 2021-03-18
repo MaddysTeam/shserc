@@ -44,10 +44,7 @@ public class MenuController extends BaseController {
 		if (bindingResult.hasErrors()) {
 			return JsonResult.error(super.generateErrorMessage(bindingResult));
 		}
-
-		if (super.checkIsUnAuthorized())
-			return JsonResult.unAuthorized(Constant.Error.LOGIN_USER_INFO_INVALID);
-
+		
 		return menuService.edit(editMenuDto) ?
 				JsonResult.success(Constant.Success.EDIT_SUCCESS) :
 				JsonResult.error(Constant.Error.EDIT_FAILURE);

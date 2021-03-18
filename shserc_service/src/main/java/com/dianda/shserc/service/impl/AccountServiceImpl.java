@@ -11,6 +11,7 @@ import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IAccountService;
 import com.dianda.shserc.util.basic.EncoderUtil;
+import com.dianda.shserc.util.logger.system.SystemLog;
 import com.dianda.shserc.util.shiro.jwt.JwtOperation;
 import com.dianda.shserc.util.shiro.jwt.JwtToken;
 import com.dianda.shserc.util.shiro.util.ShiroUtil;
@@ -37,6 +38,7 @@ public class AccountServiceImpl implements IAccountService {
 	ResUserMapper userMapper;
 
 	@Override
+	@SystemLog()
 	public LoginDto login(@Valid LoginDto loginDto) {
 		try {
 			// login by shiro and jwt
@@ -69,6 +71,7 @@ public class AccountServiceImpl implements IAccountService {
 
 
 	@Override
+	@SystemLog()
 	public boolean logout() {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated())

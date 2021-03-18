@@ -1,5 +1,6 @@
 package com.dianda.shserc.dto;
 
+import com.dianda.shserc.common.Constant;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -22,15 +23,15 @@ public class EditResourceDto {
 	
 	private String coverPath;
 	
-	@NotBlank
+	@NotBlank(message = Constant.Error.FILE_UPLOAD_DST_PATH_IS_REQUIRED )
 	private String resourcePath;
 
-	@NotBlank
+	@NotBlank(message = Constant.Error.FILE_EXT_TYPE_IS_REQUIRED)
 	private String fileExtName;
 	
 	private long fileSize;
 
-	@NotBlank
+	@NotBlank(message = Constant.Error.FILE_NAME_IS_REQUIRED)
 	private String fileName;
 	
 	private boolean isLink;

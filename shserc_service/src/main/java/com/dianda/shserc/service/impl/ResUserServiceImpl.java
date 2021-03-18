@@ -12,14 +12,11 @@ import com.dianda.shserc.dto.mappers.IEditUserRoleMapper;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.exceptions.GlobalException;
-import com.dianda.shserc.mapper.ResRoleMapper;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IResUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.basic.StringUtil;
-import com.dianda.shserc.validators.NotNull;
-import com.dianda.shserc.vo.ResRealVoList;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResUserVoList;
 import com.dianda.shserc.vo.mappers.IUserVoMapper;
@@ -29,9 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author huachao

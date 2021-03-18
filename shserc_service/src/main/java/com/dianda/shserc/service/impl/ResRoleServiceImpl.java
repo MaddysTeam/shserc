@@ -70,7 +70,7 @@ public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> impl
 	@Override
 	public ResRoleVo findById( long id ) {
 		QueryWrapper<ResRole> queryWrapper = new QueryWrapper<> ( );
-		queryWrapper.eq ( "r.id" , id );
+		queryWrapper.eq ( "id" , id );
 		ResRole resRole = mapper.selectOne ( queryWrapper );
 		ResRoleVo vo = ObjectUtil.isNull ( resRole ) ? null : IRoleVoMapper.INSTANCE.mapFrom ( resRole );
 		

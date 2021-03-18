@@ -20,14 +20,14 @@
           placeholder="输入实名卡号"
         ></el-input>
       </el-form-item>
-      <el-form-item prop="cardPassword">
+      <!-- <el-form-item prop="cardPassword">
         <el-input
           v-model="model.cardPassword"
           prefix-icon="el-icon-user"
           placeholder="输入实名卡密码"
           type="password"
         ></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item prop="idCard">
         <el-input
           v-model="model.idCard"

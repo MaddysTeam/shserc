@@ -49,8 +49,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
 	protected boolean isAccessAllowed( ServletRequest request , ServletResponse response , Object mappedValue ) {
 		Subject subject = getSubject ( request , response );
 		if ( subject.isAuthenticated ( ) ) {
-			JSONObject user= ShiroUtil.getLoginUser ();
 			redisUtil=getRedisClient ();
+			
+			JSONObject user= ShiroUtil.getLoginUser ();
+			if(ObjectUtil.isNull ( user )){
+				return false;
+			}
+			
 			String token=redisUtil.get ( JwtConstant.CACHE_PREFIX+user.get ( "id" ));
 			
 			return !StringUtil.isNullOrEmpty( token);

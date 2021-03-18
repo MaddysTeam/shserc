@@ -46,7 +46,7 @@ public class SystemLogAspect {
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 		Method method = methodSignature.getMethod();
 		Object[] args = joinPoint.getArgs();
-		Class<?> classObject = joinPoint.getClass();
+		Class<?> targetClass = joinPoint.getTarget ().getClass ();
 
 		// get http servlet request
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
@@ -57,13 +57,13 @@ public class SystemLogAspect {
 
 		// get login user info from shiro
 		JSONObject user = ShiroUtil.getLoginUser();
-		String userName = ObjectUtil.isNull(user) ? "unknow" : user.getString("userId");
+		String userName = ObjectUtil.isNull(user) ? "unknow" :  "user id :"+ user.getString("id")+" , user name :"+user.getString ( "userName" );
 
 		// system log record
 		if (!ObjectUtil.isNull(logger)) {
 			logger.system(new SystemLoggerMessage(
 					userName + ":" + sourceIp,
-					classObject.getName(),
+					targetClass.getName(),
 					method.getName(),
 					args));
 		}
