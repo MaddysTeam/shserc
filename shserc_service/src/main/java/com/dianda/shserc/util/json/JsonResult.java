@@ -58,7 +58,7 @@ public class JsonResult<Data> {
 	}
 	
 	public static final JsonResult unAuthorized( String message){
-		return new JsonResult(500,StatusType.UNAUTHORIZED.getStatus(), message);
+		return new JsonResult(401,StatusType.UNAUTHORIZED.getStatus(), message);
 	}
 	
 	public Data getData() {

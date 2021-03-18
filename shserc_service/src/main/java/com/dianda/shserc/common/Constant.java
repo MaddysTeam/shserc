@@ -10,6 +10,7 @@ public final class Constant {
 		public static String PARAM_NULL_POINT_REFERENCE = "008";
 		public static String PARAM_INVALIDATE = "009";
 		public static String LOGIC_RESULT_INVALID="005";
+		public static String LOGIN_INFO_INVALID="003";
 	}
 	
 	public static final class Error {
@@ -48,7 +49,7 @@ public final class Constant {
 		public final static String PARAMS_IS_INVALID = "传入参数有误";
 		public final static String EDIT_FAILURE = "编辑失败";
 		public final static String OBJECT_IS_REQUIRED = "对象不能为空";
-		
+		public final static String LOGIN_USER_INFO_INVALID="登录用户信息已失效，请重新登录";
 	}
 	
 	public static final class Success {

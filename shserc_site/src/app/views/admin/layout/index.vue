@@ -10,7 +10,7 @@
             </el-button>
             <el-link class="img-header">JimmyPoor</el-link>     
              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>用户信息</el-dropdown-item>
+                <el-dropdown-item @click.native="accountInfo">用户信息</el-dropdown-item>
                 <el-dropdown-item @click.native="logout">注销 </el-dropdown-item>
              </el-dropdown-menu>
            </el-dropdown>  
@@ -36,24 +36,33 @@
    import {menuRoutes} from '@/app/routers/routes'
    import { mapMutations } from "vuex";
    import {logout} from '@/app/api/account'
+   //import func from 'vue-editor-bridge';
 
    export default{
      name:"layout",
+
      components:{
          DynamicMenu
      },
+
      data(){
          return {
              menus: menuRoutes //TODO:getMenusData()
          }
      }, 
+
      methods:{
-         logout:function(){
+
+         logout(){
             logout().then(res=>{
                 this.$store.commit(types.APP+"/"+types.LOGOUT)
                 this.$router.push({ path:'/admin/logout',replace:true});
             });
            
+         },
+
+         accountInfo(){
+                  this.$router.push({ path:'/admin/account/info',replace:true});
          }
      }
    }

@@ -36,6 +36,7 @@ import edit from "@/app/views/admin/role/edit";
 import Table from "@/components/Tables/index";
 import { selectParam, roleModel } from "@/app/models/role";
 import { list, info } from "@/app/api/role";
+import { deepCopy} from "@/app/utils/objectHelper"
 
 export default {
   components: {
@@ -68,7 +69,7 @@ export default {
       source: [],
       selectParam: selectParam,
       dialogVisible: false,
-      editModel: roleModel,
+      editModel: deepCopy(roleModel),
     };
   },
   mounted() {
@@ -97,6 +98,7 @@ export default {
 
     handleCloseEdit() {
       this.dialogVisible = false;
+      this.editModel=deepCopy(roleModel),
       this.loadRoleList();
     },
 

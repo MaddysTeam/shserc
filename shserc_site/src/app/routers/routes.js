@@ -1,6 +1,7 @@
 import Admin from '@/app/views/admin/layout/index'
 import Login from '@/app/views/admin/account/login'
 import Empty from '@/app/views/admin/layout/empty'
+import AccountInfo from '@/app/views/admin/account/info'
 import UserList from '@/app/views/admin/user/list'
 import CompanyList from '@/app/views/admin/company/list'
 import ResourceList from '@/app/views/admin/resource/list'
@@ -13,6 +14,7 @@ import RealList from '@/app/views/admin/real/list'
 import CommentList from '@/app/views/admin/comment/list'
 import BulletinList from '@/app/views/admin/bulletin/list'
 import BulletinEdit from '@/app/views/admin/bulletin/edit'
+import MenuList from '@/app/views/admin/menu/list'
 
 
 export const menuRoutes = [
@@ -47,13 +49,13 @@ export const menuRoutes = [
       component: () => import('@/app/views/admin/user/list.vue'),
       children: []
     }]
-  } ,{
+  }, {
     id: 5,
     level: 1,
     name: '角色管理',
     path: '/admin/role/list',
     icon: 'el-icon-s-custom',
-    component:RoleList,
+    component: RoleList,
     children: [],
   },
   {
@@ -62,7 +64,7 @@ export const menuRoutes = [
     name: '单位管理',
     path: '/admin/company/list',
     icon: 'el-icon-school',
-    component:CompanyList,
+    component: CompanyList,
     meta: {
       keepAlive: false
     },
@@ -73,7 +75,7 @@ export const menuRoutes = [
     name: '资源管理',
     icon: 'el-icon-tickets',
     path: '/admin/resource',
-    component:Empty,
+    component: Empty,
     children: [
       {
         id: 8,
@@ -81,7 +83,7 @@ export const menuRoutes = [
         name: '入库资源',
         path: "/admin/resource/index",
         icon: 'el-icon-files',
-        component:ResourceIndex,
+        component: ResourceIndex,
         children: []
       }
     ]
@@ -91,24 +93,24 @@ export const menuRoutes = [
     level: 1,
     name: '资源包',
     path: '#',
-    icon: 'el-icon-folder',
+    icon: 'el-icon-folder-opened',
     children: []
   },
   {
     id: 10,
     level: 1,
     name: '公告管理',
-    icon: 'el-icon-folder',
+    icon: 'el-icon-edit-outline',
     path: '/admin/bulletin',
-    component:Empty,
+    component: Empty,
     children: [
       {
         id: 11,
         level: 2,
         name: '资源库公告',
         path: '/admin/bulletin/list',
-        icon: 'el-icon-files',
-        component:BulletinList,
+        icon: 'el-icon-edit-outline',
+        component: BulletinList,
         children: []
       }
     ]
@@ -117,18 +119,27 @@ export const menuRoutes = [
     id: 12,
     level: 1,
     name: '评论管理',
-    icon: 'el-icon-folder',
+    icon: 'el-icon-chat-dot-square',
     path: '/admin/comment/list',
-    component:Empty,
+    component: Empty,
     children: [{
       id: 4,
       level: 2,
       name: '入库资源评论管理',
       path: "/admin/comment/list",
-      icon: 'el-icon-files',
-      component:CommentList,
+      icon: 'el-icon-chat-dot-square',
+      component: CommentList,
       children: []
     }]
+  }
+  , {
+    id: 13,
+    level: 1,
+    name: '菜单管理',
+    icon: 'el-icon-folder',
+    path: '/admin/menu/list',
+    component: MenuList,
+    children: []
   }
 ];
 
@@ -138,10 +149,10 @@ const routes = [
   // frontend
   {
     path: '/',
-    name: 'index',
-    redirect: { name: 'AdminIndex' } //TODO:这里改成前台
+    name: 'FrontendIndex',
+    redirect: { name: 'AdminIndex' } //TODO: these routes for frontend
   },
-  
+
   // backend
   {
     path: '/admin',
@@ -149,35 +160,40 @@ const routes = [
     component: Admin,
     children: [
 
+      //TODO:  really think about 
       ...menuRoutes,
-      
-    {
-      path: '/admin/resource/list',
-      name: 'ResourceList',
-      component: ResourceList
-    }, 
-    {
-      path: '/admin/resource/add/',
-      name: 'ResourceAdd',
-      component: ResourceEdit
-    }, {
-      path: '/admin/resource/edit/:id',
-      name: 'ResourceEdit',
-      component: ResourceEdit
-    }, {
-      path: '/admin/resource/detail/:id',
-      name: 'ResourceDetail',
-      component: ResourceDetail
-    },{
-      path: '/admin/bulletin/add',
-      name: 'ResourceAdd',
-      component: BulletinEdit
-    },
-    {
-      path: '/admin/bulletin/edit/:id',
-      name: 'bulletinEdit',
-      component: BulletinEdit
-    }
+      {
+        path: '/admin/account/info',
+        name: 'AccountInfo',
+        component: AccountInfo
+      },
+      {
+        path: '/admin/resource/list',
+        name: 'ResourceList',
+        component: ResourceList
+      },
+      {
+        path: '/admin/resource/add/',
+        name: 'ResourceAdd',
+        component: ResourceEdit
+      }, {
+        path: '/admin/resource/edit/:id',
+        name: 'ResourceEdit',
+        component: ResourceEdit
+      }, {
+        path: '/admin/resource/detail/:id',
+        name: 'ResourceDetail',
+        component: ResourceDetail
+      }, {
+        path: '/admin/bulletin/add',
+        name: 'ResourceAdd',
+        component: BulletinEdit
+      },
+      {
+        path: '/admin/bulletin/edit/:id',
+        name: 'bulletinEdit',
+        component: BulletinEdit
+      }
     ]
   },
   {

@@ -41,82 +41,84 @@ import java.util.Map;
 @Validated
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
 	
-	// TODO:  not  recommend to  use  cache manger directly ,you  can use  springboot  cache  instead
-////	@Resource(name = "memoryCache")
-//	ICacheManager manager;
-	
+	/*
+	TODO:  not  recommend to  use  cache manger directly ,you  can use  springboot  cache  instead
+	 otherwise you want to  set  cache logic by yourself
+	 */
+	//	ICacheManager manager;
+
 	@Resource
 	MenuMapper mapper;
-	
+
 	@Override
-	public MenuVoList find( MenuSelectParams menuSelectParams ) {
-		QueryWrapper<Menu> wrapper = new QueryWrapper<> ( );
-		long roleId = menuSelectParams.getRoleId ( );
-		if ( roleId > 0 ) {
-			wrapper.eq ( "role_id" , roleId );
+	public MenuVoList find(MenuSelectParams menuSelectParams) {
+		QueryWrapper<Menu> wrapper = new QueryWrapper<>();
+		long roleId = menuSelectParams.getRoleId();
+		if (roleId > 0) {
+			wrapper.eq("role_id", roleId);
 		}
-		
-		List<Menu> menuList = mapper.selectMenus ( wrapper );
-		List<MenuVo> voList = new ArrayList<> ( );
-		for ( Menu menu : menuList ) {
-			boolean exist = voList.stream ( ).anyMatch ( x -> x.getId ( ) == menu.getId ( ) );
+
+		List<Menu> menuList = mapper.selectMenus(wrapper);
+		List<MenuVo> voList = new ArrayList<>();
+		for (Menu menu : menuList) {
+			boolean exist = voList.stream().anyMatch(x -> x.getId() == menu.getId());
 			MenuVo vo = null;
-			if ( ! exist ) {
-				vo = IMenuVoMapper.INSTANCE.mapFrom ( menu );
-				voList.add ( vo );
+			if (!exist) {
+				vo = IMenuVoMapper.INSTANCE.mapFrom(menu);
+				voList.add(vo);
 			} else {
-				vo = voList.stream ( ).filter ( x -> x.getId ( ) == menu.getId ( ) ).findFirst ( ).get ( );
-				ResRoleVo roleVo = new ResRoleVo ( );
-				roleVo.setId ( vo.getRoleId ( ) );
-				roleVo.setRoleName ( vo.getRoleName ( ) );
-				
-				vo.getRoles ( ).add ( roleVo );
+				vo = voList.stream().filter(x -> x.getId() == menu.getId()).findFirst().get();
 			}
+
+			ResRoleVo roleVo = new ResRoleVo();
+			roleVo.setId(vo.getRoleId());
+			roleVo.setRoleName(vo.getRoleName());
+			vo.getRoles().add(roleVo);
 		}
-		
-		MenuVoList menuVoList = new MenuVoList ( );
-		menuVoList.setListData ( voList );
-		
+
+		MenuVoList menuVoList = new MenuVoList();
+		menuVoList.setListData(voList);
+
 		return menuVoList;
 	}
-	
+
 	@Override
-	public boolean edit( @Valid @NotNull EditMenuDto editMenuDto ) {
-		Menu menu = IEditMenuMapper.INSTANCE.mapFrom ( editMenuDto );
-		Menu parentMenu = mapper.selectById ( menu.getParentId ( ) ); // check  whether the parent menu is  exists or not
-		if ( ObjectUtil.isNull ( parentMenu ) ) {
-			throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.PARENT_MENU_IS_NOT_EXISTS );
+	public boolean edit(@Valid @NotNull EditMenuDto editMenuDto) {
+		Menu menu = IEditMenuMapper.INSTANCE.mapFrom(editMenuDto);
+		Menu parentMenu = mapper.selectById(menu.getParentId()); // check  whether the parent menu is  exists or not
+		if (ObjectUtil.isNull(parentMenu)) {
+			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PARENT_MENU_IS_NOT_EXISTS);
 		}
-		
+
 		boolean result;
-		if ( menu.isNewOne ( ) ) {
-			result = mapper.insert ( menu ) > 0;
+		if (menu.isNewOne()) {
+			result = mapper.insert(menu) > 0;
 		} else {
-			result = mapper.updateById ( menu ) >= 0;
+			result = mapper.updateById(menu) >= 0;
 		}
-		
+
 		return result;
 	}
-	
+
 	@Override
-	@Transactional( readOnly = true, rollbackFor = GlobalException.class )
-	public boolean editMenuRole( @NotNull EditMenuRoleDto editMenuRoleDto ) {
-		MenuRole menuRole = IEditMenuRoleMapper.INSTANCE.mapFrom ( editMenuRoleDto );
-		
+	@Transactional(readOnly = true, rollbackFor = GlobalException.class)
+	public boolean editMenuRole(@NotNull EditMenuRoleDto editMenuRoleDto) {
+		MenuRole menuRole = IEditMenuRoleMapper.INSTANCE.mapFrom(editMenuRoleDto);
+
 		// delete menu roles by menu id
-		int result = mapper.deleteMenuRoles ( menuRole );
-		
-		// add new menu role
-		for ( Map.Entry<Long, Long> entry : editMenuRoleDto.getMenuRoleMap ( ).entrySet ( ) ) {
-			menuRole.setMenuId ( entry.getKey ( ) );
-			menuRole.setRoleId ( entry.getValue ( ) );
-			result += mapper.insertMenuRole ( menuRole );
+		int result = mapper.deleteMenuRoles(menuRole);
+
+		// re-add new menu role
+		for (Map.Entry<Long, Long> entry : editMenuRoleDto.getMenuRoleMap().entrySet()) {
+			menuRole.setMenuId(entry.getKey());
+			menuRole.setRoleId(entry.getValue());
+			result += mapper.insertMenuRole(menuRole);
 		}
-		
-		if( result <= 0)
-			throw new GlobalException (  Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.PARENT_MENU_IS_NOT_EXISTS );
-		
+
+		if (result <= 0)
+			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PARENT_MENU_IS_NOT_EXISTS);
+
 		return true;
 	}
-	
+
 }

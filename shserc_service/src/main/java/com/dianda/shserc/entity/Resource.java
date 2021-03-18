@@ -56,16 +56,6 @@ public class Resource extends  BaseEntity{
 
 	private LocalDateTime auditorTime;
 
-//	private long addUser;
-//
-//	private LocalDateTime addTime;
-//
-//	private long updateUser;
-//
-//	private LocalDateTime updateTime;
-//
-//	private boolean isDeleted;
-
 	@TableField(exist = false)
 	private String deformity;
 
@@ -123,10 +113,6 @@ public class Resource extends  BaseEntity{
 	
 	@TableField(exist = false)
 	private  String learnFrom;
-	
-//	public boolean isNewOne() {
-//		return this.id <= 0;
-//	}
 
 	public void addViewCount() {
 		this.setViewCount(this.getViewCount() + 1);

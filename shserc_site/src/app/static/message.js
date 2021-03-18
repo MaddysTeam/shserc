@@ -14,6 +14,9 @@ export const messages = {
     MOBILE_NOT_VAILD: '请输入正确的手机号！',
     EMAIL_NOT_VAILD: '请输入正确的邮箱格式！',
 
+    Role_NAME_REQUIRED: '必须填写角色名称',
+    USER_LENGHT_NOT_ALLOWED_MORE_THAN_50: '角色名称长度不能超过50!',
+
     REAL_NAME_LENGHT_NOT_ALLOWED_MORE_THAN_50: '用户实名长度不能超过50!',
     REAL_NAME_IS_REQUIRED:"必须填写用户实名！",
     REAL_CARDNO_IS_REQUIRED:"必须填写实名卡号！",
