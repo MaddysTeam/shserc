@@ -16,3 +16,4 @@ export const DEFORMITY="deformity";
 export const LEARNFROM="learn_from";
 export const SOURCE="source";
 export const AUDITSTATES="audit_states";
+export const ROLES="roles"

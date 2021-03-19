@@ -3,6 +3,7 @@ package com.dianda.shserc.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.shserc.validators.ICheckIdCard;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * @since 2020-10-05
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ResReal extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;

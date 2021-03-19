@@ -3,10 +3,12 @@ package com.dianda.shserc.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Bulletin extends BaseEntity{
 	
 	private long typeId;

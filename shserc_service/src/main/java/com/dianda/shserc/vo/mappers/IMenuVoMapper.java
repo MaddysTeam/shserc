@@ -16,7 +16,7 @@ public interface IMenuVoMapper extends BasicMapper<MenuVo, Menu> {
 	@Mappings({
 			@Mapping(source="id",target="id"),
 			@Mapping(source="parentId",target="parentId"),
-			@Mapping(source="title",target="name"),
+			@Mapping(source="title",target="title"),
 			@Mapping(source = "path",target = "path"),
 			@Mapping(source = "level",target = "level")
 	})

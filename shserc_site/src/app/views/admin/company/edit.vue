@@ -26,17 +26,16 @@
 import { Notification } from "element-ui";
 import { getChildren, edit } from "@/app/api/company.js";
 import { messages } from "@/app/static/message";
-import {validateRequired,validateLessThan50,validateSelectValue} from '@/static/validator';
+import {validateRequired,validateLessThan50,validateSelectValue} from "@/static/validator";
+import {deepCopy} from "@/app/utils/objectHelper" 
+import {companyModel} from "@/app/models/company"
 
 export default {
   name: "edit",
+  
   data() {
     return {
-      company: {
-        name: "",
-        parentId: "",
-        id: "",
-      },
+      company: deepCopy(companyModel),
       model: {},
       options: [],
       rules: {
@@ -48,6 +47,7 @@ export default {
       },
     };
   },
+
   props: {
     visible: { type: Boolean, required: true },
   },
@@ -58,6 +58,7 @@ export default {
     handleClose() {
       this.$emit("close");
     },
+
     bindCompany(root) {
       getChildren(root).then((res) => {
         if (res && res.data) {
@@ -73,9 +74,11 @@ export default {
         }
       });
     },
+
     selectChanged(parentId){
       this.company.parentId=parentId;
     },
+
     submitForm(formName) {
       let _this = this;
       _this.$refs[formName].validate((isValid) => {
@@ -88,8 +91,8 @@ export default {
         }
         
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

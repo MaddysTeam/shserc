@@ -11,7 +11,7 @@ public class MenuVo {
 
 	private  long parentId;
 
-	private  String name;
+	private  String title;
 
 	private  String path;
 

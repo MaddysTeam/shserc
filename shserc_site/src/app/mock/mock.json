@@ -34,6 +34,17 @@
                     "label": "黄浦区"
                 }
             ]
-        }
+        },
+
+        "roleList":{
+
+        },
+
+        "menuList":[
+            {"id":1,"parentId":0,"title":"menu1","path":"/temp/link1","level":1,"roles":[{"id":1,"name":"kissnana"}]},
+            {"id":2,"parentId":1,"title":"menu2","path":"/temp/link2","level":1,"roles":[{"id":1,"name":"kissnana"}]},
+            {"id":3,"parentId":0,"title":"menu3","path":"/temp/link3","level":1,"roles":[{"id":1,"name":"kissnana"}]},
+            {"id":4,"parentId":0,"title":"menu4","path":"/temp/link4","level":1,"roles":[{"id":1,"name":"kissnana"}]}
+        ]       
     
 }

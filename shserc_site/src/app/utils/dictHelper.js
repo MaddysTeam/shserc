@@ -50,7 +50,7 @@ export function getRelevantByRelevantId(relevantId, dict) {
 }
 
 /**
- *  following function for dicionary business
+ *  following function for dictionary business
  */
 
 function loadResourceDeformity(store, dict) {

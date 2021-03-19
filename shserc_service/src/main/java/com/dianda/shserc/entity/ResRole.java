@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
  * @since 2020-08-12
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ResRole extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;

@@ -10,19 +10,22 @@ import '@/static/elementUI.js'
 import '@/static/validator.js'
 import '@/assets/css/global.css'
 import { initDic } from '@/app/utils/dictHelper'
+import { initRoles } from '@/app/utils/roleHelper'
 import VideoPlayer  from 'vue-video-player'
 import TEditor from '@/components/Editor/index'
 
 /** initial mock data */
-const mock=false;
+const mock=true;
 if(mock){
   require('./app/mock/mock');
 }
 
+/** regist editor  component */
 Vue.component('TinymceEditor',TEditor)
 
-/** initial global dictionary */
+/** initial global dictionary and roles */
 initDic(store);
+initRoles(store);
 
 Vue.prototype.instance = instance_;
 Vue.config.productionTip = false

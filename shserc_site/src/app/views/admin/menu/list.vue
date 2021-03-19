@@ -44,26 +44,29 @@ export default {
 
   methods: {
     renderContent(h, { node, data, store }) {
+      console.log(node);
       return (
-        <span class="custom-tree-node">
-          <span>{node.label}</span>
+        <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
           <span>
-            <el-select
-              multiple
-              v-model="data"
-              on-change={() => this.handleEditMenuRole(data)}
-            >
-              <el-option
-                v-for="i in [1,2,3,4,5]"
-                label="menu role1"
-                value="role1"
-              ></el-option>
+            <span>{data.title}</span>
+          </span>
+          <span>
+            <el-select v-model="id" value-key="id" size="mini" multiple>
+              {data.roles.map(item => {
+                return <el-option label={item.name} value={item.id} key={item.id} ></el-option>;
+              })}
             </el-select>
-
             <el-button
-              size="mini"
+              style="font-size: 12px;"
               type="text"
-              on-click={() => this.handleEdit(node, data)}
+              on-click={() => this.append(data)}
+            >
+              绑定角色
+            </el-button>
+            <el-button
+              style="font-size: 12px;"
+              type="text"
+              on-click={() => this.remove(node, data)}
             >
               编辑
             </el-button>
@@ -80,7 +83,7 @@ export default {
       list().then((res) => {
         if (res && res.data) {
           console.log(res.data);
-          this.source = handleChangeSource(res.data); 
+          this.source = this.handleChangeSource(res.data);
         }
       });
     },
@@ -89,11 +92,11 @@ export default {
 
     handleEdit(data) {},
 
-    handleChangeSource(source){
+    handleChangeSource(source) {
       //TODO: bind menu
-       return [JSON.parse(source)]
-    }
-  }
+      return JSON.parse(source).listData;
+    },
+  },
 };
 </script>
 
@@ -117,5 +120,9 @@ export default {
   justify-content: space-between;
   font-size: 14px;
   padding-right: 8px;
+}
+
+.el-input {
+  height: 30px;
 }
 </style>
