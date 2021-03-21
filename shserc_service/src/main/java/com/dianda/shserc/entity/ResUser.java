@@ -27,7 +27,7 @@ public class ResUser extends  BaseEntity {
 	
 	private int isDeleted;
 	
-	private  Long  companyId;
+	private  long  companyId;
 	
 	//TODO: 20210220
 	

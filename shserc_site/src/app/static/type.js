@@ -1,7 +1,12 @@
+// keys for login and logout
 export const APP="app";
 export const LOGIN='login';
 export const LOGOUT='logout';
-//export const LOGIN_USER='login_user';
+
+// keys for role and menu
+export const ROLES="roles"
+export const MENUS="menus"
+export const ROUTES="routes"
 
 // following keys for dictionary
 export const DICTIONARY="dictionary";
@@ -16,4 +21,3 @@ export const DEFORMITY="deformity";
 export const LEARNFROM="learn_from";
 export const SOURCE="source";
 export const AUDITSTATES="audit_states";
-export const ROLES="roles"

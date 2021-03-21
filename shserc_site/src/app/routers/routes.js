@@ -143,16 +143,33 @@ export const menuRoutes = [
   }
 ];
 
+export const constRoutes = [
+  {
+    path: '/admin/login',
+    name: 'AdminLogin',
+    component: Login
+  },
+  {
+    path: '/admin/logout',
+    name: 'AdminLogout',
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/app/views/404.vue')
+  }
+];
 
-
-const routes = [
+ const frontendRoutes = [
   // frontend
   {
     path: '/',
     name: 'FrontendIndex',
     redirect: { name: 'AdminIndex' } //TODO: these routes for frontend
-  },
+  }
+]
 
+ const backendRoutes=[
   // backend
   {
     path: '/admin',
@@ -196,24 +213,17 @@ const routes = [
       }
     ]
   },
-  {
-    path: '/admin/login',
-    name: 'AdminLogin',
-    component: Login
-  },
-  {
-    path: '/admin/logout',
-    name: 'AdminLogout',
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('@/app/views/404.vue')
-  },
-  {
-    path: "*",
-    redirect: "/404"
-  }
+]
+
+
+const routes = [
+ ...frontendRoutes,
+ ...backendRoutes,
+ ...constRoutes,
+   {
+     path: "*",
+     redirect: "/404"
+   }
 ];
 
 export default routes;

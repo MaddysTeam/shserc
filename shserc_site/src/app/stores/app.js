@@ -5,9 +5,15 @@ export default {
     token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     isAuth: true,//localStorage.getItem('Authorization') ? true : false,
     loginUserInfo: {},
-    roles:[], // store all system roles here
 
-    //following for dictionary
+    // following for all roles and menus
+    roles: [],
+    menus: [],
+
+    // dynamic routes
+    dynamicRoutes: [],
+
+    // following for dictionary
     dict: [],
     deformity: [],
     resourceStatus: [],
@@ -22,28 +28,45 @@ export default {
     source: []
   },
   mutations: {
-    // login 
     [types.LOGIN]: (state, data) => {
       if (data) {
         let token = data.token;
-        localStorage.setItem('Authorization', token); // store and used by backend api
+        localStorage.setItem('Authorization', token); // store token to localstorage
         state.isAuth = true;
         state.token = token;
         state.loginUserInfo = data;
-        console.log(state.loginUserInfo)
+        // state.menus = state.menus.filter(m => m.roles.some(id => id === data.roleId)); // store user menus by role id
+        // console.log(state.loginUserInfo)
       }
     },
+
     [types.LOGOUT]: (state) => {
       localStorage.removeItem('Authorization');
       state.loginUserInfo = {}
     },
 
-    //dictionary
+    // roles
+    [types.ROLES]: (state, data) => {
+      state.roles = data;
+    },
+
+    // menus
+    [types.MENUS]: (state, data) => {
+      localStorage.setItem('menu', JSON.stringify(data));
+      state.menus = data;
+    },
+
+    // routes
+    [types.ROUTES]: (state, data) => {
+      state.dynamicRoutes = data;
+    },
+
+    // following for dictionary
     [types.DICTIONARY]: (state, data) => {
       state.dict = data;
     },
 
-    // dict for resource
+
     [types.DEFORMITY]: (state, data) => {
       state.deformity = data;
     },
@@ -92,7 +115,10 @@ export default {
     }
 
   },
-  getters: {}
+  getters: {
+    currentMenus: state => state.menus,
+    currentRoutes: state => state.routes
+  }
 }
 
 

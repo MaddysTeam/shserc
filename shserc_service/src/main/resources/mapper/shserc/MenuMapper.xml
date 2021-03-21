@@ -11,8 +11,8 @@
         r.id as roleId,
         r.role_name
         from menu m
-         letf join menu_role mr on mr.menu_id=m.id
-         left join res_role r on role.id= mr.role_id
+        letf join menu_role mr on mr.menu_id=m.id
+        left join res_role r on role.id= mr.role_id
         <where>
             ${ew.sqlSegment}
         </where>

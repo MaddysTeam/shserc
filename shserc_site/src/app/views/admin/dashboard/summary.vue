@@ -15,9 +15,9 @@ export default {
           
         }
     },
-    mounted(){
-       console.log(this.$store)
-    },
+    // mounted(){
+    //    console.log(this.$store)
+    // },
     methods:{
 
     }

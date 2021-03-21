@@ -32,11 +32,7 @@
 <script>
    import DynamicMenu from '@/components/DynamicMenus/index';
    import * as types from '@/app/static/type';
-   //TODO: import {getMenusData} from '@/app/api/menu.js'
-   import {menuRoutes} from '@/app/routers/routes'
-   import { mapMutations } from "vuex";
    import {logout} from '@/app/api/account'
-   //import func from 'vue-editor-bridge';
 
    export default{
      name:"layout",
@@ -45,9 +41,11 @@
          DynamicMenu
      },
 
+
      data(){
+
          return {
-             menus: menuRoutes //TODO:getMenusData()
+             menus: JSON.parse(localStorage.getItem("menu"))
          }
      }, 
 

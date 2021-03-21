@@ -32,14 +32,14 @@ public class MenuController extends BaseController {
 	@Resource
 	IMenuService menuService;
 
-	@PostMapping("/list")
+	@PostMapping(path="/list")
 	public JsonResult findByPhrase(@RequestBody MenuSelectParams menuSelectParams) {
 		MenuVoList menuVoList = menuService.find(menuSelectParams);
 
 		return JsonResult.success(menuVoList);
 	}
 
-	@PostMapping("/edit")
+	@PostMapping(path="/edit")
 	public JsonResult edit(@RequestBody @Valid EditMenuDto editMenuDto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return JsonResult.error(super.generateErrorMessage(bindingResult));
