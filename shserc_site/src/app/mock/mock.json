@@ -37,24 +37,24 @@
         },
 
         "roleList": [  {
-            "value": 1,
-            "label": "系统管理员"
+            "id": 1,
+            "roleName": "系统管理员"
           },
           {
-            "value": 2,
-            "label": "用户管理员"
+            "id": 2,
+            "roleName": "用户管理员"
           },
           {
-            "value": 3,
-            "label": "资源上传员"
+            "id": 3,
+            "roleName": "资源上传员"
           },
           {
-            "value": 4,
-            "label": "评论审核员"
+            "id": 4,
+            "roleName": "评论审核员"
           },
           {
-            "value": 5,
-            "label": "未知"
+            "id": 5,
+            "roleName": "未知"
           }],
     
         "menuList": [

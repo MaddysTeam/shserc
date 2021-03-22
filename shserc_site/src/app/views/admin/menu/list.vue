@@ -29,9 +29,9 @@
           >
             <el-option
               v-for="item in allRoles"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
             />
           </el-select>
           <el-button type="text" size="mini" @click.native.prevent="() => handleEdit(node,data)">

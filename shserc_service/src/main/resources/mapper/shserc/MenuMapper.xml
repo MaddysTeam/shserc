@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dianda.shserc.mapper.ResRoleMapper">
+<mapper namespace="com.dianda.shserc.mapper.MenuMapper">
 
     <select id="selectMenus" resultType="com.dianda.shserc.entity.Menu">
-        select r.id as id,
+        select m.id as id,
         m.title,
+        m.parent_id,
         m.path,
         m.level,
         m.state_id,
         r.id as roleId,
         r.role_name
         from menu m
-        letf join menu_role mr on mr.menu_id=m.id
-        left join res_role r on role.id= mr.role_id
+        left join menu_role mr on mr.menu_id=m.id
+        left join res_role r on r.id= mr.role_id
         <where>
             ${ew.sqlSegment}
         </where>

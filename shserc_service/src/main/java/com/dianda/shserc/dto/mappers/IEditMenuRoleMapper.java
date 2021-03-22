@@ -1,9 +1,7 @@
 package com.dianda.shserc.dto.mappers;
 
 import com.dianda.shserc.dto.EditMenuRoleDto;
-import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.entity.MenuRole;
-import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

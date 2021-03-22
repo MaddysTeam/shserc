@@ -150,6 +150,9 @@ export default {
               Notification.success({ message: "登录成功" });
               // save login info to store，save dynamic route info to store
               _this.$store.commit(types.APP + "/" + types.LOGIN, res.data);
+
+              //_this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
+
               // redirect to admin index page
               _this.$router.push("/admin/dashboard/summary");
             }
@@ -157,9 +160,9 @@ export default {
 
         //TODO:
 
-          _this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
+          //_this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
           // redirect to admin index page
-          _this.$router.push("/admin/dashboard/summary");
+          //_this.$router.push("/admin/dashboard/summary");
         } else {
           console.log("error submit!!");
           return false;

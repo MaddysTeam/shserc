@@ -12,6 +12,7 @@ export function buildHierarchy(source) {
     var result = [];
     for (var i = 0; i < source.length; i++) {
         var current = source[i];
+        current["children"]=[];
         if (current.parentId > 0) {
             let parent = searchHierarchyTarget(result, current.parentId);
             if (parent) {

@@ -16,6 +16,8 @@ public class Menu extends BaseEntity {
 
 	private String title;
 	
+	private long stateId;
+	
 	@TableField(exist = false)
 	private  long roleId;
 

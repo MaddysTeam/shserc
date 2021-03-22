@@ -9,18 +9,11 @@ Vue.use(Router)
 
 
 
-const createRouter = () => new Router({
-    mode: 'history',
-    routes: routes
-})
+const router = new Router({ routes });
 
-const router = createRouter();
 router.beforeEach(protector);
 
-export function reset() {
-    const newRouter = createRouter()
-    router.matcher = newRouter.matcher // the relevant part
-}
+
 
 
 
