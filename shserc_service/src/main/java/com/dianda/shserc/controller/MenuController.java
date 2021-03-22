@@ -1,9 +1,11 @@
 package com.dianda.shserc.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONReader;
 import com.dianda.shserc.bean.MenuSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
+import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IMenuService;
 import com.dianda.shserc.util.basic.ObjectUtil;
@@ -30,11 +32,11 @@ import javax.validation.Valid;
 public class MenuController extends BaseController {
 
 	@Resource
-	IMenuService menuService;
+	IMenuService service;
 
 	@PostMapping(path="/list")
 	public JsonResult findByPhrase(@RequestBody MenuSelectParams menuSelectParams) {
-		MenuVoList menuVoList = menuService.find(menuSelectParams);
+		MenuVoList menuVoList = service.find(menuSelectParams);
 
 		return JsonResult.success(menuVoList);
 	}
@@ -45,7 +47,18 @@ public class MenuController extends BaseController {
 			return JsonResult.error(super.generateErrorMessage(bindingResult));
 		}
 		
-		return menuService.edit(editMenuDto) ?
+		return service.edit(editMenuDto) ?
+				JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
+	}
+
+	@PostMapping(path="/edit")
+	public JsonResult state(@RequestBody @Valid EditStateDto editStateDto,BindingResult bindingResult){
+		if (bindingResult.hasErrors()) {
+			return JsonResult.error(super.generateErrorMessage(bindingResult));
+		}
+
+		return service.setState(editStateDto)?
 				JsonResult.success(Constant.Success.EDIT_SUCCESS) :
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}

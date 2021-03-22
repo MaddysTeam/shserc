@@ -6,6 +6,7 @@ import com.dianda.shserc.bean.MenuSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.dto.EditMenuRoleDto;
+import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.dto.mappers.IEditMenuMapper;
 import com.dianda.shserc.dto.mappers.IEditMenuRoleMapper;
 import com.dianda.shserc.entity.Menu;
@@ -102,7 +103,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 
 	@Override
 	@Transactional(readOnly = true, rollbackFor = GlobalException.class)
-	public boolean editMenuRole(@NotNull EditMenuRoleDto editMenuRoleDto) {
+	public boolean editMenuRole(@NotNull @Valid EditMenuRoleDto editMenuRoleDto) {
 		MenuRole menuRole = IEditMenuRoleMapper.INSTANCE.mapFrom(editMenuRoleDto);
 
 		// delete menu roles by menu id
@@ -116,9 +117,18 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		}
 
 		if (result <= 0)
-			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PARENT_MENU_IS_NOT_EXISTS);
+			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.EDIT_FAILURE);
 
 		return true;
+	}
+
+	@Override
+	public boolean setState(@NotNull @Valid EditStateDto editStateDto) {
+		Menu menu=new Menu();
+		menu.setId(editStateDto.getTargetId());
+		menu.setStateId(editStateDto.getStateId());
+
+		return mapper.updateById(menu) >=0;
 	}
 
 }

@@ -17,6 +17,7 @@ export function initDic(store) {
             bindSubject(store, data.listData);
             bindSchoolTypes(store, data.listData);
             bindLearnFrom(store, data.listData);
+            //TODO:bindState(store,data.listData);
         }
     });
 }
@@ -101,4 +102,9 @@ function bindSchoolTypes(store, dict) {
 function bindLearnFrom(store, dict) { 
     let learnFrom = getChildrenByParentId(21, dict)
     store.commit("app/" + types.LEARNFROM, learnFrom)
+}
+
+function bindState(store,dict){
+    let states = getChildrenByParentId(0, dict)
+    store.commit("app/" + types.STATES, states)
 }

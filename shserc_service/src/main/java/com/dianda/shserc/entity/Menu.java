@@ -15,6 +15,8 @@ public class Menu extends BaseEntity {
 	private String path;
 
 	private String title;
+
+	private long stateId;
 	
 	@TableField(exist = false)
 	private  long roleId;

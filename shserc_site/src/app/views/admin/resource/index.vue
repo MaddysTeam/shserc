@@ -21,7 +21,7 @@
         class="el-button--primary"
         type="danger"
         size="large"
-        @click="addResource()"
+        @click="handleAddResource()"
         ><i class="el-icon-plus"></i> 新增资源</el-button
       >
     </div>
@@ -30,21 +30,20 @@
     <div>
       <!-- card area start-->
       <el-row style="margin-top: 100px">
-        <el-col :md="10" :lg="8" v-for="o in 4" :key="o" style="padding: 20px">
+        <el-col :md="10" :lg="8" v-for="domain in domains" :key="domain" style="padding: 20px">
           <el-card :body-style="{ padding: '0px' }">
             <div class="widget">
               <!-- widget header start-->
               <div class="widget-header">
-                <i class="el-icon-star-on"></i> 政策与文献
-                <!-- <img style="width:100%; height:100%;" src="https://gzmooc.edu.sh.cn/mooc/upload/cover/205062/20210126/20210126162545_878.jpg" /> -->
+                <i class="el-icon-star-on"></i> {{domain.name}}
               </div>
               <!-- widget content end-->
 
               <!-- widget content start-->
               <div class="widget-content">
                 <el-row style="padding: 20px">
-                  <el-col v-for="o in 5" :key="o" style="text-align: left">
-                    <b>这里是链接</b>
+                  <el-col v-for="type in domain.resourceTypes" :key="type" style="text-align: left">
+                    <b>{{type.name}}</b>
                     <p></p>
                   </el-col>
                 </el-row>
@@ -61,18 +60,27 @@
 </template>
 
 <script>
+import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
+
 export default {
   data() {
     return {
       searchPhrase: "",
+      domains: [],
     };
   },
+
+  mounted(){
+    this.handleLoadDomains();
+  },
+
   methods: {
     searchTextChanged() {},
+
     handleSearchButtonClick() {
       if (this.searchPhrase === "")
         this.$router.push({
-          path: "/admin/resource/list"
+          path: "/admin/resource/list",
         });
       else
         this.$router.push({
@@ -80,8 +88,21 @@ export default {
           query: { searchPhrase: this.searchPhrase },
         });
     },
-    addResource() {
+
+    handleAddResource() {
       this.$router.push("/admin/resource/add");
+    },
+
+    handleLoadDomains() {
+      let resourceDomains = this.$store.state.app.resourceDomains;
+      let dict=this.$store.state.app.dict;
+
+      this.domains = resourceDomains.map((item) => {
+        return {
+          domain: item.name,
+          resourceTypes: getRelevantByRelevantId(item.id,dict), // get resource types by domain id
+        };
+      });
     },
   },
 };
@@ -95,13 +116,6 @@ export default {
   margin-top: 20px;
   max-width: 500px;
   width: 50%;
-}
-.el-row {
-  /* display:flex;
-   flex-wrap: wrap; */
-}
-.widget > .widget-header,
-.widget > .widget-content {
 }
 .widget-header {
   background: #eaedf1;

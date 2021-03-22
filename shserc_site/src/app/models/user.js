@@ -22,3 +22,8 @@ export const changePassword={
     newPassword:"",
     confirmPassword:""
 }
+
+export const userRoleModel={
+    userId:0,
+    roleId:0
+}

@@ -20,4 +20,4 @@ export const SCHOOLTYPES="school_types";
 export const DEFORMITY="deformity";
 export const LEARNFROM="learn_from";
 export const SOURCE="source";
-export const AUDITSTATES="audit_states";
+export const STATES="audit_states";

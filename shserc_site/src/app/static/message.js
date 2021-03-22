@@ -16,6 +16,7 @@ export const messages = {
 
     ROLE_NAME_REQUIRED: '必须填写角色名称',
     ROLE_NAME_LENGHT_NOT_ALLOWED_MORE_THAN_50: '角色名称过长!',
+    ROLE_SELECT_NOT_NULL: '必须选择角色!',
 
     MENU_LENGHT_NOT_ALLOWED_MORE_THAN_50: '菜单名称过长!',
     MENU_NOT_NULL: '必须填写菜单名称!',

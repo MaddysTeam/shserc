@@ -441,6 +441,20 @@ export default {
             name: this.resource.fileName,
             url: this.resource.resourcePath,
           });
+
+          //fix bugs for cascade data  in edit condition
+          let domainId = this.resource.domainId;
+          if (domainId > 0) {
+            // load cascade data 
+            this.typeOptions = getRelevantByRelevantId(domainId, this.dict);
+          }
+          let stageId=this.resource.stageId;
+          if (stageId > 0) {
+            // load cascade data 
+            this.gradeOptions = getRelevantByRelevantId(stageId, this.dict);
+          }
+
+          //bind key words
           this.bindKeywords();
         });
       }

@@ -24,8 +24,9 @@ export default {
     subjects: [],
     schoolTypes: [],
     learnFrom: [],
-    domains: [],
-    source: []
+   // domains: [],
+    source: [],
+    states: []
   },
   mutations: {
     [types.LOGIN]: (state, data) => {
@@ -102,9 +103,15 @@ export default {
     [types.LEARNFROM]: (state, data) => {
       state.learnFrom = data;
     },
+
     [types.SOURCE]: (state, data) => {
       state.source = data;
+    },
+
+    [types.STATES]: (state, data) => {
+      state.states = data;
     }
+
   },
   actions: {
     changeResourceTypes({ commit, state }, data) {
@@ -117,7 +124,8 @@ export default {
   },
   getters: {
     currentMenus: state => state.menus,
-    currentRoutes: state => state.routes
+    currentRoutes: state => state.routes,
+    currentStates: state => state.states
   }
 }
 

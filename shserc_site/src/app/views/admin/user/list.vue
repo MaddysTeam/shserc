@@ -58,7 +58,6 @@ export default {
           label: "编辑",
           type: "primary",
           method: (index, row) => {
-            console.log("编辑:" + index, row);
             info(row.id).then((res) => {
               if (res && res.data) {
                 this.editModel = JSON.parse(res.data);
