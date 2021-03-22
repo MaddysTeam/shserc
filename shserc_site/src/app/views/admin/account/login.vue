@@ -78,8 +78,7 @@ import {
 } from "@/static/validator";
 import { mapMutations } from "vuex";
 import * as types from "@/app/static/type";
-//temp
-import { menuRoutes } from "@/app/routers/routes";
+import { initMenus } from "@/app/utils/menuHelper";
 
 export default {
   data() {
@@ -151,14 +150,14 @@ export default {
               // save login info to store，save dynamic route info to store
               _this.$store.commit(types.APP + "/" + types.LOGIN, res.data);
 
-              //_this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
+              initMenus(_this.$store);
 
               // redirect to admin index page
               _this.$router.push("/admin/dashboard/summary");
             }
           });
 
-        //TODO:
+          //TODO:
 
           //_this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
           // redirect to admin index page
