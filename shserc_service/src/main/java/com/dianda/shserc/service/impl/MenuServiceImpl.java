@@ -26,6 +26,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,11 +71,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 			} else {
 				vo = voList.stream().filter(x -> x.getId() == menu.getId()).findFirst().get();
 			}
-
-			ResRoleVo roleVo = new ResRoleVo();
-			roleVo.setId(vo.getRoleId());
-			roleVo.setRoleName(vo.getRoleName());
-			vo.getRoles().add(roleVo);
+			
+           if(vo.getRoleId ()>0) {
+			   ResRoleVo roleVo = new ResRoleVo ( );
+			   roleVo.setId ( vo.getRoleId ( ) );
+			   roleVo.setRoleName ( vo.getRoleName ( ) );
+			   vo.getRoles ( ).add ( roleVo );
+		   }
 		}
 
 		MenuVoList menuVoList = new MenuVoList();
@@ -87,14 +90,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 	public boolean edit(@Valid @NotNull EditMenuDto editMenuDto) {
 		Menu menu = IEditMenuMapper.INSTANCE.mapFrom(editMenuDto);
 		Menu parentMenu = mapper.selectById(menu.getParentId()); // check  whether the parent menu is  exists or not
-		if (ObjectUtil.isNull(parentMenu)) {
+		if (menu.getParentId ()>0 && ObjectUtil.isNull(parentMenu)) {
 			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PARENT_MENU_IS_NOT_EXISTS);
 		}
 
 		boolean result;
 		if (menu.isNewOne()) {
+			menu.setAddTime ( LocalDateTime.now () );
 			result = mapper.insert(menu) > 0;
 		} else {
+			menu.setUpdateTime ( LocalDateTime.now () );
 			result = mapper.updateById(menu) >= 0;
 		}
 

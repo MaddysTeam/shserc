@@ -43,8 +43,7 @@
 
 
      data(){
-
-         return {
+         return {       
              menus: JSON.parse(localStorage.getItem("menu"))
          }
      }, 

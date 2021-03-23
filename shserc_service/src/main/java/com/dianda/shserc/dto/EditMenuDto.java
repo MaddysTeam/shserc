@@ -9,24 +9,24 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class EditMenuDto {
-
-	@Min(value = 1)
+	
+	@Min( value = 0 )
 	private long id;
-
-	@Min(value = 1)
+	
+	@Min( value = 0 )
 	private long parentId;
-
-	@Min(value = 0)
+	
+	@Min( value = 0 )
 	private int level;
-
+	
 	@NotBlank
-	@Length(min = Constant.LENGTH.MIN_PATH_LENGTH,
-			max = Constant.LENGTH.MAX_PATH_LENGTH)
+	@Length( min = Constant.LENGTH.MIN_PATH_LENGTH,
+			max = Constant.LENGTH.MAX_PATH_LENGTH )
 	private String path;
-
+	
 	@NotBlank
-	@Length(min = Constant.LENGTH.MIN_NAME_LENGTH,
-			max = Constant.LENGTH.MAX_NAME_LENGTH)
-		private String title;
-
+	@Length( min = Constant.LENGTH.MIN_NAME_LENGTH,
+			max = Constant.LENGTH.MAX_NAME_LENGTH )
+	private String title;
+	
 }

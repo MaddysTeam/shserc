@@ -2,11 +2,15 @@ package com.dianda.shserc.dto.mappers;
 
 import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.entity.Menu;
+import com.dianda.shserc.util.mapper.BasicMapper;
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-public interface IEditMenuMapper {
+@Mapper(unmappedTargetPolicy= ReportingPolicy.IGNORE)
+public interface IEditMenuMapper extends BasicMapper<Menu,EditMenuDto> {
 
 	IEditMenuMapper INSTANCE = Mappers.getMapper(IEditMenuMapper.class);
 

@@ -1,23 +1,23 @@
 <template>
 	<div>
 		<template v-for="item in this.dataSource">
-			<el-submenu v-if="item.children.length>0" :key="item.id" :index="item.name">
+			<el-submenu v-if="item.children.length>0" :key="item.id" :index="item.title">
 				<template slot="title" >
                     <i :class="item.icon"></i>
-					<span slot="title" style="text-align:left"  >{{item.name}}</span>
+					<span slot="title" style="text-align:left"  >{{item.title}}</span>
 				</template>
 				<Menu :dataSource="item.children"></Menu>
             </el-submenu>
-            <el-menu-item v-else-if="item.level==1" :index="item.path" :key="item.id"  >
+            <el-menu-item v-else-if="item.children.length==0" :index="item.path" :key="item.id"  >
                 <template slot="title" >
                     <i :class="item.icon"></i>
-					<span slot="title">{{ item.name}}</span>
+					<span slot="title">{{ item.title}}</span>
 				</template>
 			</el-menu-item>
-	 			<el-menu-item v-else :index="item.path" :key="item.id"  >
+	 			<el-menu-item v-else :index="item.title" :key="item.id"  >
                 <i :class="item.icon" ></i>
                 <template slot="title" >
-					<span slot="title">{{ item.name}}</span>
+					<span slot="title">{{ item.title}}</span>
 				</template>
 			</el-menu-item>
 		</template>

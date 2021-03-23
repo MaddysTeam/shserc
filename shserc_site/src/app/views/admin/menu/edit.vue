@@ -5,10 +5,10 @@
     :before-close="handleClose"
   >
     <el-form :model="model" ref="menuForm" :rules="rules">
-      <el-form-item prop="name">
+      <el-form-item prop="title">
         <el-input
           prefix-icon="el-icon-search"
-          v-model="model.name"
+          v-model="model.title"
           placeholder="菜单名称"
         ></el-input>
       </el-form-item>
@@ -71,7 +71,7 @@ export default {
       // model: {},
       options: [],
       rules: {
-        name: [
+        title: [
           {
             validator: (rule, value, callback) => {
               validateRequired(rule, value, callback, messages.MENU_NOT_NULL);
@@ -90,17 +90,17 @@ export default {
             trigger: "blur",
           },
         ],
-        parentId: {
-          validator: (rule, value, callback) => {
-            validateSelectValue(
-              rule,
-              value,
-              callback,
-              messages.MENU_SELECT_NOT_NULL
-            );
-          },
-          trigger: "change",
-        },
+        // parentId: {
+        //   validator: (rule, value, callback) => {
+        //     validateSelectValue(
+        //       rule,
+        //       value,
+        //       callback,
+        //       messages.MENU_SELECT_NOT_NULL
+        //     );
+        //   },
+        //   trigger: "change",
+        // },
       },
 
       //temp
@@ -133,17 +133,18 @@ export default {
     },
 
     handleLoadMenus() {
-      list().then((res) => {
-        if (res && res.data) {
-          let originSource = JSON.parse(res.data).listData;
-          this.options = buildHierarchy(originSource);
-          console.log(this.options);
-        }
-      });
+      // list().then((res) => {
+      //   if (res && res.data) {
+      //     let originSource = JSON.parse(res.data).listData;
+      //     this.options = buildHierarchy(originSource);
+      //     console.log(this.options);
+      //   }
+      // });
     },
 
     selectChanged(parentId) {
       this.model.parentId = parentId;
+      //level
     },
 
     submitForm(formName) {

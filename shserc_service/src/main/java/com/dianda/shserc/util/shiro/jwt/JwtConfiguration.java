@@ -82,8 +82,8 @@ public class JwtConfiguration {
 		filterRuleMap.put("/real/*", "jwt");
 		filterRuleMap.put("/file/*", "jwt");
 		filterRuleMap.put("/user/*", "jwt");
-		filterRuleMap.put("/role/*", "jwt");
-		filterRuleMap.put("/menu/*", "jwt");
+		filterRuleMap.put("/role/edit", "jwt");
+		filterRuleMap.put("/menu/edit", "jwt");
 		filterRuleMap.put("/account/logout","jwt");
 	//	filterRuleMap.put("/**", "jwt");
 		shiroFilter.setFilterChainDefinitionMap(filterRuleMap);
