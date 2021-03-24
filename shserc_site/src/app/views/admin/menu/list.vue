@@ -16,7 +16,7 @@
       :visible="dialogVisible"
       :model="editModel"
     ></edit>
-    <el-tree :data="source" :default-expand-all="true">
+    <el-tree :data="source" :default-expand-all="true" class="font12"> 
       <span class="custom-tree-node" slot-scope="{ node, data }" @click.stop>
         <span> <i class="el-icon-menu"></i> {{ data.title }}</span>
         <span>
@@ -98,7 +98,14 @@ export default {
       list(selectParam).then((res) => {
         if (res && res.data) {
           let originSource = JSON.parse(res.data).listData;
+          for(let i in originSource){
+            let roles=originSource[i].roles;
+            originSource[i].roles=roles.map(x=>x.id)
+          }
           this.source = buildHierarchy(originSource);
+          console.log(this.allRoles);
+          console.log('------------------------');
+          console.log(this.source);
           this.originSource = originSource;
         }
       });
@@ -157,6 +164,7 @@ export default {
     handleEdit(node, data) {
       this.editModel= data;
       this.dialogVisible = true;
+      this.handleLoadMenus();
       return false;
     },
 
@@ -193,7 +201,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding-right: 8px;
-  font-size:12px;
 }
 
 .el-input {

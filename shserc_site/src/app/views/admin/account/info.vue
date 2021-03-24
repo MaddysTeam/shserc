@@ -20,7 +20,7 @@
           <div  style="text-align:left; border:1px solid #C0C4CC;padding-left:15px; font-size:inherit;border-radius:4px">3444444444</div>
         <!-- <el-input v-model="account.name"></el-input> -->
       </el-form-item>
-      <el-form-item label="证件号">
+      <el-form-item label="证件号" >
         <el-input v-model="account.idCard"></el-input>
       </el-form-item>
       <el-form-item label="所属单位">
@@ -53,11 +53,5 @@ export default {
 </script>
 
 <style scoped>
-.el-form-item__label {
-  font-size: 12px;
-}
- .el-form-item__content {
-  font-size: 20px;
-  color: #aaaa33;
-}
+
 </style>

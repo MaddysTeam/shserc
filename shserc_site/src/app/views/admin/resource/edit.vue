@@ -445,13 +445,16 @@ export default {
           //fix bugs for cascade data  in edit condition
           let domainId = this.resource.domainId;
           if (domainId > 0) {
-            // load cascade data 
-            this.typeOptions = getRelevantByRelevantId(domainId, this.dict);
+            // load cascade data
+            let resourceTypes = getRelevantByRelevantId(domainId, this.dict);
+            this.$store.dispatch("app/changeResourceTypes", resourceTypes);
           }
-          let stageId=this.resource.stageId;
+          let stageId = this.resource.stageId;
           if (stageId > 0) {
-            // load cascade data 
-            this.gradeOptions = getRelevantByRelevantId(stageId, this.dict);
+            // load cascade data
+            let grades = getRelevantByRelevantId(stageId, this.dict);
+
+            this.$store.dispatch("app/changeGrades", grades);
           }
 
           //bind key words
@@ -567,11 +570,11 @@ export default {
 
     stageSelectChanged(stageId) {
       this.resource.stageId = stageId;
-      // clean value of  grade dropdown
-      this.resource.grade = "";
       // relavent items
       let relavents = getRelevantByRelevantId(stageId, this.dict);
       this.$store.dispatch("app/changeGrades", relavents);
+      // clean value of  grade dropdown
+      this.resource.grade = relavents[0].name;
     },
 
     gradeSelectChanged(gradeId) {
@@ -581,10 +584,9 @@ export default {
     domainSelectChanged(domainId) {
       // set domain id in resource model
       this.resource.domainId = domainId;
-      // clean  value of resource type dropdown
-      this.resource.resourceType = "";
       // relavent items
       let relavents = getRelevantByRelevantId(domainId, this.dict);
+      // clean  value of resource type dropdown
       this.$store.dispatch("app/changeResourceTypes", relavents);
     },
 
@@ -633,6 +635,10 @@ export default {
 .btn-keywords {
   display: flex;
   width: 100%;
+}
+
+.el-form-item__label {
+  font-size: 12px;
 }
 
 .el-upload--picture-card {

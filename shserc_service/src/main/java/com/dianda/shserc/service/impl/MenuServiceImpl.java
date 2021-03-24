@@ -11,6 +11,7 @@ import com.dianda.shserc.dto.mappers.IEditMenuMapper;
 import com.dianda.shserc.dto.mappers.IEditMenuRoleMapper;
 import com.dianda.shserc.entity.Menu;
 import com.dianda.shserc.entity.MenuRole;
+import com.dianda.shserc.entity.ResRole;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.MenuMapper;
 import com.dianda.shserc.service.IMenuService;
@@ -26,6 +27,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,92 +50,97 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 	 otherwise you want to  set  cache logic by yourself
 	 */
 	//	ICacheManager manager;
-
+	
 	@Resource
 	MenuMapper mapper;
-
+	
 	@Override
-	public MenuVoList find(MenuSelectParams menuSelectParams) {
-		QueryWrapper<Menu> wrapper = new QueryWrapper<>();
-		long roleId = menuSelectParams.getRoleId();
-		if (roleId > 0) {
-			wrapper.eq("role_id", roleId);
+	public MenuVoList find( MenuSelectParams menuSelectParams ) {
+		QueryWrapper<Menu> wrapper = new QueryWrapper<> ( );
+		long roleId = menuSelectParams.getRoleId ( );
+		if ( roleId > 0 ) {
+			wrapper.eq ( "role_id" , roleId );
 		}
-
-		List<Menu> menuList = mapper.selectMenus(wrapper);
-		List<MenuVo> voList = new ArrayList<>();
-		for (Menu menu : menuList) {
-			boolean exist = voList.stream().anyMatch(x -> x.getId() == menu.getId());
-			MenuVo vo = null;
-			if (!exist) {
-				vo = IMenuVoMapper.INSTANCE.mapFrom(menu);
-				voList.add(vo);
-			} else {
-				vo = voList.stream().filter(x -> x.getId() == menu.getId()).findFirst().get();
+		
+		//ArrayList<ResRoleVo> roleVoList = new ArrayList ( );
+		List<Menu> menuList = mapper.selectMenus ( wrapper );
+		List<MenuVo> voList = new ArrayList<> ( );
+		for ( Menu menu : menuList ) {
+			MenuVo vo = IMenuVoMapper.INSTANCE.mapFrom ( menu );
+			vo.setRoles ( new ArrayList<> (  ) );
+			
+			boolean exist = voList.stream ( ).anyMatch ( x -> x.getId ( ) == menu.getId ( ) );
+			if(!exist){
+				voList.add ( vo );
+			}
+			else{
+				vo = voList.stream ( ).filter ( x -> x.getId ( ) == menu.getId ( ) ).findFirst ( ).get ( );
 			}
 			
-           if(vo.getRoleId ()>0) {
-			   ResRoleVo roleVo = new ResRoleVo ( );
-			   roleVo.setId ( vo.getRoleId ( ) );
-			   roleVo.setRoleName ( vo.getRoleName ( ) );
-			   vo.getRoles ( ).add ( roleVo );
-		   }
+			if ( menu.getRoleId ( ) > 0 ) {
+				ResRoleVo roleVo = new ResRoleVo ( );
+				roleVo.setId ( menu.getRoleId ( ) );
+				roleVo.setRoleName ( menu.getRoleName ( ) );
+				vo.getRoles ().add ( roleVo );
+			}
 		}
-
-		MenuVoList menuVoList = new MenuVoList();
-		menuVoList.setListData(voList);
-
+		
+		MenuVoList menuVoList = new MenuVoList ( );
+		menuVoList.setListData ( voList );
+		
 		return menuVoList;
 	}
-
+	
 	@Override
-	public boolean edit(@Valid @NotNull EditMenuDto editMenuDto) {
-		Menu menu = IEditMenuMapper.INSTANCE.mapFrom(editMenuDto);
-		Menu parentMenu = mapper.selectById(menu.getParentId()); // check  whether the parent menu is  exists or not
-		if (menu.getParentId ()>0 && ObjectUtil.isNull(parentMenu)) {
-			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PARENT_MENU_IS_NOT_EXISTS);
+	public boolean edit( @Valid @NotNull EditMenuDto editMenuDto ) {
+		Menu menu = IEditMenuMapper.INSTANCE.mapFrom ( editMenuDto );
+		Menu parentMenu = mapper.selectById ( menu.getParentId ( ) ); // check  whether the parent menu is  exists or not
+		if ( menu.getParentId ( ) > 0 && ObjectUtil.isNull ( parentMenu ) ) {
+			throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.PARENT_MENU_IS_NOT_EXISTS );
 		}
-
+		
 		boolean result;
-		if (menu.isNewOne()) {
-			menu.setAddTime ( LocalDateTime.now () );
-			result = mapper.insert(menu) > 0;
+		if ( menu.isNewOne ( ) ) {
+			menu.setAddTime ( LocalDateTime.now ( ) );
+			result = mapper.insert ( menu ) > 0;
 		} else {
-			menu.setUpdateTime ( LocalDateTime.now () );
-			result = mapper.updateById(menu) >= 0;
+			menu.setUpdateTime ( LocalDateTime.now ( ) );
+			result = mapper.updateById ( menu ) >= 0;
 		}
-
+		
 		return result;
 	}
-
+	
 	@Override
-	@Transactional(readOnly = true, rollbackFor = GlobalException.class)
-	public boolean editMenuRole(@NotNull @Valid EditMenuRoleDto editMenuRoleDto) {
-		MenuRole menuRole = IEditMenuRoleMapper.INSTANCE.mapFrom(editMenuRoleDto);
-
+	@Transactional( rollbackFor = GlobalException.class )
+	public boolean editMenuRole( @NotNull @Valid List<EditMenuRoleDto> editMenuRoleDto ) {
+		//get menu id
+		MenuRole menuRole = new MenuRole ( );
+		menuRole.setMenuId ( editMenuRoleDto.get ( 0 ).getMenuId ( ) );
+		
 		// delete menu roles by menu id
-		int result = mapper.deleteMenuRoles(menuRole);
-
+		int result = mapper.deleteMenuRoles ( menuRole );
+		
 		// re-add new menu role
-		for (Map.Entry<Long, Long> entry : editMenuRoleDto.getMenuRoleMap().entrySet()) {
-			menuRole.setMenuId(entry.getKey());
-			menuRole.setRoleId(entry.getValue());
-			result += mapper.insertMenuRole(menuRole);
+		for ( EditMenuRoleDto item : editMenuRoleDto ) {
+			menuRole.setMenuId ( item.getMenuId ( ) );
+			menuRole.setRoleId ( item.getRoleId ( ) );
+			result += mapper.insertMenuRole ( menuRole );
 		}
-
-		if (result <= 0)
-			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.EDIT_FAILURE);
-
+		
+		if ( result <= 0 )
+			throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.EDIT_FAILURE );
+		
 		return true;
 	}
-
+	
 	@Override
-	public boolean setState(@NotNull @Valid EditStateDto editStateDto) {
-		Menu menu=new Menu();
-		menu.setId(editStateDto.getTargetId());
-		menu.setStateId(editStateDto.getStateId());
-
-		return mapper.updateById(menu) >=0;
+	public boolean setState( @NotNull @Valid EditStateDto editStateDto ) {
+		Menu menu = new Menu ( );
+		menu.setId ( editStateDto.getTargetId ( ) );
+		menu.setStateId ( editStateDto.getStateId ( ) );
+		
+		return mapper.updateById ( menu ) >= 0;
 	}
-
+	
 }

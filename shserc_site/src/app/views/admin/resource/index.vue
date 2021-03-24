@@ -29,8 +29,8 @@
     <div>
       <!-- card area start-->
       <el-row style="margin-top: 100px">
-        <el-col :md="10" :lg="8" v-for="domain in domains" :key="domain" style="padding: 20px">
-          <el-card :body-style="{ padding: '0px' }">
+        <el-col :md="10" :lg="8" v-for="domain in domains" :key="domain.id" style="padding: 20px">
+          <el-card :body-style="{ padding: '0px' , height:'300px' }" class="font12">
             <div class="widget">
               <!-- widget header start-->
               <div class="widget-header">
@@ -41,7 +41,7 @@
               <!-- widget content start-->
               <div class="widget-content">
                 <el-row style="padding: 20px">
-                  <el-col v-for="type in domain.resourceTypes" :key="type" style="text-align: left">
+                  <el-col v-for="type in domain.resourceTypes" :key="type.id" style="text-align: left">
                     <b>{{type.name}}</b>
                     <p></p>
                   </el-col>
@@ -94,11 +94,13 @@ export default {
 
     handleLoadDomains() {
       let resourceDomains = this.$store.state.app.resourceDomains;
+      console.log("----------------domain-----------------")
+      console.log(resourceDomains);
       let dict=this.$store.state.app.dict;
 
       this.domains = resourceDomains.map((item) => {
         return {
-          domain: item.name,
+          name: item.name,
           resourceTypes: getRelevantByRelevantId(item.id,dict), // get resource types by domain id
         };
       });
@@ -120,8 +122,5 @@ export default {
   background: #eaedf1;
   font-size: 15px;
   padding: 20px;
-}
-.el-card {
-  font-size: 12px;
 }
 </style>

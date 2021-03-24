@@ -9,7 +9,8 @@ export function edit(editParam){
 }
 
 export function editMenuRole(editParam){
-    return axios.post('api/menu/role/edit',editParam);
+    let jsonStr=JSON.stringify({menuRoles:editParam});
+    return axios.post('api/menu/role/edit/',editParam);
 }
 
 export function changeState(changeStateParam){

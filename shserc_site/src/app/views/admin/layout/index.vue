@@ -113,4 +113,5 @@ export default {
   background: #eaedf1;
   width: 60%;
 }
+
 </style>

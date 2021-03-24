@@ -10,6 +10,7 @@ import com.dianda.shserc.vo.MenuVoList;
 import com.dianda.shserc.validators.NotNull;
 
 import javax.validation.Valid;
+import java.util.List;
 
 public interface IMenuService extends IService<Menu> {
 
@@ -17,7 +18,7 @@ public interface IMenuService extends IService<Menu> {
 
 	boolean edit(@Valid @NotNull EditMenuDto editMenuDto);
 
-	boolean editMenuRole(@NotNull @Valid EditMenuRoleDto editMenuRoleDto);
+	boolean editMenuRole(@NotNull @Valid List<EditMenuRoleDto> editMenuRoleDto);
 
 	boolean setState(@NotNull @Valid EditStateDto editStateDto);
 

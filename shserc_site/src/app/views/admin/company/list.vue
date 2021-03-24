@@ -11,7 +11,7 @@
         <el-button class="el-button--primary">刷新列表</el-button>
       </div>
      <edit ref="companyEdit" @close="handleCloseEdit" :visible="dialogVisible"></edit>
-    <el-tree :data="source" :default-expanded-keys="[26856]" :render-content="renderContent"></el-tree>
+    <el-tree :data="source" :default-expanded-keys="[26856]" :render-content="renderContent" :default-expand-all="true"></el-tree>
   </div>
 </template>
 
@@ -38,11 +38,11 @@ export default {
         <div class="node" style="">
           <span
             class="tree-img"
-            style="color:#409EFF;padding:30px;font-size:18px;transition:color .15s linear"
+            style="color:#409EFF;padding:30px;font-size:14px;transition:color .15s linear"
           >
             <i class="el-icon-location"></i>
           </span>
-          <span class="tree-spt" style="padding-top:20px; color:333;">{node.label}</span>
+          <span class="tree-spt font12" style="padding-top:20px; color:333;">{node.label}</span>
         </div>
       );
     },

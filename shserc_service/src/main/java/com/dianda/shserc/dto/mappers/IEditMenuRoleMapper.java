@@ -14,9 +14,9 @@ public interface IEditMenuRoleMapper extends BasicMapper<MenuRole, EditMenuRoleD
 	
 	IEditMenuRoleMapper INSTANCE= Mappers.getMapper ( IEditMenuRoleMapper.class);
 	
-	@Mappings( {
-			@Mapping(source="menuId",target="menuId")
-	} )
+//	@Mappings( {
+//			@Mapping(source="menuId",target="menuId")
+//	} )
 	MenuRole mapFrom( EditMenuRoleDto editUserDto );
 	
 }

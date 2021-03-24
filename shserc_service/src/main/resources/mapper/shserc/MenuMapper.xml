@@ -17,10 +17,11 @@
         <where>
             ${ew.sqlSegment}
         </where>
+        order by m.id asc
     </select>
 
     <insert id="insertMenuRole" parameterType="com.dianda.shserc.entity.MenuRole">
-         insert into menu_role (resource_id, user_id,) values(#{resourceId} ,#{userId})
+         insert into menu_role (menu_id, role_id) values(#{menuId} ,#{roleId})
     </insert>
 
     <delete id="deleteMenuRoles" parameterType="com.dianda.shserc.entity.MenuRole">

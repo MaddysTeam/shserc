@@ -14,7 +14,7 @@
     <!-- audit end -->
 
     <!-- details start -->
-    <el-container>
+    <el-container class="font12">
       <el-main>
         <div class="grid text_align_left">
           <div class="grid-item">
@@ -41,13 +41,13 @@
             <div class="font20">
               {{ resource.title }}
             </div>
-            <div class="m_30_top">
+            <div class="m_30_top font12">
               审核资源：
               <el-button
-                @click="handAudit(resource)"
+                @click="handleAudit(resource)"
                 class="el-button--primary search"
               >
-                <i class="el-icon-edit"></i> 查询
+                <i class="el-icon-edit"></i> 审核
               </el-button>
               <!-- <el-switch
                 v-model="resource.auditResult"
@@ -56,21 +56,21 @@
                 @change="handleAudit"
               ></el-switch> -->
             </div>
-            <div class="m_30_top">
+            <div class="m_30_top font12">
               资源下载：
               <a :href="resource.resourcePath"
-                ><i class="el-icon-download font30"></i
+                ><i class="el-icon-download font14"></i
               ></a>
             </div>
-            <div class="m_30_top">
-              上传时间：<i class="el-icon-time font30"></i> 2020-11-08
+            <div class="m_30_top font14">
+              上传时间：<i class="el-icon-time font12"></i> 2020-11-08
             </div>
           </div>
 
           <div class="grid-item">
             <hr />
-            <div class="font20 m_30_top">
-              <i class="el-icon-platform font20"></i><strong>资源描述</strong>
+            <div class="m_30_top">
+              <i class="el-icon-platform font12"></i><strong>资源描述</strong>
             </div>
             <div class="m_30_top">
               {{ resource.description }}
@@ -79,22 +79,18 @@
 
           <div class="grid-item">
             <hr />
-            <div class="font20 m_30_top"><strong>资源信息</strong></div>
+            <div class="m_30_top"><strong>资源信息</strong></div>
 
             <el-row class="m_30_top">
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >资源名称：</el-col>
-                  <el-col :span="12" >{{
-                    resource.title
-                  }}</el-col>
+                  <el-col :span="12">资源名称：</el-col>
+                  <el-col :span="12">{{ resource.title }}</el-col>
                 </el-row>
 
                 <el-row class="m_20_top">
-                  <el-col :span="12" >残疾类型：</el-col>
-                  <el-col :span="12">{{
-                    resource.deformity
-                  }}</el-col>
+                  <el-col :span="12">残疾类型：</el-col>
+                  <el-col :span="12">{{ resource.deformity }}</el-col>
                 </el-row>
               </el-col>
 
@@ -109,16 +105,14 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >媒体类型：</el-col>
-                  <el-col :span="12" >
-                    {{ resource.mediumType }}</el-col
-                  >
+                  <el-col :span="12">媒体类型：</el-col>
+                  <el-col :span="12"> {{ resource.mediumType }}</el-col>
                 </el-row>
               </el-col>
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >安置类型：</el-col>
+                  <el-col :span="12">安置类型：</el-col>
                   <el-col :span="12">
                     {{ resource.learnFrom }}
                   </el-col>
@@ -127,8 +121,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >学段：</el-col>
-                  <el-col :span="12" >
+                  <el-col :span="12">学段：</el-col>
+                  <el-col :span="12">
                     {{ resource.stage }}
                   </el-col>
                 </el-row>
@@ -136,8 +130,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >年级：</el-col>
-                  <el-col :span="12" >
+                  <el-col :span="12">年级：</el-col>
+                  <el-col :span="12">
                     {{ resource.grade }}
                   </el-col>
                 </el-row>
@@ -145,8 +139,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" >学科：</el-col>
-                  <el-col :span="12" >
+                  <el-col :span="12">学科：</el-col>
+                  <el-col :span="12">
                     {{ resource.subject }}
                   </el-col>
                 </el-row>
@@ -178,6 +172,7 @@
 </template>
 
 <script>
+import { CDN } from "@/static/CDN";
 import { resourceModel, videoOptions, auditModel } from "@/app/models/resource";
 import { info } from "@/app/api/resource";
 import { appEnum } from "@/app/static/enum";
@@ -190,6 +185,7 @@ export default {
   },
 
   data() {
+    console.log(resourceModel);
     return {
       resource: resourceModel,
 
@@ -235,7 +231,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.deformities);
     this.getResource();
   },
 
@@ -244,6 +239,11 @@ export default {
       let id = this.$router.currentRoute.params.id;
       info(id).then((res) => {
         this.resource = JSON.parse(res.data);
+        // let coverPath = this.resource.coverPath;
+        // if (coverPath || coverPath == "")
+        //   this.resource.coverPath = CDN.DEFAULT_COVER;
+        console.log("--------------------------------------");
+        console.log(this.resource.coverPath);
       });
     },
 
@@ -290,7 +290,6 @@ export default {
 
 .cover img {
   width: 100%;
-  max-width: 600px;
   transition: all 0.5s;
 }
 .el-card {

@@ -204,4 +204,8 @@ export default {
   height: 400px;
   background: white;
 }
+
+.el-form-item__label{
+  font-size:12px
+}
 </style>

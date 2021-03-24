@@ -9,13 +9,11 @@ import com.dianda.shserc.service.IMenuService;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.MenuVoList;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * menu controller
@@ -60,12 +58,12 @@ public class MenuController extends BaseController {
 	}
 
 	@PostMapping(path="/role/edit")
-	public JsonResult editMenuRole(@RequestBody @Valid EditMenuRoleDto editMenuRoleDto,BindingResult bindingResult){
+	public JsonResult editMenuRole( @RequestBody() List<EditMenuRoleDto> editMenuRoleDto, BindingResult bindingResult){
        if(bindingResult.hasErrors()){
        	return JsonResult.error(super.generateErrorMessage(bindingResult));
 	   }
-
-       return service.editMenuRole(editMenuRoleDto)?
+       
+       return  service.editMenuRole ( editMenuRoleDto )?
 			   JsonResult.success(Constant.Success.EDIT_SUCCESS) :
 			   JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}

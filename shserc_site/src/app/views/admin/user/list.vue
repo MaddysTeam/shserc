@@ -14,8 +14,15 @@
         <i class="el-icon-edit"></i> 新增用户
       </el-button>
     </div>
+
+    <role
+      @close="handleCloseUserRole"
+      :visible="roleDialogVisible"
+      :model="editUserRoleModel"
+    ></role>
+
     <edit
-      @close="handleCloseEdit"
+      @close="handleClose"
       :visible="dialogVisible"
       :model="editModel"
     ></edit>
@@ -33,14 +40,15 @@
 </template>
 
 <script>
+import role from "./role.vue";
 import edit from "./edit.vue";
 import Table from "@/components/Tables/index";
 import { list, info } from "@/app/api/user";
-import { selectParam, userModel } from "@/app/models/user";
-import {deepCopy} from "@/app/utils/objectHelper"
+import { selectParam, userModel, userRoleModel } from "@/app/models/user";
+import { deepCopy } from "@/app/utils/objectHelper";
 
 export default {
-  components: { Table, edit },
+  components: { Table, edit, role },
   name: "user",
   data() {
     return {
@@ -49,7 +57,7 @@ export default {
         { prop: "userName", label: "用户名", align: "center" },
         { prop: "companyName", label: "所在单位", align: "center" },
         { prop: "realName", label: "真实姓名", align: "center" },
-         { prop: "roleName", label: "角色", align: "center" },
+        { prop: "roleName", label: "角色", align: "center" },
         { prop: "command", label: "操作", isCommand: true, align: "right" },
       ],
       commands: [
@@ -65,17 +73,23 @@ export default {
                 this.dialogVisible = true;
               }
             });
-          }
-        },{
+          },
+        },
+        {
           id: 2,
           label: "设置角色",
           type: "danger",
-        }
+           method: (index, row) => {
+             this.roleDialogVisible=true;
+          },
+        },
       ],
       source: [],
       selectParam: deepCopy(selectParam),
       dialogVisible: false,
+      roleDialogVisible: false,
       editModel: deepCopy(userModel),
+      editUserRoleModel: deepCopy(userRoleModel),
     };
   },
   mounted() {
@@ -95,10 +109,14 @@ export default {
       });
     },
 
-    handleCloseEdit() {
+    handleClose() {
       this.dialogVisible = false;
       this.loadUserList();
-      this.editModel=deepCopy(userModel);
+      this.editModel = deepCopy(userModel);
+    },
+
+    handleCloseUserRole() {
+      this.roleDialogVisible = false;
     },
 
     handleSearch(val) {
@@ -106,9 +124,9 @@ export default {
       this.loadUserList();
     },
 
-    handleAdd(){
+    handleAdd() {
       this.dialogVisible = true;
-    }
+    },
   },
 };
 </script>
