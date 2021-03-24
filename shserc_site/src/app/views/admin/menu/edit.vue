@@ -61,7 +61,7 @@ export default {
   },
 
   props: {
-     visible: { type: Boolean, required: true },
+    visible: { type: Boolean, required: true },
     model: { type: Object },
   },
 
@@ -103,21 +103,7 @@ export default {
         // },
       },
 
-      //temp
-      treeData: [
-        {
-          value: 1,
-          label: "text1",
-          children: [
-            { value: 5, label: "text5" },
-            { value: 6, label: "text6" },
-          ],
-        },
-        { value: 2, label: "text2" },
-        { value: 3, label: "text3" },
-        { value: 4, label: "text5" },
-      ],
-      value: 2,
+      treeData: []
     };
   },
 
@@ -133,18 +119,11 @@ export default {
     },
 
     handleLoadMenus() {
-      // list().then((res) => {
-      //   if (res && res.data) {
-      //     let originSource = JSON.parse(res.data).listData;
-      //     this.options = buildHierarchy(originSource);
-      //     console.log(this.options);
-      //   }
-      // });
+      this.treeData = this.$store.state.app.menus;
     },
 
     selectChanged(parentId) {
       this.model.parentId = parentId;
-      //level
     },
 
     submitForm(formName) {

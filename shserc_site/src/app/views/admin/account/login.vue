@@ -144,7 +144,8 @@ export default {
             userName: _this.form.name,
             password: _this.form.password,
           }).then((res) => {
-            console.log(res);
+            console.log('---------------- login user info------------------')
+            console.log(res.data);
             if (res) {
               Notification.success({ message: "登录成功" });
               // save login info to store，save dynamic route info to store

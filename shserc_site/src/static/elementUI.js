@@ -6,7 +6,7 @@ import { Form,FormItem} from 'element-ui'
 import { Input } from 'element-ui'
 import {Container,Aside,Main,Menu,Submenu,MenuItem} from 'element-ui'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI,{size:'small'})
 Vue.use(Button)
 Vue.use(Form)
 Vue.use(FormItem)

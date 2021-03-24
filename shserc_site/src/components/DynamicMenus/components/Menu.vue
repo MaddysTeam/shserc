@@ -50,6 +50,7 @@
         background:#333744 !important;
         color:#fff;
 		text-align: left;
+		font-size:10px;
     }
 
      .el-submenu:hover{

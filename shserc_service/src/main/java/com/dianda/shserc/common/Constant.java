@@ -45,6 +45,7 @@ public final class Constant {
 		
 		// menu error mesage
 		public final static String PARENT_MENU_IS_NOT_EXISTS="父菜单不存在";
+		public final static String MENU_ROLE_IS_REQUIRED="必须至少为菜单选择一个角色";
 		
 		// common
 		public final static String PARAMS_IS_INVALID = "传入参数有误";

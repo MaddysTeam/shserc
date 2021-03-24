@@ -9,7 +9,6 @@
       <el-button
         class="el-button--primary"
         type="danger"
-        size="large"
         @click="addResource()"
         >新增资源</el-button
       >

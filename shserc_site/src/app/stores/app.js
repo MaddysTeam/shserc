@@ -8,9 +8,9 @@ export default {
 
     // following for all roles and menus
     roles: [],
-    menus: [],
+    menus: JSON.parse(localStorage.getItem('menu')) ,
 
-    // dynamic routes
+    // TODO：dynamic routes
     dynamicRoutes: [],
 
     // following for dictionary
@@ -24,7 +24,6 @@ export default {
     subjects: [],
     schoolTypes: [],
     learnFrom: [],
-   // domains: [],
     source: [],
     states: []
   },
@@ -36,8 +35,6 @@ export default {
         state.isAuth = true;
         state.token = token;
         state.loginUserInfo = data;
-        // state.menus = state.menus.filter(m => m.roles.some(id => id === data.roleId)); // store user menus by role id
-        // console.log(state.loginUserInfo)
       }
     },
 

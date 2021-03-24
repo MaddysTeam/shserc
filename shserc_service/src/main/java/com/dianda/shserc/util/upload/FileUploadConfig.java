@@ -3,6 +3,7 @@ package com.dianda.shserc.util.upload;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.unit.DataSize;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.MultipartConfigElement;
@@ -12,16 +13,18 @@ import javax.servlet.MultipartConfigElement;
 public class FileUploadConfig {
 	
 	/**
-	 * 限制上传文件大小
+	 * multipart file upload config
 	 */
 	@Bean
 	public MultipartConfigElement multipartConfigElement( ) {
 		MultipartConfigFactory factory = new MultipartConfigFactory ( );
-		//单个文件最大 5m 可以使用读取配置
-		factory.setMaxFileSize ( "5120KB" ); //KB,MB
-		/// 设置总上传数据总大小 50m
-		factory.setMaxRequestSize ( "512000KB" );
-		
+
+		//TODO: set upload max file size , can read from config
+		factory.setMaxFileSize ( DataSize.ofMegabytes(50) ); // default max is 50m
+
+		//TODO: set max request size , can read from config
+		factory.setMaxRequestSize (DataSize.ofMegabytes(500) ); // default max is 500m
+
 		return factory.createMultipartConfig ( );
 	}
 	

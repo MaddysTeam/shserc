@@ -9,12 +9,16 @@ export function deepCopy(target) {
 }
 
 export function buildHierarchy(source) {
+    for(i in source){
+        source[i]["children"]=[];
+        source[i]["value"]=source[i]["id"]
+        source[i]["label"]=source[i]["title"]
+    }
     var result = [];
     for (var i = 0; i < source.length; i++) {
         var current = source[i];
-        current["children"]=[];
         if (current.parentId > 0) {
-            let parent = searchHierarchyTarget(result, current.parentId);
+            var parent = searchHierarchyTarget(result, current.parentId);
             if (parent) {
                 parent.children.push(current);
             }
@@ -27,13 +31,13 @@ export function buildHierarchy(source) {
 }
 
 export function searchHierarchyTarget(source, targetId) {
-    for (let idx in source) {
-        let current = source[idx];
+    for (var idx in source) {
+        var current = source[idx];
         if (current.id == targetId) {
             return current;
-        } else {
-            for (let idx2 in current.children) {
-                return searchHierarchyTarget(current.children, targetId);
+        } else if(current.children.length>0) {
+            for (var idx2 in current.children) {
+                 searchHierarchyTarget(current.children, targetId);
             }
         }
     }

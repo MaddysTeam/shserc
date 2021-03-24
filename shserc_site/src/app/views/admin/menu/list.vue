@@ -25,7 +25,7 @@
             multiple
             size="mini"
             collapse-tags
-            @change="handleEditMenuRole(data)"
+            @visible-change="handleEditMenuRole($event, data)"
           >
             <el-option
               v-for="item in allRoles"
@@ -34,10 +34,18 @@
               :value="item.id"
             />
           </el-select>
-          <el-button type="text" size="mini" @click.native.prevent="() => handleEdit(node,data)">
+          <el-button
+            type="text"
+            size="mini"
+            @click.native.prevent="() => handleEdit(node, data)"
+          >
             编辑
           </el-button>
-          <el-button type="text" size="mini" @click="() => handleForbidden(node, data)">
+          <el-button
+            type="text"
+            size="mini"
+            @click="() => handleChangeState(node, data)"
+          >
             禁用
           </el-button>
         </span>
@@ -47,10 +55,13 @@
 </template>
 
 <script>
+
+import {messages} from "@/app/static/message"
+import { Notification } from "element-ui";
 import edit from "./edit.vue";
-import { list } from "@/app/api/menu";
-import {deepCopy,buildHierarchy} from "@/app/utils/objectHelper"
-import{menuModel,selectParam} from "@/app/models/menu"
+import { list, editMenuRole,changeState } from "@/app/api/menu";
+import { deepCopy, buildHierarchy } from "@/app/utils/objectHelper";
+import { stateModel,menuModel, selectParam } from "@/app/models/menu";
 import { mapState } from "vuex";
 
 export default {
@@ -62,7 +73,8 @@ export default {
       dialogVisible: false,
       originSource: [],
       source: [],
-      editModel:deepCopy(menuModel)
+      editModel: deepCopy(menuModel),
+      stateModel: deepCopy(stateModel)
     };
   },
 
@@ -77,10 +89,9 @@ export default {
   },
 
   methods: {
-
     handleCloseEdit() {
       this.dialogVisible = false;
-      this.editModel=deepCopy(menuModel);
+      this.editModel = deepCopy(menuModel);
     },
 
     handleLoadMenus() {
@@ -93,45 +104,73 @@ export default {
       });
     },
 
-    handleEditMenuRole(data) {
-      //record current  menu roles and change parent menu roles
-      let currentMenuRoles = [];
-      let result = [];
+    handleSelectMenuRole(data) {},
 
-      if (data && data.roles) {
-        data.roles.map((roleId) => {
-          result.push({ menuId: data.id, roleId: roleId });
-          currentMenuRoles.push({ menuId: data.id, roleId: roleId });
-        });
-      }
+    handleEditMenuRole(callback, data) {
+      // when menu disappear
+      if (!callback) {
+        //record current  menu roles and change parent menu roles, for example :
+        /**
+         *   parent              =>            parent + role
+         *       child + role                        child +role
+         */
 
-      while (data.parentId && data.parentId > 0) {
-        let parent = this.originSource.find((menu) => menu.id == data.parentId);
-        if (parent && parent.roles) {
-          currentMenuRoles.map((role) => {
-            result.push({ menuId: parent.id, roleId: role.roleId });
-          });
-          parent.roles.map((role) => {
-            result.push({ menuId: parent.id, roleId: role });
+        let currentMenuRoles = [];
+        let result = [];
+
+        if (data && data.roles) {
+          data.roles.map((roleId) => {
+            result.push({ menuId: data.id, roleId: roleId });
+            currentMenuRoles.push({ menuId: data.id, roleId: roleId });
           });
         }
 
-        data = parent;
+        while (data.parentId && data.parentId > 0) {
+          let parent = this.originSource.find(
+            (menu) => menu.id == data.parentId
+          );
+          if (parent && parent.roles) {
+            currentMenuRoles.map((role) => {
+              result.push({ menuId: parent.id, roleId: role.roleId });
+            });
+            parent.roles.map((roleId) => {
+              if (
+                !result.some((x) => x.menuId == parent.id && x.roleId == roleId)
+              ) {
+                result.push({ menuId: parent.id, roleId: roleId });
+              }
+            });
+          }
+
+          data = parent;
+        }
+
+        console.log(result);
+
+        editMenuRole(result).then(res=>{
+            Notification.success({ message: messages.SUCCESS });
+        });
+
       }
-
-      console.log(result);
     },
 
-    handleEdit(node,data) {
-      this.dialogVisible=true;
+    handleEdit(node, data) {
+      this.editModel= data;
+      this.dialogVisible = true;
       return false;
     },
 
-    handleForbidden(node,data){
+    handleChangeState(node, data) {
+      this.stateModel.targetId=data.id;
+      //TODO:this.stateModel.stateId=
+      changeState(this.stateModel).then(res=>{
+        if (res) {
+           Notification.success({ message:  messages.SUCCESS });
+        }
+      });
       return false;
-    }
-
-  }
+    },
+  },
 };
 </script>
 
@@ -153,8 +192,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 14px;
   padding-right: 8px;
+  font-size:12px;
 }
 
 .el-input {

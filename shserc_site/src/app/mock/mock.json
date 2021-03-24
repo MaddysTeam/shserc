@@ -8,7 +8,8 @@
             "mobile": "",
             "companyId": 0,
             "companyName": "开放大学",
-            "email": "kissnana3@163.com"
+            "email": "kissnana3@163.com",
+            "roleName": "系统管理员"
         },
         {
             "id": 1001,
@@ -21,96 +22,141 @@
             "email": "kissnana3@163.com"
         }
     ],
-    
-    "companyList":
+    "companyList": {
+        "id": 1001,
+        "value": 1001,
+        "label": "上海市",
+        "children": [
+            {
+                "id": 1002,
+                "value": 1002,
+                "label": "黄浦区"
+            }
+        ]
+    },
+    "roleList": [
         {
-            "id": 1001,
-            "value": 1001,
-            "label": "上海市",
-            "children": [
-                {
-                    "id": 1002,
-                    "value": 1002,
-                    "label": "黄浦区"
-                }
-            ]
-        },
-
-        "roleList": [  {
             "id": 1,
             "roleName": "系统管理员"
-          },
-          {
+        },
+        {
             "id": 2,
             "roleName": "用户管理员"
-          },
-          {
+        },
+        {
             "id": 3,
             "roleName": "资源上传员"
-          },
-          {
+        },
+        {
             "id": 4,
             "roleName": "评论审核员"
-          },
-          {
+        },
+        {
             "id": 5,
             "roleName": "未知"
-          }],
-    
-        "menuList": [
-            {
-                "id": 1,
-                "parentId": 0,
-                "title": "menu1",
-                "path": "/temp/link1",
-                "level": 1,
-                "roles": [
-                    1,
-                    2
-                ],
-                "children": [  {
-                    "id": 5,
-                    "parentId": 1,
-                    "title": "menu5",
-                    "path": "/admin/real/list",
-                    "level": 1,
-                    "roles": [],
-                    "children": [],
-                    "isEnable":true
-                }],
-                "isEnable":true
-                
-            },
-            {
-                "id": 2,
-                "parentId": 1,
-                "title": "menu2",
-                "path": "/admin/menu/list",
-                "level": 1,
-                "roles": [],
-                "children": [],
-                "isEnable":true
-            },
-            {
-                "id": 3,
-                "parentId": 2,
-                "title": "menu3",
-                "path": "/temp/link3",
-                "level": 1,
-                "roles": [],
-                "children": [],
-                "isEnable":true
-            },
-            {
-                "id": 4,
-                "parentId": 1,
-                "title": "menu4",
-                "path": "/temp/link4",
-                "level": 1,
-                "roles": [],
-                "children": [],
-                "isEnable":true
-            }
-        ]    
-    
+        }
+    ],
+    "menuList": [
+        {
+            "path": "/admin/dashboard/summary",
+            "title": "仪表板",
+            "level": 1,
+            "id": 1,
+            "icon": "el-icon-pie-chart"
+        },
+        {
+            "id": 2,
+            "level": 1,
+            "title": "用户管理",
+            "icon": "el-icon-user",
+            "path": "/admin/user"
+        },
+        {
+            "id": 3,
+            "level": 2,
+            "parentId":2,
+            "path": "/admin/real/list",
+            "title": "实名管理"
+        },
+        {
+            "id": 4,
+            "level": 2,
+            "parentId":2,
+            "path": "/admin/user/list",
+            "title": "用户查询"
+        },
+        {
+            "id": 5,
+            "level": 1,
+            "title": "角色管理",
+            "path": "/admin/role/list",
+            "icon": "el-icon-s-custom"
+        },
+        {
+            "id": 6,
+            "level": 1,
+            "title": "单位管理",
+            "path": "/admin/company/list",
+            "icon": "el-icon-school"
+        },
+        {
+            "id": 7,
+            "level": 1,
+            "title": "资源管理",
+            "icon": "el-icon-tickets",
+            "path": "/admin/resource"
+        },
+        {
+            " id": 8,
+            "level": 2,
+            "parentId":7,
+            "title": "入库资源",
+            "path": "/admin/resource/index",
+            "icon": "el-icon-files"
+        },
+        {
+            "id": 9,
+            "level": 1,
+            "title": "资源包",
+            "path": "#",
+            "icon": "el-icon-folder-opened"
+        },
+        {
+            "id": 10,
+            "level": 1,
+            "title": "公告管理",
+            "icon": "el-icon-edit-outline",
+            "path": "/admin/bulletin"
+        },
+        {
+            "id": 11,
+            "level": 2,
+            "parentId":10,
+            "title": "资源库公告",
+            "path": "/admin/bulletin/list",
+            "icon": "el-icon-edit-outline"
+        },
+        {
+            "id": 12,
+            "level": 1,
+            "title": "评论管理",
+            "icon": "el-icon-chat-dot-square",
+            "path": "/admin/comment/list"
+        },
+        {
+            "id": 4,
+            "level": 2,
+            "parentId":12,
+            "title": "入库资源评论管理",
+            "path": "/admin/comment/list",
+            "icon": "el-icon-chat-dot-square"
+        },
+        {
+            "id": 13,
+            "level": 1,
+            "title": "菜单管理",
+            "icon": "el-icon-folder",
+            "path": "/admin/menu/list"
+        }
+    ]
 }

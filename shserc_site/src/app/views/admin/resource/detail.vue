@@ -84,15 +84,15 @@
             <el-row class="m_30_top">
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">资源名称：</el-col>
-                  <el-col :span="12" class="font14">{{
+                  <el-col :span="12" >资源名称：</el-col>
+                  <el-col :span="12" >{{
                     resource.title
                   }}</el-col>
                 </el-row>
 
                 <el-row class="m_20_top">
-                  <el-col :span="12" class="font14">残疾类型：</el-col>
-                  <el-col :span="12" class="font14">{{
+                  <el-col :span="12" >残疾类型：</el-col>
+                  <el-col :span="12">{{
                     resource.deformity
                   }}</el-col>
                 </el-row>
@@ -100,8 +100,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">资源类型：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12">资源类型：</el-col>
+                  <el-col :span="12">
                     {{ resource.resourceType }}
                   </el-col>
                 </el-row>
@@ -109,8 +109,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">媒体类型：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12" >媒体类型：</el-col>
+                  <el-col :span="12" >
                     {{ resource.mediumType }}</el-col
                   >
                 </el-row>
@@ -118,8 +118,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">安置类型：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12" >安置类型：</el-col>
+                  <el-col :span="12">
                     {{ resource.learnFrom }}
                   </el-col>
                 </el-row>
@@ -127,8 +127,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">学段：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12" >学段：</el-col>
+                  <el-col :span="12" >
                     {{ resource.stage }}
                   </el-col>
                 </el-row>
@@ -136,8 +136,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">年级：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12" >年级：</el-col>
+                  <el-col :span="12" >
                     {{ resource.grade }}
                   </el-col>
                 </el-row>
@@ -145,8 +145,8 @@
 
               <el-col :span="8">
                 <el-row>
-                  <el-col :span="12" class="font14">学科：</el-col>
-                  <el-col :span="12" class="font14">
+                  <el-col :span="12" >学科：</el-col>
+                  <el-col :span="12" >
                     {{ resource.subject }}
                   </el-col>
                 </el-row>
@@ -158,16 +158,16 @@
       <el-aside>
         <el-card>
           <div>作者信息</div>
-          <div class="font14 t m_30_top text_align_left">
+          <div class="m_30_top text_align_left">
             姓名：{{ resource.author }}
           </div>
-          <div class="font14 t m_30_top text_align_left">
+          <div class="m_30_top text_align_left">
             邮箱：{{ resource.authorEmail }}
           </div>
-          <div class="font14 m_30_top text_align_left">
+          <div class="m_30_top text_align_left">
             电话：{{ resource.authorPhone }}
           </div>
-          <div class="font14 m_30_top text_align_left">
+          <div class="m_30_top text_align_left">
             单位：{{ resource.authorCompany }}
           </div>
         </el-card>

@@ -7,3 +7,11 @@ export function list(selectParam) {
 export function edit(editParam){
     return axios.post('api/menu/edit',editParam);
 }
+
+export function editMenuRole(editParam){
+    return axios.post('api/menu/role/edit',editParam);
+}
+
+export function changeState(changeStateParam){
+    return axios.post('api/menu/state/edit',changeStateParam);
+}

@@ -1,105 +1,116 @@
 <template>
-   <el-container class="container">
-       <!-- top -->
-       <el-header>
-           <div>
-            <span>特教资源库后台管理</span>
-           </div>
-           <el-dropdown :hide-timeout=300>
-            <el-button type="info" circle><el-image class="img_header" src="https://himg.bdimg.com/sys/portraitn/item/757c4a696d6d79576f6c6632303134ab4d"></el-image>
-            </el-button>
-            <el-link class="img-header">JimmyPoor</el-link>     
-             <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="accountInfo">用户信息</el-dropdown-item>
-                <el-dropdown-item @click.native="logout">注销 </el-dropdown-item>
-             </el-dropdown-menu>
-           </el-dropdown>  
-       </el-header>
+  <el-container class="container">
+    <!-- top -->
+    <el-header>
+      <div>
+        <span>特教资源库后台管理</span>
+      </div>
+      <el-dropdown :hide-timeout="300">
+        <el-button type="info" circle
+          ><el-image
+            class="img_header"
+            src="https://himg.bdimg.com/sys/portraitn/item/757c4a696d6d79576f6c6632303134ab4d"
+          ></el-image>
+        </el-button>
+        <!-- <el-link class="img-header">JimmyPoor</el-link> -->
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="handleShowAccountInfo"
+            >用户信息</el-dropdown-item
+          >
+          <el-dropdown-item @click.native="handleChangePassword"
+            >修改密码</el-dropdown-item
+          >
+          <el-dropdown-item @click.native="handleLogout">注销 </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-header>
 
-       <el-container>
-           <!-- left aside -->
-            <el-aside>
-                <DynamicMenu :dataSource="menus"></DynamicMenu>
-            </el-aside>
-            <!--right side-->
-            <el-main >
-                <router-view></router-view>
-            </el-main>
-       </el-container>
-   </el-container>
+    <el-container>
+      <!-- left aside -->
+      <el-aside style="width:230px;">
+        <DynamicMenu :dataSource="menus"></DynamicMenu>
+      </el-aside>
+      <!--right side-->
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
-   import DynamicMenu from '@/components/DynamicMenus/index';
-   import * as types from '@/app/static/type';
-   import {logout} from '@/app/api/account'
+import DynamicMenu from "@/components/DynamicMenus/index";
+import * as types from "@/app/static/type";
+import { logout } from "@/app/api/account";
 
-   export default{
-     name:"layout",
+export default {
+  name: "layout",
 
-     components:{
-         DynamicMenu
-     },
+  components: {
+    DynamicMenu,
+  },
 
+  data() {
+    return {
+      menus: JSON.parse(localStorage.getItem("menu")),
+    };
+  },
 
-     data(){
-         return {       
-             menus: JSON.parse(localStorage.getItem("menu"))
-         }
-     }, 
+  methods: {
+    handleLogout() {
+      logout().then((res) => {
+        this.$store.commit(types.APP + "/" + types.LOGOUT);
+        this.$router.push({ path: "/admin/logout", replace: true });
+      });
+    },
 
-     methods:{
+    handleShowAccountInfo() {
+      this.$router.push({ path: "/admin/account/info", replace: true });
+    },
 
-         logout(){
-            logout().then(res=>{
-                this.$store.commit(types.APP+"/"+types.LOGOUT)
-                this.$router.push({ path:'/admin/logout',replace:true});
-            });
-           
-         },
-
-         accountInfo(){
-                  this.$router.push({ path:'/admin/account/info',replace:true});
-         }
-     }
-   }
+    handleChangePassword() {
+        this.$router.push({ path: "/admin/account/info", replace: true })
+    },
+  },
+};
 </script>
 
 <style scoped>
-.container{
-    height:100%;
-    font-family: Microsoft YaHei;
+.container {
+  height: 100%;
+  font-family: Microsoft YaHei;
 }
 
-.el-header{
-    background:#373d41;
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    font-size:20px;
-    color:#fff;
+.el-header {
+  background: #373d41;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  color: #fff;
 }
-.el-header > div{
-    display: flex;
-    align-items: center;
+.el-header > div {
+  display: flex;
+  align-items: center;
 }
-.img-header{
-    color:#fff; font-size:12px;;
+.img-header {
+  color: #fff;
+  font-size: 12px;
 }
 
-.el-button.is-circle{
-    padding: 1px;
+.el-button.is-circle {
+  padding: 1px;
 }
-.img_header{
-    width:38px;
-    height:38px;
-    border-radius: 50%;
+.img_header {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
 }
-.el-aside{
-    background:#333744;
+.el-aside {
+  background: #333744;
 }
-.el-main{
-    background: #eaedf1;
-    width:60%;
+.el-main {
+  background: #eaedf1;
+  width: 60%;
 }
 </style>

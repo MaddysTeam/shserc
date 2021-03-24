@@ -2,6 +2,7 @@ import Admin from '@/app/views/admin/layout/index'
 import Login from '@/app/views/admin/account/login'
 import Empty from '@/app/views/admin/layout/empty'
 import AccountInfo from '@/app/views/admin/account/info'
+import Password from '@/app/views/admin/account/password'
 import UserList from '@/app/views/admin/user/list'
 import CompanyList from '@/app/views/admin/company/list'
 import ResourceList from '@/app/views/admin/resource/list'
@@ -15,6 +16,7 @@ import CommentList from '@/app/views/admin/comment/list'
 import BulletinList from '@/app/views/admin/bulletin/list'
 import BulletinEdit from '@/app/views/admin/bulletin/edit'
 import MenuList from '@/app/views/admin/menu/list'
+
 
 
 export const menuRoutes = [
@@ -180,10 +182,16 @@ export const constRoutes = [
       //TODO:  really think about 
       ...menuRoutes,
       {
+        path: '/admin/account/password',
+        name: 'Password',
+        component: Password
+      },
+      {
         path: '/admin/account/info',
         name: 'AccountInfo',
         component: AccountInfo
       },
+      
       {
         path: '/admin/resource/list',
         name: 'ResourceList',

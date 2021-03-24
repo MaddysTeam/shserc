@@ -10,7 +10,7 @@
       </el-form-item>
     </el-form> -->
     <div class="btn-group">
-      <el-button class="el-button--primary" @click="handleAdd()">
+      <el-button class="el-button--primary" @click="handleAdd()" size="small">
         <i class="el-icon-edit"></i> 新增用户
       </el-button>
     </div>

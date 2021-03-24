@@ -7,9 +7,7 @@
 
     <div class="btn-group">
       <el-button
-        class="el-button--primary"
-        type="danger"
-        size="large"
+        class="el-button--danger"
         @click="addBulletin()"
         >新增公告</el-button
       >

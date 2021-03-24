@@ -20,7 +20,6 @@
       <el-button
         class="el-button--primary"
         type="danger"
-        size="large"
         @click="handleAddResource()"
         ><i class="el-icon-plus"></i> 新增资源</el-button
       >

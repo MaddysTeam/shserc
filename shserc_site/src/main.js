@@ -16,7 +16,7 @@ import TEditor from '@/components/Editor/index'
 
 
 /** initial mock data */
-const mock=false;
+const mock=true;
 if(mock){
   require('./app/mock/mock');
 }
@@ -29,7 +29,7 @@ initDic(store);
 initRoles(store);
 
 Vue.prototype.instance = instance_;
-Vue.config.productionTip = false
+Vue.config.productionTip = false  
 
 /** initial video player */
 Vue.use(VideoPlayer)

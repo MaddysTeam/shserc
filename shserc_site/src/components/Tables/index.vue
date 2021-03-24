@@ -138,7 +138,7 @@ export default {
     },
 
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {
-      return "font-weight:normal;font-size:14px;text-align:center";
+      return "font-weight:normal;font-size:12px;text-align:center";
     },
 
     searchTextChanged(){
@@ -166,7 +166,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.search-Box {
+.search-Box { 
   width: 300px;
   display: flex;
   margin-left: auto;

@@ -1,18 +1,14 @@
 package com.dianda.shserc.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONReader;
 import com.dianda.shserc.bean.MenuSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
+import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;
-import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IMenuService;
-import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.MenuVoList;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +48,7 @@ public class MenuController extends BaseController {
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
-	@PostMapping(path="/edit")
+	@PostMapping(path="/state/edit")
 	public JsonResult state(@RequestBody @Valid EditStateDto editStateDto,BindingResult bindingResult){
 		if (bindingResult.hasErrors()) {
 			return JsonResult.error(super.generateErrorMessage(bindingResult));
@@ -63,4 +59,14 @@ public class MenuController extends BaseController {
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 
+	@PostMapping(path="/role/edit")
+	public JsonResult editMenuRole(@RequestBody @Valid EditMenuRoleDto editMenuRoleDto,BindingResult bindingResult){
+       if(bindingResult.hasErrors()){
+       	return JsonResult.error(super.generateErrorMessage(bindingResult));
+	   }
+
+       return service.editMenuRole(editMenuRoleDto)?
+			   JsonResult.success(Constant.Success.EDIT_SUCCESS) :
+			   JsonResult.error(Constant.Error.EDIT_FAILURE);
+	}
 }
