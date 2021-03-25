@@ -19,6 +19,7 @@ public interface IUserVoMapper extends BasicMapper<ResUserVo, ResUser> {
 			@Mapping( source = "id", target = "id" ) ,
 			@Mapping( source = "userName", target = "userName" ) ,
 			@Mapping( source = "companyId", target = "companyId" ),
+			@Mapping( source = "photoPath", target = "photoPath" ),
 			@Mapping( source = "idCard", target = "idCard" ),
 			@Mapping( source = "mobile", target = "mobile" ),
 			@Mapping( source = "email", target = "email" ),

@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.ChangePasswordDto;
 import com.dianda.shserc.dto.ForgetPasswordDto;
 import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
+import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IAccountService;
 import com.dianda.shserc.util.basic.EncoderUtil;
@@ -19,6 +21,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -32,6 +35,7 @@ import java.time.LocalDateTime;
  */
 
 @Service
+@Validated
 public class AccountServiceImpl implements IAccountService {
 
 	@Resource
@@ -82,6 +86,9 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public ChangePasswordDto changePassword(@Valid ChangePasswordDto dto) {
+		if(!dto.getConfirmPassword().equals(dto.getNewPassword()))
+			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PASSWORD_CONFIRM_FAIL);
+
 		ResUser user = new ResUser();
 		user.setPassword(EncoderUtil.SHA(dto.getNewPassword()));
 

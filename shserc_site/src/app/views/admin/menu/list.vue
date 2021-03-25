@@ -16,7 +16,7 @@
       :visible="dialogVisible"
       :model="editModel"
     ></edit>
-    <el-tree :data="source" :default-expand-all="true" class="font12"> 
+    <el-tree :data="source" :default-expand-all="true" class="font12">
       <span class="custom-tree-node" slot-scope="{ node, data }" @click.stop>
         <span> <i class="el-icon-menu"></i> {{ data.title }}</span>
         <span>
@@ -55,13 +55,12 @@
 </template>
 
 <script>
-
-import {messages} from "@/app/static/message"
+import { messages } from "@/app/static/message";
 import { Notification } from "element-ui";
 import edit from "./edit.vue";
-import { list, editMenuRole,changeState } from "@/app/api/menu";
+import { list, editMenuRole, changeState } from "@/app/api/menu";
 import { deepCopy, buildHierarchy } from "@/app/utils/objectHelper";
-import { stateModel,menuModel, selectParam } from "@/app/models/menu";
+import { stateModel, menuModel, selectParam } from "@/app/models/menu";
 import { mapState } from "vuex";
 
 export default {
@@ -74,7 +73,7 @@ export default {
       originSource: [],
       source: [],
       editModel: deepCopy(menuModel),
-      stateModel: deepCopy(stateModel)
+      stateModel: deepCopy(stateModel),
     };
   },
 
@@ -98,13 +97,15 @@ export default {
       list(selectParam).then((res) => {
         if (res && res.data) {
           let originSource = JSON.parse(res.data).listData;
-          for(let i in originSource){
-            let roles=originSource[i].roles;
-            originSource[i].roles=roles.map(x=>x.id)
+          for (let i in originSource) {
+            let roles = originSource[i].roles;
+            if (roles) {
+              originSource[i].roles = roles.map((x) => x.id);
+            }
           }
           this.source = buildHierarchy(originSource);
           console.log(this.allRoles);
-          console.log('------------------------');
+          console.log("------------------------");
           console.log(this.source);
           this.originSource = originSource;
         }
@@ -154,26 +155,25 @@ export default {
 
         console.log(result);
 
-        editMenuRole(result).then(res=>{
-            Notification.success({ message: messages.SUCCESS });
+        editMenuRole(result).then((res) => {
+          Notification.success({ message: messages.SUCCESS });
         });
-
       }
     },
 
     handleEdit(node, data) {
-      this.editModel= data;
+      this.editModel = data;
       this.dialogVisible = true;
       this.handleLoadMenus();
       return false;
     },
 
     handleChangeState(node, data) {
-      this.stateModel.targetId=data.id;
+      this.stateModel.targetId = data.id;
       //TODO:this.stateModel.stateId=
-      changeState(this.stateModel).then(res=>{
+      changeState(this.stateModel).then((res) => {
         if (res) {
-           Notification.success({ message:  messages.SUCCESS });
+          Notification.success({ message: messages.SUCCESS });
         }
       });
       return false;

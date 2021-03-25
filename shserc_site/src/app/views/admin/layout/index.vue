@@ -15,12 +15,12 @@
         <!-- <el-link class="img-header">JimmyPoor</el-link> -->
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="handleShowAccountInfo"
-            >用户信息</el-dropdown-item
+            ><i class="el-icon-user-solid"></i>用户信息</el-dropdown-item
           >
           <el-dropdown-item @click.native="handleChangePassword"
-            >修改密码</el-dropdown-item
+            ><i class="el-icon-lock"></i>修改密码</el-dropdown-item
           >
-          <el-dropdown-item @click.native="handleLogout">注销 </el-dropdown-item>
+          <el-dropdown-item @click.native="handleLogout"><i class="el-icon-info"></i>注销 </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-header>
@@ -69,7 +69,7 @@ export default {
     },
 
     handleChangePassword() {
-        this.$router.push({ path: "/admin/account/info", replace: true })
+        this.$router.push({ path: "/admin/account/password", replace: true })
     },
   },
 };

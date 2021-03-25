@@ -16,7 +16,7 @@ import TEditor from '@/components/Editor/index'
 
 
 /** initial mock data */
-const mock=false;
+const mock=true;
 if(mock){
   require('./app/mock/mock');
 }

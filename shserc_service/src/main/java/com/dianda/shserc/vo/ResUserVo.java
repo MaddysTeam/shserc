@@ -12,6 +12,7 @@ public class ResUserVo implements Serializable {
 
 	private long id;
 	private String userName;
+	private String photoPath;
 	private long companyId;
 	private String idCard;
 	private String mobile;

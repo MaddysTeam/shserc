@@ -94,6 +94,7 @@ export default {
 
     handleLoadDomains() {
       let resourceDomains = this.$store.state.app.resourceDomains;
+      //TODO: fix bugs for  async loading dic data  when browser refresh 
       console.log("----------------domain-----------------")
       console.log(resourceDomains);
       let dict=this.$store.state.app.dict;

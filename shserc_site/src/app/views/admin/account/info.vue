@@ -4,7 +4,7 @@
       <el-form-item>
         <el-avatar :size="200">
           <img
-            src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+            :src="account.photoPath"
           />
         </el-avatar>
         <el-upload

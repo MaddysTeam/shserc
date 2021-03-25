@@ -21,7 +21,10 @@ public final class Constant {
 		public final static String USER_MOBILE_IS_REQUIRED = "用戶手机号为必须";
 		public final static String PASSWORD_IS_REQUIRE = "密码不能为空";
 		public final static String EMAIL_FORMAT_INVALID = "邮件格式不正确";
-		
+		public final static String USER_IS_EXISTS="用户已存在,不能重复注册";
+		public final static String PASSWORD_NOT_VALID="密码验证失败，必须包含字母和数字且长度炜6到16位！";
+		public final static String PASSWORD_CONFIRM_FAIL="新密码必须和验证密码一致！";
+
 		// role and permission error message
 		public final static String ROLE_NAME_IS_REQUIRED = "角色名称为必须";
 		
@@ -84,6 +87,10 @@ public final class Constant {
 		public final static String ASC = "ASC";
 		public final static String DESC = "DESC";
 	}
-	
+
+	public static final class Regex{
+		public final static String PASSWORD= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+	}
+
 	
 }
