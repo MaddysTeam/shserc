@@ -81,6 +81,7 @@ export default {
           type: "danger",
            method: (index, row) => {
              this.roleDialogVisible=true;
+             this.editUserRoleModel.userId=row.id;
           },
         },
       ],
@@ -117,6 +118,8 @@ export default {
 
     handleCloseUserRole() {
       this.roleDialogVisible = false;
+      this.loadUserList();
+      this.editUserRoleModel=deepCopy(userRoleModel)
     },
 
     handleSearch(val) {

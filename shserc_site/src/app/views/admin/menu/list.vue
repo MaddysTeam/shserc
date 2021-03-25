@@ -20,7 +20,7 @@
       <span class="custom-tree-node" slot-scope="{ node, data }" @click.stop>
         <span> <i class="el-icon-menu"></i> {{ data.title }}</span>
         <span>
-          <el-select
+          <el-select 
             v-model="data.roles"
             multiple
             size="mini"
@@ -205,5 +205,8 @@ export default {
 
 .el-input {
   height: 30px;
+}
+.el-select {
+  width:400px;
 }
 </style>

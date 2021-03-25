@@ -42,7 +42,7 @@
               <div class="widget-content">
                 <el-row style="padding: 20px">
                   <el-col v-for="type in domain.resourceTypes" :key="type.id" style="text-align: left">
-                    <b>{{type.name}}</b>
+                    <router-link :to="{path:'/admin/resource/list',query:{typeId:type.id}}">{{type.name}}</router-link>
                     <p></p>
                   </el-col>
                 </el-row>
@@ -87,6 +87,7 @@ export default {
           query: { searchPhrase: this.searchPhrase },
         });
     },
+      
 
     handleAddResource() {
       this.$router.push("/admin/resource/add");

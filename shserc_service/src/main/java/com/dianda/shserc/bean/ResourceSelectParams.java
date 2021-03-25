@@ -15,5 +15,6 @@ public class ResourceSelectParams extends BaseSelectParams {
 	long importSourceId;
 	long gradeId;
 	long stageId;
+	long resourceTypeId;
 	String title;
 }

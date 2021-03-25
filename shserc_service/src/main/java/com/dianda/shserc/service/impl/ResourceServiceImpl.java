@@ -70,6 +70,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long importSourceId = params.getImportSourceId();
 		long domainId = params.getDomainId();
 		long gradeId = params.getGradeId();
+		long resourceTypeId=params.getResourceTypeId ();
 		Map<String, String> orderPhrases = params.getOrderPhrases();
 		String phrase = params.getSearchPhrase();
 
@@ -96,6 +97,10 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		}
 		if (domainId > 0) {
 			wrapper = wrapper.eq("domain_id", domainId);
+		}
+		if(resourceTypeId>0)
+		{
+			wrapper = wrapper.eq("resource_type_id", resourceTypeId);
 		}
 		if (gradeId > 0) {
 			wrapper = wrapper.eq("grade_id", stageId);

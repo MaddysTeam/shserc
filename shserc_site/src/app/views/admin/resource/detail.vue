@@ -17,7 +17,7 @@
     <el-container class="font12">
       <el-main>
         <div class="grid text_align_left">
-          <div class="grid-item">
+          <div class="grid-item" >
             <div
               class="video"
               v-if="
@@ -34,7 +34,7 @@
               ></video-player>
             </div>
             <div class="cover" v-else>
-              <img :src="resource.coverPath" @error="handleImageError()" />
+              <img :src="resource.coverPath" @error="handleImageError()"  style="max-height:300px"/>
             </div>
           </div>
           <div class="grid-item font14">
@@ -56,15 +56,15 @@
                 ><i class="el-icon-download font14"></i
               ></a>
             </div>
-            <div class="m_30_top font14">
-              上传时间：<i class="el-icon-time font12"></i> 2020-11-08
+            <div class="m_30_top font12">
+              上传时间：<i class="el-icon-time font14"></i> 2020-11-08
             </div>
           </div>
 
           <div class="grid-item">
             <hr />
             <div class="m_30_top">
-              <i class="el-icon-platform font12"></i><strong>资源描述</strong>
+              <i class="el-icon-platform font14"></i><strong>资源描述</strong>
             </div>
             <div class="m_30_top">
               {{ resource.description }}
@@ -73,7 +73,7 @@
 
           <div class="grid-item">
             <hr />
-            <div class="m_30_top"><strong>资源信息</strong></div>
+            <div class="m_30_top "><strong>资源信息</strong></div>
 
             <el-row class="m_30_top">
               <el-col :span="8">
@@ -82,14 +82,14 @@
                   <el-col :span="12">{{ resource.title }}</el-col>
                 </el-row>
 
-                <el-row class="m_20_top">
+                <el-row class="m_30_top">
                   <el-col :span="12">残疾类型：</el-col>
                   <el-col :span="12">{{ resource.deformity }}</el-col>
                 </el-row>
               </el-col>
 
-              <el-col :span="8">
-                <el-row>
+              <el-col :span="8" >
+                <el-row >
                   <el-col :span="12">资源类型：</el-col>
                   <el-col :span="12">
                     {{ resource.resourceType }}
@@ -104,8 +104,8 @@
                 </el-row>
               </el-col>
 
-              <el-col :span="8">
-                <el-row>
+              <el-col :span="8" >
+                <el-row class="m_30_top">
                   <el-col :span="12">安置类型：</el-col>
                   <el-col :span="12">
                     {{ resource.learnFrom }}
@@ -114,7 +114,7 @@
               </el-col>
 
               <el-col :span="8">
-                <el-row>
+                <el-row class="m_30_top">
                   <el-col :span="12">学段：</el-col>
                   <el-col :span="12">
                     {{ resource.stage }}
@@ -123,7 +123,7 @@
               </el-col>
 
               <el-col :span="8">
-                <el-row>
+                <el-row class="m_30_top">
                   <el-col :span="12">年级：</el-col>
                   <el-col :span="12">
                     {{ resource.grade }}
@@ -132,7 +132,7 @@
               </el-col>
 
               <el-col :span="8">
-                <el-row>
+                <el-row class="m_30_top"> 
                   <el-col :span="12">学科：</el-col>
                   <el-col :span="12">
                     {{ resource.subject }}
@@ -145,7 +145,7 @@
       </el-main>
       <el-aside>
         <el-card>
-          <div>作者信息</div>
+          <div><strong>作者信息</strong></div>
           <div class="m_30_top text_align_left">
             姓名：{{ resource.author }}
           </div>
@@ -248,20 +248,22 @@ export default {
 .grid-item {
   padding: 30px;
   margin: 5px;
-  border-radius: 8px;
+  border-radius: 4px;
   background: #fafafa;
   flex: 1;
   min-width: 500px;
   margin: 20px;
+  height: 300px;
 }
 
 .cover img {
   width: 100%;
-  transition: all 0.5s;
+  transition: all 1.5s;
 }
 .el-card {
   min-width: 280px;
   margin-right: 20px;
   transition: all 0.5s;
+  margin-top:38px;
 }
 </style>

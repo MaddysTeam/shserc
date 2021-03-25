@@ -4,11 +4,11 @@
     :visible.sync="visible"
     :before-close="handleClose"
   >
-    <el-form :model="userRole" ref="userRoleForm" :rules="rules">
+    <el-form :model="model" ref="userRoleForm" :rules="rules">
       <el-form-item prop="role">
         <el-select
           @change="selectChanged"
-          v-model="userRole.id"
+          v-model="model.roleId"
           placeholder="选择角色"
           style="width: 100%"
         >
@@ -42,7 +42,7 @@ export default {
   name: "role",
   data() {
     return {
-      userRole: deepCopy(userRoleModel),
+      // userRole: deepCopy(userRoleModel),
       roles: [],
       rules: {
         role: {
@@ -62,12 +62,14 @@ export default {
 
   props: {
     visible: { type: Boolean, required: true },
+    model: { type: Object, required: true },
   },
   mounted() {
     this.handleLoadRoles();
   },
   methods: {
     handleClose() {
+      this.mode= deepCopy(userRoleModel);
       this.$emit("close");
     },
 
@@ -76,14 +78,14 @@ export default {
     },
 
     selectChanged(roleId) {
-      this.userRole.roleId = roleId;
+      this.model.roleId = roleId;
     },
 
     submitForm(formName) {
       let _this = this;
       _this.$refs[formName].validate((isValid) => {
         if (isValid) {
-          bindUserRole(userRoleModel).then((res) => {
+          bindUserRole(this.model).then((res) => {
             Notification.success({ message: "编辑成功" });
             _this.handleClose();
           });

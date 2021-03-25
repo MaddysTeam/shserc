@@ -57,7 +57,8 @@ export const selectParam = {
    domainId: 0,
    importSourceId: 0,
    gradeId: 0,
-   stageId: 0
+   stageId: 0,
+   resourceTypeId:0,
 }
 
 //  video optons only for resouce 

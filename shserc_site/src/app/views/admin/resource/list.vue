@@ -155,6 +155,9 @@ export default {
     if (this.$route.query.searchPhrase !== "") {
       this.selectParam.searchPhrase = this.$route.query.searchPhrase; // get search phrase
     }
+    if(this.$route.query.typeId!==""){
+      this.selectParam.resourceTypeId=this.$route.query.typeId;
+    }
     this.loadResourceList();
   },
   methods: {

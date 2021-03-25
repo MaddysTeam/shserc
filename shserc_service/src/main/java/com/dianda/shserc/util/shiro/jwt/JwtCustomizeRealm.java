@@ -3,11 +3,13 @@ package com.dianda.shserc.util.shiro.jwt;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.exceptions.ExceptionType;
 import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.util.SpringUtils;
+import com.dianda.shserc.util.basic.EncoderUtil;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.nosql.redis.RedisUtil;
 import org.apache.shiro.authc.AuthenticationException;
@@ -53,10 +55,11 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 			throw new AuthenticationException ( "用户名或密码错误" );
 
 		String userName=dto.getString("userName");
+		String password = EncoderUtil.SHA( dto.getString ( "password" ));
 		try {
-			ResUser user = userMapper.selectOne (
+			ResUser user = userMapper.selectUsers (new Page<> (  ) ,
 					new QueryWrapper<ResUser> ( )
-							.eq ( "password" , dto.getString ( "password" ) )
+							.eq ( "password" , password )
 							.and(wrapper->
 									wrapper.eq ( "user_name" , userName)
 											.or()
@@ -64,7 +67,7 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 											.or()
 											.eq("mobile",userName)
 							)
-			);
+			).getRecords ().get ( 0 );
 			if ( ObjectUtil.isNull ( user ) ) {
 				throw new AuthenticationException ( "用户名或密码错误" );
 			} else {

@@ -19,6 +19,7 @@ public class ResUserVo implements Serializable {
 	private String email;
 	private String companyName;
 	private String state;
+	private long roleId;
 	private String roleName;
 	private String realName;
 	private LocalDateTime registerTime;

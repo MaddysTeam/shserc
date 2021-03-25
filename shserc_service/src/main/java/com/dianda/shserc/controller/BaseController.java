@@ -3,6 +3,7 @@ package com.dianda.shserc.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.entity.ResUser;
+import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.util.shiro.util.ShiroUtil;
@@ -28,10 +29,11 @@ public class BaseController {
 			ResUser resUser=new ResUser();
 			resUser.setId(user.getInteger("id"));
 			resUser.setUserName(user.getString("userName"));
+			resUser.setRoleId ( user.getInteger ( "roleId" ) );
 			return resUser;
 		}
 		
-		return null;
+		throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID,Constant.Error.LOGIN_USER_INVALID );
 	}
 
 	public String generateErrorMessage(BindingResult result){

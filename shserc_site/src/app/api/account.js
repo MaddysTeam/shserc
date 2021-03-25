@@ -9,7 +9,7 @@ export function logout() {
 }
 
 export function changePassword(changePassword){
-    return axios.post('api/account/changePassword',changePassword)
+    return axios.post('api/account/password/change',changePassword)
 }
 
 export function forgetPassword(){

@@ -60,12 +60,16 @@ public class AccountController extends BaseController {
 		else
 			return JsonResult.error();
 	}
-
+	
+	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
 	public JsonResult changePassword(@RequestBody @Valid ChangePasswordDto changePasswordDto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return JsonResult.error();
+			return JsonResult.error(super.generateErrorMessage ( bindingResult ));
 		}
-
+		
+		ResUser user= super.getLoginUserInfo ();
+		
+		changePasswordDto.setUserName ( user.getUserName () );
 		changePasswordDto = accountService.changePassword(changePasswordDto);
 		if (changePasswordDto.getIsSuccess()) {
 			return JsonResult.success(changePasswordDto, "success");

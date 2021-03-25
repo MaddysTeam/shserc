@@ -144,25 +144,17 @@ export default {
             userName: _this.form.name,
             password: _this.form.password,
           }).then((res) => {
-            console.log('---------------- login user info------------------')
-            console.log(res.data);
             if (res) {
               Notification.success({ message: "登录成功" });
               // save login info to store，save dynamic route info to store
               _this.$store.commit(types.APP + "/" + types.LOGIN, res.data);
 
-              initMenus(_this.$store);
+              initMenus(_this.$store,res.data.roleId);
 
               // redirect to admin index page
               _this.$router.push("/admin/dashboard/summary");
             }
           });
-
-          //TODO:
-
-          //_this.$store.commit(types.APP + "/" + types.MENUS, menuRoutes);
-          // redirect to admin index page
-          //_this.$router.push("/admin/dashboard/summary");
         } else {
           console.log("error submit!!");
           return false;

@@ -16,9 +16,9 @@ import org.apache.tomcat.jni.Local;
  * @since 2020-08-08
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class ResUser extends  BaseEntity {
-
+@EqualsAndHashCode( callSuper = false )
+public class ResUser extends BaseEntity {
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String userName;
@@ -27,7 +27,7 @@ public class ResUser extends  BaseEntity {
 	
 	private int isDeleted;
 	
-	private  long  companyId;
+	private long companyId;
 	
 	//TODO: 20210220
 	
@@ -46,29 +46,23 @@ public class ResUser extends  BaseEntity {
 	private LocalDateTime lastLoginTime;
 	
 	private long stateId;
-
+	
 	private int loginCount;
-
-	@TableField(exist = false)
+	
+	@TableField( exist = false )
 	private String companyName;
-
-	@TableField(exist = false)
-	private  String state;
-
-	@TableField(exist = false)
+	
+	@TableField( exist = false )
+	private String state;
+	
+	@TableField( exist = false )
 	private String roleName;
 	
-//	private long addUser;
-//
-//	private LocalDateTime addTime;
-//
-//	private long updateUser;
-//
-//	private LocalDateTime updateTime;
+	@TableField( exist = false )
+	private long roleId;
 	
-	public static long getSerialVersionUID() {
+	public static long getSerialVersionUID( ) {
 		return serialVersionUID;
 	}
-	
 	
 }

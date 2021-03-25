@@ -3,9 +3,10 @@ import * as types from '@/app/static/type';
 import  {selectParam}  from "@/app/models/menu"
 import {buildHierarchy} from "@/app/utils/objectHelper"
 
-export function initMenus(store) {
+export function initMenus(store,roleId) {
 
-
+    selectParam.roleId=roleId;
+    
     //means get all menus
     list(selectParam).then(res => {
         if (res && store) {

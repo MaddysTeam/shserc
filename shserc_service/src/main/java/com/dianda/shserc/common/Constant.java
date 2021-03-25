@@ -24,6 +24,7 @@ public final class Constant {
 		public final static String USER_IS_EXISTS="用户已存在,不能重复注册";
 		public final static String PASSWORD_NOT_VALID="密码验证失败，必须包含字母和数字且长度炜6到16位！";
 		public final static String PASSWORD_CONFIRM_FAIL="新密码必须和验证密码一致！";
+		public final static String LOGIN_USER_INVALID = "用户登录信息失效，请重新登录";
 
 		// role and permission error message
 		public final static String ROLE_NAME_IS_REQUIRED = "角色名称为必须";
@@ -89,7 +90,7 @@ public final class Constant {
 	}
 
 	public static final class Regex{
-		public final static String PASSWORD= "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+		public final static String PASSWORD= "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,15}$";
 	}
 
 	

@@ -12,7 +12,8 @@
         u.last_login_time,
         u.login_count,
         c.company_name,
-        r.role_name
+        r.role_name,
+        r.id as role_id
         from res_user
         u left join res_company c on u.company_id=c.id
          left join res_user_role ur  on u.id=ur.user_id
