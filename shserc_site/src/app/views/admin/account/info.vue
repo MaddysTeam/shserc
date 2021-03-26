@@ -1,10 +1,14 @@
 <template>
   <div>
-    <el-form label-width="80px" v-model="account">
+    <el-form ref="accountForm" label-width="80px" v-model="account">
       <el-form-item>
+        <!-- avatar start -->
         <el-avatar :size="200">
           <img :src="account.photoPath" />
         </el-avatar>
+        <!-- avatar end -->
+
+        <!-- upload start -->
         <el-upload
           class="upload-file"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -23,15 +27,14 @@
         </el-upload>
         <div slot="tip" class="el-upload__tip"></div>
       </el-form-item>
+      <!-- upload end -->
+
+      <!-- others -->
       <el-form-item label="账号名称">
         <div class="el-label">
-          3333
+          {{ account.name }}
         </div>
-        <!-- <el-input v-model="account.name"></el-input> -->
       </el-form-item>
-      <!-- <el-form-item label="证件号" >
-        <el-input v-model="account.idCard"></el-input>
-      </el-form-item> -->
       <el-form-item label="所属单位">
         <el-input v-model="account.company"></el-input>
       </el-form-item>
@@ -42,6 +45,8 @@
       <el-form-item label="手机">
         <el-input v-model="account.mobile"></el-input>
       </el-form-item>
+      <!-- others -->
+
       <el-form-item class="btns">
         <el-button type="primary" @click="submitForm('companyForm')"
           >修改</el-button
@@ -52,8 +57,10 @@
   </div>
 </template>
 <script>
+import { info } from "@/app/api/user";
 import { accountModel } from "@/app/models/account";
 import { uploadFile } from "@/app/api/file";
+import { messages } from "@/app/static/message";
 
 export default {
   data() {
@@ -83,13 +90,8 @@ export default {
     },
 
     uploadResourceSuccess(response, file, fileList) {
-      alert();
-      // var data = JSON.parse(response.data);
-      // console.log(data);
-      // this.resource.resourcePath = data.filePath;
-      // this.resource.fileName = data.fileName;
-      // this.resource.fileExtName = data.fileExtName;
-      // this.resource.fileSize = data.fileSize;
+      var data = JSON.parse(response.data);
+      this.account.photoPath = data.filePath;
     },
     uploadResourceOnRemoveTxt() {},
 
@@ -97,6 +99,18 @@ export default {
 
     handleBack() {
       this.$router.back(-1);
+    },
+
+    submitForm(formName) {
+      this.$ref[formName].validate((vaild) => {
+        if (vaild) {
+          info(this.account).then((res) => {
+            if (res) {
+              this.$notification.success(messages.SUCCESS);
+            }
+          });
+        }
+      });
     },
   },
 };
