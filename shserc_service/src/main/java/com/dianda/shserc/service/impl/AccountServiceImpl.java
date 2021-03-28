@@ -53,12 +53,12 @@ public class AccountServiceImpl implements IAccountService {
 			subject.login(new JwtToken(loginToken));
 
 			// if login succes, get userinfo from shiro
-			JSONObject userObject = ShiroUtil.getLoginUser();
-			ResUser user = new ResUser();
-			user.setId(userObject.getInteger("id"));
-			user.setLastLoginTime(LocalDateTime.now());  // record last login time
-			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
-			userMapper.updateById(user);
+//			JSONObject userObject = ShiroUtil.getLoginUser();
+//			ResUser user = new ResUser();
+//			user.setId(userObject.getInteger("id"));
+//			user.setLastLoginTime(LocalDateTime.now());  // record last login time
+//			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
+//			userMapper.updateById(user);
 
 			// if login success,we can get token from subject and save it
 			String token = subject.getPrincipal().toString();

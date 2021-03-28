@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted(){
-    this.bind();
+    this.handleLoadList();
   },
   methods: {
 
@@ -49,9 +49,10 @@ export default {
 
     handleCloseEdit(){
       this.dialogVisible=false;
+      this.handleLoadList();
     },
 
-    bind(){
+    handleLoadList(){
       list().then((res)=>{
         if(res && res.data){
         console.log(res.data);

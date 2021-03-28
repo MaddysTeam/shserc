@@ -79,7 +79,7 @@ function bindGrade(store, dict) {
     store.commit("app/" + types.GRADES, grades)
 }
 
-function bindDomain(store, dict) {
+ function bindDomain(store, dict) {
     let domains = getChildrenByParentId(15, dict)
     store.commit("app/" + types.RESOURCE_DOMAINS, domains)
  }

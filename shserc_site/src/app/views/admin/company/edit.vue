@@ -96,5 +96,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.el-tree-node__label, .el-select-dropdown__item{
+  font-size:12px;
+}
 </style>

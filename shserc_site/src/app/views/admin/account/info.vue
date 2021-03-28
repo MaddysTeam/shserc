@@ -4,7 +4,7 @@
       <el-form-item>
         <!-- avatar start -->
         <el-avatar :size="200">
-          <img :src="account.photoPath" />
+          <img :src="account.photoPath"  @error="handleImageError()"/>
         </el-avatar>
         <!-- avatar end -->
 
@@ -32,11 +32,18 @@
       <!-- others -->
       <el-form-item label="账号名称">
         <div class="el-label">
-          {{ account.name }}
+          {{ account.userName }}
         </div>
       </el-form-item>
       <el-form-item label="所属单位">
-        <el-input v-model="account.company"></el-input>
+         <selectTree
+          :data="companySource"
+          placeholder="所属单位"
+          :nodeKey="account.companyId.toString()"
+          :value="account.companyId.toString()"
+          @input="handleSelectCompany"
+        >
+        </selectTree>
       </el-form-item>
 
       <el-form-item label="邮箱">
@@ -48,7 +55,7 @@
       <!-- others -->
 
       <el-form-item class="btns">
-        <el-button type="primary" @click="submitForm('companyForm')"
+        <el-button type="primary" @click="submitForm('accountForm')"
           >修改</el-button
         >
         <el-button type="info" @click="handleBack()">返回</el-button>
@@ -57,20 +64,62 @@
   </div>
 </template>
 <script>
-import { info } from "@/app/api/user";
+import { edit } from "@/app/api/user";
+import { companyList } from "@/app/api/company";
 import { accountModel } from "@/app/models/account";
 import { uploadFile } from "@/app/api/file";
 import { messages } from "@/app/static/message";
+import selectTree from "@/components/TreeSelector/index";
+import {CDN} from "@/static/CDN"
 
 export default {
+  components:{selectTree},
   data() {
     return {
       account: accountModel,
       fileList: [],
+      companySource:[]
     };
   },
 
+  mounted(){
+    this.handLoadCompanyList();
+  },
+
   methods: {
+
+    handleLoadAccount(){
+        this.account=this.$store.state.app.account;
+        console.log(this.account);
+        if( this.account.photoPath==null || !this.account.photoPath || this.account.photoPath=="" ){
+          this.account.photoPath=CDN.DEFAULT_HEADER_COVER
+        } 
+        
+        //account.companyId=account.companyId.toString();
+        
+    },
+
+     handleImageError(){
+      let img=event.srcElement;
+      img.src = CDN.DEFAULT_HEADER_COVER;
+	    img.onerror = null; //防止闪图
+    },
+
+
+    handLoadCompanyList() {
+      companyList().then((res) => {
+        if (res && res.data) {
+          this.companySource = [JSON.parse(res.data)];
+
+          this.handleLoadAccount();
+        }
+      });
+    },
+
+    handleSelectCompany(id) {
+      this.account.companyId = id + "";
+    },
+
     uploadResource(options) {
       uploadFile(options);
     },
@@ -102,15 +151,17 @@ export default {
     },
 
     submitForm(formName) {
-      this.$ref[formName].validate((vaild) => {
-        if (vaild) {
-          info(this.account).then((res) => {
+      console.log(this.account);
+       edit(this.account).then((res) => {
             if (res) {
               this.$notification.success(messages.SUCCESS);
             }
           });
-        }
-      });
+      // this.$refs[formName].validate((vaild) => {
+      //   if (vaild) {
+         
+      //   }
+      // });
     },
   },
 };

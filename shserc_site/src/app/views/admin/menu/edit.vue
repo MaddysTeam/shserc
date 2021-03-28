@@ -24,6 +24,7 @@
           :data="treeData"
           :clearable="true"
           :default-expand-all="true"
+          :check-strictly="true"
           v-model="model.parentId"
           placeholder="选择菜单"
           size="medium"
@@ -89,18 +90,7 @@ export default {
             },
             trigger: "blur",
           },
-        ],
-        // parentId: {
-        //   validator: (rule, value, callback) => {
-        //     validateSelectValue(
-        //       rule,
-        //       value,
-        //       callback,
-        //       messages.MENU_SELECT_NOT_NULL
-        //     );
-        //   },
-        //   trigger: "change",
-        // },
+        ]
       },
 
       treeData: []
@@ -131,7 +121,7 @@ export default {
       _this.$refs[formName].validate((isValid) => {
         if (isValid) {
           edit(this.model).then((res) => {
-            Notification.success({ message: "编辑成功" });
+            Notification.success({ message: messages.SUCCESS });
             _this.handleClose();
             //TOOD:调用父页面方法 刷新列表等操作
           });
@@ -142,5 +132,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.el-select-tree__item{
+  font-size:12px;
+}
 </style>

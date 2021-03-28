@@ -1,14 +1,15 @@
-import * as types from '@/app/static/type';
+import * as types from "@/app/static/type";
+import { setCookie, getCookie,delCookie } from "@/static/cookie"
 export default {
   namespaced: true,
   state: {
-    token: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-    isAuth: localStorage.getItem('Authorization') ? true : false,
-    loginUserInfo: {},
+    token:  getCookie("Authorization"), 
+    isAuth: getCookie("Authorization") ? true : false,
+    account: JSON.parse(localStorage.getItem("account")),
 
     // following for all roles and menus
     roles: [],
-    menus: JSON.parse(localStorage.getItem('menu')) ,
+    menus: JSON.parse(localStorage.getItem("menu")),
 
     // TODO：dynamic routes
     dynamicRoutes: [],
@@ -31,16 +32,21 @@ export default {
     [types.LOGIN]: (state, data) => {
       if (data) {
         let token = data.token;
-        localStorage.setItem('Authorization', token); // store token to localstorage
+        // attention !  must set current state value and next step we can use localstorage, otherwise state value will be null when rendering page!
         state.isAuth = true;
         state.token = token;
-        state.loginUserInfo = data;
+        state.account= data;
+
+        setCookie('Authorization', token, 1);
+        localStorage.setItem("account", JSON.stringify(data));
       }
     },
 
     [types.LOGOUT]: (state) => {
-      localStorage.removeItem('Authorization');
-      state.loginUserInfo = {}
+      localStorage.removeItem("account");
+      localStorage.removeItem("menu");
+      delCookie("Authorization")
+      state.account = {}
     },
 
     // roles
@@ -50,8 +56,9 @@ export default {
 
     // menus
     [types.MENUS]: (state, data) => {
-      localStorage.setItem('menu', JSON.stringify(data));
-      state.menus = data;
+        // attention !  must set current state value  and next step we can use localstorage, otherwise state value will be null!
+      state.menus=data;
+      localStorage.setItem("menu", JSON.stringify(data));
     },
 
     // routes

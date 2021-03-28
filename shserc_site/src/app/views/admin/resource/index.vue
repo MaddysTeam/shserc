@@ -29,11 +29,11 @@
     <div>
       <!-- card area start-->
       <el-row style="margin-top: 100px">
-        <el-col :md="10" :lg="8" v-for="domain in domains" :key="domain.id" style="padding: 20px">
-          <el-card :body-style="{ padding: '0px' , height:'300px' }" class="font12">
+        <el-col :md="10" :lg="8" v-for="(domain,index) in domains" :key="domain.id" class="p_20">
+          <el-card :body-style="{ padding: '0px' }" class="font12 height300">
             <div class="widget">
               <!-- widget header start-->
-              <div class="widget-header">
+              <div class="widget-header " :style="{backgroundColor:colors[index],color:'white'}">
                 <i class="el-icon-star-on"></i> {{domain.name}}
               </div>
               <!-- widget content end-->
@@ -59,13 +59,14 @@
 </template>
 
 <script>
-import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
+import { getRelevantByRelevantId ,bindDomain} from "@/app/utils/dictHelper";
 
 export default {
   data() {
     return {
       searchPhrase: "",
       domains: [],
+      colors:['#e54d42','#0081ff','#39b54a','#6739b6','#a5673f']
     };
   },
 
@@ -94,7 +95,7 @@ export default {
     },
 
     handleLoadDomains() {
-      let resourceDomains = this.$store.state.app.resourceDomains;
+       let resourceDomains = this.$store.state.app.resourceDomains;
       //TODO: fix bugs for  async loading dic data  when browser refresh 
       console.log("----------------domain-----------------")
       console.log(resourceDomains);

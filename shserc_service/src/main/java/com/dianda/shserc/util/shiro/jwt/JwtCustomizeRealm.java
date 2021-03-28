@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.exceptions.ExceptionType;
 import com.dianda.shserc.exceptions.GlobalException;
@@ -24,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class JwtCustomizeRealm extends AuthorizingRealm {
 	
@@ -53,28 +55,30 @@ public class JwtCustomizeRealm extends AuthorizingRealm {
 		JSONObject dto = JSON.parseObject ( account );
 		if ( ObjectUtil.isNull ( dto ) )
 			throw new AuthenticationException ( "用户名或密码错误" );
-
-		String userName=dto.getString("userName");
-		String password = EncoderUtil.SHA( dto.getString ( "password" ));
+		
+		String userName = dto.getString ( "userName" );
+		String password = EncoderUtil.SHA ( dto.getString ( "password" ) );
 		try {
-			ResUser user = userMapper.selectUsers (new Page<> (  ) ,
+			ResUser user = null;
+			List<ResUser> users = userMapper.selectUsers ( new Page<> ( ) ,
 					new QueryWrapper<ResUser> ( )
 							.eq ( "password" , password )
-							.and(wrapper->
-									wrapper.eq ( "user_name" , userName)
-											.or()
-											.eq("email", userName)
-											.or()
-											.eq("mobile",userName)
+							.and ( wrapper ->
+									wrapper.eq ( "user_name" , userName )
+											.or ( )
+											.eq ( "email" , userName )
+											.or ( )
+											.eq ( "mobile" , userName )
 							)
-			).getRecords ().get ( 0 );
-			if ( ObjectUtil.isNull ( user ) ) {
-				throw new AuthenticationException ( "用户名或密码错误" );
-			} else {
-				account = JSON.toJSONString ( user );
-				token = JwtOperation.Sign ( account , System.currentTimeMillis ( ) );
+			).getRecords ( );
+			
+			if ( ObjectUtil.isNull ( users ) || users.size ( ) <= 0 || ObjectUtil.isNull ( users.get ( 0 ) ) ) {
+				throw new AuthenticationException ( Constant.Error.LOGIN_WITH_WRONG_INFO );
 			}
 			
+			user = users.get ( 0 );
+			account = JSON.toJSONString ( user );
+			token = JwtOperation.Sign ( account , System.currentTimeMillis ( ) );
 			if ( JwtOperation.verifyToken ( token ) ) {
 				// put token into redis
 				redisUtil.saveString ( JwtConstant.CACHE_PREFIX + user.getId ( ) , token );

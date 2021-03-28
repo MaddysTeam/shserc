@@ -16,7 +16,13 @@ public interface IEditUserMapper extends BasicMapper<ResUser, EditUserDto> {
 	
 	@Mappings( {
 			@Mapping(source="id",target="id"),
-			@Mapping( source="userName", target="userName" )
+			@Mapping( source="userName", target="userName" ),
+			@Mapping( source="companyId", target="companyId" ),
+			@Mapping( source="idCard", target="idCard" ),
+			@Mapping( source="realName", target="realName" ),
+			@Mapping( source="mobile", target="mobile" ),
+			@Mapping( source="email", target="email" ),
+			@Mapping( source="photoPath", target="photoPath" )
 	} )
 	ResUser mapFrom(EditUserDto editUserDto);
 	

@@ -75,7 +75,7 @@
                   v-model="resource.domain"
                   value-key="id"
                   placeholder="不分领域"
-                  style="width: 100%"
+                   class="fullWidth"
                 >
                   <el-option
                     v-for="item in domainOptions"
@@ -94,7 +94,7 @@
                   v-model="resource.resourceType"
                   value-key="id"
                   placeholder="不分资源类型"
-                  style="width: 100%"
+                   class="fullWidth"
                 >
                   <el-option
                     v-for="item in typeOptions"
@@ -116,7 +116,7 @@
                   v-model="resource.stage"
                   value-key="id"
                   placeholder="不分学段"
-                  style="width: 100%"
+                   class="fullWidth"
                 >
                   <el-option
                     v-for="item in stageOptions"
@@ -135,7 +135,7 @@
                   v-model="resource.grade"
                   value-key="id"
                   placeholder="不分年级"
-                  style="width: 100%"
+                  class="fullWidth"
                 >
                   <el-option
                     v-for="item in gradeOptions"
@@ -157,7 +157,7 @@
                   v-model="resource.subject"
                   value-key="id"
                   placeholder="不分学科"
-                  style="width: 100%"
+                  class="fullWidth"
                 >
                   <el-option
                     v-for="item in subjectOptions"
@@ -176,7 +176,7 @@
                   v-model="resource.schoolType"
                   value-key="id"
                   placeholder="不分学校类型"
-                  style="width: 100%"
+                  class="fullWidth"
                 >
                   <el-option
                     v-for="item in schoolTypeOptions"
@@ -198,7 +198,7 @@
                   v-model="resource.deformity"
                   value-key="id"
                   placeholder="不分残疾类型"
-                  style="width: 100%"
+                  class="fullWidth"
                 >
                   <el-option
                     v-for="item in deformityOptions"
@@ -217,7 +217,7 @@
                   v-model="resource.learnFrom"
                   value-key="id"
                   placeholder="不分安置形式"
-                  style="width: 100%"
+                  class="fullWidth"
                 >
                   <el-option
                     v-for="item in learnFromOptions"
@@ -263,55 +263,54 @@
         </el-form>
       </el-col>
       <el-col :span="10">
+
+        <!-- cover upload start -->
         <el-upload
+          accept=".jpg, .bmp,.jpeg,.gif,.png"
           action="#"
-          list-type="picture-card"
-          :limit="1"
-          :on-preview="handlePictureCardPreview"
-          :on-exceed="uploadResourceCoverHandleExceed"
           :on-success="uploadResourceCoverSuccess"
           :http-request="uploadResourceCover"
+          :on-change="uploadOnChange"
           :auto-upload="true"
+          :show-file-list="false"
         >
+          <div
+            v-if="resource.coverPath && resource.coverPath != ''"
+            slot="default"
+          >
+            <div >
+              <img
+                :src="resource.coverPath"
+                class="cover-path"
+              />
+              <span class="el-upload-list__item-actions">
+                <el-button class="el-button--danger fullWidth">
+                   <i class="el-icon-upload2 font20"></i> 
+                </el-button>
+              </span>
+            </div>
+          </div>
           <i
+            v-else
             slot="default"
             class="el-icon-upload"
             style="font-size: 70px; margin-top: 80px"
             ><br />
-            <div style="font-size: 22px">点击上传封面</div></i
-          >
-
-          <!-- <div slot="file" slot-scope="{ file }">
-            <img
-              class="el-upload-list__item-thumbnail"
-              :src="file.url"
-              alt=""
-            />
-            <span class="el-upload-list__item-actions">
-              <span
-                class="el-upload-list__item-preview"
-                @click="handlePictureCardPreview(file)"
-              >
-                <i class="el-icon-zoom-in"></i>
-              </span>
-              <span
-                v-if="!disabled"
-                class="el-upload-list__item-delete"
-                @click="handleDownload(file)"
-              >
-                <i class="el-icon-download"></i>
-              </span>
-              <span
-                v-if="!disabled"
-                class="el-upload-list__item-delete"
-                @click="handleRemove(file)"
-              >
-                <i class="el-icon-delete"></i>
-              </span>
-            </span>
-          </div> -->
+            <div class="font20">点击上传封面</div>
+          </i>
         </el-upload>
-        <el-dialog :visible.sync="dialogVisible" size="tiny">
+        <!-- cover upload end -->
+
+        <div>
+          <el-button
+            class="el-button--primary"
+            v-if="false"
+            @click="handlePictureCardPreview(resource)"
+          >
+            <i class="el-icon-zoom-in"></i> 图片预览
+          </el-button>
+        </div>
+        <el-dialog :visible.sync="dialogVisible">
           <img width="100%" :src="dialogImageUrl" alt="" />
         </el-dialog>
       </el-col>
@@ -342,6 +341,7 @@ export default {
       keywords: [],
       inputKeywordsValue: "",
       fileList: [],
+      coverList: [],
 
       inputVisible: false,
       dialogVisible: false,
@@ -532,22 +532,31 @@ export default {
 
     uploadResourceOnBeforeUpload() {},
 
+    // upload resource cover
+
     uploadResourceCover(options) {
       uploadFile(options);
     },
 
-    uploadResourceCoverHandleExceed() {
-      Notification.error({ message: messages.FILE_UPLOAD_COUNT_ALLOWED });
-    },
 
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+    uploadOnChange(file, fileList) {
+      let coverList = this.coverList;
+      if (coverList.length > 0) {
+        coverList = [coverList[coverList.length - 1]];
+      }
+      this.coverList = coverList;
     },
 
     uploadResourceCoverSuccess(response, file, fileList) {
       var data = JSON.parse(response.data);
+
       this.resource.coverPath = data.filePath;
+      this.coverList.push(file);
+    },
+
+    handlePictureCardPreview(resource) {
+      this.dialogImageUrl = resource.coverPath;
+      this.dialogVisible = true;
     },
 
     // select select changed
@@ -652,5 +661,12 @@ export default {
 
 .el-upload-list {
   width: 70%;
+}
+.el-upload-list--picture-card .el-upload-list__item {
+  width: 100%;
+  height: 300px;
+}
+.cover-path{
+height: 300px; width: 100%;border: 1px dashed #a6a9ad;
 }
 </style>

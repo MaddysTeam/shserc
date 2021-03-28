@@ -29,7 +29,14 @@ public class BaseController {
 			ResUser resUser=new ResUser();
 			resUser.setId(user.getInteger("id"));
 			resUser.setUserName(user.getString("userName"));
+			resUser.setRealName (user.getString("realName"));
+			resUser.setIdCard (user.getString("idCard"));
 			resUser.setRoleId ( user.getInteger ( "roleId" ) );
+			resUser.setCompanyName ( user.getString("companyName") );
+			resUser.setCompanyId ( user.getInteger ("companyId") );
+			resUser.setMobile ( user.getString ( "mobile" ) );
+			resUser.setEmail ( user.getString ( "email" ) );
+			resUser.setPhotoPath ( user.getString("photoPath") );
 			return resUser;
 		}
 		

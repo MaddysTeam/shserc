@@ -7,10 +7,7 @@
       </div>
       <el-dropdown :hide-timeout="300">
         <el-button type="info" circle
-          ><el-image
-            class="img_header"
-            src="https://himg.bdimg.com/sys/portraitn/item/757c4a696d6d79576f6c6632303134ab4d"
-          ></el-image>
+          ><el-image class="img_header" :src="account.photoPath"></el-image>
         </el-button>
         <!-- <el-link class="img-header">JimmyPoor</el-link> -->
         <el-dropdown-menu slot="dropdown">
@@ -20,14 +17,16 @@
           <el-dropdown-item @click.native="handleChangePassword"
             ><i class="el-icon-lock"></i>修改密码</el-dropdown-item
           >
-          <el-dropdown-item @click.native="handleLogout"><i class="el-icon-info"></i>注销 </el-dropdown-item>
+          <el-dropdown-item @click.native="handleLogout"
+            ><i class="el-icon-info"></i>注销
+          </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </el-header>
 
     <el-container>
       <!-- left aside -->
-      <el-aside style="width:230px;">
+      <el-aside style="width: 230px">
         <DynamicMenu :dataSource="menus"></DynamicMenu>
       </el-aside>
       <!--right side-->
@@ -42,6 +41,7 @@
 import DynamicMenu from "@/components/DynamicMenus/index";
 import * as types from "@/app/static/type";
 import { logout } from "@/app/api/account";
+import { CDN } from "@/static/CDN";
 
 export default {
   name: "layout",
@@ -52,7 +52,8 @@ export default {
 
   data() {
     return {
-      menus: JSON.parse(localStorage.getItem("menu")),
+      account:  this.$store.state.app.account,
+      menus: this.$store.state.app.menus, 
     };
   },
 
@@ -69,7 +70,13 @@ export default {
     },
 
     handleChangePassword() {
-        this.$router.push({ path: "/admin/account/password", replace: true })
+      this.$router.push({ path: "/admin/account/password", replace: true });
+    },
+
+    handleImageError() {
+      let img = event.srcElement;
+      img.src = CDN.DEFAULT_HEADER_COVER;
+      img.onerror = null; //to fix bugs for image auto flash
     },
   },
 };
@@ -113,5 +120,4 @@ export default {
   background: #eaedf1;
   width: 60%;
 }
-
 </style>

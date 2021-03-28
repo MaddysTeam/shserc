@@ -44,8 +44,8 @@
 <script>
 import { Notification } from "element-ui";
 import { bulletinModel } from "@/app/models/bulletin";
-import { uploadFile } from "@/app/api/file";
-import { info,edit } from "@/app/api/bulletin";
+import { uploadFile, uploadFileInEditor } from "@/app/api/file";
+import { info, edit } from "@/app/api/bulletin";
 import {
   validateRequired,
   validateLessThan50,
@@ -61,12 +61,22 @@ export default {
       rules: {
         title: {
           validator: (rule, value, callback) => {
-            validateRequired(rule,value,callback,messages.BULLETIN_TITLE_REQUIRED,
-              ()=>validateLessThan50(rule, value, callback,messages.BULLETIN_TITLE_LENGHT_NOT_ALLOWED_MORE_THAN_50 )
+            validateRequired(
+              rule,
+              value,
+              callback,
+              messages.BULLETIN_TITLE_REQUIRED,
+              () =>
+                validateLessThan50(
+                  rule,
+                  value,
+                  callback,
+                  messages.BULLETIN_TITLE_LENGHT_NOT_ALLOWED_MORE_THAN_50
+                )
             );
-          }
-        }
-      }
+          },
+        },
+      },
     };
   },
 
@@ -125,9 +135,25 @@ export default {
     // tinymce rich text area
 
     uploadImage(blobInfo, success, failure) {
-      const img = "http://tjcdn.shec.edu.cn/404.jpg";
-      success(img);
-
+      //const img = "http://tjcdn.shec.edu.cn/404.jpg";
+      //success(img);
+      const isAccord =
+        blobInfo.blob().type === "image/jpeg" ||
+        blobInfo.blob().type === "image/png" ||
+        blobInfo.blob().type === "image/GIF" ||
+        blobInfo.blob().type === "image/jpg" ||
+        blobInfo.blob().type === "image/BMP";
+      uploadFileInEditor(
+        blobInfo,
+        function (data) {
+           let file= JSON.parse(data);
+           alert(file.filePath);
+          success(file.filePath);
+        },
+        function (err) {
+          alert("err");
+        }
+      );
       // function (blobInfo, success, failure) {
       //   this.temp();
       //   //upload();
@@ -205,7 +231,7 @@ export default {
   background: white;
 }
 
-.el-form-item__label{
-  font-size:12px
+.el-form-item__label {
+  font-size: 12px;
 }
 </style>

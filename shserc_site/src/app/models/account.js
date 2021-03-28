@@ -1,4 +1,3 @@
-import {CDN} from "@/static/CDN"
 export const loginModel = {
     name: "",
     password: "",
@@ -13,11 +12,12 @@ export const changePasswordModel={
 }
 
 export const accountModel={
-    name:"",
-    photoPath: CDN.DEFAULT_HEADER_COVER,
+    userName:"",
+    photoPath:"",
     realName: "",
     idCard:"",
     mobile:"",
-    company:"",
+    companyName:"",
+    companyId:"",
     email:""
 }

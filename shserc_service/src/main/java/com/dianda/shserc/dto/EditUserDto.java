@@ -30,6 +30,8 @@ public class EditUserDto {
 	@NotBlank(message = Constant.Error.USER_NAME_IS_REQUIRED)
 	@Email(message = Constant.Error.EMAIL_FORMAT_INVALID)
 	private String email;
+	
+	private  String photoPath;
 
 
 }

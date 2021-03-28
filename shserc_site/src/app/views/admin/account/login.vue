@@ -149,10 +149,15 @@ export default {
               // save login info to store，save dynamic route info to store
               _this.$store.commit(types.APP + "/" + types.LOGIN, res.data);
 
-              initMenus(_this.$store,res.data.roleId);
+              initMenus(_this.$store, res.data.roleId, () => {
+                _this.$router.push({
+                  path: "/admin/dashboard/summary",
+                  replace:  true,
+                  query: { _time: new Date().getTime() / 1000 },
+                });
+              });
 
               // redirect to admin index page
-              _this.$router.push("/admin/dashboard/summary");
             }
           });
         } else {

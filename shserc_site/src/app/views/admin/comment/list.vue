@@ -67,7 +67,7 @@ export default {
           let data = JSON.parse(res.data);
           this.selectParam.total = data.total;
           this.selectParam.current = data.current;
-          this.source = data.listData;
+          //this.source = data.listData;
         }
       });
     },
