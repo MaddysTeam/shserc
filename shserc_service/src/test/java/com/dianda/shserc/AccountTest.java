@@ -2,6 +2,7 @@ package com.dianda.shserc;
 
 import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.service.IAccountService;
+import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.util.shiro.jwt.JwtOperation;
 import com.dianda.shserc.util.shiro.jwt.JwtSettings;
 import org.apache.shiro.util.Assert;
@@ -17,10 +18,10 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
-@ActiveProfiles("local")
-@SpringBootTest(classes = ServiceApplication.class)
-@RunWith ( SpringRunner.class )
-@EnableConfigurationProperties({ JwtSettings.class})
+@ActiveProfiles( "local" )
+@SpringBootTest( classes = ServiceApplication.class )
+@RunWith( SpringRunner.class )
+@EnableConfigurationProperties( { JwtSettings.class } )
 public class AccountTest {
 	
 	@Autowired
@@ -32,29 +33,39 @@ public class AccountTest {
 	@Autowired
 	IAccountService accountService;
 	
-	LoginDto loginDTO=new LoginDto ();
-	
+	LoginDto loginDTO = new LoginDto ( );
+
 //	@Before
 //	public void setupMock(){
 //		SecurityUtils.setSecurityManager( null );
 //	}
 	
-	public AccountTest(){
-		loginDTO.setUserName("jimmyPoor");
+	public AccountTest( ) {
+		loginDTO.setUserName ( "jimmyPoor" );
 		loginDTO.setPassword ( "123456" );
 	}
 	
 	@Test
-	 public void verify_token_test() throws UnsupportedEncodingException {
-		String token = JwtOperation.Sign(loginDTO.getUserName (),System.currentTimeMillis ());
-		boolean verifyResult=JwtOperation.verifyToken(token);
-		Assert.isTrue ( verifyResult);
-	 }
-	 
-	 @Test
-	public void login_test(){
-		 LoginDto result= accountService.login ( loginDTO );
-		 Assert.notNull ( result.getToken () );
-	 }
-	 
+	public void verify_token_test( ) throws UnsupportedEncodingException {
+		String token = JwtOperation.Sign ( loginDTO.getUserName ( ) , System.currentTimeMillis ( ) );
+		boolean verifyResult = JwtOperation.verifyToken ( token );
+		Assert.isTrue ( verifyResult );
+	}
+	
+	@Test
+	public void login_test( ) {
+		boolean result = accountService.login ( loginDTO );
+		Assert.isTrue ( result && ! ObjectUtil.isNull ( loginDTO.getToken ( ) ) );
+	}
+	
+	@Test
+	public void change_password_test(){
+	
+	}
+	
+	@Test
+	public void forgetPassword_test(){
+	
+	}
+	
 }

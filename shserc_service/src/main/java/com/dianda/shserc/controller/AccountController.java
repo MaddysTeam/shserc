@@ -1,11 +1,13 @@
 package com.dianda.shserc.controller;
 
 
+import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.ChangePasswordDto;
 import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IAccountService;
 import com.dianda.shserc.service.IResRoleService;
+import com.dianda.shserc.util.crypto.CryptoSecret;
 import com.dianda.shserc.util.json.JsonResult;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.mappers.IUserVoMapper;
@@ -26,57 +28,56 @@ import javax.validation.Valid;
  * @since 2020-08-05
  */
 @RestController
-@RequestMapping("/account")
+@RequestMapping( "/account" )
 public class AccountController extends BaseController {
-
+	
 	@Autowired
 	IAccountService accountService;
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public JsonResult login(@RequestBody @Valid @Validated LoginDto loginDto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return JsonResult.error("validate error");
+	
+	@RequestMapping( value = "/login", method = RequestMethod.POST )
+	public JsonResult login( @RequestBody @Valid @Validated LoginDto loginDto , BindingResult bindingResult ) {
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( "validate error" );
 		}
+		
+		//de-encrypt password
+		String password = CryptoSecret.desEncrypt ( loginDto.getPassword ( ) );
+		loginDto.setPassword ( password );
+		
 		//try to login
-		loginDto = accountService.login(loginDto);
-		if (loginDto.getIsSuccess()) {
+		boolean result = accountService.login ( loginDto );
+		if ( result ) {
 			// get login user info
-			ResUserVo resUserVo = IUserVoMapper.INSTANCE.mapFrom(super.getLoginUserInfo());
+			ResUserVo resUserVo = IUserVoMapper.INSTANCE.mapFrom ( super.getLoginUserInfo ( ) );
 			//set token to user vo and transfer to frontend
-			resUserVo.setToken(loginDto.getToken());
-
-			return JsonResult.success(resUserVo, "success");
+			resUserVo.setToken ( loginDto.getToken ( ) );
+			
+			return JsonResult.success ( resUserVo , "success" );
 		} else {
-			return JsonResult.error(loginDto.getMessage());
+			return JsonResult.error ( loginDto.getMessage ( ) );
 		}
-	}
-
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	//@RequiresRoles( "admin" )
-	public JsonResult logout() {
-		boolean result = accountService.logout();
-		if (result)
-			return JsonResult.success();
-		else
-			return JsonResult.error();
 	}
 	
-	@RequestMapping(value = "/password/change", method = RequestMethod.POST)
-	public JsonResult changePassword(@RequestBody @Valid ChangePasswordDto changePasswordDto, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			return JsonResult.error(super.generateErrorMessage ( bindingResult ));
-		}
-		
-		ResUser user= super.getLoginUserInfo ();
-		
-		changePasswordDto.setUserName ( user.getUserName () );
-		changePasswordDto = accountService.changePassword(changePasswordDto);
-		if (changePasswordDto.getIsSuccess()) {
-			return JsonResult.success(changePasswordDto, "success");
-		} else {
-			return JsonResult.error(changePasswordDto.getMessage());
-		}
+	@RequestMapping( value = "/logout", method = RequestMethod.POST )
+	//@RequiresRoles( "admin" )
+	public JsonResult logout( ) {
+		return accountService.logout ( ) ? JsonResult.success ( ) : JsonResult.error ( );
 	}
-
+	
+	@RequestMapping( value = "/password/change", method = RequestMethod.POST )
+	public JsonResult changePassword( @RequestBody @Valid ChangePasswordDto changePasswordDto , BindingResult bindingResult ) {
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
+		}
+		
+		ResUser user = super.getLoginUserInfo ( );
+		
+		changePasswordDto.setUserName ( user.getUserName ( ) );
+		boolean result = accountService.changePassword ( changePasswordDto );
+		return result ? JsonResult.success ( changePasswordDto , Constant.Success.EDIT_SUCCESS ) :
+				JsonResult.error ( Constant.Error.EDIT_FAILURE );
+		
+	}
+	
 }
 

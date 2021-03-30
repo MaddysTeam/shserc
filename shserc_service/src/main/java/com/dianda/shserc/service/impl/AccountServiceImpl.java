@@ -37,21 +37,21 @@ import java.time.LocalDateTime;
 @Service
 @Validated
 public class AccountServiceImpl implements IAccountService {
-
+	
 	@Resource
 	ResUserMapper userMapper;
-
+	
 	@Override
 	@SystemLog()
-	public LoginDto login(@Valid LoginDto loginDto) {
+	public boolean login( @Valid LoginDto loginDto ) {
 		try {
 			// login by shiro and jwt
-			String userName = loginDto.getUserName();
-			String loginJson = JSON.toJSONString(loginDto);
-			String loginToken = JwtOperation.Sign(loginJson, System.currentTimeMillis());
-			Subject subject = SecurityUtils.getSubject();
-			subject.login(new JwtToken(loginToken));
-
+			//String userName = loginDto.getUserName();
+			String loginJson = JSON.toJSONString ( loginDto );
+			String loginToken = JwtOperation.Sign ( loginJson , System.currentTimeMillis ( ) );
+			Subject subject = SecurityUtils.getSubject ( );
+			subject.login ( new JwtToken ( loginToken ) );
+			
 			// if login succes, get userinfo from shiro
 //			JSONObject userObject = ShiroUtil.getLoginUser();
 //			ResUser user = new ResUser();
@@ -59,52 +59,45 @@ public class AccountServiceImpl implements IAccountService {
 //			user.setLastLoginTime(LocalDateTime.now());  // record last login time
 //			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
 //			userMapper.updateById(user);
-
+			
 			// if login success,we can get token from subject and save it
-			String token = subject.getPrincipal().toString();
-			loginDto.setIsSuccess(true);
-			loginDto.setToken(token);
-
-			return loginDto;
-		} catch (AuthenticationException e) {
-			loginDto.setIsSuccess(false);
-			loginDto.setMessage(e.getMessage());
+			String token = subject.getPrincipal ( ).toString ( );
+			loginDto.setIsSuccess ( true );
+			loginDto.setToken ( token );
+			
+			return true;
+		} catch ( AuthenticationException e ) {
+			loginDto.setIsSuccess ( false );
+			loginDto.setMessage ( e.getMessage ( ) );
+			return false;
 		}
-		return loginDto;
 	}
-
-
+	
+	
 	@Override
 	@SystemLog()
-	public boolean logout() {
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.isAuthenticated())
-			subject.logout();
-
+	public boolean logout( ) {
+		Subject subject = SecurityUtils.getSubject ( );
+		if ( subject.isAuthenticated ( ) )
+			subject.logout ( );
+		
 		return true;
 	}
-
+	
 	@Override
-	public ChangePasswordDto changePassword(@Valid ChangePasswordDto dto) {
-		if(!dto.getConfirmPassword().equals(dto.getNewPassword()))
-			throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.PASSWORD_CONFIRM_FAIL);
-
-		ResUser user = new ResUser();
-		user.setPassword(EncoderUtil.SHA(dto.getNewPassword()));
-
-		LambdaUpdateWrapper<ResUser> wrapper = new LambdaUpdateWrapper<>();
-		wrapper.eq(ResUser::getUserName, dto.getUserName());
-
-		Integer row = userMapper.update(user, wrapper);
-		if (row > 0) {
-			dto.setIsSuccess(true);
-		} else {
-			dto.setIsSuccess(false);
-		}
-
-		return dto;
+	public boolean changePassword( @Valid ChangePasswordDto dto ) {
+		if ( ! dto.getConfirmPassword ( ).equals ( dto.getNewPassword ( ) ) )
+			throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.PASSWORD_CONFIRM_FAIL );
+		
+		ResUser user = new ResUser ( );
+		user.setPassword ( EncoderUtil.SHA ( dto.getNewPassword ( ) ) );
+		
+		LambdaUpdateWrapper<ResUser> wrapper = new LambdaUpdateWrapper<> ( );
+		wrapper.eq ( ResUser :: getUserName , dto.getUserName ( ) );
+		
+		return userMapper.update ( user , wrapper ) >= 0; // zero means old password same as  the new password
 	}
-
+	
 	/**
 	 * @title forget password
 	 * @Description this method to retrieve password by using mobile number
@@ -113,8 +106,8 @@ public class AccountServiceImpl implements IAccountService {
 	 * @Copyright 2019-2020
 	 */
 	@Override
-	public ForgetPasswordDto forgetPassword(ForgetPasswordDto dto) {
-		return null;
+	public boolean forgetPassword( ForgetPasswordDto dto ) {
+		return false;
 	}
-
+	
 }

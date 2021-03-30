@@ -9,12 +9,12 @@ import javax.validation.Valid;
 
 public interface IAccountService {
 
-	LoginDto login(@Valid LoginDto login );
+	boolean login(@Valid LoginDto login );
 	
 	boolean logout( );
 	
-	ChangePasswordDto changePassword(@Valid ChangePasswordDto dto );
+	boolean changePassword(@Valid ChangePasswordDto dto );
 	
-	ForgetPasswordDto forgetPassword( ForgetPasswordDto dto );
+	boolean forgetPassword( ForgetPasswordDto dto );
 
 }

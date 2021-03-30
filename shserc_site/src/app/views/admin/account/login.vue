@@ -78,6 +78,7 @@ import {
 } from "@/static/validator";
 import { mapMutations } from "vuex";
 import * as types from "@/app/static/type";
+import {encrypt} from "@/util/crypto"
 import { initMenus } from "@/app/utils/menuHelper";
 
 export default {
@@ -142,7 +143,7 @@ export default {
         if (valid) {
           login({
             userName: _this.form.name,
-            password: _this.form.password,
+            password: encrypt(_this.form.password), // encrypt password and  de-encrypt in server side
           }).then((res) => {
             if (res) {
               Notification.success({ message: "登录成功" });
