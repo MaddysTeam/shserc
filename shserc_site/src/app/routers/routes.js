@@ -16,6 +16,11 @@ import CommentList from '@/app/views/admin/comment/list'
 import BulletinList from '@/app/views/admin/bulletin/list'
 import BulletinEdit from '@/app/views/admin/bulletin/edit'
 import MenuList from '@/app/views/admin/menu/list'
+// following for site
+import Site from '@/app/views/site/layout/index'
+import HomeIndex from '@/app/views/site/home/index'
+//import { component } from 'vue/types/umd'
+
 
 
 
@@ -166,8 +171,16 @@ export const constRoutes = [
   // frontend
   {
     path: '/',
-    name: 'FrontendIndex',
-    redirect: { name: 'AdminIndex' } //TODO: these routes for frontend
+    name: 'Site',
+    component:Site,
+    children:[
+        {
+          path:'/home/index',
+          name:'HomeIndex',
+          component:HomeIndex
+        }
+    ],
+    redirect: { name: 'HomeIndex' } // redirect to home index
   }
 ]
 
