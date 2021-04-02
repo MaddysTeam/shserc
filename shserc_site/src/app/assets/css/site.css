@@ -6,7 +6,7 @@
     font-size: 12px;
 }
 .site_container{
-    width: 1230px;
+     width: 80%; 
     margin-left: auto;
     margin-right: auto;
     padding: 0;
@@ -25,7 +25,16 @@
     border-top:#7ab4ce 3px solid;
 } 
 
-.panel_title{text-align: left;}
+
+.block_panel .panel_title{
+    font-size: 18px;
+    color: #f39800;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #a0a0a0;
+    height: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+}
 
 /*-------------------------.carousel------------------------*/
 .el-carousel__item h3 {
@@ -52,7 +61,7 @@
 
 .search form {
     position: relative;
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -65,8 +74,8 @@
 .search button {
     height: 42px;
     width: 42px;
-    top:10px;
-    right:2px;
+     top:10px;
+    right:20px; */
     cursor: pointer;
     position: absolute;
 }
@@ -80,7 +89,6 @@
 }
 .search .bar1 button {
     top: 0;
-    right: 0;
     background-image: linear-gradient(135deg, rgb(252, 207, 49) 10%, rgb(245, 85, 85) 100%);
     border-radius: 0 5px 5px 0;
 }
@@ -93,3 +101,4 @@
     border: none;
     outline: none;
 }
+
