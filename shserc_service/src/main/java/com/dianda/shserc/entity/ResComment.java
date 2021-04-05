@@ -1,15 +1,13 @@
 package com.dianda.shserc.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ResComment extends  BaseEntity {
+public class ResComment extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 

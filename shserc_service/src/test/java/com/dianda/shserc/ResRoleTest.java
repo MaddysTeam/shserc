@@ -1,5 +1,6 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.bean.RoleSelectParams;
 import com.dianda.shserc.dto.EditRoleDto;
 import com.dianda.shserc.service.IResRoleService;

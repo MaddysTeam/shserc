@@ -15,3 +15,7 @@ export function info(id) {
 export function del(deleteParams){
     return axios.post('api/bulletin/delete',deleteParams);
 }
+
+export function top(stateParams) {
+    return axios.post('api/bulletin/top', stateParams);
+}

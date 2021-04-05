@@ -1,12 +1,10 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.bean.UserSelectParams;
-import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
 import com.dianda.shserc.dto.EditUserRoleDto;
-import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IResUserService;
-import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResUserVoList;
 import org.apache.shiro.util.Assert;
 import org.junit.Test;

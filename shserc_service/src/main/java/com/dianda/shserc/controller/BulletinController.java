@@ -4,14 +4,12 @@ package com.dianda.shserc.controller;
 import com.dianda.shserc.bean.BulletinSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditBulletinDto;
-import com.dianda.shserc.dto.mappers.IEditBulletinMapper;
-import com.dianda.shserc.entity.Bulletin;
+import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IBulletinService;
-import com.dianda.shserc.util.json.JsonResult;
+import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.BulletinVo;
 import com.dianda.shserc.vo.BulletinVoList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +52,20 @@ public class BulletinController extends BaseController {
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
 	}
 	
+	@PostMapping(path="top")
+	public  JsonResult top( @Valid @RequestBody EditStateDto editStateDto,BindingResult bindingResult){
+		if ( bindingResult.hasErrors ( ) ) {
+			String errorMessage = super.generateErrorMessage ( bindingResult );
+			return JsonResult.error ( errorMessage );
+		}
+		
+		ResUser loginUser=super.getLoginUserInfo ();
+		editStateDto.setOperatorId ( loginUser.getId () );
+		editStateDto.setOperateDate ( LocalDateTime.now () );
+		
+		boolean result=service.top ( editStateDto );
+		return result ? JsonResult.success( Constant.Success.EDIT_SUCCESS) :
+				JsonResult.error(Constant.Error.EDIT_FAILURE);
+	}
 	
 }

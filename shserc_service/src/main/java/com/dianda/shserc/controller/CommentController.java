@@ -4,7 +4,7 @@ import com.dianda.shserc.bean.CommentSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditCommentDto;
 import com.dianda.shserc.service.IResCommentService;
-import com.dianda.shserc.util.json.JsonResult;
+import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.CommentVoList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;

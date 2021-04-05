@@ -148,7 +148,7 @@ export default {
             if (res) {
               Notification.success({ message: "登录成功" });
               // save login info to store，save dynamic route info to store
-              _this.$store.commit(types.APP + "/" + types.LOGIN, res.data);
+              _this.$store.commit(types.APP + "/" + types.LOGIN, JSON.parse(res.data));
 
               initMenus(_this.$store, res.data.roleId, () => {
                 _this.$router.push({

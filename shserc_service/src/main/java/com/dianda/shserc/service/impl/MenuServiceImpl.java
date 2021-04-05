@@ -8,15 +8,13 @@ import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.dto.mappers.IEditMenuMapper;
-import com.dianda.shserc.dto.mappers.IEditMenuRoleMapper;
 import com.dianda.shserc.entity.Menu;
 import com.dianda.shserc.entity.MenuRole;
-import com.dianda.shserc.entity.ResRole;
-import com.dianda.shserc.exceptions.GlobalException;
+import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.mapper.MenuMapper;
 import com.dianda.shserc.service.IMenuService;
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.MenuVo;
 import com.dianda.shserc.vo.MenuVoList;
 import com.dianda.shserc.vo.ResRoleVo;
@@ -27,11 +25,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 /**

@@ -21,6 +21,7 @@ export function encrypt(word, input_key, input_iv) {
     let result = encrypted.ciphertext.toString(CryptoJS.enc.Base64);  // CryptoJS.enc.Base64.stringify(encryped);
     console.log("--------------- encrypt --------------------")
     console.log(result);
+    return result;
 }
 
 function parseUTF8(str) {

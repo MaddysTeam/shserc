@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.BulletinSelectParams;
 import com.dianda.shserc.dto.EditBulletinDto;
+import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.dto.mappers.IEditBulletinMapper;
 import com.dianda.shserc.entity.Bulletin;
 import com.dianda.shserc.mapper.BulletinMapper;
 import com.dianda.shserc.service.IBulletinService;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.BulletinVo;
 import com.dianda.shserc.vo.BulletinVoList;
 import com.dianda.shserc.vo.mappers.IBulletinVoMapper;
@@ -18,74 +19,82 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BulletinServiceImpl extends ServiceImpl<BulletinMapper, Bulletin> implements IBulletinService {
-
+	
 	@Resource
 	BulletinMapper mapper;
-
+	
 	@Override
-	public boolean edit(@Valid @NotNull EditBulletinDto editBulletinDto) {
-		Bulletin bulletin = IEditBulletinMapper.INSTANCE.mapFrom(editBulletinDto);
-		if (bulletin.isNewOne()) {
-			bulletin.setAddUser ( editBulletinDto.getOperatorId () );
-			bulletin.setAddTime (editBulletinDto.getOperateDate () );
-			return mapper.insert(bulletin) > 0;
+	public boolean edit( @Valid @NotNull EditBulletinDto editBulletinDto ) {
+		Bulletin bulletin = IEditBulletinMapper.INSTANCE.mapFrom ( editBulletinDto );
+		if ( bulletin.isNewOne ( ) ) {
+			bulletin.setAddUser ( editBulletinDto.getOperatorId ( ) );
+			bulletin.setAddTime ( editBulletinDto.getOperateDate ( ) );
+			return mapper.insert ( bulletin ) > 0;
 		} else {
-			bulletin.setUpdateUser ( editBulletinDto.getOperatorId () );
-			bulletin.setUpdateTime ( editBulletinDto.getOperateDate ()   );
-			return mapper.updateById(bulletin) >= 0;
+			bulletin.setUpdateUser ( editBulletinDto.getOperatorId ( ) );
+			bulletin.setUpdateTime ( editBulletinDto.getOperateDate ( ) );
+			return mapper.updateById ( bulletin ) >= 0;
 		}
 	}
-
+	
 	@Override
-	public BulletinVoList find(BulletinSelectParams bulletinSelectParams) {
-		QueryWrapper<Bulletin> wrapper = new QueryWrapper<>();
-		int current = bulletinSelectParams.getCurrent();
-		int size = bulletinSelectParams.getSize();
-		long typeId = bulletinSelectParams.getTypeId();
-
+	public boolean top( @Valid @NotNull EditStateDto editStateDto ) {
+		Bulletin bulletin = IEditBulletinMapper.INSTANCE.mapFrom ( editStateDto );
+		bulletin.setUpdateUser ( editStateDto.getOperatorId ( ) );
+		bulletin.setUpdateTime ( editStateDto.getOperateDate ( ) );
+		
+		return  mapper.updateById ( bulletin ) >= 0;
+	}
+	
+	@Override
+	public BulletinVoList find( BulletinSelectParams bulletinSelectParams ) {
+		QueryWrapper<Bulletin> wrapper = new QueryWrapper<> ( );
+		int current = bulletinSelectParams.getCurrent ( );
+		int size = bulletinSelectParams.getSize ( );
+		long typeId = bulletinSelectParams.getTypeId ( );
+		
 		// where phrase
-
-	//	wrapper.eq("bulletin.is_deleted", 0);
-		if (typeId > 0) {
-			wrapper.eq("type_id", typeId);
+		
+		//	wrapper.eq("bulletin.is_deleted", 0);
+		if ( typeId > 0 ) {
+			wrapper.eq ( "type_id" , typeId );
 		}
-
+		
 		// get paged list data
-
-		IPage<Bulletin> page = new Page<>( current , size );
-		page = mapper.selectBulletins(page, wrapper);
-		List<BulletinVo> voListData = new ArrayList<>();
-		List<Bulletin> listData = page.getRecords();
-		for (Bulletin bulletin : listData) {
-			BulletinVo bulletinVo = IBulletinVoMapper.INSTANCE.mapFrom(bulletin);
-			voListData.add(bulletinVo);
+		
+		IPage<Bulletin> page = new Page<> ( current , size );
+		page = mapper.selectBulletins ( page , wrapper );
+		List<BulletinVo> voListData = new ArrayList<> ( );
+		List<Bulletin> listData = page.getRecords ( );
+		for ( Bulletin bulletin : listData ) {
+			BulletinVo bulletinVo = IBulletinVoMapper.INSTANCE.mapFrom ( bulletin );
+			voListData.add ( bulletinVo );
 		}
-
+		
 		// get vo list
-
-		BulletinVoList voList = new BulletinVoList();
-		voList.setListData(voListData);
-		voList.setTotal(page.getTotal());
-		voList.setCurrent(current);
-		voList.setSize(size);
-
+		
+		BulletinVoList voList = new BulletinVoList ( );
+		voList.setListData ( voListData );
+		voList.setTotal ( page.getTotal ( ) );
+		voList.setCurrent ( current );
+		voList.setSize ( size );
+		
 		return voList;
 	}
-
+	
 	@Override
-	public BulletinVo findById(long id) {
+	public BulletinVo findById( long id ) {
 		try {
-			Bulletin bulletin = mapper.selectById(id);
-			return IBulletinVoMapper.INSTANCE.mapFrom(bulletin);
-		} catch (Exception e) {
+			Bulletin bulletin = mapper.selectById ( id );
+			return IBulletinVoMapper.INSTANCE.mapFrom ( bulletin );
+		} catch ( Exception e ) {
 			return null;
 		}
 	}
-
+	
 }

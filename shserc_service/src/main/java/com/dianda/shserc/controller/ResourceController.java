@@ -7,11 +7,9 @@ import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.service.IResourceService;
-import com.dianda.shserc.util.json.JsonResult;
-import com.dianda.shserc.util.logger.system.SystemLog;
+import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

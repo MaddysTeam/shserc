@@ -8,6 +8,7 @@
         bulletin.title,
         bulletin.content,
         bulletin.type_id,
+        bulletin.top,
         u.user_name,
         bulletin.add_user,
         bulletin.add_time

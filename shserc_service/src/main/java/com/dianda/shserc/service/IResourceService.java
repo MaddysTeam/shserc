@@ -6,7 +6,7 @@ import com.dianda.shserc.dto.EditResourceDto;
 import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.entity.Resource;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
 

@@ -3,15 +3,13 @@ package com.dianda.shserc.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.entity.ResUser;
-import com.dianda.shserc.exceptions.GlobalException;
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.json.JsonResult;
-import com.dianda.shserc.util.shiro.util.ShiroUtil;
+import com.dianda.common.exceptions.GlobalException;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.security.shiro.util.ShiroUtil;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.security.auth.Subject;
 import java.util.List;
 
 /**

@@ -1,9 +1,9 @@
 package com.dianda.shserc.controller;
 
 
-import com.dianda.shserc.service.IDictionaryService;
-import com.dianda.shserc.util.json.JsonResult;
-import com.dianda.shserc.vo.DictionaryVo;
+import com.dianda.common.service.IDictionaryService;
+import com.dianda.common.util.json.JsonResult;
+import com.dianda.common.vo.DictionaryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 

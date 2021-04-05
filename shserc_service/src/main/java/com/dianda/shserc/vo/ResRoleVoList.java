@@ -1,5 +1,7 @@
 package com.dianda.shserc.vo;
 
-public class ResRoleVoList extends BaseVoList<ResRoleVo>{
+import com.dianda.common.vo.BaseVoList;
+
+public class ResRoleVoList extends BaseVoList<ResRoleVo> {
 
 }

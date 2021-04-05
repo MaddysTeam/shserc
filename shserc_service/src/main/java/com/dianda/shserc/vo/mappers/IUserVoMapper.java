@@ -2,7 +2,7 @@ package com.dianda.shserc.vo.mappers;
 
 
 import com.dianda.shserc.entity.ResUser;
-import com.dianda.shserc.util.mapper.BasicMapper;
+import com.dianda.common.util.mapper.BasicMapper;
 import com.dianda.shserc.vo.ResUserVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

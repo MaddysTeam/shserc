@@ -1,5 +1,6 @@
 package com.dianda.shserc.dto;
 
+import com.dianda.common.dto.BaseDto;
 import com.dianda.shserc.common.Constant;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
-public class EditBulletinDto {
+public class EditBulletinDto  extends BaseDto {
 
 	@Min(value = 0)
 	private long Id;
@@ -34,8 +35,10 @@ public class EditBulletinDto {
 
 	private long fileSize;
 	
-	private  long operatorId;
-	
-	private LocalDateTime operateDate;
+//	private  long operatorId;
+//
+//	private LocalDateTime operateDate;
 
 }
+
+

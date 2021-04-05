@@ -1,9 +1,7 @@
 package com.dianda.shserc.dto;
 
-import com.dianda.shserc.validators.NotNull;
 import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 

@@ -37,15 +37,15 @@
     </select>
 
     <insert id="addView" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_view (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into res_view (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <insert id="addDownload" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_download (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into res_download (resource_id, user_id,add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <insert id="addFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_favorite (resource_id, user_id, add_date) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into res_favorite (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <delete id="deleteFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">

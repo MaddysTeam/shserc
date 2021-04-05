@@ -5,12 +5,12 @@ import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditCompanyDto;
 import com.dianda.shserc.dto.mappers.IEditCompanyMapper;
 import com.dianda.shserc.entity.ResCompany;
-import com.dianda.shserc.exceptions.ExceptionType;
-import com.dianda.shserc.exceptions.GlobalException;
+import com.dianda.common.exceptions.ExceptionType;
+import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResCompanyMapper;
 import com.dianda.shserc.service.IResCompanyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dianda.shserc.util.basic.ObjectUtil;
+import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.shserc.vo.ResCompanyVo;
 import org.springframework.stereotype.Service;
 

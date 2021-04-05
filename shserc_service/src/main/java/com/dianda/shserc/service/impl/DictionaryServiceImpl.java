@@ -1,19 +1,17 @@
 package com.dianda.shserc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dianda.shserc.entity.Dictionary;
-import com.dianda.shserc.entity.ResUser;
+import com.dianda.common.entity.Dictionary;
 import com.dianda.shserc.mapper.DictionaryMapper;
-import com.dianda.shserc.service.IDictionaryService;
+import com.dianda.common.service.IDictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
-import com.dianda.shserc.vo.DictionaryVo;
+import com.dianda.common.util.cache.dictionary.DictionaryCache;
+import com.dianda.common.vo.DictionaryVo;
 import com.dianda.shserc.vo.mappers.IDictionaryVoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 	@Resource
 	DictionaryMapper mapper;
 	
-	@Autowired
+	@Resource
 	DictionaryCache dictionaryCache;
 	
 	@Override

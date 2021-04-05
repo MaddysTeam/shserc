@@ -7,7 +7,7 @@ import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.entity.Menu;
 import com.dianda.shserc.vo.MenuVoList;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.validators.NotNull;
 
 import javax.validation.Valid;
 import java.util.List;

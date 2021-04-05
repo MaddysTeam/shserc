@@ -5,17 +5,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.RealSelectParams;
-import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditRealDto;
 import com.dianda.shserc.dto.RegistRealDto;
 import com.dianda.shserc.dto.mappers.IEditRealMapper;
 import com.dianda.shserc.entity.ResReal;
-import com.dianda.shserc.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResRealMapper;
 import com.dianda.shserc.service.IResRealService;
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.basic.StringUtil;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.util.basic.StringUtil;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.ResRealVo;
 import com.dianda.shserc.vo.ResRealVoList;
 import com.dianda.shserc.vo.mappers.IRealVoMapper;
@@ -24,7 +22,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +40,7 @@ public class ResRealServiceImpl extends ServiceImpl<ResRealMapper, ResReal> impl
 		ResRealVo resRealVo = findByIdCard ( resReal.getIdCard ( ) ); // search by id card
 		String cardPassword = resReal.getCardPassword ( );
 		if ( ! StringUtil.isNullOrEmpty ( cardPassword ) )
-			resReal.setCardPassword ( com.dianda.shserc.util.basic.EncoderUtil.SHA ( cardPassword ) );
+			resReal.setCardPassword ( com.dianda.common.util.basic.EncoderUtil.SHA ( cardPassword ) );
 		
 		if ( resReal.isNewOne ( ) && ObjectUtil.isNull ( resRealVo ) ) {
 			result = mapper.insert ( resReal );

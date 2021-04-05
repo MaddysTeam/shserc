@@ -8,5 +8,9 @@ export const appEnum = {
     },
     
     ValidateImageUrls:"http://tjcdn.shec.edu.cn/",
-    validateImageNames:["404.jpg"]
+    validateImageNames:["404.jpg"],
+
+    httpCode:{
+        success:200
+    }
 }

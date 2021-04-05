@@ -1,10 +1,9 @@
 package com.dianda.shserc.dto.mappers;
 
 import com.dianda.shserc.dto.EditBulletinDto;
-import com.dianda.shserc.dto.EditUserDto;
+import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.entity.Bulletin;
-import com.dianda.shserc.entity.ResUser;
-import com.dianda.shserc.util.mapper.BasicMapper;
+import com.dianda.common.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -27,5 +26,11 @@ public interface IEditBulletinMapper extends BasicMapper<Bulletin, EditBulletinD
 			@Mapping(source = "fileSize",target="fileSize")
 	})
 	Bulletin mapFrom(EditBulletinDto editUserDto);
+	
+	@Mappings({
+			@Mapping(source = "booleanState", target = "top"),
+			@Mapping(source = "targetId", target = "id")
+	})
+	Bulletin mapFrom( EditStateDto editStateDto );
 
 }

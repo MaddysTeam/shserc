@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.dianda.shserc.bean.CommentSelectParams;
 import com.dianda.shserc.dto.EditCommentDto;
 import com.dianda.shserc.entity.ResComment;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.CommentVoList;
 
 import javax.validation.Valid;

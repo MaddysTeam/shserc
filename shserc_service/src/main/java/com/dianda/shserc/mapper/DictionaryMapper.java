@@ -1,6 +1,6 @@
 package com.dianda.shserc.mapper;
 
-import com.dianda.shserc.entity.Dictionary;
+import com.dianda.common.entity.Dictionary;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

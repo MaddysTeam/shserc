@@ -6,7 +6,7 @@ import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.service.IMenuService;
-import com.dianda.shserc.util.json.JsonResult;
+import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.MenuVoList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

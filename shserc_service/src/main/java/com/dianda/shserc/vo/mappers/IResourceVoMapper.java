@@ -1,15 +1,13 @@
 package com.dianda.shserc.vo.mappers;
 
 import com.dianda.shserc.entity.Resource;
-import com.dianda.shserc.util.mapper.BasicMapper;
+import com.dianda.common.util.mapper.BasicMapper;
 import com.dianda.shserc.vo.ResourceVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
-import javax.crypto.spec.PSource;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IResourceVoMapper extends BasicMapper<ResourceVo, Resource> {

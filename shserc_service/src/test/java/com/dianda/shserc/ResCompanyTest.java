@@ -1,5 +1,6 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.service.IResCompanyService;
 import com.dianda.shserc.vo.ResCompanyVo;
 import org.junit.Assert;

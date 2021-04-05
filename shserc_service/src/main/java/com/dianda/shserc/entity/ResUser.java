@@ -1,13 +1,11 @@
 package com.dianda.shserc.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.tomcat.jni.Local;
 
 /**
  * user entity

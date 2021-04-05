@@ -11,12 +11,12 @@ import com.dianda.shserc.dto.mappers.IEditUserMapper;
 import com.dianda.shserc.dto.mappers.IEditUserRoleMapper;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResUserRole;
-import com.dianda.shserc.exceptions.GlobalException;
+import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IResUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.basic.StringUtil;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.util.basic.StringUtil;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResUserVoList;
 import com.dianda.shserc.vo.mappers.IUserVoMapper;
@@ -97,7 +97,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 				throw new GlobalException(Constant.ErrorCode.LOGIC_RESULT_INVALID, Constant.Error.USER_IS_EXISTS);
 			}
 
-			user.setPassword(com.dianda.shserc.util.basic.EncoderUtil.SHA(user.getPassword()));
+			user.setPassword( com.dianda.common.util.basic.EncoderUtil.SHA(user.getPassword()));
 			return mapper.insert(user) > 0;
 		} else {
 			return mapper.updateById(user) >= 0;

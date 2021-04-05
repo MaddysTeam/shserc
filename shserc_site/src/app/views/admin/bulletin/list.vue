@@ -6,9 +6,7 @@
     </el-breadcrumb>
 
     <div class="btn-group">
-      <el-button
-        class="el-button--danger"
-        @click="addBulletin()"
+      <el-button class="el-button--danger" @click="handleAddBulletin()"
         >新增公告</el-button
       >
     </div>
@@ -23,25 +21,24 @@
       :total="selectParam.total"
     >
       <template slot-scope="scopes" slot="title">
-        <!-- <div v-if="scopes.row.top">
+        <div v-if="scopes.scope.row.top">
           <strong font="color:red">【置顶】</strong>
-        </div> -->
+        </div>
         <div>{{ scopes.scope.row.title }}</div>
       </template>
       <template slot-scope="scopes" slot="content">
-        <div v-html="scopes.scope.row.content "></div>
+        <div v-html="scopes.scope.row.content"></div>
       </template>
     </Table>
   </div>
 </template>
 <script>
 import { Notification } from "element-ui";
-import {messages} from "@/app/static/message"
+import { appEnum } from "@/app/static/enum";
 import Table from "@/components/Tables/index";
-import { list, edit, del, info } from "@/app/api/bulletin.js";
-import { selectParam } from "@/app/models/bulletin.js";
-import { mapState } from "vuex";
-import {deepCopy} from "@/app/utils/objectHelper"
+import { list, del ,top} from "@/app/api/bulletin.js";
+import { selectParam, setTopModel } from "@/app/models/bulletin.js";
+import { deepCopy } from "@/app/utils/objectHelper";
 
 export default {
   components: { Table },
@@ -79,10 +76,14 @@ export default {
           type: "info",
           method: (index, row) => {
             //TODO:
-            edit({ id: row.id, top: !row.top }).then((res)=>{
-                if (res && res.data) {
-                    Notification.success({message:res.message})
-                }
+            this.setTopModel.booleanState = !row.top;
+            this.setTopModel.targetId = row.id;
+            top(this.setTopModel).then((res) => {
+              console.log(res);
+             if (res && res.resultCode==appEnum.httpCode.success) {
+                Notification.success({ message: res.message });
+                this.loadBulletinList();
+              }
             });
           },
         },
@@ -92,9 +93,10 @@ export default {
           type: "danger",
           method: (index, row) => {
             //TODO:
-            del({ id: row.id }).then((res)=>{
-              if(res && res.data){
-                Notification.success({message:res.message})
+            del({ id: row.id }).then((res) => {
+              if (res && res.data) {
+                Notification.success({ message: res.message });
+                this.loadBulletinList();
               }
             });
           },
@@ -103,6 +105,7 @@ export default {
 
       source: [],
       selectParam: deepCopy(selectParam),
+      setTopModel: setTopModel,
       selesctOptions: ["", ""],
     };
   },
@@ -134,10 +137,10 @@ export default {
       this.loadBulletinList();
     },
 
-    addBulletin() {
+    handleAddBulletin() {
       this.$router.push("/admin/bulletin/add");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

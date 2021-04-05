@@ -1,7 +1,8 @@
 package com.dianda.shserc.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.dianda.shserc.util.cache.dictionary.DictionaryCache;
+import com.dianda.common.entity.BaseEntity;
+import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Resource extends  BaseEntity{
+public class Resource extends BaseEntity {
 	
 	private String title;
 

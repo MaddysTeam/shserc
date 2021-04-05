@@ -1,5 +1,6 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.service.IMenuService;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

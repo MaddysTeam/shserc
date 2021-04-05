@@ -4,6 +4,9 @@
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
     color: #444;
     font-size: 12px;
+    width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .site_container{
      width: 80%; 
@@ -11,6 +14,28 @@
     margin-right: auto;
     padding: 0;
 }
+.site_top img{
+    width:100%;
+}
+.site_footer{
+    background-color: #02567b;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.site_footer p{
+    margin: 0px;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+
+.bk_gray {
+    background-color: #f4f4f4;
+    padding-bottom: 56px;
+  }
+
 
 /*-------------------------.block panel------------------------*/
 
@@ -75,7 +100,7 @@
     height: 42px;
     width: 42px;
      top:10px;
-    right:20px; */
+    right:20px; 
     cursor: pointer;
     position: absolute;
 }
@@ -102,3 +127,45 @@
     outline: none;
 }
 
+
+/*-------------------------resource small square------------------------*/
+
+.res_square {
+    padding: 0;
+    border: none;
+    margin: 0 13px;
+    overflow: hidden;
+    clear: both;
+    position: relative;
+    display: inline-block;
+    width: 184px;
+  }
+
+  .res_square img.cover {
+    width: 184px;
+    height: 115px;
+  }
+
+  .res_square p {
+    margin: 10px 0;
+    color: #0082cc;
+    text-align: left;
+    overflow: hidden;
+    clear: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    clear: both;
+  }
+
+  .res_square span {
+    color: #666;
+    font-size: 12px / 20px;
+    overflow: hidden;
+    clear: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    clear: both;
+    display: block;
+    text-align: left;
+  }
+  

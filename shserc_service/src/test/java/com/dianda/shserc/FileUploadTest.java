@@ -1,10 +1,11 @@
 package com.dianda.shserc;
 
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.basic.StringUtil;
-import com.dianda.shserc.util.upload.UploadResult;
-import com.dianda.shserc.util.upload.wangsu.IWangsuFileUploader;
-import com.dianda.shserc.util.upload.wangsu.WangsuUploader;
+import com.dianda.ServiceApplication;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.util.basic.StringUtil;
+import com.dianda.common.util.upload.UploadResult;
+import com.dianda.common.util.upload.wangsu.IWangsuFileUploader;
+import com.dianda.common.util.upload.wangsu.WangsuUploader;
 import org.apache.shiro.util.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

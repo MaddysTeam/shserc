@@ -1,10 +1,7 @@
 package com.dianda.shserc;
 
-import com.dianda.shserc.bean.RealSelectParams;
 import com.dianda.shserc.dto.EditRealDto;
-import com.dianda.shserc.entity.ResReal;
 import com.dianda.shserc.service.IResRealService;
-import com.dianda.shserc.util.basic.ObjectUtil;
 import com.dianda.shserc.vo.ResRealVo;
 import org.apache.shiro.util.Assert;
 import org.junit.Test;

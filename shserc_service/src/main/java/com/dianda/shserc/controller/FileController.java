@@ -1,9 +1,9 @@
 package com.dianda.shserc.controller;
 
 
-import com.dianda.shserc.util.json.JsonResult;
-import com.dianda.shserc.util.upload.IFileUploaderProvider;
-import com.dianda.shserc.util.upload.UploadResult;
+import com.dianda.common.util.json.JsonResult;
+import com.dianda.common.util.upload.IFileUploaderProvider;
+import com.dianda.common.util.upload.UploadResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

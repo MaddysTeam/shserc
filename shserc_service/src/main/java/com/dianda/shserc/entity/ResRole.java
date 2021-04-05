@@ -1,8 +1,6 @@
 package com.dianda.shserc.entity;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
+import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

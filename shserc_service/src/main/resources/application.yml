@@ -1,5 +1,5 @@
 server:
-  port: 2525
+  port: 2526
 
 #mybatis-plus:
 #   configuration:
@@ -8,15 +8,33 @@ server:
 spring:
   datasource:
     dynamic:
-      primary: source1
+      primary: shserc
       datasource:
-        source1:
+        common:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://192.168.1.6:30070/common?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+          username: root
+          password: password
+          filters: stat
+          maxActive: 300
+          initialSize: 1
+          maxWait: 60000
+          minIdle: 1
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: select 1 FROM DUAL
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+          poolPreparedStatements: true
+          maxOpenPreparedStatements: 20
+        shserc:
           driver-class-name: com.mysql.jdbc.Driver
           url: jdbc:mysql://192.168.1.6:30070/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
           username: root
           password: password
           filters: stat
-          maxActive: 20
+          maxActive: 300
           initialSize: 1
           maxWait: 60000
           minIdle: 1

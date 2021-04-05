@@ -12,6 +12,11 @@ export const bulletinModel = {
     fileList: [],
 }
 
+export const setTopModel={
+    targetId:0,
+    booleanState:false
+}
+
 export const selectParam = {
     current: 1,
     total: 0,

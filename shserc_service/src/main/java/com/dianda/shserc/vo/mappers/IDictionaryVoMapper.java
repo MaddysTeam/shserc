@@ -1,8 +1,8 @@
 package com.dianda.shserc.vo.mappers;
 
-import com.dianda.shserc.entity.Dictionary;
-import com.dianda.shserc.util.mapper.BasicMapper;
-import com.dianda.shserc.vo.DictionaryVo;
+import com.dianda.common.entity.Dictionary;
+import com.dianda.common.util.mapper.BasicMapper;
+import com.dianda.common.vo.DictionaryVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

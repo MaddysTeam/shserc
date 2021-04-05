@@ -1,24 +1,23 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.dto.LoginDto;
 import com.dianda.shserc.service.IAccountService;
-import com.dianda.shserc.util.basic.ObjectUtil;
-import com.dianda.shserc.util.shiro.jwt.JwtOperation;
-import com.dianda.shserc.util.shiro.jwt.JwtSettings;
+import com.dianda.common.util.basic.ObjectUtil;
+import com.dianda.common.security.shiro.jwt.JwtOperation;
+import com.dianda.common.security.shiro.jwt.JwtSettings;
 import org.apache.shiro.util.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
-@ActiveProfiles( "local" )
+//@ActiveProfiles( "local" )
 @SpringBootTest( classes = ServiceApplication.class )
 @RunWith( SpringRunner.class )
 @EnableConfigurationProperties( { JwtSettings.class } )
@@ -26,9 +25,6 @@ public class AccountTest {
 	
 	@Autowired
 	WebApplicationContext wac;
-	
-	@Resource
-	SecurityManager securityManager;
 	
 	@Autowired
 	IAccountService accountService;

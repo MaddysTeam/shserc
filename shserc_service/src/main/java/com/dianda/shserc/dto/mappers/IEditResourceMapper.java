@@ -1,9 +1,8 @@
 package com.dianda.shserc.dto.mappers;
 
 import com.dianda.shserc.dto.EditResourceDto;
-import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.Resource;
-import com.dianda.shserc.util.mapper.BasicMapper;
+import com.dianda.common.util.mapper.BasicMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

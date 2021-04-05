@@ -1,5 +1,7 @@
 package com.dianda.shserc.vo;
 
-public class BulletinVoList extends BaseVoList<BulletinVo>{
+import com.dianda.common.vo.BaseVoList;
+
+public class BulletinVoList extends BaseVoList<BulletinVo> {
 
 }

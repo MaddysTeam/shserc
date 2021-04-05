@@ -1,10 +1,10 @@
 package com.dianda.shserc;
 
+import com.dianda.ServiceApplication;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.entity.ResourceOperation;
-import com.dianda.shserc.exceptions.GlobalException;
+import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.service.IResourceService;
-import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
 import org.junit.Assert;
 import org.junit.Test;

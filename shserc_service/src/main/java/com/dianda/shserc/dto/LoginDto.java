@@ -1,6 +1,6 @@
 package com.dianda.shserc.dto;
 
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.common.*;
 
 import javax.validation.constraints.NotBlank;

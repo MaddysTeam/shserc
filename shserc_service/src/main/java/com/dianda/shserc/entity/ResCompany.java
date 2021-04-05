@@ -1,9 +1,6 @@
 package com.dianda.shserc.entity;
 
-import java.time.LocalDateTime;
-import java.io.Serializable;
-
-import com.dianda.shserc.validators.NotNull;
+import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +14,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ResCompany extends  BaseEntity  {
+public class ResCompany extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	

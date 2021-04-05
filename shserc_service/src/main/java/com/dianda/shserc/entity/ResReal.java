@@ -1,7 +1,8 @@
 package com.dianda.shserc.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.dianda.shserc.validators.ICheckIdCard;
+import com.dianda.common.entity.BaseEntity;
+import com.dianda.common.validators.ICheckIdCard;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
