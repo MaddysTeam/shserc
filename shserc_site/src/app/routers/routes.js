@@ -19,6 +19,8 @@ import MenuList from '@/app/views/admin/menu/list'
 // following for site
 import Site from '@/app/views/site/layout/index'
 import HomeIndex from '@/app/views/site/home/index'
+import ResourceSearch from '@/app/views/site/resource/search'
+//import { component } from 'vue/types/umd'
 //import { component } from 'vue/types/umd'
 
 
@@ -178,6 +180,11 @@ export const constRoutes = [
           path:'/home/index',
           name:'HomeIndex',
           component:HomeIndex
+        },
+        {
+          path: '/resource/search',
+          name:'resourceSearch',
+          component:ResourceSearch
         }
     ],
     redirect: { name: 'HomeIndex' } // redirect to home index

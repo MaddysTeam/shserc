@@ -27,7 +27,7 @@
         <img src="../../../assets/images/t_banner.jpg" />
       </div>
 
-      <router-view></router-view>
+      <router-view class="p_30_left_right"></router-view>
 
       <div class="site_footer"></div>
     </div>

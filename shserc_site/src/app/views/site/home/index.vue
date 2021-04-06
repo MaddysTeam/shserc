@@ -1,5 +1,5 @@
 <template>
-  <div   style="padding-left:30px; padding-right:30px">
+  <div >
     <div class="block_panel blue_edge">
       <!-- carousel start -->
       <el-carousel indicator-position="outside">
@@ -12,33 +12,7 @@
 
     <!-- advance search box start -->
     <div class="block_panel">
-      <p class="panel_title">
-        <span><img src="/assets/img/ico_gift.png" />资源检索</span>
-      </p>
-      <div class="search">
-        <div class="search bar1">
-          <form>
-            <input type="text" placeholder="请输入您要搜索的内容..." />
-            <button type="submit">
-              <i
-                class="el-icon-search"
-                style="font-size: 26px; color: #eee"
-              ></i>
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div class="text-center more" style="display: none">
-        <a href="javascript:void(0)">
-          <strong><i class="fa fa-arrow-down"></i> 更多条件</strong></a
-        >
-      </div>
-      <div class="text-center less" style="display: none">
-        <a href="javascript:void(0)">
-          <strong><i class="fa fa-arrow-up"></i> 收起</strong></a
-        >
-      </div>
+        <searchArea></searchArea>
     </div>
     <!-- advance search box end -->
 
@@ -114,7 +88,12 @@
 </template>
 
 <script>
-export default {};
+import searchArea from "@/app/views/site/components/SearchArea"
+import Index from '../../admin/layout/index.vue';
+export default {
+  components:{searchArea}
+}
+
 </script>
 
 <style scoped>
