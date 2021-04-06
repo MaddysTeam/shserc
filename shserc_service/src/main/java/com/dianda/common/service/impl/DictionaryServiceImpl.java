@@ -1,8 +1,8 @@
-package com.dianda.shserc.service.impl;
+package com.dianda.common.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dianda.common.entity.Dictionary;
-import com.dianda.shserc.mapper.DictionaryMapper;
+import com.dianda.common.mapper.DictionaryMapper;
 import com.dianda.common.service.IDictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
@@ -23,7 +23,6 @@ import java.util.List;
  */
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements IDictionaryService {
-
 
 	@Resource
 	DictionaryMapper mapper;
