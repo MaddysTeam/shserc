@@ -1,20 +1,95 @@
 html,
 body,
-#app {height: 100%;margin: 0;padding: 0}
-a {text-decoration:none; color:inherit;}
-.m_30 {margin: 30px;}
-.m_30_top {margin-top: 30px;}
-.m_20_top {margin-top: 20px;}
-.m_30_left {margin-left:30px;}
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
 
-.font20{font-size:20px;}   
-.font30{font-size:30px;}
-.font14 {font-size:14px;}
-.font12 {font-size:12px;}
-.text_align_left{text-align:left;}
-.fullWidth{width: 100%;}
-.p_30 {padding: 30px;}
-.p_30_left_right{padding-left: 30px; padding-right: 30px;}
-.p_20{padding: 20px;}
-.p_0{padding: 0px;}
-.height300{height:300px;}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.m_30 {
+    margin: 30px;
+}
+
+.m_30_top {
+    margin-top: 30px;
+}
+
+.m_20_top {
+    margin-top: 20px;
+}
+
+.m_30_left {
+    margin-left: 30px;
+}
+
+.m_30_bottom {
+    margin-bottom: 30px;
+}
+
+.font20 {
+    font-size: 20px;
+}
+
+.font30 {
+    font-size: 30px;
+}
+
+.font14 {
+    font-size: 14px;
+}
+
+.font12 {
+    font-size: 12px;
+}
+
+.text_align_left {
+    text-align: left;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.p_30 {
+    padding: 30px;
+}
+
+.p_30_left_right {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.p_20 {
+    padding: 20px;
+}
+
+.p_0 {
+    padding: 0px;
+}
+
+.height300 {
+    height: 300px;
+}
+
+.height200 {
+    height: 200px;
+}
+
+.width300 {
+    width: 300px;
+}
+
+.width200 {
+    width: 200px;
+}
+
+.flex_space_between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

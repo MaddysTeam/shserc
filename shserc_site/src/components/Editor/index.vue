@@ -15,7 +15,6 @@ import tinymce from "tinymce/tinymce"; //tinymce默认hidden，不引入不显�
 import Editor from "@tinymce/tinymce-vue"; //编辑器引入
 import "tinymce/themes/silver/theme"; //编辑器主题
 import "tinymce/skins/ui/oxide/skin.css";
-// 引入编辑器插件（基本免费插件都在这儿了）
 import "tinymce/plugins/advlist"; //高级列表
 import "tinymce/plugins/autolink"; //自动链接
 import "tinymce/plugins/link"; //超链接

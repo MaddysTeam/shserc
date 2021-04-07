@@ -1,13 +1,13 @@
 <template>
   <div>
     <p class="panel_title">
-      <span><img src="/assets/img/ico_gift.png" />资源检索</span>
+      <span><i class="el-icon-search"></i> 资源检索</span>
     </p>
     <div class="search">
       <div class="search bar1">
         <form>
           <input type="text" placeholder="请输入您要搜索的内容..." />
-          <button type="submit">
+          <button @click="handleSubmit()"> 
             <i class="el-icon-search" style="font-size: 26px; color: #eee"></i>
           </button>
         </form>
@@ -34,16 +34,16 @@
 				<dd>
 					<ul id="deformityChoose" class="items">
 						<li><a href="javascript:void(0)" class="actived" data-id=""><el-tag effect="dark" type="danger ">全部</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10031"><el-tag effect="light ">视力残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10032"><el-tag effect="light ">听力残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10033"><el-tag effect="light ">智力残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10034"><el-tag effect="light ">肢体残疾（脑瘫）</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10035"><el-tag effect="light ">肢体残疾（非脑瘫）</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10036"><el-tag effect="light ">言语残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10037"><el-tag effect="light ">精神残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10038"><el-tag effect="light ">精神残疾（自闭症）</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10039"><el-tag effect="light ">多重残疾</el-tag></a></li>
-								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10069"><el-tag effect="light ">其他残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10031"><el-tag effect="light">视力残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10032"><el-tag effect="light">听力残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10033"><el-tag effect="light">智力残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10034"><el-tag effect="light">肢体残疾（脑瘫）</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10035"><el-tag effect="light">肢体残疾（非脑瘫）</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10036"><el-tag effect="light">言语残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10037"><el-tag effect="light">精神残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10038"><el-tag effect="light">精神残疾（自闭症）</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10039"><el-tag effect="light">多重残疾</el-tag></a></li>
+								<li><a href="javascript:void(0)" class="item" data-type="deformity" data-id="10069"><el-tag effect="light">其他残疾</el-tag></a></li>
 					</ul>
 				</dd>
 			</dl>
@@ -194,43 +194,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+	props:{
+		handleSearch:{
+			type:Function 
+		}
+	},
+
+	methods:{
+		handleSubmit(){
+			this.$emit("handleSearch");
+		}
+	}
+};
 </script>
 
 <style>
- .adv_hit{
-     font-size:14px;
- }
 
- .adv_hit dl{
-         display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
- }
-
- .adv_hit dt {
-    margin: auto 50px;
-    margin-right: 0px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #f39800;
-    float: left;
-     line-height: 22px; 
-}
-
-.adv_hit ul{
-        list-style: none;
-    padding-left: 5px;
-    padding-left: 110px;
-    text-align: left;
-             margin-bottom:30px;
-}
-.adv_hit ul li{
-    display: inline-block;
-    /* background-color: firebrick; */
-    margin-left: 10px;
-    vertical-align: top;
-}
 </style>

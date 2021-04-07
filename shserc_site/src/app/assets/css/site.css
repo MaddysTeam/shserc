@@ -1,5 +1,5 @@
-.site{ 
-    margin: 0px; 
+.site {
+    margin: 0px;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
     color: #444;
@@ -8,16 +8,23 @@
     margin-left: auto;
     margin-right: auto;
 }
-.site_container{
-     width: 80%; 
+
+.site a {
+    text-decoration: none;
+}
+
+.site_container {
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
 }
-.site_top img{
-    width:100%;
+
+.site_top img {
+    width: 100%;
 }
-.site_footer{
+
+.site_footer {
     background-color: #02567b;
     color: #fff;
     padding: 30px 0;
@@ -25,36 +32,35 @@
     height: 100px;
 }
 
-.site_footer p{
+.site_footer p {
     margin: 0px;
     font-size: 12px;
     line-height: 24px;
 }
 
-
 .bk_gray {
     background-color: #f4f4f4;
     /* padding-bottom: 56px; */
-  }
+}
 
 
 /*-------------------------.block panel------------------------*/
 
-.block_panel{
+.block_panel {
     border: 1px solid #bfbfbf;
     padding: 20px;
     background-color: #fff;
     margin-top: 30px;
 }
 
-.block_panel.blue_edge{
-    border-top:#7ab4ce 3px solid;
-} 
+.block_panel.blue_edge {
+    border-top: #7ab4ce 3px solid;
+}
 
-
-.block_panel .panel_title{
+.block_panel .panel_title {
     font-size: 18px;
-    color: #f39800;
+    /* color: #f39800; */
+    color: #0076f3;
     padding-bottom: 40px;
     border-bottom: 1px solid #a0a0a0;
     height: 20px;
@@ -62,28 +68,35 @@
     margin-bottom: 20px;
 }
 
+
 /*-------------------------.carousel------------------------*/
+
 .el-carousel__item h3 {
     color: #475669;
     font-size: 18px;
     opacity: 0.75;
     line-height: 300px;
     margin: 0;
-  }
-  
-  .el-carousel__item:nth-child(2n) {
+}
+
+.el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
+}
+
+.el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
-  }
+}
+
 
 /*-------------------------advance search------------------------*/
 
-.search{   font-size: 12px;}
+.search {
+    font-size: 12px;
+}
 
-.search div.search {padding: 30px 0;}
+.search div.search {
+    padding: 30px 0;
+}
 
 .search form {
     position: relative;
@@ -100,32 +113,75 @@
 .search button {
     height: 42px;
     width: 42px;
-     top:10px;
-    right:20px; 
+    top: 10px;
+    right: 20px;
     cursor: pointer;
     position: absolute;
 }
 
+
 /* .bar1 {background: #e4eae9;} */
+
 .search .bar1 input {
     border: 1px solid #7BA7AB;
     border-radius: 5px;
     background: #F9F0DA;
     color: #9E9C9C;
 }
+
 .search .bar1 button {
     top: 0;
     background-image: linear-gradient(135deg, rgb(252, 207, 49) 10%, rgb(245, 85, 85) 100%);
     border-radius: 0 5px 5px 0;
 }
+
 .search .bar1 button:before {
     font-size: 16px;
     color: #F9F0DA;
 }
 
-.search input, button {
+.search input,
+button {
     border: none;
     outline: none;
+}
+
+.adv_hit {
+    font-size: 14px;
+}
+
+.adv_hit dl {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.adv_hit dt {
+    margin: auto 50px;
+    margin-right: 0px;
+    font-weight: bold;
+    font-size: 18px;
+    /* color: #f39800; */
+    color: #0076f3;
+    float: left;
+    line-height: 22px;
+}
+
+.adv_hit ul {
+    list-style: none;
+    padding-left: 5px;
+    padding-left: 110px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.adv_hit ul li {
+    display: inline-block;
+    /* background-color: firebrick; */
+    margin-left: 10px;
+    vertical-align: top;
 }
 
 
@@ -140,14 +196,14 @@
     position: relative;
     display: inline-block;
     width: 184px;
-  }
+}
 
-  .res_square img.cover {
+.res_square img.cover {
     width: 184px;
     height: 115px;
-  }
+}
 
-  .res_square p {
+.res_square p {
     margin: 10px 0;
     color: #0082cc;
     text-align: left;
@@ -156,9 +212,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     clear: both;
-  }
+}
 
-  .res_square span {
+.res_square span {
     color: #666;
     font-size: 12px / 20px;
     overflow: hidden;
@@ -168,5 +224,4 @@
     clear: both;
     display: block;
     text-align: left;
-  }
-  
+}

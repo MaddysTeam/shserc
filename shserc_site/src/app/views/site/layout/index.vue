@@ -27,7 +27,9 @@
         <img src="../../../assets/images/t_banner.jpg" />
       </div>
 
+      <transition  name="fade" mode="out-in" appear>
       <router-view class="p_30_left_right"></router-view>
+      </transition>
 
       <div class="site_footer"></div>
     </div>
