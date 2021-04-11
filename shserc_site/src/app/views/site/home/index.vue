@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import searchArea from "@/app/views/site/components/SearchArea";
+import searchArea from "@/app/views/site/resource/components/SearchArea";
 import { loginModel } from "@/app/models/account";
 import Index from "../../admin/layout/index.vue";
 export default {

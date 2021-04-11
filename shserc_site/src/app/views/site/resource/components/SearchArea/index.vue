@@ -7,7 +7,7 @@
       <div class="search bar1">
         <form>
           <input type="text" placeholder="请输入您要搜索的内容..." />
-          <button @click.prevent="btn" @click="handleSubmit()"> 
+          <button @click.prevent="handlePrevent" @click="handleSubmit()"> 
             <i class="el-icon-search" style="font-size: 26px; color: #eee"></i>
           </button>
         </form>
@@ -202,6 +202,9 @@ export default {
 	},
 
 	methods:{
+		handlePrevent(){
+		
+		},
 		handleSubmit(){
 			this.$emit("handleSearch");
 		}

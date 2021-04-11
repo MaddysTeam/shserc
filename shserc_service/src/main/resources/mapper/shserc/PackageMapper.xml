@@ -2,4 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dianda.shserc.mapper.PackageMapper">
 
+    <select id="selectPackages" resultType="com.dianda.shserc.entity.Package">
+        select r.id,
+        r.title,
+        r.description,
+        r.state_id,
+        r.stage_id,
+        r.grade_id,
+        r.domain_id,
+        r.subject_id,
+        r.school_type_id,
+        r.deformity_id,
+        r.author,
+        r.author_address,
+        r.author_email,
+        r.author_phone,
+        r.description,
+        r.keywords,
+        r.view_count,
+        r.download_count,
+        r.favorite_count,
+        r.comment_count,
+        r.star_count,
+        r.auditor,
+        r.auditor_time,
+        r.auditor_opinion
+        from package r
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+
+    <insert id="addView" parameterType="com.dianda.shserc.entity.PackageOperation">
+		 insert into package_view (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
+
+    <insert id="addDownload" parameterType="com.dianda.shserc.entity.PackageOperation">
+		 insert into package_download (resource_id, user_id,add_time) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
+
+    <insert id="addFavorite" parameterType="com.dianda.shserc.entity.PackageOperation">
+		 insert into package_favorite (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
+	</insert>
+
+    <delete id="deleteFavorite" parameterType="com.dianda.shserc.entity.PackageOperation">
+        delete from package_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
+    </delete>
+
+    <select id="selectFavorite" resultType="com.dianda.shserc.entity.PackageOperation">
+        select
+        resource_id,
+        user_id
+        from package_favorite
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <insert id="addStar" parameterType="com.dianda.shserc.entity.PackageOperation">
+         insert into package_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+    </insert>
+
 </mapper>

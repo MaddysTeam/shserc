@@ -19,8 +19,20 @@ a {
     margin-top: 30px;
 }
 
+.m_10_top {
+    margin-top: 10px;
+}
+
 .m_20_top {
     margin-top: 20px;
+}
+
+.m_10_bottom {
+    margin-bottom: 10px;
+}
+
+.m_20_bottom {
+    margin-bottom: 20px;
 }
 
 .m_30_left {
