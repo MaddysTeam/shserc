@@ -33,6 +33,13 @@
         </where>
     </select>
 
+    <insert id="addPackageResource" parameterType="com.dianda.shserc.entity.PackageOperation">
+        insert into package_resource(package_id,resource_id) values(#{packageId},#{resourceId})
+    </insert>
+
+    <insert id="deletePackageResource" parameterType="com.dianda.shserc.entity.PackageOperation">
+        delete from package_resource where package_id = #{packageId}
+    </insert>
 
     <insert id="addView" parameterType="com.dianda.shserc.entity.PackageOperation">
 		 insert into package_view (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})

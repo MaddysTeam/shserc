@@ -38,8 +38,8 @@ public interface IPackageVoMapper extends BasicMapper<PackageVo, Package> {
 			@Mapping( source = "stateId", target = "stateId" ) ,
 			@Mapping( source = "learnFromId", target = "learnFromId" ) ,
 			
-			//@Mapping( source = "subject", target = "subject" ) ,
-			//@Mapping( source = "grade", target = "grade" ) ,
+			@Mapping( source = "subject", target = "subject" ) ,
+			@Mapping( source = "grade", target = "grade" ) ,
 			@Mapping( source = "stage", target = "stage" ) ,
 			@Mapping( source = "schoolType", target = "schoolType" ) ,
 			@Mapping( source = "domain", target = "domain" ) ,

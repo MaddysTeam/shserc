@@ -153,7 +153,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 
 	@Override
 	public boolean edit(@Valid @NotNull EditResourceDto resourceDto) {
-		// execute user mapping from dto
 		Resource resource = IEditResourceMapper.INSTANCE.mapFrom(resourceDto);
 		ResourceVo resourceVo = findById(resource.getId());
 		if (resource.isNewOne() && ObjectUtil.isNull(resourceVo)) {
