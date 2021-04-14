@@ -1,6 +1,8 @@
 <template>
   <div class="page-login text-center">
     <div class="login-box center-block loginArea">
+
+      <!-- login form start -->
       <el-form ref="loginForm"  :model="account"
       >
        <p class="title"><i class="el-icon-info"></i>   用户登录</p>
@@ -14,13 +16,14 @@
            <el-button type="primary" style="width:100%">提交</el-button>
         </el-form-item>
       </el-form>
-      <div class="links">
+      <!-- login form end -->
+
+      <div>
         <p>
-          <router-link  to="" href="/Account/Forget">忘记密码 <i class="el-icon-question"></i></router-link> |
-          <router-link to="" href="/Account/Register">注册</router-link>
+          <router-link  to="/Account/ForgetPassword">忘记密码 <i class="el-icon-question"></i></router-link> |
+          <router-link to="/Account/Register">注册</router-link>
         </p>
       </div>
-      <div class="error"></div>
     </div>
   </div>
 </template>

@@ -19,6 +19,26 @@ a {
     margin-top: 30px;
 }
 
+.m_30_left {
+    margin-left: 30px;
+}
+
+.m_30_bottom {
+    margin-bottom: 30px;
+}
+
+.m_30_right {
+    margin-right: 30px;
+}
+
+.m_5 {
+    margin: 5px;
+}
+
+.m_5_top {
+    margin-top: 5px;
+}
+
 .m_10_top {
     margin-top: 10px;
 }
@@ -33,14 +53,6 @@ a {
 
 .m_20_bottom {
     margin-bottom: 20px;
-}
-
-.m_30_left {
-    margin-left: 30px;
-}
-
-.m_30_bottom {
-    margin-bottom: 30px;
 }
 
 .font20 {

@@ -24,6 +24,7 @@ import ResourceDetails from '@/app/views/site/resource/details'
 import AccountLogin from '@/app/views/site/account/login'
 import AccountSpace from '@/app/views/site/account/space'
 import AccountRegister from '@/app/views/site/account/register'
+import ForgetPassword from '@/app/views/site/account/forgetPassword'
 
 export const menuRoutes = [{
         path: '/admin/dashboard/summary',
@@ -198,6 +199,11 @@ const frontendRoutes = [
                 path: '/account/register',
                 name: 'AccountRegister',
                 component: AccountRegister
+            },
+            {
+                path: '/account/forgetPassword',
+                name: 'ForgetPassword',
+                component: ForgetPassword
             }
         ],
         redirect: { name: 'HomeIndex' } // redirect to home index

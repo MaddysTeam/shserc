@@ -20,51 +20,80 @@
 
         <header
           role="banner"
-          class="Sticky AppHeader"
+          class="Sticky appHeader"
           data-za-module="TopNavBar"
+          style="position: relative"
         >
-          <div class="AppHeader-inner">
-           
-
-            <ul role="navigation" >
-              <li> <router-link to="/home/index" replace type="primary"  aria-label="上海特殊教育资源库" :underline="false">欢迎访问上海市特殊教育资源库</router-link></li>
-              <li role="tab">
-                <router-link to="/account/register" type="danger" class="font12" :underline="false">注册 </router-link>
-              </li>
-              <li role="tab">
-               <router-link to="/account/login"    class="font12" :underline="false">登录</router-link>
-              </li>
-              <li role="tab" >
-               <router-link to="/account/space"  class="font12" :underline="false">进入我的空间</router-link>
-              </li>
+          <div class="appHeader-inner">
+            <ul role="navigation">
               <li>
-             
+                <router-link
+                  to="/home/index"
+                  replace
+                  type="primary"
+                  aria-label="上海特殊教育资源库"
+                  :underline="false"
+                  >欢迎访问上海市特殊教育资源库</router-link
+                >
+              </li>
+              <li role="tab">
+                <router-link
+                  to="/account/register"
+                  type="danger"
+                  class="font12"
+                  :underline="false"
+                  ><el-tag>注册</el-tag></router-link
+                >
+              </li>
+              <li role="tab">
+                <router-link
+                  to="/account/login"
+                  class="font12"
+                  :underline="false"
+                  ><el-tag type="danger">登录</el-tag></router-link
+                >
+              </li>
+              <li role="tab">
+                <router-link
+                  to="/account/space"
+                  class="font12"
+                  :underline="false"
+                  ><el-tag type="success">欢迎您！xxx 进入我的空间</el-tag></router-link
+                >
               </li>
             </ul>
-            <div style="margin-right:20px;" class="m_5_top">
-              
-                 <el-dropdown :hide-timeout="300">
-                  <el-button type="info" circle
-                    ><el-image
-                      class="img_header"
-                      src="http://pic3.zhimg.com/v2-409c2376878382d891bfe8a294606933_xs.jpg"
-                    ></el-image>
-                  </el-button>
-                  <!-- <el-link class="img-header">JimmyPoor</el-link> -->
-                  <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click.native="handleShowAccountInfo"
-                      ><i class="el-icon-user-solid"></i
-                      >个人空间</el-dropdown-item
-                    >
-                    <el-dropdown-item @click.native="handleChangePassword"
-                      ><i class="el-icon-lock"></i>修改密码</el-dropdown-item
-                    >
-                    <el-dropdown-item @click.native="handleLogout"
-                      ><i class="el-icon-info"></i>注销
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </el-dropdown>
-                jimmy
+            <div style="display:flex" class="m_5_top m_30_right">
+              <el-form class="m_10_top m_30_right" >
+                <el-form-item style="position:relative">
+                  <el-input
+                    prefix-icon="el-icon-search"
+                    placeholder="资源搜索"
+                  ></el-input>
+                  <el-button  style="position:absolute; top:0px; right:0px; height:100%" size="small" class="btn_login el-button el-button--primary"><i class="el-icon-search"></i></el-button>
+                </el-form-item>
+              </el-form>
+
+              <el-dropdown :hide-timeout="300">
+                <el-button type="info"  class="btn_header" circle style="backgroundColor:transparent;"
+                  ><el-image
+                    class="img_header"
+                    src="http://pic3.zhimg.com/v2-409c2376878382d891bfe8a294606933_xs.jpg"
+                  ></el-image>
+                </el-button>
+                <!-- <el-link class="img-header">JimmyPoor</el-link> -->
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item @click.native="handleShowAccountInfo"
+                    ><i class="el-icon-user-solid"></i
+                    >个人空间</el-dropdown-item
+                  >
+                  <!-- <el-dropdown-item @click.native="handleChangePassword"
+                    ><i class="el-icon-lock"></i>修改密码</el-dropdown-item
+                  > -->
+                  <el-dropdown-item @click.native="handleLogout"
+                    ><i class="el-icon-info"></i>注销
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </div>
           <div></div>
@@ -90,34 +119,49 @@
 </template>
 
 <script>
-export default {};
+export default {
+  components: {},
+  methods:{
+    handleShowAccountInfo(){
+      this.$router.push({path:"/account/space"});
+    }
+  }
+};
 </script>
 
 <style>
 @import "../../../assets/css/site.css";
 
-.AppHeader {
+.appHeader {
   background-clip: content-box;
 }
-.AppHeader {
+.appHeader {
   -webkit-box-shadow: 0 1px 3px rgba(18, 18, 18, 0.1);
   box-shadow: 0 1px 3px rgba(18, 18, 18, 0.1);
 }
-.AppHeader {
+.appHeader {
   position: relative;
   z-index: 100;
   min-width: 800px;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: #fff;
-  margin:0 auto;
+  /* margin:0 auto; */
+  height: 55px;
 }
 
-.AppHeader-inner {
+.appHeader-inner {
+  min-width: 800px;
+  position: fixed;
+  z-index: 1002;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
+  background: #fff;
 }
 
-.AppHeader ul,
+.appHeader ul,
 menu,
 dir {
   list-style-type: none;
@@ -126,24 +170,23 @@ dir {
   -webkit-margin-start: 0px;
   -webkit-margin-end: 0px;
   -webkit-padding-start: 40px;
-   margin-top:20px;
+  margin-top: 20px;
 }
 
-.AppHeader ul li {
+.appHeader ul li {
   display: inline;
   margin-right: 20px;
 }
 
-.AppHeader .el-button {
+.appHeader .el-button {
   border: 0px;
-  background: transparent;
 }
 
-
-.img_header {
+.appHeader .img_header {
   width: 38px;
   height: 38px;
   border-radius: 50%;
 }
+
 </style>
 

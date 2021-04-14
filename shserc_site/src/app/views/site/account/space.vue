@@ -11,7 +11,16 @@
       <el-menu-item index="3"> 我的收藏</el-menu-item>
       <el-menu-item index="4"> 我的评论</el-menu-item>
     </el-menu>
-    <div class="line"></div>
+    <div class="block_panel blue_edge" v-if="activeIndex==1">
+        <p class="panel_title">
+            <span><i class="el-icon-user-solid"></i> 个人信息</span>
+          </p>
+    </div>
+      <div class="block_panel blue_edge" v-if="activeIndex==2">
+        <p class="panel_title">
+            <span><i class="el-icon-user-solid"></i> 我的下载</span>
+          </p>
+    </div>
   </div>
 </template>
 <script>
@@ -19,12 +28,12 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      activeIndex2: "1",
     };
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+      this.activeIndex=key;
     },
   },
 };

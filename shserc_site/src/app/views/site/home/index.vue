@@ -18,7 +18,7 @@
 
     <el-row :gutter="10">
       <!-- recommand  resource area start -->
-      <el-col :xs="14" :sm="14" :md="14" :lg="14" :xl="14">
+      <el-col :span="15">
         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-star-on font20"></i> 资源推荐</span>
@@ -62,7 +62,8 @@
       </el-col>
       <!-- recommand  resource area end -->
 
-      <el-col :xs="25" :sm="25" :md="9" :lg="9" :xl="9" style="margin-left: 4%">
+      <!-- login area start -->
+      <el-col :span="8" style="margin-left: 4%">
         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-user-solid"></i> 用户登录</span>
@@ -91,8 +92,8 @@
                     >登录</el-button
                   >
                   <div>
-                    <el-link type="info" :underline="false">注册/</el-link>
-                    <el-link type="info" :underline="false">忘记密码</el-link>
+                     <router-link to="/account/register" type="danger" class="font12" :underline="false"><el-tag>注册</el-tag></router-link>
+                     <router-link to="/account/forgetPassword"    class="font12" :underline="false"><el-tag type="danger">忘记密码</el-tag></router-link>
                   </div>
                 </div>
               </el-form-item>
@@ -100,8 +101,10 @@
           </div>
         </div>
       </el-col>
+      <!-- login area end -->
 
-      <el-col :xs="25" :sm="25" :md="9" :lg="9" :xl="9" style="margin-left: 4%">
+      <!-- activity user list start -->
+      <el-col  :span="8" style="margin-left: 4%">
         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-headset"></i> 活跃用户</span>
@@ -109,7 +112,9 @@
         </div>
       </el-col>
     </el-row>
+    <!-- activity user list end -->
 
+     
     <el-row class="p_30">
       <el-select style="width: 60%" >
         <el-option  v-for="i in [1,2,3,4,5]" value-key="i" :key="i"></el-option>
