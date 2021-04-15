@@ -108,7 +108,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if (!ObjectUtil.isNull(orderPhrases) && orderPhrases.size() > 0) {
 			for (Map.Entry<String, String> entry : orderPhrases.entrySet()) {
 				String direction = entry.getValue();
-				String orderPhrase = entry.getKey();
+				String orderPhrase = params.translateOrderPhrase(entry.getKey());
 				if (direction.equals(Constant.OrderDirection.ASC)) {
 					wrapper = wrapper.orderByAsc (orderPhrase);
 				} else if (direction.equals(Constant.OrderDirection.DESC)) {

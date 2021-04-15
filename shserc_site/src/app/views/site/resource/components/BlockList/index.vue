@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list listType="blockList" :source="[1, 2, 3, 4, 5, 6, 7, 8, 9]">
+    <list listType="blockList" :source="[1, 2, 3, 4, 5, 6]">
       <template>
 
         <div class="widget">
@@ -14,23 +14,23 @@
 
           <!-- widget content start-->
           <div class="widget-content">
-            <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧">
+            <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧" >
               <img
                 class="cover"
                 src="http://tjcdn.shec.edu.cn/demo/7.jpg"
-                style="height: 150px"
+                :style="{width: coverWidth+'px', height: coverHeight+'px'}"
             /></a>
             <div class="hot"></div>
-            <div class="p_30_left_right">
-              <p>
+            <div class=" m_5 text_align_left">
+
                 <el-link :underline="false" type="primary"
                   >让我们成为芭蕾演员吧</el-link
                 >
-              </p>
+
 
               <p>作者：上海高教电子音像出版社</p>
 
-              <p>
+              <p v-show="isShowStatistical">
                 <el-tag>点击量：80</el-tag>
                 <el-tag type="info">下载量：80</el-tag>
                 <el-tag type="danger"> 格式： pdf</el-tag>
@@ -51,6 +51,12 @@ import list from "@/components/List";
 
 export default {
   components:{list},
+
+  props:{
+    isShowStatistical:{type:Boolean},
+    coverWidth:{type:Number},
+    coverHeight:{type:Number}
+  },
   
   data() {
     return {

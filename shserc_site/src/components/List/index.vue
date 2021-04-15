@@ -19,16 +19,16 @@
           :key="index"
           class="p_20"
         >
-          <el-card :body-style="{ padding: '0px' }" class="font12 height300">
+          <el-card :body-style="{ padding: '0px' }" >
             <slot v-bind:item="item"></slot>
           </el-card>
-        </el-col> </el-row
-      >f
+        </el-col> </el-row>
     </div>
      <!-- block list end -->
      
     <div class="outer">
       <el-pagination
+        v-show="isShowPage"
         class="pagenation"
         background
         :current-page="current"
@@ -53,6 +53,7 @@ export default {
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
+    isShowPage:false
   },
 
   data() {

@@ -118,7 +118,8 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/role/list*" , "anon" );
 		
 		filterRuleMap.put ( "/company/*" , "jwt" );
-		filterRuleMap.put ( "/resource/*" , "jwt" );
+		filterRuleMap.put ( "/resource/*" , "anon" );
+		filterRuleMap.put ( "/resource/edit" , "jwt" );
 		filterRuleMap.put ( "/real/*" , "jwt" );
 		filterRuleMap.put ( "/file/*" , "jwt" );
 		filterRuleMap.put ( "/user/*" , "jwt" );

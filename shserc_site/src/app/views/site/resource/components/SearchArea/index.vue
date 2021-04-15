@@ -14,7 +14,7 @@
       </div>
     </div>
     
-    <div class="adv_hit">
+    <div class="adv_hit" v-show="isShowAdvHit">
         <div style="border:1px #eee dashed; width:80%; margin: 0 auto"></div>
         <dl class="domain   ">
 				<dt>领 域：</dt>
@@ -198,7 +198,8 @@ export default {
 	props:{
 		handleSearch:{
 			type:Function 
-		}
+		},
+		isShowAdvHit:{type:Boolean}
 	},
 
 	methods:{

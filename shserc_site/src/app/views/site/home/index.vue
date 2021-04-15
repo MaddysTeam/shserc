@@ -25,18 +25,9 @@
           </p>
 
           <div class="body">
-            <div class="res_square" v-for="i in [1, 2, 3, 4, 5, 6]" :key="i">
-              <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧"
-                ><img class="cover" src="http://tjcdn.shec.edu.cn/demo/15.jpg"
-              /></a>
-              <div class="hot"></div>
-              <div>
-                <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧"
-                  ><p>让我们成为芭蕾演员吧</p></a
-                >
-                <span>作者：上海高教电子音像出版社 </span>
-              </div>
-            </div>
+
+            <ResourceBlockList :coverWidth="184" :coverHeight="120"></ResourceBlockList> 
+
           </div>
         </div>
         <div class="block_panel">
@@ -45,18 +36,9 @@
           </p>
 
           <div class="body">
-            <div class="res_square" v-for="i in [1, 2, 3, 4, 5, 6]" :key="i">
-              <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧"
-                ><img class="cover" src="http://tjcdn.shec.edu.cn/demo/15.jpg"
-              /></a>
-              <div class="hot"></div>
-              <div>
-                <a href="/Resource/View/1158" title="让我们成为芭蕾演员吧"
-                  ><p>让我们成为芭蕾演员吧</p></a
-                >
-                <span>作者：上海高教电子音像出版社 </span>
-              </div>
-            </div>
+
+             <ResourceList></ResourceList>
+
           </div>
         </div>
       </el-col>
@@ -92,8 +74,19 @@
                     >登录</el-button
                   >
                   <div>
-                     <router-link to="/account/register" type="danger" class="font12" :underline="false"><el-tag>注册</el-tag></router-link>
-                     <router-link to="/account/forgetPassword"    class="font12" :underline="false"><el-tag type="danger">忘记密码</el-tag></router-link>
+                    <router-link
+                      to="/account/register"
+                      type="danger"
+                      class="font12"
+                      :underline="false"
+                      ><el-tag>注册</el-tag></router-link
+                    >
+                    <router-link
+                      to="/account/forgetPassword"
+                      class="font12"
+                      :underline="false"
+                      ><el-tag type="danger">忘记密码</el-tag></router-link
+                    >
                   </div>
                 </div>
               </el-form-item>
@@ -104,7 +97,7 @@
       <!-- login area end -->
 
       <!-- activity user list start -->
-      <el-col  :span="8" style="margin-left: 4%">
+      <el-col :span="8" style="margin-left: 4%">
         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-headset"></i> 活跃用户</span>
@@ -114,38 +107,78 @@
     </el-row>
     <!-- activity user list end -->
 
-     
     <el-row class="p_30">
-      <el-select style="width: 60%" >
-        <el-option  v-for="i in [1,2,3,4,5]" value-key="i" :key="i"></el-option>
+      <el-select style="width: 60%">
+        <el-option
+          v-for="i in [1, 2, 3, 4, 5]"
+          value-key="i"
+          :key="i"
+        ></el-option>
       </el-select>
     </el-row>
   </div>
 </template>
 
 <script>
+import { selectParam, orderPhrasesModel } from "@/app/models/resource";
+import { list } from "@/app/api/resource";
 import searchArea from "@/app/views/site/resource/components/SearchArea";
 import { loginModel } from "@/app/models/account";
-import Index from "../../admin/layout/index.vue";
+import { deepCopy } from "@/app/utils/objectHelper";
+import { DESC } from "@/app/static/type";
+import ResourceList from "@/app/views/site/resource/components/List";
+import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
+
 export default {
-  components: { searchArea },
+  components: { searchArea ,ResourceList,ResourceBlockList},
   data() {
     return {
       loginModel: loginModel,
+      selectParam: deepCopy(selectParam),
+      topFavoriteResources: [],
+      topVisitResources: [],
+      topCommentResources: [],
+      topDownloadResources: [],
+      value2: 5,
+      colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
     };
   },
+
+  mounted() {
+    this.loadTopFavoriteResources();
+  },
+
   methods: {
-    handleSearchResource() {
-      this.$router.push("/resource/search")
+    loadTopFavoriteResources() {
+      selectParam.size = 6; // get top 12 favorite resources
+      selectParam.orderPhrases[orderPhrasesModel.favorite] = DESC;
+      list(selectParam).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          this.topFavoriteResources = data.listData ? data.listData : [];
+        }
+      });
     },
+
+    loadTopCommentResource() {},
+
+    loadTopVisitResource() {},
+
+    loadTopDownloadResource() {},
+
+    loadActivityUsers() {},
+
+    handleSearchResource() {
+      this.$router.push("/resource/search");
+    },
+
+    handleLogin() {},
   },
 };
 </script>
 
 <style >
 .btn_login {
-  /* color: #fff;
-    background-color: #f39800; */
   text-align: center;
   border: none;
   height: 40px;

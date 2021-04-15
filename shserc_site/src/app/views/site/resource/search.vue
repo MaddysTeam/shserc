@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="block_panel">
-      <searchArea></searchArea>
+      <SearchArea :isShowAdvHit="true"></SearchArea>
     </div>
     <div class="block_panel m_30_bottom">
       <p class="panel_title flex_space_between">
@@ -15,17 +15,17 @@
           ></el-link>
         </span>
       </p>
-      <list v-if="isShowList"></list>
-      <blockList v-if="!isShowList"></blockList>
+      <ResourceList v-if="isShowList"></ResourceList>
+      <ResourceBlockList v-if="!isShowList"></ResourceBlockList>
     </div>
   </div>
 </template>
 <script>
-import searchArea from "@/app/views/site/resource/components/SearchArea";
-import blockList from "@/app/views/site/resource/components/BlockList";
-import list from "@/app/views/site/resource/components/list";
+import SearchArea from "@/app/views/site/resource/components/SearchArea";
+import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
+import ResourceList from "@/app/views/site/resource/components/List";
 export default {
-  components: { searchArea, blockList, list },
+  components: { SearchArea, ResourceBlockList, ResourceList },
 
   data() {
     return {

@@ -1,7 +1,9 @@
 package com.dianda.shserc.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class Constant {
 	
@@ -88,6 +90,17 @@ public final class Constant {
 	public static final class OrderDirection {
 		public final static String ASC = "ASC";
 		public final static String DESC = "DESC";
+	}
+	
+	public static final class OrderPhraseMapping{
+		
+		public  final static Map<String,String> getOrderPhraseMapping(){
+			Map<String,String> orderPhraseMapping=new HashMap<> (  );
+			orderPhraseMapping.put ( "favorite" ,"favorite_count");
+			
+			return orderPhraseMapping;
+		}
+		
 	}
 
 	public static final class Regex{

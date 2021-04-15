@@ -5,6 +5,10 @@ server:
 #   configuration:
 #    map-underscore-to-camel-case: false
 
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 spring:
   datasource:
     dynamic:
@@ -46,6 +50,7 @@ spring:
           testOnReturn: false
           poolPreparedStatements: true
           maxOpenPreparedStatements: 20
+
 
   #http configuration
   http:

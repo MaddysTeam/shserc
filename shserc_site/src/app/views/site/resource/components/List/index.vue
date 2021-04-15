@@ -1,5 +1,5 @@
 <template>
-  <list :source="[1,2,3,4,5]"  >
+  <RList :source="[1,2,3,4,5]"  >
        <template v-slot:default="slotProps">
 					<router-link to="/resource/details" title="对智障学生开展积极心理品质培养的实践研究"><img class="cover"  src="http://tjcdn.shec.edu.cn/demo/7.jpg"    style="height: 100px"></router-link>
 					<div class="details">
@@ -14,16 +14,14 @@
 						</div>
 						
 					</div>
-
-				<!-- </div> -->
        </template>
-   </list>
+   </RList>
 </template>
 
 <script>
-import list from "@/components/List";
+import RList from "@/components/List";
 export default {
-  components: { list },
+  components: { RList },
 };
 </script>
 
