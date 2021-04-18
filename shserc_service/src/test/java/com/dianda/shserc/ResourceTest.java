@@ -6,6 +6,7 @@ import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.vo.ResourceVoList;
+import com.dianda.shserc.vo.ScoreVoList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @SpringBootTest( classes = ServiceApplication.class )
 @RunWith( SpringRunner.class )
@@ -62,6 +64,13 @@ public class ResourceTest {
 	@Test
 	public void add_resource_view_test(){
 
+	}
+	
+	@Test
+	public void get_resource_stars_test(){
+	 ScoreVoList scoreVoList=	service.findStars ( resourceId );
+	 Assert.assertNotNull ( scoreVoList );
+	 Assert.assertTrue ( scoreVoList.getListData ().size ()>0 );
 	}
 
 	private void editResourceViewCountTest( ) {

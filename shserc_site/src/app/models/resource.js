@@ -2,7 +2,7 @@ import { CDN } from "@/static/CDN"
 
 export const resourceModel = {
     id: 0,
-    title: "",
+    title: "资源名称",
     state: "",
     stateId: 10002,
     deformityId: "",
@@ -11,12 +11,14 @@ export const resourceModel = {
     authorEmail: "",
     authorCompany: "",
     authorPhone: "",
-    keywords: null,
+    keywords: "",
     description: "",
     resourcePath: "",
     fileName: "",
     fileExtName: "",
     fileSize: 0,
+    domain: "",
+    domainId: 0,
     mediumType: "",
     mediumTypeId: 0,
     resourceType: "",
@@ -24,6 +26,7 @@ export const resourceModel = {
     domainId: 0,
     learnFrom: "",
     learnFromId: 0,
+    schoolType: "",
     schoolTypeId: 0,
     subject: "",
     subjectId: 0,
@@ -32,6 +35,12 @@ export const resourceModel = {
     grade: "",
     gradeId: 0,
     coverPath: CDN.DEFAULT_COVER,
+    viewCount: 0,
+    downloadCount: 0,
+    favoriteCount: 0,
+    commentCount: 0,
+    isVedio: false,
+    isFile: false
 
 };
 
@@ -63,8 +72,11 @@ export const selectParam = {
 }
 
 export const orderPhrasesModel = {
-    favorite: "favorite"
+    favoriteCount: "favorite",
+    viewCount: "view",
+    downloadCount: "download"
 }
+
 
 //  video optons only for resouce 
 export function videoOptions(videoPath, videoCover) {

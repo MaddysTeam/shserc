@@ -10,57 +10,67 @@
 
           <div class="body">
             <div class="body res_details">
-              <div class="title filetype">
-                <div class="mp4"></div>
-                “《好脏的哈利——九宫格翻翻书》绘本延伸美术活动材料包”的运用
+              <div v-if="resource.isVedio">
+                <div class="title filetype">
+                  <i class="el-icon-video-play link font30"></i>
+                  {{ resource.title }}
+                </div>
+                <video-player
+                  class="video-player vjs-custom-skin"
+                  ref="videoPlayer"
+                  :playsinline="true"
+                  :options="
+                    videoOptions(resource.resourcePath, resource.coverPath)
+                  "
+                ></video-player>
               </div>
-
-              <div>
+              <div v-else>
+                <div class="title filetype">
+                  <i class="el-icon-document link font30"></i>
+                  {{ resource.title }}
+                </div>
                 <div>
-                  <embed
-                    type="application/x-mplayer2"
-                    pluginspage="http://www.microsoft.com/Windows/MediaPlayer/"
-                    width="100%"
-                    height="520"
-                    src="http://tjcdn.shec.edu.cn/20171113/fb608b8f-9781-4e09-a95c-e08539a7ee82/“《好脏的哈利——九宫格翻翻书》绘本延伸美术活动材料包”的运用（1080P）.mp4"
-                    wmode="transparent"
-                    autostart="false"
+                  <img
+                    :src="resource.coverPath"
+                    @error="handleImageError()"
+                    style="max-height: 600px; width: 100%"
                   />
                 </div>
               </div>
 
               <div class="opbar">
-                <div class="eval_star">
+                <div class="stars">
                   <b>点击评分：</b>
                   <el-rate v-model="value2" :colors="colors"> </el-rate>
                 </div>
                 <div class="buttons">
-                  <el-button size="larger" type="danger" id="favorite">
+                  <el-button
+                    size="larger"
+                    type="danger"
+                    id="favorite"
+                    @click="handleFavorite()"
+                  >
                     <i class="fa fa-download"></i> 收 藏
                   </el-button>
-                  <el-button size="larger" type="primary" id="favorite">
+                  <el-button
+                    size="larger"
+                    type="primary"
+                    id="favorite"
+                    v-if="resource.isVedio"
+                  >
                     <i class="fa fa-download"></i> 复制地址
                   </el-button>
-
-                  <!-- <a
-                    href="http://tjcdn.shec.edu.cn/20171113/fb608b8f-9781-4e09-a95c-e08539a7ee82/“《好脏的哈利——九宫格翻翻书》绘本延伸美术活动材料包”的运用（1080P）.mp4"
-                    id="localPlay"
-                    title="视频不能内嵌播放时，请选择本地播放模式"
+                  <el-button
+                    size="larger"
+                    type="primary"
+                    id="favorite"
+                    @click="
+                      handleDownload(resource.title, resource.resourcePath)
+                    "
+                    v-else
                   >
-                    <button class="btn btn-lg btn-info btn-op btn-default">
-                      <i class="fa fa-play"></i>
-                      本地播放
-                    </button>
-                  </a>
-                  <button
-                    id="toClipboard"
-                    class="btn btn-lg btn-info btn-op btn-default zeroclipboard-is-hover"
-                    title="点击复制资源地址到剪贴板中"
-                    data-clipboard-text="http://tjcdn.shec.edu.cn/20171113/fb608b8f-9781-4e09-a95c-e08539a7ee82/“《好脏的哈利——九宫格翻翻书》绘本延伸美术活动材料包”的运用（1080P）.mp4"
-                  >
-                    <i class="fa fa-copy"></i>
-                    复制地址
-                  </button> -->
+                    <i class="fa fa-download"></i> 下 载
+                  </el-button>
                 </div>
               </div>
 
@@ -69,46 +79,19 @@
                   <div class="boxes">
                     <div class="half left">
                       <div>
-                        <!-- <p><strong class="score">5</strong></p>
-                                    -->
                         <p>共有 2 人参与了评价</p>
                       </div>
                     </div>
                     <div class="half right">
-                      <!-- <ul class="bars">
-									<li>5分 <div class="bar"><div class="val" style="width:100%}"></div></div> 2 人</li>
-									<li>4分 <div class="bar"><div class="val" style="width:0%}"></div></div> 0 人</li>
-									<li>3分 <div class="bar"><div class="val" style="width:0%}"></div></div> 0 人</li>
-									<li>2分 <div class="bar"><div class="val" style="width:0%}"></div></div> 0 人</li>
-									<li>1分 <div class="bar"><div class="val" style="width:0%}"></div></div> 0 人</li>
-								</ul> -->
                       <el-progress
-                        :text-inside="true"
-                        :stroke-width="26"
-                        :percentage="70"
-                        class="m_10_bottom"
-                      ></el-progress>
-                      <p></p>
-                      <el-progress
+                        v-for="i in [0, 1, 2, 3, 4]"
+                        :key="i"
+                        :format="progressFormats[i]"
                         :text-inside="true"
                         :stroke-width="24"
-                        :percentage="100"
+                        :percentage="10"
                         class="m_10_bottom"
-                        status="success"
-                      ></el-progress>
-                      <el-progress
-                        :text-inside="true"
-                        :stroke-width="22"
-                        :percentage="80"
-                        class="m_10_bottom"
-                        status="warning"
-                      ></el-progress>
-                      <el-progress
-                        :text-inside="true"
-                        :stroke-width="20"
-                        :percentage="50"
-                        class="m_10_bottom"
-                        status="exception"
+                        :color="progressColors[i]"
                       ></el-progress>
                     </div>
                   </div>
@@ -116,45 +99,51 @@
                 </div>
 
                 <div class="board first">
-                  <p><span>关 键 字： 绘本、延伸活动、美术 </span></p>
                   <p>
-                    <span>资源类型： 教学实录</span><span>媒体格式： 视频</span>
+                    <span>关 键 字： {{ resource.keywords }} </span>
                   </p>
                   <p>
-                    <span>上传日期： 2017/11/13</span
-                    ><span>浏览次数： 6426 次</span>
+                    <span>资源类型： {{ resource.resourceType }}</span
+                    ><span>媒体格式： {{ resource.mediumType }}</span>
+                  </p>
+                  <p>
+                    <span>上传日期： {{ resource.addTime }}</span
+                    ><span>浏览次数： {{ resource.viewCount }} 次</span>
                   </p>
 
-                  <p><span>收藏次数： 7</span><span>下载次数： 1 次</span></p>
+                  <p>
+                    <span>收藏次数： {{ resource.favoriteCount }}</span
+                    ><span>下载次数： {{ resource.downloadCount }} 次</span>
+                  </p>
 
                   <p></p>
                 </div>
                 <div class="board">
                   <p>
-                    绘本延伸美术活动，是以绘本为载体，选取绘本故事中的情节、画面等元素进行设计的美术活动。根据绘本《好脏的哈利》所设计的《好脏的哈利——九宫格翻翻书》，由9幅图画组成，每一幅图画代表绘本故事中的一个情节，学生需要在阅读绘本后，根据书中内容完成9幅图画的绘制与句子填写，并进行剪裁、翻折与封面设计，最后完成属于自己的小绘本。在此过程中帮助学生发展语言表达能力，提升双手动作的精确性。
-                    本视频包含：1、美术活动材料包内容介绍；2、材料包的使用方法演示；3、材料包使用注意事项。
+                    {{ resource.description }}
                   </p>
                   <h3>详细属性</h3>
                 </div>
                 <div class="board">
                   <p>
-                    <span>残疾类别： 智力残疾</span
-                    ><span>学　　段： 义务教育</span>
+                    <span>残疾类别： {{ resource.deformity }}</span
+                    ><span>学　　段： {{ resource.stage }}</span>
                   </p>
                   <p>
-                    <span>领　　域： 课程与教学</span
-                    ><span>年　　级： 小学段</span>
+                    <span>领　　域： {{ resource.domain }}</span
+                    ><span>年　　级： {{ resource.grade }}</span>
                   </p>
                   <p>
-                    <span>安置形式： 随班就读</span
-                    ><span>学校类别： 普通学校</span>
+                    <span>安置形式： {{ resource.learnFrom }}</span
+                    ><span>学校类别： {{ resource.schoolType }}</span>
                   </p>
                   <p>
-                    <span>学　　科： 艺术</span><span>作　　者： 仇佩琦</span>
+                    <span>学　　科： {{ resource.subject }}</span
+                    ><span>作　　者： {{ resource.author }}</span>
                   </p>
                   <p>
-                    <span>单　　位： 虹口区特殊教育指导中心</span
-                    ><span>地　　址： 虹口区天宝西路242弄40号</span>
+                    <span>单　　位： {{ resource.authorCompany }}</span
+                    ><span>地　　址： {{ resource.author }}</span>
                   </p>
                 </div>
               </div>
@@ -164,42 +153,26 @@
                   <h3>您的评论</h3>
                   <textarea></textarea>
                   <div class="comment_num">240</div>
-                  <el-button type="info" disabled="disabled">
+                  <el-button
+                    type="info"
+                    disabled="disabled"
+                    v-if="isLogin == false"
+                  >
                     登录后可发表评论
                   </el-button>
+                  <el-button type="primary" v-else> 提交评论 </el-button>
                 </div>
 
                 <div class="comment_count">
-                 <el-tag type="danger" class="font14"><i class="el-icon-info"></i> 共 <strong>3</strong> 条评论</el-tag>
-                </div>
-                <div class="comment_list">
-                  <list :source="[1, 2, 3,]">
-                    <template>
-                      <img
-                          class="cover"
-                          src="http://tjcdn.shec.edu.cn/demo/7.jpg"
-                          style="height: 100px"
-                      />
-                      <div class="details">
-                        <p class="font14"><el-tag>杨美玲</el-tag> 发表于： <el-tag type="success">2019/9/12</el-tag></p>
-                       <br />
-                        <p class="snippet">
-                          随着特殊教育的“零拒绝”的发展，越来越多的中、重度甚至极重度智障儿童进入学校。由于智障学生认知水平和语言能力的缺陷，他们
-                          ...
-                        </p>
-                      </div>
-                    </template>
-                  </list>
-                </div>
-                <!-- <div class="comment_more">
-                  <button
-                    id="getmore"
-                    class="btn btn-op btn-default"
-                    disabled=""
+                  <el-tag type="danger" class="font14"
+                    ><i class="el-icon-info"></i> 共
+                    <strong>{{ resource.commentCount }}</strong> 条评论</el-tag
                   >
-                    加载更多评论
-                  </button>
-                </div> -->
+                </div>
+
+                <div class="comment_list">
+                  <CommentList></CommentList>
+                </div>
               </div>
             </div>
           </div>
@@ -215,76 +188,7 @@
           </p>
 
           <div class="body">
-            <ul class="compact_list">
-              <li>
-                <a href="/Resource/View/1333"
-                  ><span class="square">1</span> 解决问题的策略——转化</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1334"
-                  ><span class="square">2</span>
-                  认知数学《认识整点》（课堂实录）</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1335"
-                  ><span class="square">3</span> 我的学校</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1332"><span>4</span> 荷叶圆圆</a>
-              </li>
-              <li>
-                <a href="/Resource/View/1553"
-                  ><span>5</span> 品德与社会《绿色的呼唤》</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1336"><span>6</span> 有序数对</a>
-              </li>
-              <li>
-                <a href="/Resource/View/5480"
-                  ><span>7</span>
-                  “《好脏的哈利——九宫格翻翻书》绘本延伸美术活动材料包”的运用</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1330"
-                  ><span>8</span> 表情表情我知道（教学实录）</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/283"
-                  ><span>9</span> 实用数学《时分的认识》</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/5476"
-                  ><span>10</span>
-                  “《我妈妈——拎包式立体贺卡》绘本延伸美术活动材料包”的运用</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/276"
-                  ><span>11</span> 《荷花》——聋校语文教学实录</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1382"><span>12</span> 面积的估测</a>
-              </li>
-              <li>
-                <a href="/Resource/View/1347"
-                  ><span>13</span> 六面体的平行透视</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1378"><span>14</span> 掷数点块</a>
-              </li>
-              <li>
-                <a href="/Resource/View/1337"><span>15</span> 圆的面积</a>
-              </li>
-            </ul>
+            <TopList></TopList>
           </div>
         </div>
         <!--  relative  resource list end -->
@@ -294,7 +198,9 @@
           <p class="panel_title">
             <span><i class="el-icon-user-solid"></i> 热门资源</span>
           </p>
-          <div>右侧列表</div>
+          <div class="body">
+            <TopList></TopList>
+          </div>
         </div>
         <!--  relative  resource list end -->
       </el-col>
@@ -302,17 +208,105 @@
   </div>
 </template>
 <script>
-import list from "@/components/List";
+import CommentList from "@/app/views/site/comment/components/List/index";
+import TopList from "@/app/views/site/resource/components/TopList/index";
+import { resourceModel, videoOptions } from "@/app/models/resource";
+import { appEnum } from "@/app/static/enum";
+import { list, info } from "@/app/api/resource";
+import { commentList,commentEdit } from "@/app/api/comment";
+import { downloadFile } from "@/static/file";
 
 export default {
-  components: { list },
+  components: { CommentList, TopList },
 
   data() {
     return {
       value1: null,
       value2: null,
-      colors: ["#99A9BF", "#F7BA2A", "#FF9900"], // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
+      colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
+      resource: resourceModel,
+      appEnum: appEnum,
+      progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],
+      progressIndex: 0,
+      progressFormats: [],
+      relativeResources: [],
+      topVisitResources: [],
+      isLogin: false
     };
+  },
+
+  mounted() {
+    this.isLogin = this.$store.state.app.isAuth;
+
+    this.loadResourceInfo();
+    this.loadTopVisitResourceList();
+    this.loadTopVisitResourceList();
+
+    let totalCount = 8;
+    this.progressFormats.push(function (percentage) {
+      return "5分：" + 1 + "人";
+    });
+    this.progressFormats.push(function (percentage) {
+      return "4分：" + 1 + "人";
+    });
+    this.progressFormats.push(function (percentage) {
+      return "3分：" + 0 + "人";
+    });
+    this.progressFormats.push(function (percentage) {
+      return "2分：" + 0 + "人";
+    });
+    this.progressFormats.push(function (percentage) {
+      return "1分：" + 0 + "人";
+    });
+  },
+
+  methods: {
+    loadResourceInfo() {
+      let id = this.$router.currentRoute.params.id;
+      info(id).then((res) => {
+        if (res) {
+          this.resource = JSON.parse(res.data);
+          this.resource.isVedio =
+            resource.fileExtName.indexOf(appEnum.fileExtNames.video) >= 0;
+          console.log(this.resource.coverPath);
+        }
+      });
+    },
+
+    loadTopVisitResourceList() {},
+
+    loadRelativeResourceList() {},
+
+    loadComments() {},
+
+    handleImageError() {
+      let img = event.srcElement;
+      img.src = CDN.DEFAULT_COVER;
+      img.onerror = null; //防止闪图
+    },
+
+    handleScore() {
+      if (!this.isLogin) {
+        this.$notification.error({ message: "haha" });
+      }
+    },
+
+    handleFavorite() {
+      if (!this.isLogin) {
+        this.$notification.error({ message: "haha" });
+      }
+    },
+
+    handleSendComment() {},
+
+    handleDownload(fileName, path) {
+      if (!this.isLogin) {
+        this.$notification.error({ message: "haha" });
+      }
+      else{
+      downloadFile(fileName, path);
+      }
+    },
   },
 };
 </script>

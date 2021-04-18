@@ -1,31 +1,45 @@
 <template>
   <div>
-
     <!-- list start -->
     <div class="list" v-if="listType == 'list'">
       <div class="list_square" v-for="(item, index) in source" :key="index">
-        <slot v-bind:item="item"></slot>
+        <slot name="item" :item="item"></slot>
       </div>
     </div>
     <!-- list end -->
 
-  <!-- block list start -->
-    <div class="list" v-if="listType == 'blockList'">
-      <el-row>
+    <!-- block custom list start -->
+    <div class="list" v-if="listType == 'blockCustomList'">
+      <el-row :gutter="20">
         <el-col
-          :md="10"
-          :lg="8"
+          :span="6"
           v-for="(item, index) in source"
           :key="index"
           class="p_20"
         >
-          <el-card :body-style="{ padding: '0px' }" >
-            <slot v-bind:item="item"></slot>
-          </el-card>
-        </el-col> </el-row>
+          <slot name="item" :item="item"></slot>
+        </el-col>
+      </el-row>
     </div>
-     <!-- block list end -->
-     
+    <!-- block  list end -->
+
+    <!-- block list start -->
+    <div class="list" v-if="listType == 'blockList'">
+      <el-row :gutter="20">
+        <el-col
+          :span="8"
+          v-for="(item, index) in source"
+          :key="index"
+          class="p_20"
+        >
+          <el-card :body-style="{ padding: '0px' }" v-if="isUseCard">
+            <slot name="item" :item="item"></slot>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+    <!-- block list end -->
+
     <div class="outer">
       <el-pagination
         v-show="isShowPage"
@@ -49,11 +63,11 @@ export default {
 
   props: {
     listType: { type: String, default: "list" },
-    source: { type: Array, default: [] },
+    source: { type: Array, default: () => [] },
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
-    isShowPage:false
+    isShowPage: false,
   },
 
   data() {

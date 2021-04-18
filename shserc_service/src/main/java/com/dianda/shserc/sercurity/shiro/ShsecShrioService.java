@@ -118,8 +118,23 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/role/list*" , "anon" );
 		
 		filterRuleMap.put ( "/company/*" , "jwt" );
+		
 		filterRuleMap.put ( "/resource/*" , "anon" );
-		filterRuleMap.put ( "/resource/edit" , "jwt" );
+		filterRuleMap.put ( "/resource/edit/*" , "jwt" );
+		filterRuleMap.put ( "/resource/favorite/*" , "jwt" );
+		filterRuleMap.put ( "/resource/star/*" , "jwt" );
+		filterRuleMap.put ( "/resource/download/*" , "jwt" );
+		filterRuleMap.put ( "/resource/comment/*" , "jwt" );
+		filterRuleMap.put ( "/resource/audit/*" , "jwt" );
+		
+		filterRuleMap.put ( "/croResource/*" , "anon" );
+		filterRuleMap.put ( "/croResource/edit/*" , "jwt" );
+		filterRuleMap.put ( "/croResource/favorite/*" , "jwt" );
+		filterRuleMap.put ( "/croResource/star/*" , "jwt" );
+		filterRuleMap.put ( "/croResource/download/*" , "jwt" );
+		filterRuleMap.put ( "/croResource/comment/*" , "jwt" );
+		filterRuleMap.put ( "/croResource/audit/*" , "jwt" );
+		
 		filterRuleMap.put ( "/real/*" , "jwt" );
 		filterRuleMap.put ( "/file/*" , "jwt" );
 		filterRuleMap.put ( "/user/*" , "jwt" );

@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import step1 from "@/app/views/site/account/steps/register/step1.vue";
-import step2 from "@/app/views/site/account/steps/register/step2.vue";
+import step1 from "@/app/views/site/account/components/Steps/register/step1.vue";
+import step2 from "@/app/views/site/account/components/Steps/register/step2.vue";
 
   export default {
     components:{step1,step2},

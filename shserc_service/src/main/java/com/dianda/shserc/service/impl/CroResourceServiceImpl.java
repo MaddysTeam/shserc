@@ -4,26 +4,31 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.dianda.shserc.bean.ResourceSelectParams;
-import com.dianda.shserc.common.Constant;
-import com.dianda.shserc.dto.EditResourceDto;
-import com.dianda.shserc.dto.ResourceAuditDto;
-import com.dianda.shserc.dto.mappers.IResourceAuditMapper;
-import com.dianda.shserc.entity.ResourceOperation;
-import com.dianda.shserc.dto.mappers.IEditResourceMapper;
-import com.dianda.shserc.entity.Resource;
 import com.dianda.common.exceptions.GlobalException;
-import com.dianda.shserc.mapper.ResourceMapper;
-import com.dianda.shserc.service.IResourceService;
 import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.util.basic.StringUtil;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
-import com.dianda.shserc.vo.ResourceVo;
-import com.dianda.shserc.vo.ResourceVoList;
-import com.dianda.shserc.vo.ScoreVo;
-import com.dianda.shserc.vo.ScoreVoList;
+import com.dianda.shserc.bean.CroResourceSelectParams;
+import com.dianda.shserc.bean.ResourceSelectParams;
+import com.dianda.shserc.common.Constant;
+import com.dianda.shserc.dto.EditCroResourceDto;
+import com.dianda.shserc.dto.EditResourceDto;
+import com.dianda.shserc.dto.ResourceAuditDto;
+import com.dianda.shserc.dto.mappers.ICroResourceAuditMapper;
+import com.dianda.shserc.dto.mappers.IEditCroResourceMapper;
+import com.dianda.shserc.dto.mappers.IEditResourceMapper;
+import com.dianda.shserc.dto.mappers.IResourceAuditMapper;
+import com.dianda.shserc.entity.CroResource;
+import com.dianda.shserc.entity.Resource;
+import com.dianda.shserc.entity.ResourceOperation;
+import com.dianda.shserc.mapper.CroResourceMapper;
+import com.dianda.shserc.mapper.ResourceMapper;
+import com.dianda.shserc.service.ICroResourceService;
+import com.dianda.shserc.service.IResourceService;
+import com.dianda.shserc.vo.*;
+import com.dianda.shserc.vo.mappers.ICroResourceVoMapper;
 import com.dianda.shserc.vo.mappers.IResourceScoreVoMapper;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,22 +50,22 @@ import java.util.Map;
 
 @Service
 @Validated
-public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
+public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroResource> implements ICroResourceService {
 	
 	@javax.annotation.Resource
-	ResourceMapper mapper;
+	CroResourceMapper mapper;
 	
 	DictionaryCache cache;
 	
 	@Autowired
-	public ResourceServiceImpl( DictionaryCache cache ) {
+	public CroResourceServiceImpl( DictionaryCache cache ) {
 		this.cache = cache;
 		this.cache.setCacheFromService ( 0 );
 	}
 	
 	@Override
-	public ResourceVoList find( ResourceSelectParams params ) {
-		QueryWrapper<Resource> wrapper = new QueryWrapper<> ( );
+	public CroResourceVoList find( CroResourceSelectParams params ) {
+		QueryWrapper<CroResource> wrapper = new QueryWrapper<> ( );
 		long userId = params.getUserId ( );
 		long deformityId = params.getDeformityId ( );
 		long stateId = params.getStateId ( );
@@ -109,8 +114,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		// order phrase
 		if ( ! ObjectUtil.isNull ( orderPhrases ) && orderPhrases.size ( ) > 0 ) {
 			for ( Map.Entry<String, String> entry : orderPhrases.entrySet ( ) ) {
-				String direction = entry.getValue ( );
 				String orderPhrase = params.translateOrderPhrase ( entry.getKey ( ) );
+				String direction = entry.getValue ( );
 				if ( direction.equals ( Constant.OrderDirection.ASC ) ) {
 					wrapper = wrapper.orderByAsc ( orderPhrase );
 				} else if ( direction.equals ( Constant.OrderDirection.DESC ) ) {
@@ -125,67 +130,67 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		
 		int current = params.getCurrent ( );
 		int size = params.getSize ( );
-		IPage<Resource> page = new Page<> ( current , size );
-		page = mapper.selectResources ( page , wrapper );
-		List<Resource> resources = page.getRecords ( );
-		List<ResourceVo> resourceVoList = new ArrayList<> ( );
+		IPage<CroResource> page = new Page<> ( current , size );
+		page = mapper.selectCroResources ( page , wrapper );
+		List<CroResource> resources = page.getRecords ( );
+		List<CroResourceVo> croResourceVoList = new ArrayList<> ( );
 		
 		// translate
 		
-		for ( Resource res : resources ) {
-			Resource.dictTranslate ( res , cache ); // 翻译字典
-			ResourceVo vo = IResourceVoMapper.INSTANCE.mapFrom ( res );
+		for ( CroResource res : resources ) {
+			CroResource.dictTranslate ( res , cache ); // 翻译字典
+			CroResourceVo vo = ICroResourceVoMapper.INSTANCE.mapFrom ( res );
 			vo.setGrade ( res.getGrade ( ) );
 			vo.setSubject ( res.getSubject ( ) );
-			resourceVoList.add ( vo );
+			croResourceVoList.add ( vo );
 		}
 		
 		// get vo list data
 		
-		ResourceVoList voList = new ResourceVoList ( );
+		CroResourceVoList voList = new CroResourceVoList ( );
 		voList.setCurrent ( current );
 		voList.setSize ( size );
 		voList.setTotal ( page.getTotal ( ) );
 		
 		if ( ! ObjectUtil.isNull ( resources ) && resources.size ( ) > 0 )
-			voList.setListData ( resourceVoList );
+			voList.setListData ( croResourceVoList );
 		
 		return voList;
 	}
 	
 	@Override
-	public boolean edit( @Valid @NotNull EditResourceDto editResourceDto ) {
-		Resource resource = IEditResourceMapper.INSTANCE.mapFrom ( editResourceDto );
-		ResourceVo resourceVo = findById ( resource.getId ( ) );
-		if ( resource.isNewOne ( ) && ObjectUtil.isNull ( resourceVo ) ) {
-			resource.setAddTime ( editResourceDto.getOperateDate ( ) );
-			resource.setAddUser ( editResourceDto.getId ( ) );
+	public boolean edit( @Valid @NotNull EditCroResourceDto editCroResourceDto ) {
+		CroResource croResource = IEditCroResourceMapper.INSTANCE.mapFrom ( editCroResourceDto );
+		CroResourceVo croResourceVo = findById ( croResource.getId ( ) );
+		if ( croResource.isNewOne ( ) && ObjectUtil.isNull ( croResourceVo ) ) {
+			croResource.setAddTime ( editCroResourceDto.getOperateDate ( ) );
+			croResource.setAddUser ( editCroResourceDto.getId ( ) );
 			
-			return mapper.insert ( resource ) > 0;
+			return mapper.insert ( croResource ) > 0;
 		} else {
-			resource.setUpdateTime ( editResourceDto.getOperateDate ( ) );
-			resource.setUpdateUser ( editResourceDto.getId ( ) );
+			croResource.setUpdateTime ( editCroResourceDto.getOperateDate ( ) );
+			croResource.setUpdateUser ( editCroResourceDto.getId ( ) );
 			
-			return mapper.updateById ( resource ) >= 0;
+			return mapper.updateById ( croResource ) >= 0;
 		}
 	}
 	
 	@Override
 	public boolean audit( @Valid @NotNull ResourceAuditDto model ) {
-		Resource resource = IResourceAuditMapper.INSTANCE.mapFrom ( model );
-		resource.setStateId ( model.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
+		CroResource croResource = ICroResourceAuditMapper.INSTANCE.mapFrom ( model );
+		croResource.setStateId ( model.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
 		
-		return mapper.updateById ( resource ) >= 0;
+		return mapper.updateById ( croResource ) >= 0;
 	}
 	
 	@Override
-	public ResourceVo findById( long id ) {
+	public CroResourceVo findById( long id ) {
 		try {
-			Resource resource = mapper.selectById ( id );
-			Resource.dictTranslate ( resource , cache ); // 翻译字典
-			ResourceVo vo = IResourceVoMapper.INSTANCE.mapFrom ( resource );
-			vo.setGrade ( resource.getGrade ( ) );
-			vo.setSubject ( resource.getSubject ( ) );
+			CroResource croResource = mapper.selectById ( id );
+			CroResource.dictTranslate ( croResource , cache ); // 翻译字典
+			CroResourceVo vo = ICroResourceVoMapper.INSTANCE.mapFrom ( croResource );
+			vo.setGrade ( croResource.getGrade ( ) );
+			vo.setSubject ( croResource.getSubject ( ) );
 			
 			return vo;
 		} catch ( Exception e ) {
@@ -197,24 +202,24 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Transactional( readOnly = false, rollbackFor = GlobalException.class )
 	@SystemLog()
 	public boolean addViewCount( @Valid @NotNull ResourceOperation resourceOperation ) {
-		Resource resource = mapper.selectById ( resourceOperation.getResourceId ( ) );
-		if ( ObjectUtil.isNull ( resource ) ) {
+		CroResource croResource = mapper.selectById ( resourceOperation.getResourceId ( ) );
+		if ( ObjectUtil.isNull ( croResource ) ) {
 			return false;
 		}
 		
-		resource.addViewCount ( );
-		return mapper.updateById ( resource ) + mapper.addView ( resourceOperation ) == 2;
+		croResource.addViewCount ( );
+		return mapper.updateById ( croResource ) + mapper.addView ( resourceOperation ) == 2;
 	}
 	
 	@Override
 	public boolean addDownloadCount( @Valid @NotNull ResourceOperation resourceOperation ) {
-		Resource resource = mapper.selectById ( resourceOperation.getResourceId ( ) );
-		if ( ObjectUtil.isNull ( resource ) ) {
+		CroResource croResource = mapper.selectById ( resourceOperation.getResourceId ( ) );
+		if ( ObjectUtil.isNull ( croResource ) ) {
 			return false;
 		}
 		
-		resource.addDownloadCount ( );
-		return mapper.updateById ( resource ) + mapper.addDownload ( resourceOperation ) == 2;
+		croResource.addDownloadCount ( );
+		return mapper.updateById ( croResource ) + mapper.addDownload ( resourceOperation ) == 2;
 	}
 	
 	@Override
@@ -229,18 +234,18 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long userId = resourceOperation.getUserId ( );
 		long resourceId = resourceOperation.getResourceId ( );
 		
-		Resource resource = mapper.selectById ( resourceId );
-		if ( ObjectUtil.isNull ( resource ) ) return false;
+		CroResource croResource = mapper.selectById ( resourceId );
+		if ( ObjectUtil.isNull ( croResource ) ) return false;
 		
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
 		wrapper.eq ( "resource_id" , userId ).eq ( "resource_id" , resourceId );
 		List<ResourceOperation> list = mapper.selectFavorite ( wrapper );
 		if ( ObjectUtil.isNull ( list ) || list.size ( ) <= 0 ) {
-			resource.addFavoriteCount ( );
-			return mapper.updateById ( resource ) + mapper.addFavorite ( resourceOperation ) == 2;
+			croResource.addFavoriteCount ( );
+			return mapper.updateById ( croResource ) + mapper.addFavorite ( resourceOperation ) == 2;
 		} else {
-			resource.deleteFavoriteCount ( );
-			return mapper.updateById ( resource ) + mapper.deleteFavorite ( resourceOperation ) == 2;
+			croResource.deleteFavoriteCount ( );
+			return mapper.updateById ( croResource ) + mapper.deleteFavorite ( resourceOperation ) == 2;
 		}
 	}
 	
@@ -250,11 +255,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		long userId = resourceOperation.getUserId ( );
 		long resourceId = resourceOperation.getResourceId ( );
 		
-		Resource resource = mapper.selectById ( resourceId );
-		if ( ObjectUtil.isNull ( resource ) ) return false;
+		CroResource croResource = mapper.selectById ( resourceId );
+		if ( ObjectUtil.isNull ( croResource ) ) return false;
 		
-		resource.addStarCount ( resourceOperation.getOperIntResult ( ) );
-		return mapper.updateById ( resource ) + mapper.addStar ( resourceOperation ) == 2;
+		croResource.addStarCount ( resourceOperation.getOperIntResult ( ) );
+		return mapper.updateById ( croResource ) + mapper.addStar ( resourceOperation ) == 2;
 	}
 	
 	@Override

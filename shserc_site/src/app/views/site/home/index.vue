@@ -26,7 +26,7 @@
 
           <div class="body">
 
-            <ResourceBlockList :coverWidth="184" :coverHeight="120"></ResourceBlockList> 
+            <ResourceBlockList :coverWidth="184" :coverHeight="120" :source="topFavoriteResources"></ResourceBlockList> 
 
           </div>
         </div>
@@ -37,21 +37,26 @@
 
           <div class="body">
 
-             <ResourceList></ResourceList>
+             <ResourceList :source="topVisitResources"></ResourceList>
 
           </div>
         </div>
       </el-col>
       <!-- recommand  resource area end -->
 
-      <!-- login area start -->
-      <el-col :span="8" style="margin-left: 4%">
-        <div class="block_panel">
-          <p class="panel_title">
-            <span><i class="el-icon-user-solid"></i> 用户登录</span>
+     
+      <el-col style="margin-left: 20px;width:411px">
+
+         <!-- login area start -->
+        <div class="block_panel" >
+          <p class="panel_title flex_space_between">
+            <span v-if="isLogin"><i class="el-icon-user-solid"></i> 用户登录</span>
+            <span v-if="!isLogin"><i class="el-icon-user-solid"></i> 欢迎您，{{ account.userName}}</span>
+             <el-avatar :size="50" :src="account.photoPath"></el-avatar>
           </p>
           <div>
-            <el-form ref="form" :model="loginModel">
+            <!-- login form start-->
+            <el-form ref="form" :model="loginModel" v-if="isLogin">
               <el-form-item prop="userName">
                 <el-input
                   prefix-icon="el-icon-search"
@@ -91,35 +96,101 @@
                 </div>
               </el-form-item>
             </el-form>
+            <!-- login form stop -->
+
+            <!-- login info start-->
+            <div v-if="!isLogin" class="text_align_left font14">
+                 <div><i class="el-icon-time"></i> 您上次的登录时间：2020-12-1  </div>
+                 <p></p>
+                 <div><i class="el-icon-s-custom"></i> <router-link to="/account/space" class="link">进入我的中心</router-link></div>
+                  <p></p>
+                 <div><i class="el-icon-info"></i> 退出我的登录</div>
+
+                  <div class="m_10_top">
+                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
+                    <el-progress type="circle" :percentage="100"  :width=60></el-progress>
+                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
+                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
+                  </div>
+               
+            </div>
+            <!-- login info stop-->
           </div>
         </div>
-      </el-col>
-      <!-- login area end -->
+         <!-- login area end -->
 
-      <!-- activity user list start -->
-      <el-col :span="8" style="margin-left: 4%">
-        <div class="block_panel">
+          <div class="block_panel">
+          <!-- <p class="panel_title">
+            <span><i class="el-icon-headset"></i> 众筹资源</span>
+          </p> -->
+         
+        </div>
+
+           <!-- activity user list start -->
+         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-headset"></i> 活跃用户</span>
           </p>
+          <ActivityUserList listType="blockCustomList" :source="[1,2,3,45,1,2,3,45]">
+             <template slot="item">
+                   <el-avatar :src="account.photoPath" :size="40"></el-avatar>
+                   <div>xx</div>
+             </template>
+          </ActivityUserList>
         </div>
+          <!-- activity user list end -->
+
+            <!-- activity user list start -->
+         <div class="block_panel">
+          <p class="panel_title">
+            <span><i class="el-icon-chat-round"></i> 消息公告</span>
+          </p>
+           <div>
+        <ul class="compact_list">
+              <li>
+                <a href="/Resource/View/1333"
+                  ><span class="square">1</span> 公告1</a
+                >
+              </li>
+              <li>
+                <a href="/Resource/View/1334"
+                  ><span class="square">2</span>
+                 公告2</a
+                >
+              </li>
+              <li>
+                <a href="/Resource/View/1335"
+                  ><span class="square">3</span> 公告3</a
+                >
+              </li>
+              <li>
+                <a href="/Resource/View/1332"><span>4</span> 公告4</a>
+              </li>
+
+            </ul>
+    </div>
+        </div>
+          <!-- activity user list end -->
+
       </el-col>
     </el-row>
-    <!-- activity user list end -->
+   
 
-    <el-row class="p_30">
-      <el-select style="width: 60%">
+   <el-row class="p_30">
+      <el-select style="width: 60%" v-model="friendSites">
         <el-option
           v-for="i in [1, 2, 3, 4, 5]"
           value-key="i"
           :key="i"
+          :value="i"
         ></el-option>
       </el-select>
-    </el-row>
+    </el-row> 
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { selectParam, orderPhrasesModel } from "@/app/models/resource";
 import { list } from "@/app/api/resource";
 import searchArea from "@/app/views/site/resource/components/SearchArea";
@@ -128,31 +199,42 @@ import { deepCopy } from "@/app/utils/objectHelper";
 import { DESC } from "@/app/static/type";
 import ResourceList from "@/app/views/site/resource/components/List";
 import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
+import ActivityUserList from "@/components/List/index"
 
 export default {
-  components: { searchArea ,ResourceList,ResourceBlockList},
+  components: { searchArea ,ResourceList,ResourceBlockList,ActivityUserList},
   data() {
     return {
       loginModel: loginModel,
-      selectParam: deepCopy(selectParam),
+      selectParam: selectParam,
       topFavoriteResources: [],
       topVisitResources: [],
       topCommentResources: [],
       topDownloadResources: [],
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
+      friendSites:[]
     };
+  },
+
+   computed:{
+    ...mapState({
+        isLogin:(state)=>state.app.isAuth,
+        account: (state)=>state.app.account
+    })
   },
 
   mounted() {
     this.loadTopFavoriteResources();
+    this.loadTopVisitResource();
   },
 
   methods: {
     loadTopFavoriteResources() {
-      selectParam.size = 6; // get top 12 favorite resources
-      selectParam.orderPhrases[orderPhrasesModel.favorite] = DESC;
-      list(selectParam).then((res) => {
+      let param=deepCopy(selectParam);
+      param.size = 6; // get top 12 favorite resources
+      param.orderPhrases[orderPhrasesModel.favoriteCount] = DESC;
+      list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.topFavoriteResources = data.listData ? data.listData : [];
@@ -162,7 +244,17 @@ export default {
 
     loadTopCommentResource() {},
 
-    loadTopVisitResource() {},
+    loadTopVisitResource() {
+      let param=deepCopy(selectParam);
+      param.size = 4; // get top 12 favorite resources
+      param.orderPhrases[orderPhrasesModel.viewCount] = DESC;
+      list(param).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          this.topVisitResources = data.listData ? data.listData : [];
+        }
+      });
+    },
 
     loadTopDownloadResource() {},
 

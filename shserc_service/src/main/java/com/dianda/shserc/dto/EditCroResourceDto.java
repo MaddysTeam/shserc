@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class EditResourceDto extends BaseDto {
+public class EditCroResourceDto extends BaseDto {
 
 	private long id;
 	

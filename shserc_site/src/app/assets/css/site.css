@@ -13,6 +13,11 @@
     text-decoration: none;
 }
 
+.site button,
+.site span {
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+
 .site_container {
     margin-left: auto;
     margin-right: auto;
@@ -40,6 +45,80 @@
 .bk_gray {
     background-color: #f4f4f4;
     /* padding-bottom: 56px; */
+}
+
+
+/*-------------------------layout header----------------------*/
+
+.appHeader {
+    background-clip: content-box;
+}
+
+.appHeader {
+    -webkit-box-shadow: 0 1px 3px rgba(18, 18, 18, 0.1);
+    box-shadow: 0 1px 3px rgba(18, 18, 18, 0.1);
+}
+
+.appHeader {
+    position: relative;
+    z-index: 100;
+    min-width: 800px;
+    /* overflow: hidden; */
+    background: #fff;
+    /* margin:0 auto; */
+    height: 55px;
+}
+
+.appHeader-inner {
+    min-width: 800px;
+    position: fixed;
+    z-index: 1002;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+}
+
+.appHeader ul,
+menu,
+dir {
+    list-style-type: none;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+    margin-top: 20px;
+}
+
+.appHeader ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.appHeader .el-button {
+    border: 0px;
+}
+
+.appHeader .img_header {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.appHeader .search .searchBox {
+    position: relative;
+    width: 250px;
+}
+
+.appHeader .search .searchButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 20%;
 }
 
 
@@ -233,6 +312,7 @@ button {
     font-size: 20px;
     line-height: 60px;
     margin: 0px;
+    text-align: left;
 }
 
 .res_details .filetype div {
@@ -245,13 +325,14 @@ button {
 }
 
 .res_details .opbar {
-    line-height: 70px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.res_details .opbar:after {
-    display: table;
-    content: "";
-    clear: both;
+.res_details .opbar .stars {
+    display: flex;
+    justify-content: space-between;
 }
 
 .res_details .eval_star {
