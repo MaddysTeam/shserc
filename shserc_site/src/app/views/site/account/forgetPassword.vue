@@ -9,13 +9,13 @@
 
     <!-- step 1 page start -->
     <div class="step1" v-show="active == 0">
-      <step1 @nextClick="next()"></step1>
+      <Step1 @nextClick="next()"></Step1>
     </div>
     <!-- step 1 page end -->
 
     <!-- step 2 page start -->
     <div class="step2" v-show="active == 1">
-      <step2 @nextClick="next()" @previousClick="previous()"></step2>
+       <Step2 @nextClick="next()" @previousClick="previous()"></Step2> 
     </div>
     <!-- step 2 page end -->
 
@@ -23,11 +23,11 @@
 </template>
 
 <script>
-import step1 from "@/app/views/site/account/steps/forgetPassword/step1.vue";
-import step2 from "@/app/views/site/account/steps/forgetPassword/step2.vue";
+import Step1 from "@/app/views/site/account/components/Steps/forgetPassword/step1.vue";
+import Step2 from "@/app/views/site/account/components/Steps/forgetPassword/step2.vue";
 
 export default {
-  components: { step1, step2 },
+ components: { Step1,Step2 },
 
   data() {
     return {

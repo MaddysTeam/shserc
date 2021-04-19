@@ -32,6 +32,7 @@ import { selectParam } from "@/app/models/resource.js";
 import SearchArea from "@/app/views/site/resource/components/SearchArea";
 import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
 import ResourceList from "@/app/views/site/resource/components/List";
+import {deepCopy} from "@/app/utils/objectHelper";
 export default {
   components: { SearchArea, ResourceBlockList, ResourceList },
 
