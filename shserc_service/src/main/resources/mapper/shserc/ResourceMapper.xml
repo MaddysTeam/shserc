@@ -56,6 +56,10 @@
         delete from res_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
     </delete>
 
+    <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
+         insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+    </insert>
+
     <select id="selectFavorite" resultType="com.dianda.shserc.entity.ResourceOperation">
         select
         resource_id,
@@ -76,9 +80,5 @@
             ${ew.sqlSegment}
         </where>
     </select>
-
-    <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
-         insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
-    </insert>
 
 </mapper>

@@ -38,5 +38,5 @@ public interface IResourceService extends IService<Resource> {
 	boolean setStar(@Valid @NotNull ResourceOperation param);
 	
 	ScoreVoList findStars(@Valid long resourceId);
-
+	
 }

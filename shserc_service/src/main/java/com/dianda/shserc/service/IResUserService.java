@@ -28,5 +28,5 @@ public interface IResUserService extends IService<ResUser> {
 	ResUserVo getByNameAndPassword(String userName,String password);
 	
 	Boolean editUserRole(EditUserRoleDto model);
-
+	
 }

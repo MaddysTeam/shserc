@@ -2,22 +2,23 @@ export const loginModel = {
     name: "",
     password: "",
     isAble: true
-} 
+}
 
-export const changePasswordModel={
+export const changePasswordModel = {
     userName: "",
     oldPassword: "",
     newPassword: "",
-    confirmPassword:""
+    confirmPassword: ""
 }
 
-export const accountModel={
-    userName:"",
-    photoPath:"",
+export const accountModel = {
+    userId: 0,
+    userName: "",
+    photoPath: "",
     realName: "",
-    idCard:"",
-    mobile:"",
-    companyName:"",
-    companyId:"",
-    email:""
+    idCard: "",
+    mobile: "",
+    companyName: "",
+    companyId: "",
+    email: ""
 }

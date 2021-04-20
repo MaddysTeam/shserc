@@ -248,10 +248,6 @@ const backendRoutes = [
                 path: '/admin/resource/detail/:id',
                 name: 'ResourceDetail',
                 component: ResourceDetail
-            }, {
-                path: '/admin/bulletin/add',
-                name: 'ResourceAdd',
-                component: BulletinEdit
             },
             {
                 path: '/admin/bulletin/edit/:id',

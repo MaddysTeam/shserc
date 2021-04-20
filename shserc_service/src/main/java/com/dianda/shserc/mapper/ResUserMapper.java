@@ -6,7 +6,10 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.dianda.shserc.entity.ResUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dianda.shserc.entity.ResUserRole;
+import com.dianda.shserc.entity.ResourceOperation;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * user mapper interface
@@ -23,5 +26,7 @@ public interface ResUserMapper extends BaseMapper<ResUser> {
 	int insertUserRole(ResUserRole resUserRole);
 
 	int deleteUserRole(ResUserRole resUserRole);
+	
+	List<ResourceOperation> selectOperationCount( long userId);
 
 }

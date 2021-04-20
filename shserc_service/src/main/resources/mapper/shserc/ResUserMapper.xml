@@ -45,4 +45,14 @@
         delete from res_user_role where  user_id= #{userId}
     </delete>
 
+    <select id="selectResourceOperationCount" parameterType="java.lang.Long" resultType="com.dianda.shserc.entity.ResourceOperation">
+         select count(*) as oper_int_result,"view" as oper_string_result from res_view where user_id= #{id}
+         union all
+         select count(*) as oper_int_result,,"favorite" as oper_string_result from res_favorite where user_id= #{id}
+         union all
+         select count(*) as oper_int_result,,"comment" as oper_string_result from res_comment where user_id= #{id}
+         union all
+         select count(*) as oper_int_result,,"download" as oper_string_result from res_download where user_id= #{id}
+    </select>
+
 </mapper>

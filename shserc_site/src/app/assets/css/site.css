@@ -589,3 +589,54 @@ button {
 .page-login .el-input__inner {
     background-color: white;
 }
+
+
+/*-------------------------simple ranking list-------------------------*/
+
+.ranking_square {
+    /* border-bottom: 1px dotted #bfbfbf; */
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.ranking_square img.cover {
+    width: 150px;
+    height: 94px;
+    vertical-align: top;
+}
+
+.ranking_square .details {
+    width: 433px;
+    padding-left: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.ranking_square .details.wide {
+    width: 733px;
+}
+
+.ranking_square .details.downwide {
+    width: 890px;
+}
+
+.ranking_square .restitle {
+    font-size: 16px;
+    color: #338ecf;
+}
+
+.ranking_square .info {
+    color: #666;
+    margin-top: 6px;
+}
+
+.ranking_square .info span {
+    color: #f39800;
+    margin-right: 8px;
+}
+
+.ranking_square .snippet {
+    color: #666;
+    font-size: 10px;
+    margin-top: 6px;
+}

@@ -25,9 +25,11 @@
           </p>
 
           <div class="body">
-
-            <ResourceBlockList :coverWidth="184" :coverHeight="120" :source="topFavoriteResources"></ResourceBlockList> 
-
+            <ResourceBlockList
+              :coverWidth="184"
+              :coverHeight="120"
+              :source="topFavoriteResources"
+            ></ResourceBlockList>
           </div>
         </div>
         <div class="block_panel">
@@ -36,23 +38,25 @@
           </p>
 
           <div class="body">
-
-             <ResourceList :source="topVisitResources"></ResourceList>
-
+            <ResourceList :source="topVisitResources"></ResourceList>
           </div>
         </div>
       </el-col>
       <!-- recommand  resource area end -->
 
-     
-      <el-col style="margin-left: 20px;width:411px">
-
-         <!-- login area start -->
-        <div class="block_panel" >
+      <el-col style="margin-left: 20px; width: 411px">
+        <!-- login area start -->
+        <div class="block_panel">
           <p class="panel_title flex_space_between">
-            <span v-if="isLogin"><i class="el-icon-user-solid"></i> 用户登录</span>
-            <span v-if="!isLogin"><i class="el-icon-user-solid"></i> 欢迎您，{{ account.userName}}</span>
-             <el-avatar :size="50" :src="account.photoPath"></el-avatar>
+            <span v-if="isLogin"
+              ><i class="el-icon-user-solid"></i> 用户登录</span
+            >
+            <span v-if="!isLogin"
+              ><i class="el-icon-user-solid"></i> 欢迎您，{{
+                account.userName
+              }}</span
+            >
+            <el-avatar :size="50" :src="account.photoPath"></el-avatar>
           </p>
           <div>
             <!-- login form start-->
@@ -100,53 +104,86 @@
 
             <!-- login info start-->
             <div v-if="!isLogin" class="text_align_left font14">
-                 <div><i class="el-icon-time"></i> 您上次的登录时间：2020-12-1  </div>
-                 <p></p>
-                 <div><i class="el-icon-s-custom"></i> <router-link to="/account/space" class="link">进入我的中心</router-link></div>
-                  <p></p>
-                 <div><i class="el-icon-info"></i> 退出我的登录</div>
+              <div>
+                <i class="el-icon-time"></i> 您上次的登录时间：2020-12-1
+              </div>
+              <p></p>
+              <div>
+                <i class="el-icon-s-custom"></i>
+                <router-link to="/account/space" class="link"
+                  >进入我的中心</router-link
+                >
+              </div>
+              <p></p>
+              <div><i class="el-icon-info"></i> 退出我的登录</div>
 
-                  <div class="m_10_top">
-                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
-                    <el-progress type="circle" :percentage="100"  :width=60></el-progress>
-                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
-                    <el-progress type="circle" :percentage="100" :width=60></el-progress>
-                  </div>
-               
+              <div class="m_10_top">
+                <el-progress
+                  type="circle"
+                  :percentage="100"
+                  :width="60"
+                ></el-progress>
+                <el-progress
+                  type="circle"
+                  :percentage="100"
+                  :width="60"
+                ></el-progress>
+                <el-progress
+                  type="circle"
+                  :percentage="100"
+                  :width="60"
+                ></el-progress>
+                <el-progress
+                  type="circle"
+                  :percentage="100"
+                  :width="60"
+                ></el-progress>
+              </div>
             </div>
             <!-- login info stop-->
           </div>
         </div>
-         <!-- login area end -->
+        <!-- login area end -->
 
-          <div class="block_panel">
+        <div class="block_panel">
           <!-- <p class="panel_title">
             <span><i class="el-icon-headset"></i> 众筹资源</span>
           </p> -->
-         
         </div>
 
-           <!-- activity user list start -->
-         <div class="block_panel">
+        <!-- activity user list start -->
+        <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-headset"></i> 活跃用户</span>
           </p>
-          <ActivityUserList listType="blockCustomList" :source="[1,2,3,45,1,2,3,45]">
-             <template slot="item">
-                   <el-avatar :src="account.photoPath" :size="40"></el-avatar>
-                   <div>xx</div>
-             </template>
+          <ActivityUserList
+            listType="blockCustomList"
+            :source="[1, 2, 3, 45, 1, 2, 3, 45]"
+          >
+            <template slot="item">
+              <el-avatar :src="account.photoPath" :size="40"></el-avatar>
+              <div>xx</div>
+            </template>
           </ActivityUserList>
         </div>
-          <!-- activity user list end -->
+        <!-- activity user list end -->
 
-            <!-- activity user list start -->
-         <div class="block_panel">
+        <!-- activity user list start -->
+        <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-chat-round"></i> 消息公告</span>
           </p>
-           <div>
-        <ul class="compact_list">
+          <div>
+            <BulltinList listType="list" :source="topBulltins">
+              <template slot="item" slot-scope="bulltin">
+                <li>
+                  <router-link to="/Resource/View/1332"
+                    ><span class="square">1</span> {{ bulltin.item.title }}</router-link
+                  >
+                </li>
+              </template>
+            </BulltinList>
+            <!-- <ul class="compact_list">
               <li>
                 <a href="/Resource/View/1333"
                   ><span class="square">1</span> 公告1</a
@@ -154,8 +191,7 @@
               </li>
               <li>
                 <a href="/Resource/View/1334"
-                  ><span class="square">2</span>
-                 公告2</a
+                  ><span class="square">2</span> 公告2</a
                 >
               </li>
               <li>
@@ -166,43 +202,51 @@
               <li>
                 <a href="/Resource/View/1332"><span>4</span> 公告4</a>
               </li>
-
-            </ul>
-    </div>
+            </ul> -->
+          </div>
         </div>
-          <!-- activity user list end -->
-
+        <!-- activity user list end -->
       </el-col>
     </el-row>
-   
 
-   <el-row class="p_30">
+    <el-row class="p_30">
       <el-select style="width: 60%" v-model="friendSites">
         <el-option
-          v-for="i in [1, 2, 3, 4, 5]"
-          value-key="i"
-          :key="i"
-          :value="i"
+          v-for="site in friendSites"
+          :value-key="site.name"
+          :key="site.id"
+          :value="site.url"
         ></el-option>
       </el-select>
-    </el-row> 
+    </el-row>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { selectParam, orderPhrasesModel } from "@/app/models/resource";
+import { mapState } from "vuex";
+import { selectParam ,orderPhrasesModel} from "@/app/models/resource";
+import { accountModel } from "@/app/models/account";
+import { rseoureBulletinList } from "@/app/api/bulletin";
 import { list } from "@/app/api/resource";
+import { login, logout } from "@/app/api/account";
+import { operationCount } from "@/app/api/my";
 import searchArea from "@/app/views/site/resource/components/SearchArea";
 import { loginModel } from "@/app/models/account";
 import { deepCopy } from "@/app/utils/objectHelper";
 import { DESC } from "@/app/static/type";
 import ResourceList from "@/app/views/site/resource/components/List";
 import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
-import ActivityUserList from "@/components/List/index"
+import ActivityUserList from "@/components/List/index";
+import BulltinList from "@/components/List/index";
 
 export default {
-  components: { searchArea ,ResourceList,ResourceBlockList,ActivityUserList},
+  components: {
+    searchArea,
+    ResourceList,
+    ResourceBlockList,
+    ActivityUserList,
+    BulltinList,
+  },
   data() {
     return {
       loginModel: loginModel,
@@ -211,27 +255,30 @@ export default {
       topVisitResources: [],
       topCommentResources: [],
       topDownloadResources: [],
+      topBulltins: [],
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
-      friendSites:[]
+      friendSites: [],
     };
   },
 
-   computed:{
+  computed: {
     ...mapState({
-        isLogin:(state)=>state.app.isAuth,
-        account: (state)=>state.app.account
-    })
+      isLogin: (state) => state.app.isAuth,
+      account: (state) => (state.app.isAuth ? state.app.account : accountModel),
+    }),
   },
 
   mounted() {
     this.loadTopFavoriteResources();
     this.loadTopVisitResource();
+    this.loadTopActivityUsers();
+    this.loadTopBulltins();
   },
 
   methods: {
     loadTopFavoriteResources() {
-      let param=deepCopy(selectParam);
+      let param = deepCopy(selectParam);
       param.size = 6; // get top 12 favorite resources
       param.orderPhrases[orderPhrasesModel.favoriteCount] = DESC;
       list(param).then((res) => {
@@ -242,10 +289,8 @@ export default {
       });
     },
 
-    loadTopCommentResource() {},
-
     loadTopVisitResource() {
-      let param=deepCopy(selectParam);
+      let param = deepCopy(selectParam);
       param.size = 4; // get top 12 favorite resources
       param.orderPhrases[orderPhrasesModel.viewCount] = DESC;
       list(param).then((res) => {
@@ -256,15 +301,51 @@ export default {
       });
     },
 
-    loadTopDownloadResource() {},
+    loadTopBulltins() {
+      rseoureBulletinList().then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          this.topBulltins = data.listData ? data.listData : [];
+        }
+      });
+    },
 
-    loadActivityUsers() {},
+    loadTopActivityUsers() {
+      
+    },
+
+    loadTopCommentResource() {},
+
+    loadTopDownloadResource() {},
 
     handleSearchResource() {
       this.$router.push("/resource/search");
     },
 
-    handleLogin() {},
+    handleLogin() {
+      login({
+        userName: _this.form.name,
+        password: encrypt(_this.form.password), // encrypt password and  de-encrypt in server side
+      }).then((res) => {
+        Notification.success({ message: "登录成功" });
+        // save login info to store，save dynamic route info to store
+        _this.$store.commit(
+          types.APP + "/" + types.LOGIN,
+          JSON.parse(res.data)
+        );
+
+        // get opeation count record
+        this.account = this.$store.state.app.account;
+        operationCount(account.id);
+      });
+    },
+
+    handleLogout() {
+      logout().then((res) => {
+        this.$store.commit(types.APP + "/" + types.LOGOUT);
+        this.$router.push({ path: "/home/index", replace: true });
+      });
+    },
   },
 };
 </script>

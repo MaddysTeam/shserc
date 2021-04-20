@@ -13,6 +13,6 @@ export function info(id) {
     return axios.post('api/user/' + id);
 }
 
-export function bindUserRole(params){
-    return axios.post('api/user/role/edit',params)
+export function bindUserRole(params) {
+    return axios.post('api/user/role/edit', params)
 }

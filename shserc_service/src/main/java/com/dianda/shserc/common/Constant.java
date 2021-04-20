@@ -55,6 +55,7 @@ public final class Constant {
 		public final static String MENU_ROLE_IS_REQUIRED="必须至少为菜单选择一个角色";
 		
 		// common
+		public final   static String INVALID_ID="ID值必须大于等于0";
 		public final static String PARAMS_IS_INVALID = "传入参数有误";
 		public final static String EDIT_FAILURE = "编辑失败";
 		public final static String OBJECT_IS_REQUIRED = "对象不能为空";

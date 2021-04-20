@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ResUserVo implements Serializable {
-
+	
 	private long id;
 	private String userName;
 	private String photoPath;
@@ -25,8 +25,12 @@ public class ResUserVo implements Serializable {
 	private LocalDateTime registerTime;
 	private LocalDateTime lastLoginTime;
 	private int loginCount;
-
-	private  String token;
-
+	private int favoriteCount;
+	private int downloadCount;
+	private int commentCount;
+	private int viewCount;
+	
+	private String token;
+	
 }
 

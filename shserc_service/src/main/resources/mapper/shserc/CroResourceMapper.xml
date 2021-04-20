@@ -78,7 +78,7 @@
     </select>
 
     <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
-         insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+         insert into res_star values (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
     </insert>
 
 </mapper>
