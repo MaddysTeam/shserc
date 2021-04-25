@@ -36,7 +36,7 @@ public class AccountController extends BaseController {
 	@RequestMapping( value = "/login", method = RequestMethod.POST )
 	public JsonResult login( @RequestBody @Valid @Validated LoginDto loginDto , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( "validate error" );
+			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}
 		
 		//de-encrypt password

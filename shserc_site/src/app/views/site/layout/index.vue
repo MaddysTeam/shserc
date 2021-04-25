@@ -57,7 +57,7 @@
               </li>
               <li role="tab">
                 <router-link
-                  v-if="!isLogin"
+                  v-if="isLogin"
                   to="/account/space"
                   class="font12"
                   :underline="false"
@@ -76,7 +76,7 @@
                 </el-form-item>
               </el-form>
 
-              <el-dropdown :hide-timeout="300" v-if="!isLogin">
+              <el-dropdown :hide-timeout="300" v-if="isLogin">
                  <span>{{ account.userName}}</span>
                 <el-image
                     class="img_header"

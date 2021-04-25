@@ -40,11 +40,11 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 		long auditor = params.getAuditor ( );
 		long resourceId = params.getResourceId ( );
 		long auditTypeId = params.getAuditTypeId ( );
+		long stateId=params.getStateId ();
 		String phrase = params.getSearchPhrase ( );
 
 		// where phrase
-
-		queryWrapper=queryWrapper.eq("is_deleted", 0);
+		
 		if ( resourceId > 0 ) {
 			queryWrapper = queryWrapper.eq ( "resource_id" , resourceId );
 		}
@@ -56,6 +56,9 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 		}
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) ) {
 			queryWrapper = queryWrapper.and ( wrapper -> wrapper.like ( "content" , phrase ) );
+		}
+		if(stateId>0){
+			queryWrapper = queryWrapper.eq ( "rc.state_id" , stateId );
 		}
 		
 		// order phrase

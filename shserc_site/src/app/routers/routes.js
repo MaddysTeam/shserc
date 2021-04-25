@@ -181,7 +181,7 @@ const frontendRoutes = [
                 component: ResourceSearch
             },
             {
-                path: '/resource/details',
+                path: '/resource/details/:id',
                 name: 'ResourceDetails',
                 component: ResourceDetails
             },
@@ -251,6 +251,11 @@ const backendRoutes = [
             },
             {
                 path: '/admin/bulletin/edit/:id',
+                name: 'bulletinEdit',
+                component: BulletinEdit
+            },
+            {
+                path: '/admin/bulletin/add',
                 name: 'bulletinEdit',
                 component: BulletinEdit
             }

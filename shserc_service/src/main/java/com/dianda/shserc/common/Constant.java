@@ -71,6 +71,7 @@ public final class Constant {
 		public final static Integer ROOT_ID = 1;
 		public static final String[] ALLOW_FILE_TYPES = { };
 		public static final String UPLOAD_FILE_PATH = "";
+		public  static  final String DEFAULT_PASSWORD="Win@1234";
 	}
 
 	public static final class LENGTH{
@@ -82,8 +83,8 @@ public final class Constant {
 
 	public static final class State {
 		public final static int DELETED = 171;
-		public final static int AUDITSUCCESS = 169;
-		public final static int AUDITFALURE = 170;
+		public final static int AUDITSUCCESS = 129;
+		public final static int AUDITFALURE = 130;
 		public final static int ENABLED = 13;
 		public final static int DISABLED = 14;
 	}

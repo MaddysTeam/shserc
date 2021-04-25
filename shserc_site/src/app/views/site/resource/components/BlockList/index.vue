@@ -1,7 +1,14 @@
 <template>
   <div>
 
-    <List listType="blockList" :source="source">
+    <List listType="blockList" 
+    :source="source"
+     :isShowPage="isShowPage" 
+     :pageSize="pageSize" 
+     :total="total"
+    :handleChange="handleChange"
+    :handlePageSizeChange="handlePageSizeChange"
+     > 
       <template slot="item" slot-scope="resource">
         <div class="widget">
           <!-- widget header start-->
@@ -25,7 +32,7 @@
             </router-link>
             <div class="hot"></div>
             <div class="m_5 text_align_left">
-              <div>标题：<router-link class="link" to="/resource/details">{{ resource.item.title}} </router-link></div>
+              <div>标题：<router-link class="link" :to="{path:'/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
               <p>作者：{{resource.item.author}}</p>
 
               <p v-show="isShowStatistical">
@@ -55,6 +62,11 @@ export default {
     source:{type:Array, dufault: []},
     coverWidth: { type: Number },
     coverHeight: { type: Number },
+    isShowPage:{type: Boolean, default:false},
+    pageSize:{type:Number,default:0},
+    total:{type:Number,default:0},
+     handleChange: { type: Function },
+    handlePageSizeChange:{type:Function},
   },
 
   data() {

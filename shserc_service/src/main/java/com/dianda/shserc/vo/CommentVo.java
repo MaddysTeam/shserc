@@ -15,4 +15,6 @@ public class CommentVo implements Serializable {
 	private String addUserName;
 	private String resourceTitle;
 	private LocalDateTime commentTime;
+	private String userPhotoPath;
+	
 }

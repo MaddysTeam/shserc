@@ -10,7 +10,7 @@
 
           <div class="body">
             <div class="body res_details">
-              <div v-if="resource.isVedio">
+              <div v-if="resource.isVideo">
                 <div class="title filetype">
                   <i class="el-icon-video-play link font30"></i>
                   {{ resource.title }}
@@ -56,7 +56,8 @@
                     size="larger"
                     type="primary"
                     id="favorite"
-                    v-if="resource.isVedio"
+                    v-if="resource.isVideo"
+                    @click="handleFavorite()"
                   >
                     <i class="fa fa-download"></i> 复制地址
                   </el-button>
@@ -153,14 +154,12 @@
                   <h3>您的评论</h3>
                   <textarea></textarea>
                   <div class="comment_num">240</div>
-                  <el-button
-                    type="info"
-                    disabled="disabled"
-                    v-if="isLogin == false"
-                  >
+                  <el-button type="info" disabled="disabled" v-if="!isLogin">
                     登录后可发表评论
                   </el-button>
-                  <el-button type="primary" v-else> 提交评论 </el-button>
+                  <el-button type="primary" v-if="isLogin">
+                    提交评论
+                  </el-button>
                 </div>
 
                 <div class="comment_count">
@@ -171,7 +170,7 @@
                 </div>
 
                 <div class="comment_list">
-                  <CommentList></CommentList>
+                  <CommentList :source="comments"></CommentList>
                 </div>
               </div>
             </div>
@@ -207,23 +206,36 @@
     </el-row>
   </div>
 </template>
+
 <script>
+import { mapState } from "vuex";
+import { AUDIT_SUCCESS_ID } from "@/app/static/type";
+import { messages } from "@/app/static/message.js";
 import CommentList from "@/app/views/site/comment/components/List/index";
 import TopList from "@/app/views/site/resource/components/TopList/index";
 import { resourceModel, videoOptions } from "@/app/models/resource";
+import { selectParam as commentSelectParam } from "@/app/models/comment";
 import { appEnum } from "@/app/static/enum";
-import { list, info } from "@/app/api/resource";
-import { commentList,commentEdit } from "@/app/api/comment";
+import { list as resourceList, info, favorite } from "@/app/api/resource";
+import { list as commentList, edit as commentEdit } from "@/app/api/comment";
 import { downloadFile } from "@/static/file";
 
 export default {
   components: { CommentList, TopList },
+
+  computed: {
+    ...mapState({
+      isLogin: (state) => state.app.isAuth,
+      account: (state) => state.app.account,
+    }),
+  },
 
   data() {
     return {
       value1: null,
       value2: null,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
+      commentSelectParam: commentSelectParam,
       resource: resourceModel,
       appEnum: appEnum,
       progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],
@@ -231,16 +243,15 @@ export default {
       progressFormats: [],
       relativeResources: [],
       topVisitResources: [],
-      isLogin: false
+      comments: [],
     };
   },
 
   mounted() {
-    this.isLogin = this.$store.state.app.isAuth;
-
     this.loadResourceInfo();
     this.loadTopVisitResourceList();
     this.loadTopVisitResourceList();
+    this.loadComments();
 
     let totalCount = 8;
     this.progressFormats.push(function (percentage) {
@@ -266,9 +277,8 @@ export default {
       info(id).then((res) => {
         if (res) {
           this.resource = JSON.parse(res.data);
-          this.resource.isVedio =
-            resource.fileExtName.indexOf(appEnum.fileExtNames.video) >= 0;
-          console.log(this.resource.coverPath);
+          this.resource.isVideo =
+            this.resource.fileExtName.indexOf(appEnum.fileExtNames.video) >= 0;
         }
       });
     },
@@ -277,34 +287,58 @@ export default {
 
     loadRelativeResourceList() {},
 
-    loadComments() {},
+    loadComments(current) {
+      let selectParam = this.commentSelectParam;
+      selectParam.resourceId = this.$router.currentRoute.params.id;
+      selectParam.stateId = AUDIT_SUCCESS_ID;
+      if (current) {
+        selectParam.current = current;
+      }
+      commentList(this.commentSelectParam).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          selectParam.total = data.total;
+          this.comments = data.listData ? data.listData : [];
+        }
+      });
+    },
 
     handleImageError() {
       let img = event.srcElement;
       img.src = CDN.DEFAULT_COVER;
-      img.onerror = null; //防止闪图
+      img.onerror = null;
     },
 
     handleScore() {
       if (!this.isLogin) {
-        this.$notification.error({ message: "haha" });
+        this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       }
     },
 
     handleFavorite() {
       if (!this.isLogin) {
-        this.$notification.error({ message: "haha" });
+        this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
+      } else {
+        let resourceId = this.$router.currentRoute.params.id;
+        favorite(resourceId).then((res) => {
+          this.$notification.success({ message: messages.SUCCESS });
+        });
       }
     },
 
-    handleSendComment() {},
+    handleSendComment() {
+      let resourceId = this.$router.currentRoute.params.id;
+      commentEdit(resourceId).then((res) => {
+        if (res) {
+        }
+      });
+    },
 
     handleDownload(fileName, path) {
       if (!this.isLogin) {
-        this.$notification.error({ message: "haha" });
-      }
-      else{
-      downloadFile(fileName, path);
+        this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
+      } else {
+        downloadFile(fileName, path);
       }
     },
   },

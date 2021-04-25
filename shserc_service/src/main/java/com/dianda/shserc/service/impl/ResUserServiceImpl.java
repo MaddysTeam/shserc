@@ -88,19 +88,31 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 	}
 	
 	@Override
-	@Transactional( readOnly = false, rollbackFor = Exception.class )
 	public boolean edit( EditUserDto userDto ) {
 		// execute user mapping from dto
 		ResUser user = IEditUserMapper.INSTANCE.mapFrom ( userDto );
 		if ( user.isNewOne ( ) ) {
-			boolean userIsExists = mapper.selectCount ( new QueryWrapper<ResUser> ( ).eq ( "user_name" , user.getUserName ( ) ) ) > 0;
+			boolean userIsExists = mapper.selectCount ( new QueryWrapper<ResUser> ( )
+					.eq ( "user_name" , user.getUserName ( ) )
+					.or()
+					.eq ("email",user.getEmail ()  )
+					.or()
+					.eq ( "id_card",user.getIdCard () )
+					.or()
+					.eq ( "mobile",user.getMobile () )
+			) > 0;
 			if ( userIsExists ) {
 				throw new GlobalException ( Constant.ErrorCode.LOGIC_RESULT_INVALID , Constant.Error.USER_IS_EXISTS );
 			}
 			
-			user.setPassword ( com.dianda.common.util.basic.EncoderUtil.SHA ( user.getPassword ( ) ) );
+			String passwrod = StringUtil.isNullOrEmpty ( user.getPassword ( ) ) ? Constant.ThisApp.DEFAULT_PASSWORD : user.getPassword ( );
+			user.setPassword ( com.dianda.common.util.basic.EncoderUtil.SHA (passwrod) );
+			user.setAddUser ( userDto.getOperatorId () );
+			user.setAddTime ( userDto.getOperateDate () );
 			return mapper.insert ( user ) > 0;
 		} else {
+			user.setUpdateUser ( userDto.getOperatorId () );
+			user.setUpdateTime ( userDto.getOperateDate () );
 			return mapper.updateById ( user ) >= 0;
 		}
 	}

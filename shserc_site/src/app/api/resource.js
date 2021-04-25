@@ -12,6 +12,10 @@ export function edit(params) {
     return axios.post('api/resource/edit', params);
 }
 
-export function audit(auditParams){
+export function audit(auditParams) {
     return axios.post('api/resource/audit', auditParams);
+}
+
+export function favorite(id) {
+    return axios.post('api/resource/favorite/' + id);
 }

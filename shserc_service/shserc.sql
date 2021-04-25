@@ -33,20 +33,20 @@ CREATE TABLE `dictionary` (
 -- ----------------------------
 -- Records of dictionary
 -- ----------------------------
-INSERT INTO `dictionary` VALUES ('1', '字典表', '0', null, 'dict', null, null);
-INSERT INTO `dictionary` VALUES ('2', '性别', '1', null, 'gender', null, null);
-INSERT INTO `dictionary` VALUES ('3', '男', '2', null, 'mail', null, '1');
-INSERT INTO `dictionary` VALUES ('4', '女', '2', null, 'femail', null, '0');
-INSERT INTO `dictionary` VALUES ('5', '残疾类型', '1', null, 'deformity', null, null);
-INSERT INTO `dictionary` VALUES ('6', '智力残疾', '5', null, 'intellegent', null, '1');
-INSERT INTO `dictionary` VALUES ('7', '肢体残疾', '5', null, 'physical', null, '2');
-INSERT INTO `dictionary` VALUES ('8', '视力残疾', '5', null, 'visual', null, '3');
-INSERT INTO `dictionary` VALUES ('9', '听力残疾', '5', null, 'hearing', null, '4');
-INSERT INTO `dictionary` VALUES ('10', '言语残疾', '5', null, 'speech', null, '5');
-INSERT INTO `dictionary` VALUES ('11', '精神残疾', '5', null, 'mental', null, '6');
-INSERT INTO `dictionary` VALUES ('12', '资源状态', '1', null, 'state', null, null);
-INSERT INTO `dictionary` VALUES ('13', '可用', '12', null, 'enable', null, '1001');
-INSERT INTO `dictionary` VALUES ('14', '禁用', '12', null, 'disable', null, '1002');
+INSERT INTO `dictionary` VALUES ('1', '字典表', '0', null, 'dict', null, null,null);
+INSERT INTO `dictionary` VALUES ('2', '性别', '1', null, 'gender', null, null,null);
+INSERT INTO `dictionary` VALUES ('3', '男', '2', null, 'mail', null, '1',null);
+INSERT INTO `dictionary` VALUES ('4', '女', '2', null, 'femail', null, '0',null);
+INSERT INTO `dictionary` VALUES ('5', '残疾类型', '1', null, 'deformity', null, null,null);
+INSERT INTO `dictionary` VALUES ('6', '智力残疾', '5', null, 'intellegent', null, '1',null);
+INSERT INTO `dictionary` VALUES ('7', '肢体残疾', '5', null, 'physical', null, '2',null);
+INSERT INTO `dictionary` VALUES ('8', '视力残疾', '5', null, 'visual', null, '3',null);
+INSERT INTO `dictionary` VALUES ('9', '听力残疾', '5', null, 'hearing', null, '4',null);
+INSERT INTO `dictionary` VALUES ('10', '言语残疾', '5', null, 'speech', null, '5',null);
+INSERT INTO `dictionary` VALUES ('11', '精神残疾', '5', null, 'mental', null, '6',null);
+INSERT INTO `dictionary` VALUES ('12', '资源状态', '1', null, 'state', null, null,null);
+INSERT INTO `dictionary` VALUES ('13', '可用', '12', null, 'enable', null, '1001',null);
+INSERT INTO `dictionary` VALUES ('14', '禁用', '12', null, 'disable', null, '1002',null);
 
 -- ----------------------------
 -- Table structure for `resource`

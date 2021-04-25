@@ -123,5 +123,9 @@ a {
 }
 
 .link {
-    color: #0076f3
+    color: #0076f3;
+}
+
+.cursor_pointer {
+    cursor: pointer;
 }

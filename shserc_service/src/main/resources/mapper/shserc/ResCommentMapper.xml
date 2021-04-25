@@ -6,7 +6,11 @@
         select rc.id as id,
         rc.user_id,
         rc.resource_id,
+        rc.content,
+        rc.add_time,
+        rc.state_id,
         u.user_name as add_user_name,
+        u.photo_path as user_photo_path,
         r.title as resource_title
         from res_comment rc
         join res_user u on rc.user_id=u.id
@@ -15,6 +19,7 @@
         <where>
             ${ew.sqlSegment}
         </where>
+        and rc.is_deleted=0
     </select>
 
 

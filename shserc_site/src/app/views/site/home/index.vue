@@ -48,10 +48,10 @@
         <!-- login area start -->
         <div class="block_panel">
           <p class="panel_title flex_space_between">
-            <span v-if="isLogin"
+            <span v-if="!isLogin"
               ><i class="el-icon-user-solid"></i> 用户登录</span
             >
-            <span v-if="!isLogin"
+            <span v-if="isLogin"
               ><i class="el-icon-user-solid"></i> 欢迎您，{{
                 account.userName
               }}</span
@@ -60,7 +60,7 @@
           </p>
           <div>
             <!-- login form start-->
-            <el-form ref="form" :model="loginModel" v-if="isLogin">
+            <el-form ref="form" :model="loginModel" v-if="!isLogin">
               <el-form-item prop="userName">
                 <el-input
                   prefix-icon="el-icon-search"
@@ -103,9 +103,9 @@
             <!-- login form stop -->
 
             <!-- login info start-->
-            <div v-if="!isLogin" class="text_align_left font14">
+            <div v-if="isLogin" class="text_align_left font14">
               <div>
-                <i class="el-icon-time"></i> 您上次的登录时间：2020-12-1
+                <i class="el-icon-time"></i> 您上次的登录时间：{{loginModel.lastLoginTime}}
               </div>
               <p></p>
               <div>
@@ -175,7 +175,7 @@
           </p>
           <div>
             <BulltinList listType="list" :source="topBulltins">
-              <template slot="item" slot-scope="bulltin">
+              <template slot="item" slot-scope="bulltin" >
                 <li>
                   <router-link to="/Resource/View/1332"
                     ><span class="square">1</span> {{ bulltin.item.title }}</router-link
@@ -302,7 +302,8 @@ export default {
     },
 
     loadTopBulltins() {
-      rseoureBulletinList().then((res) => {
+      let param = deepCopy(selectParam);
+      rseoureBulletinList(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.topBulltins = data.listData ? data.listData : [];

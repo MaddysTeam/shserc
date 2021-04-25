@@ -7,11 +7,3 @@ export function list(selectParam) {
 export function edit(editParam) {
     return axios.post('api/comment/edit', editParam);
 }
-
-export function commentList(selectParam) {
-    return list(selectParam);
-}
-
-export function commentEdit(editParam) {
-    return edit(editParam);
-}

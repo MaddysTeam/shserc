@@ -129,7 +129,6 @@ export default {
   },
   methods: {
     currentChange: function (val) {
-     // val["searchPhrase"] = this.searchPhrase;
       this.handleChange(val);
     },
 

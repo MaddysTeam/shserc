@@ -22,6 +22,7 @@ public interface ICommentVoMapper extends BasicMapper<CommentVo, ResComment> {
 			@Mapping(source = "addUserName", target = "addUserName"),
 			@Mapping(source = "resourceTitle", target = "resourceTitle"),
 			@Mapping(source = "addTime", target = "commentTime"),
+			@Mapping(source = "userPhotoPath", target = "userPhotoPath"),
 	})
 	CommentVo mapFrom(ResComment comment);
 }

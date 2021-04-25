@@ -32,7 +32,7 @@
           :key="index"
           class="p_20"
         >
-          <el-card :body-style="{ padding: '0px' }" v-if="isUseCard">
+          <el-card :body-style="{ padding: '0px' }">
             <slot name="item" :item="item"></slot>
           </el-card>
         </el-col>
@@ -67,7 +67,10 @@ export default {
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
-    isShowPage: false,
+    isShowPage: {type:Boolean,default:false},
+
+    handleChange: { type: Function },
+    handlePageSizeChange:{type:Function},
   },
 
   data() {
@@ -77,11 +80,11 @@ export default {
   methods: {
     currentChange: function (val) {
       // val["searchPhrase"] = this.searchPhrase;
-      //this.handleChange(val);
+      this.handleChange(val);
     },
 
     pageSizeChange: function (val) {
-      //this.handlePageSizeChange(val);
+      this.handlePageSizeChange(val);
     },
   },
 };

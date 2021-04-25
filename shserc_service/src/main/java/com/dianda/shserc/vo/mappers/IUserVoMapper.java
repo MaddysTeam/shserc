@@ -25,7 +25,7 @@ public interface IUserVoMapper extends BasicMapper<ResUserVo, ResUser> {
 			@Mapping( source = "email", target = "email" ),
 			@Mapping( source = "companyName", target = "companyName" ),
 			@Mapping( source = "registerTime", target = "registerTime" ),
-			@Mapping( source = "lastLoginTime", target = "lastLoginTime" ),
+				@Mapping( source = "lastLoginTime", target = "lastLoginTime" ),
 			@Mapping( source = "loginCount", target = "loginCount" ),
 			@Mapping( source = "roleName", target = "roleName" ),
 			@Mapping( source = "realName", target = "realName" ),

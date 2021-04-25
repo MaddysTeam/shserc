@@ -1,12 +1,13 @@
-export const userModel={
+export const userModel = {
     id: 0,
     userName: "",
     idCard: "",
-    realName:"",
-    mobile:"",
+    realName: "",
+    mobile: "",
     companyId: "",
-    companyName:"",
-    email:"",
+    companyName: "",
+    email: "",
+    lastLoginTime: ""
 }
 
 export const selectParam = {
@@ -16,14 +17,14 @@ export const selectParam = {
     searchPhrase: "",
 }
 
-export const changePassword={
-    userName:"",
-    oldPassword:"",
-    newPassword:"",
-    confirmPassword:""
+export const changePassword = {
+    userName: "",
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: ""
 }
 
-export const userRoleModel={
-    userId:0,
-    roleId:0
+export const userRoleModel = {
+    userId: 0,
+    roleId: 0
 }

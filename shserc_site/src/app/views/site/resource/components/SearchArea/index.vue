@@ -5,116 +5,71 @@
     </p>
     <div class="search">
       <div class="search bar1">
-        <form>
-          <input type="text" placeholder="请输入您要搜索的内容..." />
-          <button @click.prevent="handlePrevent" @click="handleSubmit()"> 
+        <form >
+          <input v-model="searchPhrase" type="text" placeholder="请输入您要搜索的内容..." />
+          <button @click.prevent="handlePrevent" @click="handleSubmit()">
             <i class="el-icon-search" style="font-size: 26px; color: #eee"></i>
           </button>
         </form>
       </div>
     </div>
-    
+
     <div class="adv_hit" v-show="isShowAdvHit">
-        <div style="border:1px #eee dashed; width:80%; margin: 0 auto"></div>
-        <dl class="domain">
-				<dt>领 域：</dt>
-				<dd>
-					<ul id="domainChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in domainOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li> 
-					</ul>
-				</dd>
-			</dl>
-			<dl class="deformity">
-				<dt>分 类：</dt>
-				<dd>
-					<ul id="deformityChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in deformityOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="resourceType">
-				<dt>类 型：</dt>
-				<dd>
-					<ul id="resourceTypeChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in typeOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="subject">
-				<dt>学 科：</dt>
-				<dd>
-					<ul id="subjectChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in subjectOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="grade" style="display: none;">
-				<dt>年 级：</dt>
-				<dd>
-					<ul id="gradeChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in gradeOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="schoolType" style="display: none;">
-				<dt>学校类型：</dt>
-				<dd>
-					<ul id="schoolTypeChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in schoolTypeOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="learnFrom" style="display: none;">
-				<dt>安置形式：</dt>
-				<dd>
-					<ul id="learnFromChoose" class="items">
-						<li><el-button type="danger" size="mini">全部</el-button></li>
-						<li class="item" v-for="(item) in learnFromOptions"  :key="item.id" @click="handleSelectItem(item)">
-							 <el-tag>{{ item.name}}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
-			<dl class="selectItems  hidden">
-				<dt>过滤条件：</dt>
-				<dd>
-					<ul id="selectItems">
-						<li @click="handleUnSelectItem()"><el-button type="danger" size="mini"><i class="el-icon-delete"></i></el-button></li>
-						<li v-for="(item) in selectedItems"  :key="item.id">
-							<el-tag type="danger">{{ item.name }}</el-tag>
-						</li>
-					</ul>
-				</dd>
-			</dl>
+      <div style="border: 1px #eee dashed; width: 80%; margin: 0 auto"></div>
+      <dl
+        v-show="option.isShow"
+        v-for="option in allOptions"
+        :key="option.title"
+      >
+        <dt>{{ option.title }}：</dt>
+        <dd>
+          <ul id="domainChoose" class="items">
+            <li><el-button type="danger" size="mini">全部</el-button></li>
+            <li
+              class="item"
+              v-for="item in option.items"
+              :key="item.id"
+              @click="handleSelectItem(item, option)"
+            >
+              <el-tag class="cursor_pointer m_5">{{ item.name }}</el-tag>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+
+      <dl class="selectItems hidden">
+        <dt>过滤条件：</dt>
+        <dd>
+          <ul id="selectItems">
+            <li @click="handleUnSelectAllItems()">
+              <el-button type="danger" size="mini"
+                ><i class="el-icon-delete"></i
+              ></el-button>
+            </li>
+            <li v-for="item in selectedItems" :key="item.id">
+              <el-badge
+                :value="'x'"
+                class="item"
+              >
+                <el-tag class="cursor_pointer m_5" type="danger" @click="handleUnSelectItem(item)">{{
+                  item.name
+                }}</el-tag>
+              </el-badge>
+            </li>
+          </ul>
+        </dd>
+      </dl>
     </div>
 
-    <div class="text-center more" style="display: none">
-      <a href="javascript:void(0)">
-        <strong><i class="fa fa-arrow-down"></i> 更多条件</strong></a
-      >
+    <div class="text-center more" v-show="!isShowMoreOptions&&isShowAdvHit">
+      <el-link @click="isShowMoreOptions = !isShowMoreOptions">
+        <strong><i class="fa fa-arrow-down"></i> 更多条件</strong>
+      </el-link>
     </div>
-    <div class="text-center less" style="display: none">
-      <a href="javascript:void(0)">
-        <strong><i class="fa fa-arrow-up"></i> 收起</strong></a
-      >
+    <div class="text-center less" v-show="isShowMoreOptions&&isShowAdvHit">
+      <el-link @click="isShowMoreOptions = !isShowMoreOptions">
+        <strong><i class="fa fa-arrow-up"></i> 收起</strong>
+      </el-link>
     </div>
   </div>
 </template>
@@ -123,59 +78,82 @@
 import { mapState } from "vuex";
 
 export default {
-	props:{
-		handleSearch:{
-			type:Function 
-		},
-		isShowAdvHit:{type:Boolean}
-	},
+  props: {
+    handleSearch: {
+      type: Function,
+    },
+    isShowAdvHit: { type: Boolean },
+  },
 
-	data(){
-		return {
-			selectedItems:[]
-		}
-	},
+  data() {
+    return {
+      selectedItems: [],
+      isShowMoreOptions: false,
+	  searchPhrase:'',
+    };
+  },
 
-	 computed: {
+  computed: {
     ...mapState({
-      dict: (state) => state.app.dict,
-      deformityOptions: (state) => state.app.deformity,
-      domainOptions: (state) => state.app.resourceDomains,
-      typeOptions: (state) => state.app.resourceTypes,
-      stageOptions: (state) => state.app.stages,
-      gradeOptions: (state) => state.app.grades,
-      subjectOptions: (state) => state.app.subjects,
-      schoolTypeOptions: (state) => state.app.schoolTypes,
-      learnFromOptions: (state) => state.app.learnFrom,
+      //  dict: (state) => state.app.dict,
+      allOptions: (state) => [
+        { title: "领 域", type:"domainId", isShow: true, items: state.app.resourceDomains },
+        { title: "分 类", type:"deformityId", isShow: true, items: state.app.deformity },
+      ],
+      //  deformityOptions: (state) => state.app.deformity,
+      //   domainOptions: (state) => state.app.resourceDomains,
+      //   typeOptions: (state) => state.app.resourceTypes,
+      //   stageOptions: (state) => state.app.stages,
+      //   gradeOptions: (state) => state.app.grades,
+      //   subjectOptions: (state) => state.app.subjects,
+      //   schoolTypeOptions: (state) => state.app.schoolTypes,
+      //   learnFromOptions: (state) => state.app.learnFrom,
     }),
   },
 
-	methods:{
-		handlePrevent(){},
+  methods: {
+    handlePrevent() {},
 
-		handleSubmit(){
-			this.$emit("handleSearch");
-		},
+    handleSubmit() {
+      this.$emit("handleSearch",{searchPhrase:this.searchPhrase, selectItems:this.selectedItems});
+    },
 
-		handleSelectItem(item){
-			if(item && item.value>0){
-				this.selectedItems.push(item);
-				handleSubmit();
-			}
-		},
+    handleSelectItem(item, parent) {
+	  item["parent"]=parent;
+      for (let i in this.selectedItems) {
+        if (this.selectedItems[i].id == item.id) {
+          return false;
+        }
+      }
+      if (item && item.value > 0) {
+        parent.isShow = false;
+        this.selectedItems.push(item);
+        this.handleSubmit();
+      }
+    },
 
-		handleUnSelectItem(itemValue){
-			if(itemValue){
+    handleUnSelectAllItems() {
+      this.selectedItems = [];
+      for (let i in this.allOptions) {
+        this.allOptions[i].isShow = true;
+      }
+	   this.handleSubmit();
+    },
 
-			}
-			else{
-				this.selectedItems=[];
-			}
+    handleUnSelectItem(item) {
+		for(var i=0; i< this.selectedItems.length;i++){
+			let current=this.selectedItems[i];
+			 if(current.id ==item.id){
+				 current["parent"].isShow=true;
+				 this.selectedItems.splice(i,1)
+				 i-=1;
+			 }
 		}
-	}
+		 this.handleSubmit();
+    },
+  },
 };
 </script>
 
 <style>
-
 </style>

@@ -24,7 +24,7 @@ public class CommentController {
 
 	@PostMapping(path="/list")
 	public JsonResult findByPhrase(@RequestBody CommentSelectParams params) {
-		CommentVoList list = new CommentVoList (); //service.find(params);
+		CommentVoList list = service.find(params);
 		return JsonResult.success(list);
 	}
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import java.time.LocalDateTime;
 
 /**
  * 用户控制器
@@ -43,12 +44,16 @@ public class UserController extends BaseController {
 	}
 	
 	@PostMapping( "/edit" )
-	public JsonResult edit( @Valid @RequestBody EditUserDto model , BindingResult bindingResult ) {
+	public JsonResult edit( @Valid @RequestBody EditUserDto editUserDto , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error ( generateErrorMessage ( bindingResult ) );
 		}
 		
-		return service.edit ( model ) ?
+		ResUser loginUser=super.getLoginUserInfo ();
+		editUserDto.setOperatorId ( loginUser.getId () );
+		editUserDto.setOperateDate ( LocalDateTime.now () );
+		
+		return service.edit ( editUserDto ) ?
 				JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}

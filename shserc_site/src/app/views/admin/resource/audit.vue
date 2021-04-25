@@ -4,7 +4,7 @@
       <el-form-item label="资源标题" > 
         <el-input v-model="model.resourceTitle" :disabled="true" />
       </el-form-item>
-      <el-form-item label="审核资源">
+      <el-form-item label="审核资源" class="text_align_left">
         <el-switch 
           v-model="model.auditResult"
           active-color="#13ce66"

@@ -20,5 +20,6 @@ export const accountModel = {
     mobile: "",
     companyName: "",
     companyId: "",
-    email: ""
+    email: "",
+    lastLoginTime: ""
 }

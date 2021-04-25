@@ -32,5 +32,8 @@ public class ResComment extends BaseEntity {
 	
 	@TableField(exist = false)
 	private String addUserName;
+	
+	@TableField(exist = false)
+	private String userPhotoPath;
 
 }

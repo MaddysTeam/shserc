@@ -38,5 +38,7 @@ export const messages = {
 
     FILE_UPLOAD_COUNT_ALLOWED: "只能上传一个文件",
 
-    SUCCESS: "编辑成功"
+    SUCCESS: "编辑成功",
+
+    MUST_LOGIN_FIRST: "请先登录!"
 }

@@ -52,6 +52,7 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 			throw new GlobalException ( ExceptionType.SERVER_ERROR , Constant.Error.LOGIN_WITH_WRONG_INFO );
 		
 		String userName = dto.getString ( "userName" );
+		//String password = dto.getString ( "password" );
 		String password = EncoderUtil.SHA ( dto.getString ( "password" ) );
 		try {
 			ResUser user = null;
@@ -116,6 +117,8 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/account/login" , "anon" );
 		filterRuleMap.put ( "/dictionary/*" , "anon" );
 		filterRuleMap.put ( "/role/list*" , "anon" );
+		filterRuleMap.put ( "/bulletin/list" , "anon" );
+		filterRuleMap.put ( "/comment/list" , "anon" );
 		
 		filterRuleMap.put ( "/company/*" , "jwt" );
 		

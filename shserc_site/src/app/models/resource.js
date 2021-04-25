@@ -39,7 +39,7 @@ export const resourceModel = {
     downloadCount: 0,
     favoriteCount: 0,
     commentCount: 0,
-    isVedio: false,
+    isVideo: false,
     isFile: false
 
 };
