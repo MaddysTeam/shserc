@@ -62,9 +62,27 @@
 
     <select id="selectFavorite" resultType="com.dianda.shserc.entity.ResourceOperation">
         select
-        resource_id,
-        user_id
-        from res_favorite
+        f.resource_id,
+        f.user_id,
+        r.title,
+        r.author,
+        r.file_ext_name
+        from res_favorite f
+        join "shserc".resource r on r.id=f.resource_id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectDownload" resultType="com.dianda.shserc.entity.ResourceOperation">
+        select
+        d.resource_id,
+        d.user_id,
+        r.title,
+        r.author,
+        r.file_ext_name
+        from "shserc".res_download d
+        join "shserc".resource r on r.id=d.resource_id
         <where>
             ${ew.sqlSegment}
         </where>

@@ -99,7 +99,7 @@ public class CroResourceController extends BaseController {
 			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}
 		
-		ScoreVoList list = service.findStars ( resourceId );
+		ResourceOperationVoList list = service.findStars ( resourceId );
 		return JsonResult.success ( list );
 	}
 	

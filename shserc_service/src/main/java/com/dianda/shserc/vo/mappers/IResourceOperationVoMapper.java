@@ -10,15 +10,16 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper( unmappedTargetPolicy = ReportingPolicy.IGNORE )
-public interface IResourceScoreVoMapper extends BasicMapper<ResourceOperationVo, ResourceOperation> {
+public interface IResourceOperationVoMapper extends BasicMapper<ResourceOperationVo, ResourceOperation> {
 	IResourceScoreVoMapper INSTANCE = Mappers.getMapper ( IResourceScoreVoMapper.class );
 	
 	@Mappings( {
 			@Mapping( source = "resourceId", target = "resourceId" ) ,
 			@Mapping( source = "userId", target = "userId" ) ,
-			@Mapping( source = "operIntResult", target = "score" ) ,
+			@Mapping( source = "addTime", target = "operationDate" ) ,
+			@Mapping( source = "title", target = "title" ) ,
+			@Mapping( source = "author", target = "author" ) ,
+			@Mapping( source = "fileExtName", target = "fileExtName" ) ,
 	} )
 	ResourceOperationVo mapFrom( ResourceOperation resourceOperation );
 }
-
-

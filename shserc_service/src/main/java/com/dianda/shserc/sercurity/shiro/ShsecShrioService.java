@@ -138,6 +138,8 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/croResource/comment/*" , "jwt" );
 		filterRuleMap.put ( "/croResource/audit/*" , "jwt" );
 		
+		filterRuleMap.put ( "/my/*" , "jwt" );
+		
 		filterRuleMap.put ( "/real/*" , "jwt" );
 		filterRuleMap.put ( "/file/*" , "jwt" );
 		filterRuleMap.put ( "/user/*" , "jwt" );

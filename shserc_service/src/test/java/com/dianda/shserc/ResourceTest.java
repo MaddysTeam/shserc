@@ -5,8 +5,8 @@ import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.service.IResourceService;
+import com.dianda.shserc.vo.ResourceOperationVoList;
 import com.dianda.shserc.vo.ResourceVoList;
-import com.dianda.shserc.vo.ScoreVoList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,41 +42,42 @@ public class ResourceTest {
 		Assert.assertTrue ( voList.getListData ( ).size ( ) > 0 );
 		Assert.assertNotNull ( voList );
 	}
-
+	
 	@Test
-	public void edit_resource_test(){
-
-	}
-
-	@Test
-	public void edit_resource_view_count_test( ){
-		editResourceViewCountTest();
-	}
-
-	@Test
-	public void set_resource_favorite_test(){}
-
-	@Test
-	public void add_resource_download_test(){
-
-	}
-
-	@Test
-	public void add_resource_view_test(){
-
+	public void edit_resource_test( ) {
+	
 	}
 	
 	@Test
-	public void get_resource_stars_test(){
-	 ScoreVoList scoreVoList=	service.findStars ( resourceId );
-	 Assert.assertNotNull ( scoreVoList );
-	 Assert.assertTrue ( scoreVoList.getListData ().size ()>0 );
+	public void edit_resource_view_count_test( ) {
+		editResourceViewCountTest ( );
 	}
-
+	
+	@Test
+	public void set_resource_favorite_test( ) {
+	}
+	
+	@Test
+	public void add_resource_download_test( ) {
+	
+	}
+	
+	@Test
+	public void add_resource_view_test( ) {
+	
+	}
+	
+	@Test
+	public void get_resource_stars_test( ) {
+		ResourceOperationVoList scoreVoList = service.findStars ( resourceId );
+		Assert.assertNotNull ( scoreVoList );
+		Assert.assertTrue ( scoreVoList.getListData ( ).size ( ) > 0 );
+	}
+	
 	private void editResourceViewCountTest( ) {
 		try {
 			service.addViewCount ( new ResourceOperation ( resourceId , userId ) );  // when success
-		}catch ( GlobalException e ){  // throw global exception
+		} catch ( GlobalException e ) {  // throw global exception
 			com.dianda.shserc.vo.ResourceVo resource = service.findById ( resourceId );
 			Assert.assertTrue ( resource.getViewCount ( ) == 1 );
 		}

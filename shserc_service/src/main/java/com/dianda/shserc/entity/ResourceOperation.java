@@ -21,7 +21,13 @@ public class ResourceOperation {
 	private String operStringResult;
 
 	private LocalDateTime addTime;
-
+	
+	private  String title;
+	
+	private  String author;
+	
+	private  String fileExtName;
+	
 	public ResourceOperation(){}
 
 	public ResourceOperation( long resourceId , long userId ) {

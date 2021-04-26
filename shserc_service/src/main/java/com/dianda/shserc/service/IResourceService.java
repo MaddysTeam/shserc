@@ -7,10 +7,10 @@ import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.entity.Resource;
 import com.dianda.common.validators.NotNull;
+import com.dianda.shserc.vo.ResourceOperationVo;
+import com.dianda.shserc.vo.ResourceOperationVoList;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
-import com.dianda.shserc.vo.ScoreVo;
-import com.dianda.shserc.vo.ScoreVoList;
 
 import javax.validation.Valid;
 
@@ -37,6 +37,6 @@ public interface IResourceService extends IService<Resource> {
 	//TODO:
 	boolean setStar(@Valid @NotNull ResourceOperation param);
 	
-	ScoreVoList findStars(@Valid long resourceId);
+	ResourceOperationVoList findStars( @Valid long resourceId);
 	
 }

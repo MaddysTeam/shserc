@@ -8,10 +8,10 @@ import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.service.IResourceService;
 import com.dianda.common.util.json.JsonResult;
+import com.dianda.shserc.vo.ResourceOperationVo;
+import com.dianda.shserc.vo.ResourceOperationVoList;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
-import com.dianda.shserc.vo.ScoreVo;
-import com.dianda.shserc.vo.ScoreVoList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -109,7 +109,7 @@ public class ResourceController extends BaseController {
 			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}
 		
-		ScoreVoList list = service.findStars ( resourceId );
+		ResourceOperationVoList list = service.findStars ( resourceId );
 		return JsonResult.success ( list );
 	}
 	

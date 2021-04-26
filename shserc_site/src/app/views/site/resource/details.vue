@@ -50,7 +50,9 @@
                     id="favorite"
                     @click="handleFavorite()"
                   >
-                    <i class="fa fa-download"></i> 收 藏
+                    <i class="fa fa-download"></i>
+                    <span v-if="isFavorite">取消收藏</span>
+                    <span v-else>收 藏</span>
                   </el-button>
                   <el-button
                     size="larger"
@@ -152,12 +154,16 @@
               <div class="comment">
                 <div class="comment_input">
                   <h3>您的评论</h3>
-                  <textarea></textarea>
+
+                  <el-form ref="commentForm" :model="commentForm" >
+                  <textarea   v-model="commentForm.content"></textarea>
+                  </el-form>
+
                   <div class="comment_num">240</div>
                   <el-button type="info" disabled="disabled" v-if="!isLogin">
                     登录后可发表评论
                   </el-button>
-                  <el-button type="primary" v-if="isLogin">
+                  <el-button type="primary" v-if="isLogin" @click="handleSendComment()">
                     提交评论
                   </el-button>
                 </div>
@@ -214,10 +220,11 @@ import { messages } from "@/app/static/message.js";
 import CommentList from "@/app/views/site/comment/components/List/index";
 import TopList from "@/app/views/site/resource/components/TopList/index";
 import { resourceModel, videoOptions } from "@/app/models/resource";
-import { selectParam as commentSelectParam } from "@/app/models/comment";
+import { selectParam as commentSelectParam,commentModel } from "@/app/models/comment";
 import { appEnum } from "@/app/static/enum";
 import { list as resourceList, info, favorite } from "@/app/api/resource";
 import { list as commentList, edit as commentEdit } from "@/app/api/comment";
+import { myFavoriteList } from "@/app/api/my";
 import { downloadFile } from "@/static/file";
 
 export default {
@@ -236,6 +243,7 @@ export default {
       value2: null,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       commentSelectParam: commentSelectParam,
+      commentModel:commentModel,
       resource: resourceModel,
       appEnum: appEnum,
       progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],
@@ -244,6 +252,8 @@ export default {
       relativeResources: [],
       topVisitResources: [],
       comments: [],
+      isFavorite: false,
+      commentForm:{content:""}
     };
   },
 
@@ -252,6 +262,7 @@ export default {
     this.loadTopVisitResourceList();
     this.loadTopVisitResourceList();
     this.loadComments();
+    this.checkIsFavorite();
 
     let totalCount = 8;
     this.progressFormats.push(function (percentage) {
@@ -322,16 +333,49 @@ export default {
         let resourceId = this.$router.currentRoute.params.id;
         favorite(resourceId).then((res) => {
           this.$notification.success({ message: messages.SUCCESS });
+
+          this.checkIsFavorite();
         });
       }
     },
 
-    handleSendComment() {
+    checkIsFavorite() {
+      if (!this.isLogin) return false;
+
+      this.isFavorite = false;
       let resourceId = this.$router.currentRoute.params.id;
-      commentEdit(resourceId).then((res) => {
-        if (res) {
+      myFavoriteList().then((res) => {
+        if (res && res.data) {
+          let listData = JSON.parse(res.data).listData;
+          for (let i in listData) {
+            if (listData[i].resourceId == resourceId) {
+              this.isFavorite = true;
+              break;
+            }
+          }
         }
       });
+    },
+
+    handleSendComment() {
+      let resourceId = this.$router.currentRoute.params.id;
+    
+      // comment.content= 
+      this.$refs["commentForm"].validate((vaild)=>{
+         if(vaild){
+              commentModel.resourceId=resourceId;
+              commentModel.userId= this.account.id;
+              commentModel.content=this.commentForm.content;
+              alert(this.commentForm.content);
+              commentEdit(commentModel).then((res) => {
+                  if (res) {
+                    this.$notification.success({message: messages.SUCCESS});
+                    this.loadComments();
+                  }
+                });
+         }
+      });
+ 
     },
 
     handleDownload(fileName, path) {

@@ -11,26 +11,17 @@ import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.bean.CroResourceSelectParams;
-import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditCroResourceDto;
-import com.dianda.shserc.dto.EditResourceDto;
 import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.dto.mappers.ICroResourceAuditMapper;
 import com.dianda.shserc.dto.mappers.IEditCroResourceMapper;
-import com.dianda.shserc.dto.mappers.IEditResourceMapper;
-import com.dianda.shserc.dto.mappers.IResourceAuditMapper;
 import com.dianda.shserc.entity.CroResource;
-import com.dianda.shserc.entity.Resource;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.mapper.CroResourceMapper;
-import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.ICroResourceService;
-import com.dianda.shserc.service.IResourceService;
 import com.dianda.shserc.vo.*;
 import com.dianda.shserc.vo.mappers.ICroResourceVoMapper;
-import com.dianda.shserc.vo.mappers.IResourceScoreVoMapper;
-import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -263,21 +254,26 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 	}
 	
 	@Override
-	public ScoreVoList findStars( @Valid long resourceId ) {
-		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
-		wrapper.eq ( "resource_id" , resourceId );
-		List<ResourceOperation> results = mapper.selectStar ( wrapper );
-		List<ScoreVo> voList= new ArrayList<> (  );
-		
-		for ( ResourceOperation item : results ) {
-			ScoreVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
-			voList.add ( vo );
-		}
-		
-		ScoreVoList scoreVoList=new ScoreVoList();
-		scoreVoList.setListData ( voList );
-		
-		return scoreVoList;
+	public ResourceOperationVoList findStars( @Valid long resourceId ) {
+		return null;
 	}
+
+//	@Override
+//	public ScoreVoList findStars( @Valid long resourceId ) {
+//		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
+//		wrapper.eq ( "resource_id" , resourceId );
+//		List<ResourceOperation> results = mapper.selectStar ( wrapper );
+//		List<ScoreVo> voList= new ArrayList<> (  );
+//
+//		for ( ResourceOperation item : results ) {
+//			ScoreVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
+//			voList.add ( vo );
+//		}
+//
+//		ScoreVoList scoreVoList=new ScoreVoList();
+//		scoreVoList.setListData ( voList );
+//
+//		return scoreVoList;
+//	}
 	
 }

@@ -13,7 +13,7 @@ public class EditCommentDto {
 	@Min ( value = 1)
 	private long userId;
 	
-	@Min ( value = 1)
+	@Min ( value = 0)
 	private long auditTypeId;
 	
 	@NotBlank
@@ -21,11 +21,8 @@ public class EditCommentDto {
 	
 	@Min ( value = 1)
 	private long resourceId;
-
-//	@Min ( value = 0)
-//	private  long isDeleted;
-
-	@Min ( value = 1)
+	
+	@Min ( value = 0)
 	private long auditor;
 	
 }

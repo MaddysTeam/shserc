@@ -33,5 +33,7 @@ public interface ResourceMapper extends BaseMapper<Resource> {
 	
 	List<ResourceOperation> selectFavorite(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 	
+	List<ResourceOperation> selectDownload(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
+	
 	List<ResourceOperation> selectStar(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 }

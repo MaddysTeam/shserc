@@ -39,7 +39,7 @@ axios.interceptors.response.use(res => {
     return res.data
 }, error => {
     console.log(error);
-    store.commit('app/logout');
+    //   store.commit('app/logout');
     if (error.message) {
         Notification.error(error.message);
     } else if (error.response) {

@@ -33,6 +33,6 @@ public interface ICroResourceService extends IService<CroResource> {
 	
 	boolean setStar( @Valid @NotNull ResourceOperation param );
 	
-	ScoreVoList findStars( @Valid long resourceId );
+	ResourceOperationVoList findStars( @Valid long resourceId );
 
 }

@@ -1,9 +1,12 @@
 package com.dianda.shserc.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.common.Constant;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IMyService;
 import com.dianda.shserc.vo.ResUserVo;
+import com.dianda.shserc.vo.ResourceOperationVoList;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +19,8 @@ import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping( "/my" )
-public class MyController extends  BaseController {
-
+public class MyController extends BaseController {
+	
 	@Resource
 	IMyService service;
 	
@@ -26,7 +29,7 @@ public class MyController extends  BaseController {
 	 * @desc for example :  view count, comment count,download count and favorite count
 	 * @author Huachao
 	 */
-	@RequestMapping( path = "/operation/", method = RequestMethod.POST )
+	@RequestMapping( path = "/operation", method = RequestMethod.POST )
 	public JsonResult resourceOperationCount( @RequestBody @Valid @Min( value = 1, message = Constant.Error.INVALID_ID ) long id , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error ( generateErrorMessage ( bindingResult ) );
@@ -36,18 +39,25 @@ public class MyController extends  BaseController {
 		return JsonResult.success ( resUserVo );
 	}
 	
-	@RequestMapping( path = "/download/", method = RequestMethod.POST )
-	public JsonResult myDownloads( long id){
-		return null;
+	@RequestMapping( path = "/download", method = RequestMethod.POST )
+	public JsonResult myDownloads( @RequestBody @Valid @Min( value = 1, message = Constant.Error.INVALID_ID ) long id , BindingResult bindingResult ) {
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( generateErrorMessage ( bindingResult ) );
+		}
+		
+		ResourceOperationVoList resourceOperationVoList = service.findFavorites ( id );
+		return JsonResult.success ( resourceOperationVoList );
 	}
 	
-	@RequestMapping( path = "/favorite/", method = RequestMethod.POST )
-	public JsonResult myFavorite(){
-		return null;
+	@RequestMapping( path = "/favorite", method = RequestMethod.POST )
+	public JsonResult myFavorites( ) {
+		ResUser user= getLoginUserInfo ();
+		ResourceOperationVoList resourceOperationVoList = service.findFavorites ( user.getId () );
+		return JsonResult.success ( resourceOperationVoList );
 	}
 	
 	@RequestMapping( path = "/comment/", method = RequestMethod.POST )
-	public JsonResult myComment(){
+	public JsonResult myComments( ) {
 		return null;
 	}
 	

@@ -22,8 +22,8 @@ import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.vo.ResourceVo;
 import com.dianda.shserc.vo.ResourceVoList;
-import com.dianda.shserc.vo.ScoreVo;
-import com.dianda.shserc.vo.ScoreVoList;
+import com.dianda.shserc.vo.ResourceOperationVo;
+import com.dianda.shserc.vo.ResourceOperationVoList;
 import com.dianda.shserc.vo.mappers.IResourceScoreVoMapper;
 import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -258,18 +258,18 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	}
 	
 	@Override
-	public ScoreVoList findStars( @Valid long resourceId ) {
+	public ResourceOperationVoList findStars( @Valid long resourceId ) {
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
 		wrapper.eq ( "resource_id" , resourceId );
 		List<ResourceOperation> results = mapper.selectStar ( wrapper );
-		List<ScoreVo> voList= new ArrayList<> (  );
+		List<ResourceOperationVo> voList= new ArrayList<> (  );
 		
 		for ( ResourceOperation item : results ) {
-			ScoreVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
+			ResourceOperationVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
 			voList.add ( vo );
 		}
 		
-		ScoreVoList scoreVoList=new ScoreVoList();
+		ResourceOperationVoList scoreVoList=new ResourceOperationVoList ();
 		scoreVoList.setListData ( voList );
 		
 		return scoreVoList;
