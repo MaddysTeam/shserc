@@ -36,5 +36,13 @@ public class ResourceOperation {
 		this.setAddTime ( LocalDateTime.now ( ) );
 	}
 	
+	public ResourceOperation( long resourceId , long userId ,int operIntResult, String operStringResult) {
+		this.setResourceId ( resourceId );
+		this.setUserId ( userId );
+		this.setAddTime ( LocalDateTime.now ( ) );
+		this.operIntResult=operIntResult;
+		this.operStringResult=operStringResult;
+	}
+	
 }
 

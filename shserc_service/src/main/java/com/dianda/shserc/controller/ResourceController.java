@@ -1,5 +1,6 @@
 package com.dianda.shserc.controller;
 
+import com.dianda.common.util.basic.StringUtil;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.EditResourceDto;
@@ -90,21 +91,18 @@ public class ResourceController extends BaseController {
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
-	@PostMapping( path = "/star/{id}" )
-	public JsonResult star( @PathVariable long id , int score ) {
+	@PostMapping( path = "/star/{id}/{score}" )
+	public JsonResult star( @PathVariable long id , @PathVariable int score ) {
 		ResUser loginUser = getLoginUserInfo ( );
-		ResourceOperation operation = new ResourceOperation ( );
-		operation.setResourceId ( id );
-		operation.setUserId ( loginUser.getId ( ) );
-		operation.setOperIntResult ( score );
-		
+		ResourceOperation operation = new ResourceOperation ( id , loginUser.getId ( ) , score , StringUtil.toString ( score ) );
 		boolean result = service.setStar ( operation );
+		
 		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
 	@PostMapping( path = "/stars/{resourceId}" )
-	public JsonResult findStars( @PathVariable @Min( value = 1 ) long resourceId , BindingResult bindingResult) {
+	public JsonResult findStars( @PathVariable @Min( value = 1 ) long resourceId , BindingResult bindingResult ) {
 		if ( bindingResult.hasErrors ( ) ) {
 			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
 		}

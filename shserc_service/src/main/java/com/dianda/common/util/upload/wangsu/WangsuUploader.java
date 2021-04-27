@@ -36,7 +36,7 @@ public class WangsuUploader implements IWangsuFileUploader {
 		policy.setReturnBody ( WangsuConfig.RETURN_BODY_PATTERN );
 		policy.setScope ( bucket + ":" + fileKey );
 		policy.setDeadline ( String.valueOf ( DateUtil.nextDate ( 1 , new Date ( ) ).getTime ( ) ) );
-		
+		policy.setFsizeLimit (500000000  );
 		UploadResult result = new UploadResult ( );
 		JSONObjectRet jsonObjectRet = getJSONObjectRet ( bucket , result );
 		SliceUploadResumable sliceUploadResumable = new SliceUploadResumable ( );

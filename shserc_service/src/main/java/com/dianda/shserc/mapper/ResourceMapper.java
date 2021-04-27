@@ -29,11 +29,11 @@ public interface ResourceMapper extends BaseMapper<Resource> {
 	
 	int addCommentCount( ResourceOperation operation );
 	
-	int addStar( ResourceOperation operation );
+	int addStar2( ResourceOperation operation );
 	
-	List<ResourceOperation> selectFavorite(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
+	List<ResourceOperation> selectFavorites(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 	
-	List<ResourceOperation> selectDownload(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
+	List<ResourceOperation> selectDownloads(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 	
-	List<ResourceOperation> selectStar(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
+	List<ResourceOperation> selectStars(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 }

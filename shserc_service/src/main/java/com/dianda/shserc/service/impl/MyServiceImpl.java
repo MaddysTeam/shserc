@@ -57,7 +57,7 @@ public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implement
 	public ResourceOperationVoList findFavorites( long id ) {
 		QueryWrapper<ResourceOperation> wrapper=new QueryWrapper<> (  );
 		wrapper.eq ( "user_id", id );
-		List<ResourceOperation> operationList= resourceMapper.selectFavorite (wrapper );
+		List<ResourceOperation> operationList= resourceMapper.selectFavorites (wrapper );
 		List<ResourceOperationVo> operationVoList =new ArrayList<> (  );
 		for(ResourceOperation resourceOperation : operationList){
 			operationVoList.add ( IResourceOperationVoMapper.INSTANCE.mapFrom ( resourceOperation ));
@@ -74,7 +74,7 @@ public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implement
 	public ResourceOperationVoList findDownloads( long id ) {
 		QueryWrapper<ResourceOperation> wrapper=new QueryWrapper<> (  );
 		wrapper.eq ( "user_id", id );
-		List<ResourceOperation> operationList= resourceMapper.selectDownload (wrapper );
+		List<ResourceOperation> operationList= resourceMapper.selectDownloads (wrapper );
 		List<ResourceOperationVo> operationVoList =new ArrayList<> (  );
 		for(ResourceOperation resourceOperation : operationList){
 			operationVoList.add ( IResourceOperationVoMapper.INSTANCE.mapFrom ( resourceOperation ));

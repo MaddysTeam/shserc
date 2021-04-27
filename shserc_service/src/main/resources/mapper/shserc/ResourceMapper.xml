@@ -20,6 +20,8 @@
         r.author_email,
         r.author_phone,
         r.description,
+        r.star_count,
+        r.star_total,
         r.title,
         r.is_link,
         r.file_size,
@@ -56,11 +58,11 @@
         delete from res_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
     </delete>
 
-    <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
-         insert into res_star (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+    <insert id="addStar2" parameterType="com.dianda.shserc.entity.ResourceOperation">
+         insert into res_star (resource_id,user_id, score, add_time) values (#{resourceId},#{userId},#{operIntResult},#{addTime})
     </insert>
 
-    <select id="selectFavorite" resultType="com.dianda.shserc.entity.ResourceOperation">
+    <select id="selectFavorites" resultType="com.dianda.shserc.entity.ResourceOperation">
         select
         f.resource_id,
         f.user_id,
@@ -68,27 +70,28 @@
         r.author,
         r.file_ext_name
         from res_favorite f
-        join "shserc".resource r on r.id=f.resource_id
+         join resource r on r.id=f.resource_id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
-    <select id="selectDownload" resultType="com.dianda.shserc.entity.ResourceOperation">
+    <select id="selectDownloads" resultType="com.dianda.shserc.entity.ResourceOperation"
+            parameterType="com.dianda.shserc.entity.ResourceOperation">
         select
         d.resource_id,
         d.user_id,
         r.title,
         r.author,
         r.file_ext_name
-        from "shserc".res_download d
-        join "shserc".resource r on r.id=d.resource_id
+        from res_download d
+        join resource r on r.id=d.resource_id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
-    <select id="selectStar" resultType="com.dianda.shserc.entity.ResourceOperation">
+    <select id="selectStars" resultType="com.dianda.shserc.entity.ResourceOperation">
         select
         resource_id,
         user_id,

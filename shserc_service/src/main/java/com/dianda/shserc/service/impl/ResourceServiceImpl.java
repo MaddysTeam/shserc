@@ -233,8 +233,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 		if ( ObjectUtil.isNull ( resource ) ) return false;
 		
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
-		wrapper.eq ( "resource_id" , userId ).eq ( "resource_id" , resourceId );
-		List<ResourceOperation> list = mapper.selectFavorite ( wrapper );
+		wrapper.eq ( "user_id" , userId ).eq ( "resource_id" , resourceId );
+		List<ResourceOperation> list = mapper.selectFavorites( wrapper );
 		if ( ObjectUtil.isNull ( list ) || list.size ( ) <= 0 ) {
 			resource.addFavoriteCount ( );
 			return mapper.updateById ( resource ) + mapper.addFavorite ( resourceOperation ) == 2;
@@ -247,21 +247,27 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Override
 	@Transactional( readOnly = false, rollbackFor = GlobalException.class )
 	public boolean setStar( @Valid @NotNull ResourceOperation resourceOperation ) {
-		long userId = resourceOperation.getUserId ( );
-		long resourceId = resourceOperation.getResourceId ( );
-		
-		Resource resource = mapper.selectById ( resourceId );
+		Resource resource = mapper.selectById ( resourceOperation.getResourceId ( ) );
 		if ( ObjectUtil.isNull ( resource ) ) return false;
 		
+		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
+		wrapper.eq ( "resource_id" , resourceOperation.getResourceId () )
+				      .eq ( "user_id", resourceOperation.getUserId ());
+		List<ResourceOperation> results = mapper.selectStars ( wrapper );
+		
+		if(results.size ()>0){
+			return false;
+		}
+		
 		resource.addStarCount ( resourceOperation.getOperIntResult ( ) );
-		return mapper.updateById ( resource ) + mapper.addStar ( resourceOperation ) == 2;
+		return mapper.updateById ( resource ) + mapper.addStar2 ( resourceOperation ) == 2;
 	}
 	
 	@Override
 	public ResourceOperationVoList findStars( @Valid long resourceId ) {
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
 		wrapper.eq ( "resource_id" , resourceId );
-		List<ResourceOperation> results = mapper.selectStar ( wrapper );
+		List<ResourceOperation> results = mapper.selectStars ( wrapper );
 		List<ResourceOperationVo> voList= new ArrayList<> (  );
 		
 		for ( ResourceOperation item : results ) {

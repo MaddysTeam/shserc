@@ -62,8 +62,8 @@ spring:
   #upload file size
   servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 30MB
+      max-file-size: 1500MB
+      max-request-size: 130MB
 
   #redis configuration
   redis:
