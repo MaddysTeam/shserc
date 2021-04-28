@@ -15,17 +15,17 @@ public class FileUploadConfig {
 	/**
 	 * multipart file upload config
 	 */
-	@Bean
-	public MultipartConfigElement multipartConfigElement( ) {
-		MultipartConfigFactory factory = new MultipartConfigFactory ( );
-
-		//TODO: set upload max file size , can read from config
-		factory.setMaxFileSize ( DataSize.ofMegabytes(50) ); // default max is 50m
-
-		//TODO: set max request size , can read from config
-		factory.setMaxRequestSize (DataSize.ofMegabytes(500) ); // default max is 500m
-
-		return factory.createMultipartConfig ( );
-	}
+//	@Bean
+//	public MultipartConfigElement multipartConfigElement( ) {
+//		MultipartConfigFactory factory = new MultipartConfigFactory ( );
+//
+//		//TODO: set upload max file size , can read from config
+//		factory.setMaxFileSize ( DataSize.ofMegabytes(500) ); // default max is 50m
+//
+//		//TODO: set max request size , can read from config
+//		factory.setMaxRequestSize (DataSize.ofMegabytes(500) ); // default max is 500m
+//
+//		return factory.createMultipartConfig ( );
+//	}
 	
 }

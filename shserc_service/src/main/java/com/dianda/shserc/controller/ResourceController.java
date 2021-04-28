@@ -101,13 +101,9 @@ public class ResourceController extends BaseController {
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
-	@PostMapping( path = "/stars/{resourceId}" )
-	public JsonResult findStars( @PathVariable @Min( value = 1 ) long resourceId , BindingResult bindingResult ) {
-		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
-		}
-		
-		ResourceOperationVoList list = service.findStars ( resourceId );
+	@PostMapping( path = "/stars/{id}" )
+	public JsonResult findStars( @PathVariable @Min( value = 1 ) long id  ) {
+		ResourceOperationVoList list = service.findStars ( id );
 		return JsonResult.success ( list );
 	}
 	

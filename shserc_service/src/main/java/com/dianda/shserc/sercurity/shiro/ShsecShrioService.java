@@ -119,10 +119,15 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/role/list*" , "anon" );
 		filterRuleMap.put ( "/bulletin/list" , "anon" );
 		filterRuleMap.put ( "/comment/list" , "anon" );
-		
-		filterRuleMap.put ( "/company/*" , "jwt" );
-		
+		filterRuleMap.put ( "/croResource/stars/*" , "anon" );
 		filterRuleMap.put ( "/resource/*" , "anon" );
+		filterRuleMap.put ( "/resource/stars/*" , "anon" );
+		filterRuleMap.put ( "/croResource/*" , "anon" );
+		filterRuleMap.put ( "/user/list" , "anon" );
+		
+		filterRuleMap.put ( "/user/edit/*" , "jwt" );
+		filterRuleMap.put ( "/user/role/edit","jwt" );
+		filterRuleMap.put ( "/company/*" , "jwt" );
 		filterRuleMap.put ( "/resource/edit/*" , "jwt" );
 		filterRuleMap.put ( "/resource/favorite/*" , "jwt" );
 		filterRuleMap.put ( "/resource/star/*" , "jwt" );
@@ -130,7 +135,6 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/resource/comment/*" , "jwt" );
 		filterRuleMap.put ( "/resource/audit/*" , "jwt" );
 		
-		filterRuleMap.put ( "/croResource/*" , "anon" );
 		filterRuleMap.put ( "/croResource/edit/*" , "jwt" );
 		filterRuleMap.put ( "/croResource/favorite/*" , "jwt" );
 		filterRuleMap.put ( "/croResource/star/*" , "jwt" );
@@ -139,10 +143,8 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/croResource/audit/*" , "jwt" );
 		
 		filterRuleMap.put ( "/my/*" , "jwt" );
-		
 		filterRuleMap.put ( "/real/*" , "jwt" );
 		filterRuleMap.put ( "/file/*" , "jwt" );
-		filterRuleMap.put ( "/user/*" , "jwt" );
 		filterRuleMap.put ( "/role/edit" , "jwt" );
 		filterRuleMap.put ( "/menu/edit" , "jwt" );
 		filterRuleMap.put ( "/account/logout" , "jwt" );

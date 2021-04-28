@@ -121,6 +121,8 @@
 
 <script>
 import { mapState } from 'vuex';
+import * as types from "@/app/static/type";
+import { logout } from "@/app/api/account";
 
 export default {
   components: {},
@@ -141,7 +143,14 @@ export default {
   methods:{
     handleShowAccountInfo(){
       this.$router.push({path:"/account/space"});
-    }
+    },
+
+     handleLogout() {
+      logout().then((res) => {
+        this.$store.commit(types.APP + "/" + types.LOGOUT);
+        this.$router.push({ path: "/admin/logout", replace: true });
+      });
+    },
   }
 };
 </script>

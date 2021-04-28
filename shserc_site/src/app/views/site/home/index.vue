@@ -115,9 +115,9 @@
                 >
               </div>
               <p></p>
-              <div><i class="el-icon-info"></i> 退出我的登录</div>
+              <div>  <el-link type="danger" class="link" @click="handleLogout()"><i class="el-icon-info"></i> 退出我的登录</el-link></div>
 
-              <div class="m_10_top">
+              <!-- <div class="m_10_top">
                 <el-progress
                   type="circle"
                   :percentage="100"
@@ -138,9 +138,10 @@
                   :percentage="100"
                   :width="60"
                 ></el-progress>
-              </div>
+              </div> -->
             </div>
-            <!-- login info stop-->
+            <!-- login info end-->
+
           </div>
         </div>
         <!-- login area end -->
@@ -158,11 +159,11 @@
           </p>
           <ActivityUserList
             listType="blockCustomList"
-            :source="[1, 2, 3, 45, 1, 2, 3, 45]"
+            :source="topActivityUsers"
           >
-            <template slot="item">
-              <el-avatar :src="account.photoPath" :size="40"></el-avatar>
-              <div>xx</div>
+            <template slot="item" slot-scope="user">
+              <el-avatar :src="user.item.photoPath" :size="40"></el-avatar>
+              <div>{{user.item.userName}}</div>
             </template>
           </ActivityUserList>
         </div>
@@ -224,11 +225,14 @@
 
 <script>
 import { mapState } from "vuex";
+import * as types from "@/app/static/type";
 import { selectParam ,orderPhrasesModel} from "@/app/models/resource";
+import {userOrderPhrasesModel} from "@/app/models/user";
 import { accountModel } from "@/app/models/account";
 import { rseoureBulletinList } from "@/app/api/bulletin";
 import { list } from "@/app/api/resource";
 import { login, logout } from "@/app/api/account";
+import {list as userList} from "@/app/api/user"
 import { operationCount } from "@/app/api/my";
 import searchArea from "@/app/views/site/resource/components/SearchArea";
 import { loginModel } from "@/app/models/account";
@@ -238,6 +242,7 @@ import ResourceList from "@/app/views/site/resource/components/List";
 import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
 import ActivityUserList from "@/components/List/index";
 import BulltinList from "@/components/List/index";
+
 
 export default {
   components: {
@@ -255,6 +260,7 @@ export default {
       topVisitResources: [],
       topCommentResources: [],
       topDownloadResources: [],
+      topActivityUsers:[],
       topBulltins: [],
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
@@ -300,6 +306,19 @@ export default {
         }
       });
     },
+    
+    loadTopActivityUsers(){
+      let param = deepCopy(selectParam);
+      param.size = 16; // get top 16 activity users
+      param.orderPhrases[userOrderPhrasesModel.activity] = DESC;
+      
+      userList(param).then((res)=>{
+          if (res && res.data) {
+          let data = JSON.parse(res.data);
+          this.topActivityUsers = data.listData ? data.listData : [];
+        }
+      });
+    },
 
     loadTopBulltins() {
       let param = deepCopy(selectParam);
@@ -309,10 +328,6 @@ export default {
           this.topBulltins = data.listData ? data.listData : [];
         }
       });
-    },
-
-    loadTopActivityUsers() {
-      
     },
 
     loadTopCommentResource() {},
@@ -344,7 +359,7 @@ export default {
     handleLogout() {
       logout().then((res) => {
         this.$store.commit(types.APP + "/" + types.LOGOUT);
-        this.$router.push({ path: "/home/index", replace: true });
+        this.$router.push({ path: "/admin/logout", replace: true });
       });
     },
   },

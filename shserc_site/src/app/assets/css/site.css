@@ -596,8 +596,8 @@ button {
 
 .ranking_square {
     /* border-bottom: 1px dotted #bfbfbf; */
-    padding-bottom: 20px;
-    margin-bottom: 40px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .ranking_square img.cover {

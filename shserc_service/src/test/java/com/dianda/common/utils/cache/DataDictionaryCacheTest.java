@@ -46,9 +46,9 @@ public class DataDictionaryCacheTest {
 	
 	@Test
 	public void translateTest( ) {
-		String gender = cache.translate ( "gender" , "1" );
-		String gender2 = cache.translate ( "gender" , "0" );
-		String gender3 = cache.translate ( "gender" , "2" );
+		String gender = cache.translate ( "gender" , "1" ,"default");
+		String gender2 = cache.translate ( "gender" , "0" ,"default");
+		String gender3 = cache.translate ( "gender" , "2", "default" );
 		
 		Assert.assertTrue ( gender.equals ( "男" ) );
 		Assert.assertTrue ( gender2.equals ( "女" ) );

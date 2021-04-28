@@ -40,5 +40,11 @@ export const messages = {
 
     SUCCESS: "编辑成功",
 
-    MUST_LOGIN_FIRST: "请先登录!"
+    MUST_LOGIN_FIRST: "请先登录!",
+
+    CONFIRM: "提示",
+    WHETHER_IS_CONFIRM: "是否确定此操作？",
+    IS_CONFIRM: "确定",
+    IS_CANCEL: "取消"
+
 }

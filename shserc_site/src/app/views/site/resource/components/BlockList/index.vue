@@ -20,8 +20,9 @@
 
           <!-- widget content start-->
           <div class="widget-content">
-            <router-link to="/resource/details">
+            <router-link :to="{path:'/resource/details/'+resource.item.id}">
               <img
+                :title="resource.item.title "
                 class="cover"
                 :src="resource.item.coverPath"
                 :style="{
@@ -40,7 +41,7 @@
                 <el-tag type="info">下载量：{{ resource.item.viewCount}}</el-tag>
                 <el-tag type="danger"> 格式： {{resource.item.fileExtName}}</el-tag>
               </p>
-              <el-rate v-model="value2" :colors="colors"> </el-rate>
+              <el-rate v-model="value2" :colors="colors" disabled> </el-rate>
             </div>
           </div>
           <!-- widget content end-->
@@ -72,7 +73,7 @@ export default {
   data() {
     return {
       value1: null,
-      value2: null,
+      value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"], // 等同于 { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
     };
   },

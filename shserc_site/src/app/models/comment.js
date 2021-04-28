@@ -2,6 +2,7 @@ import { CDN } from "@/static/CDN"
 
 export const commentModel = {
     id: 0,
+    userId: 0,
     auditorName: "",
     addUserName: "",
     resourceTitle: "",

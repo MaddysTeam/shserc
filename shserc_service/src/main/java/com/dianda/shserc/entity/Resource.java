@@ -3,6 +3,7 @@ package com.dianda.shserc.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.common.entity.BaseEntity;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
+import com.dianda.shserc.common.Constant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -141,16 +142,16 @@ public class Resource extends BaseEntity {
 	}
 
 	public static void dictTranslate(Resource resource, DictionaryCache cache) {
-		resource.deformity = cache.translate("deformity", String.valueOf(resource.getDeformityId()));
-		resource.state = cache.translate("state", String.valueOf(resource.getStateId()));
-		resource.domain = cache.translate("domain", String.valueOf(resource.getDomainId()));
-		resource.importSource = cache.translate("importSource", String.valueOf(resource.getImportSourceId()));
-		resource.schoolType = cache.translate("schoolType", String.valueOf(resource.getSchoolTypeId()));
-		resource.stage = cache.translate("stage", String.valueOf(resource.getStageId()));
-		resource.grade = cache.translate("grade", String.valueOf(resource.getGradeId()));
-		resource.learnFrom=cache.translate("learnFrom", String.valueOf(resource.getLearnFromId ()));
-		resource.resourceType=cache.translate("resourceType", String.valueOf(resource.getResourceTypeId ()));
-		resource.subject=cache.translate("subject", String.valueOf(resource.getSubjectId ()));
+		resource.deformity = cache.translate("deformity", String.valueOf(resource.getDeformityId()), Constant.Dictonary.All );
+		resource.state = cache.translate("state", String.valueOf(resource.getStateId()), Constant.Dictonary.All );
+		resource.domain = cache.translate("domain", String.valueOf(resource.getDomainId()), Constant.Dictonary.All );
+		resource.importSource = cache.translate("importSource", String.valueOf(resource.getImportSourceId()), Constant.Dictonary.All );
+		resource.schoolType = cache.translate("schoolType", String.valueOf(resource.getSchoolTypeId()), Constant.Dictonary.All );
+		resource.stage = cache.translate("stage", String.valueOf(resource.getStageId()), Constant.Dictonary.All );
+		resource.grade = cache.translate("grade", String.valueOf(resource.getGradeId()), Constant.Dictonary.All );
+		resource.learnFrom=cache.translate("learnFrom", String.valueOf(resource.getLearnFromId ()), Constant.Dictonary.All );
+		resource.resourceType=cache.translate("resourceType", String.valueOf(resource.getResourceTypeId ()), Constant.Dictonary.All );
+		resource.subject=cache.translate("subject", String.valueOf(resource.getSubjectId ()), Constant.Dictonary.All );
 	}
 }
 

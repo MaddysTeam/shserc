@@ -28,3 +28,7 @@ export const userRoleModel = {
     userId: 0,
     roleId: 0
 }
+
+export const userOrderPhrasesModel = {
+    activity: "activity",
+}

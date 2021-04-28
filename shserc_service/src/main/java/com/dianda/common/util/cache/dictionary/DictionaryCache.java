@@ -32,7 +32,7 @@ public class DictionaryCache {
 	@Resource
 	IDictionaryService service;
 	
-	public String translate( String code , String value ) {
+	public String translate( String code , String value, String defaultValue ) {
 		//TODO: parent code ->  children -> find name by value
 		CacheObject o = manager.getCache ( KEY );
 		if ( ObjectUtil.isNull ( o ) || ObjectUtil.isNull ( o.getMap ( ) ) ) {
@@ -56,7 +56,7 @@ public class DictionaryCache {
 			}
 		}
 		
-		return null;
+		return defaultValue;
 	}
 	
 	public CacheObject getCache( ) {

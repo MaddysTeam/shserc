@@ -8,7 +8,6 @@ export function myFavoriteList() {
     return axios.post('api/my/favorite')
 }
 
-
 export function downloadList() {
     return axios.post('api/my/download', )
 }

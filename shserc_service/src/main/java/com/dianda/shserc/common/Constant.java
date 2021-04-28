@@ -94,11 +94,21 @@ public final class Constant {
 		public final static String DESC = "DESC";
 	}
 	
+	public static final  class Dictonary{
+		public final  static String All="不限";
+	}
+	
 	public static final class OrderPhraseMapping{
 		
 		public  final static Map<String,String> getOrderPhraseMapping(){
 			Map<String,String> orderPhraseMapping=new HashMap<> (  );
+			// resource
 			orderPhraseMapping.put ( "favorite" ,"favorite_count");
+			orderPhraseMapping.put ( "download" ,"download_count");
+			orderPhraseMapping.put ( "comment" ,"comment_count");
+			
+			// user
+			orderPhraseMapping.put("activity","login_count");
 			
 			return orderPhraseMapping;
 		}

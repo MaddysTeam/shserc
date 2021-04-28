@@ -67,6 +67,7 @@ import {
 import * as types from "@/app/static/type";
 import { login } from "@/app/api/account";
 import { loginModel } from "@/app/models/account.js";
+import { initMenus } from "@/app/utils/menuHelper";
 
 export default {
   components:{Verify},
@@ -145,11 +146,15 @@ export default {
                 JSON.parse(res.data)
               );
 
-                _this.$router.push({
+              // to fix menu list is not show in admin site 
+               initMenus(_this.$store, res.data.roleId, () => {
+                 _this.$router.push({
                   path: "/home/index",
                   replace:  true,
                   query: { _time: new Date().getTime() / 1000 },
                 });
+              });
+
             }
           });
         } else {

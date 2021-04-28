@@ -69,6 +69,7 @@
 import Info from "@/app/views/site/account/components/Space/info";
 import DownloadList from   "@/app/views/site/account/components/Space/downloadList";
 import FavoriteList  from   "@/app/views/site/account/components/Space/favoriteList";
+import { mapState } from "vuex";
 
 export default {
   components: { Info,DownloadList ,FavoriteList},
@@ -78,6 +79,20 @@ export default {
       activeIndex: "1",
     };
   },
+
+  mounted(){
+     if(!this.isLogin){
+        this.$router.push("/account/login");
+     }
+  },
+
+   computed:{
+    ...mapState({
+        isLogin:(state)=>state.app.isAuth,
+        account: (state)=>state.app.account
+    })
+  },
+
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);

@@ -25,10 +25,10 @@
           作者：<span>{{ resource.item.author }}</span> 单位：<span>{{
             resource.item.authorCompany
           }}</span
-          ><br />
-          上传日期：<span>{{ resource.item.addTime }}</span> 点击量：<span>{{
+          ><p/>
+           <el-tag>上传日期：<span>{{ resource.item.addTime }}</span></el-tag> <el-tag type="success">点击量：<span>{{
             resource.item.viewCount
-          }}</span>
+          }}</span></el-tag>
           <el-tag type="danger"> 格式： {{ resource.item.fileExtName }}</el-tag>
         </div>
       </div>

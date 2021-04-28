@@ -3,6 +3,7 @@ package com.dianda.shserc.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.common.entity.BaseEntity;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
+import com.dianda.shserc.common.Constant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -117,14 +118,14 @@ public class Package extends BaseEntity {
 	}
 	
 	public static void dictTranslate(Package packages, DictionaryCache cache) {
-		packages.deformity = cache.translate("deformity", String.valueOf(packages.getDeformityId()));
-		packages.state = cache.translate("state", String.valueOf(packages.getStateId()));
-		packages.domain = cache.translate("domain", String.valueOf(packages.getDomainId()));
-		packages.schoolType = cache.translate("schoolType", String.valueOf(packages.getSchoolTypeId()));
-		packages.stage = cache.translate("stage", String.valueOf(packages.getStageId()));
-		packages.grade = cache.translate("grade", String.valueOf(packages.getGradeId()));
-		packages.learnFrom=cache.translate("learnFrom", String.valueOf(packages.getLearnFromId ()));
-		packages.subject=cache.translate("subject", String.valueOf(packages.getSubjectId ()));
+		packages.deformity = cache.translate("deformity", String.valueOf(packages.getDeformityId()), Constant.Dictonary.All );
+		packages.state = cache.translate("state", String.valueOf(packages.getStateId()), Constant.Dictonary.All );
+		packages.domain = cache.translate("domain", String.valueOf(packages.getDomainId()), Constant.Dictonary.All );
+		packages.schoolType = cache.translate("schoolType", String.valueOf(packages.getSchoolTypeId()), Constant.Dictonary.All );
+		packages.stage = cache.translate("stage", String.valueOf(packages.getStageId()), Constant.Dictonary.All );
+		packages.grade = cache.translate("grade", String.valueOf(packages.getGradeId()), Constant.Dictonary.All );
+		packages.learnFrom=cache.translate("learnFrom", String.valueOf(packages.getLearnFromId ()), Constant.Dictonary.All );
+		packages.subject=cache.translate("subject", String.valueOf(packages.getSubjectId ()), Constant.Dictonary.All );
 	}
 	
 }

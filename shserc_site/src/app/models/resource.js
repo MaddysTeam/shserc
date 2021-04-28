@@ -40,9 +40,42 @@ export const resourceModel = {
     favoriteCount: 0,
     commentCount: 0,
     isVideo: false,
-    isFile: false
-
+    isFile: false,
+    starTotal: 0,
+    starCount: 1,
 };
+
+export const starScores = [{
+    score: 1,
+    count: 0,
+    format: function(percentage) {
+        return "1分：" + starScores[0].count + "人";
+    }
+}, {
+    score: 2,
+    count: 0,
+    format: function(percentage) {
+        return "2分：" + starScores[1].count + "人";
+    }
+}, {
+    score: 3,
+    count: 0,
+    format: function(percentage) {
+        return "3分：" + starScores[2].count + "人";
+    }
+}, {
+    score: 4,
+    count: 0,
+    format: function(percentage) {
+        return "4分：" + starScores[3].count + "人";
+    }
+}, {
+    score: 5,
+    count: 0,
+    format: function(percentage) {
+        return "5分：" + starScores[4].count + "人";
+    }
+}]
 
 export const auditModel = {
     resourceId: 0,

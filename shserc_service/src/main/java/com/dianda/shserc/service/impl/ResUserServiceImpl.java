@@ -29,6 +29,7 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author huachao
@@ -52,17 +53,36 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 		
 		long companyId = params.getCompanyId ( );
 		String phrase = params.getSearchPhrase ( );
+		Map<String, String> orderPhrases = params.getOrderPhrases ( );
 		int current = params.getCurrent ( );
 		int size = params.getSize ( );
 		
 		// build search condition
 		
 		QueryWrapper<ResUser> wrapper = new QueryWrapper<> ( );
+		wrapper.eq("u.is_deleted",0);
+		
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) )
 			wrapper = wrapper.like ( "user_name" , phrase );
 		
 		if ( companyId > 0 ) {
 			wrapper.eq ( "company_id" , companyId );
+		}
+		
+		// order phrase
+		
+		if ( ! ObjectUtil.isNull ( orderPhrases ) && orderPhrases.size ( ) > 0 ) {
+			for ( Map.Entry<String, String> entry : orderPhrases.entrySet ( ) ) {
+				String direction = entry.getValue ( );
+				String orderPhrase = params.translateOrderPhrase ( entry.getKey ( ) );
+				if ( direction.equals ( Constant.OrderDirection.ASC ) ) {
+					wrapper = wrapper.orderByAsc ( orderPhrase );
+				} else if ( direction.equals ( Constant.OrderDirection.DESC ) ) {
+					wrapper = wrapper.orderByDesc ( orderPhrase );
+				}
+			}
+		} else {
+			wrapper = wrapper.orderByDesc ( "id" );
 		}
 		
 		// get paged list data

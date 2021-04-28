@@ -19,3 +19,15 @@ export function audit(auditParams) {
 export function favorite(id) {
     return axios.post('api/resource/favorite/' + id);
 }
+
+export function star(id, score) {
+    return axios.post('api/resource/star/' + id + '/' + score);
+}
+
+export function download(id) {
+    return axios.post('api/resource/download/' + id);
+}
+
+export function listStarScores(id) {
+    return axios.post('api/resource/stars/' + id);
+}

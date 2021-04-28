@@ -41,7 +41,12 @@
               <div class="opbar">
                 <div class="stars">
                   <b>点击评分：</b>
-                  <el-rate v-model="value2" :colors="colors"> </el-rate>
+                  <el-rate
+                    v-model="starScore"
+                    :colors="colors"
+                    @change="handleStar()"
+                  >
+                  </el-rate>
                 </div>
                 <div class="buttons">
                   <el-button
@@ -87,14 +92,14 @@
                     </div>
                     <div class="half right">
                       <el-progress
-                        v-for="i in [0, 1, 2, 3, 4]"
-                        :key="i"
-                        :format="progressFormats[i]"
+                        v-for="scoreObj in starScores"
+                        :key="scoreObj.score"
+                        :format="scoreObj.format"
                         :text-inside="true"
                         :stroke-width="24"
-                        :percentage="10"
+                        :percentage="scoreObj.percentage"
                         class="m_10_bottom"
-                        :color="progressColors[i]"
+                        :color="progressColors[scoreObj.score - 1]"
                       ></el-progress>
                     </div>
                   </div>
@@ -155,15 +160,19 @@
                 <div class="comment_input">
                   <h3>您的评论</h3>
 
-                  <el-form ref="commentForm" :model="commentForm" >
-                  <textarea   v-model="commentForm.content"></textarea>
+                  <el-form ref="commentForm" :model="commentForm">
+                    <textarea v-model="commentForm.content"></textarea>
                   </el-form>
 
                   <div class="comment_num">240</div>
                   <el-button type="info" disabled="disabled" v-if="!isLogin">
                     登录后可发表评论
                   </el-button>
-                  <el-button type="primary" v-if="isLogin" @click="handleSendComment()">
+                  <el-button
+                    type="primary"
+                    v-if="isLogin"
+                    @click="handleSendComment()"
+                  >
                     提交评论
                   </el-button>
                 </div>
@@ -219,13 +228,23 @@ import { AUDIT_SUCCESS_ID } from "@/app/static/type";
 import { messages } from "@/app/static/message.js";
 import CommentList from "@/app/views/site/comment/components/List/index";
 import TopList from "@/app/views/site/resource/components/TopList/index";
-import { resourceModel, videoOptions } from "@/app/models/resource";
-import { selectParam as commentSelectParam,commentModel } from "@/app/models/comment";
+import { resourceModel, videoOptions, starScores } from "@/app/models/resource";
+import {
+  selectParam as commentSelectParam,
+  commentModel,
+} from "@/app/models/comment";
 import { appEnum } from "@/app/static/enum";
-import { list as resourceList, info, favorite } from "@/app/api/resource";
+import {
+  list as resourceList,
+  info,
+  favorite,
+  star,
+  listStarScores,
+} from "@/app/api/resource";
 import { list as commentList, edit as commentEdit } from "@/app/api/comment";
 import { myFavoriteList } from "@/app/api/my";
 import { downloadFile } from "@/static/file";
+import { deepCopy } from "@/app/utils/objectHelper";
 
 export default {
   components: { CommentList, TopList },
@@ -239,47 +258,79 @@ export default {
 
   data() {
     return {
-      value1: null,
-      value2: null,
+      starScore: null,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       commentSelectParam: commentSelectParam,
-      commentModel:commentModel,
+      commentModel: commentModel,
       resource: resourceModel,
       appEnum: appEnum,
+
       progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],
       progressIndex: 0,
       progressFormats: [],
+      starScores: [],
+      starTotal: 1,
+
       relativeResources: [],
       topVisitResources: [],
       comments: [],
       isFavorite: false,
-      commentForm:{content:""}
+      commentForm: { content: "" },
     };
   },
 
   mounted() {
+    let _this = this;
+    this.starScores = 
+    [
+      {
+        score: 1,
+        count: 0,
+        percentage: 10,
+        format: function (percentage) {
+          return "1分：" + _this.starScores[0].count + "人";
+        },
+      },
+      {
+        score: 2,
+        count: 0,
+        percentage: 10,
+        format: function (percentage) {
+          return "2分：" + _this.starScores[1].count + "人";
+        },
+      },
+      {
+        score: 3,
+        count: 0,
+        percentage: 10,
+        format: function (percentage) {
+          return "3分：" + _this.starScores[2].count + "人";
+        },
+      },
+      {
+        score: 4,
+        count: 0,
+        percentage: 10,
+        format: function (percentage) {
+          return "4分：" + _this.starScores[3].count + "人";
+        },
+      },
+      {
+        score: 5,
+        count: 0,
+        percentage: 10,
+        format: function (percentage) {
+          return "5分：" + _this.starScores[4].count + "人";
+        },
+      },
+    ];
+
     this.loadResourceInfo();
     this.loadTopVisitResourceList();
     this.loadTopVisitResourceList();
     this.loadComments();
     this.checkIsFavorite();
-
-    let totalCount = 8;
-    this.progressFormats.push(function (percentage) {
-      return "5分：" + 1 + "人";
-    });
-    this.progressFormats.push(function (percentage) {
-      return "4分：" + 1 + "人";
-    });
-    this.progressFormats.push(function (percentage) {
-      return "3分：" + 0 + "人";
-    });
-    this.progressFormats.push(function (percentage) {
-      return "2分：" + 0 + "人";
-    });
-    this.progressFormats.push(function (percentage) {
-      return "1分：" + 0 + "人";
-    });
+    this.loadStarScores();
   },
 
   methods: {
@@ -290,6 +341,10 @@ export default {
           this.resource = JSON.parse(res.data);
           this.resource.isVideo =
             this.resource.fileExtName.indexOf(appEnum.fileExtNames.video) >= 0;
+          this.starScore =
+            this.resource.starCount == 0
+              ? 0
+              : Math.floor(this.resource.starTotal / this.resource.starCount);
         }
       });
     },
@@ -311,6 +366,27 @@ export default {
           selectParam.total = data.total;
           this.comments = data.listData ? data.listData : [];
         }
+      });
+    },
+
+    loadStarScores() {
+      let id = this.$router.currentRoute.params.id;
+      listStarScores(id).then((res) => {
+        if (res && res.data) {
+          let data = JSON.parse(res.data);
+          let source = data.listData ? data.listData : [];
+          for (let i in source) {
+            let score = source[i].score;
+            let scoreObj = this.starScores[score - 1];
+            if (score > 0) scoreObj.count += 1;
+            scoreObj.percentage =
+              Math.floor(scoreObj.count / source.length) == 0
+                ? 10
+                : Math.floor(scoreObj.count /  source.length) * 100;
+          }
+        }
+
+        console.log(this.starScores);
       });
     },
 
@@ -359,23 +435,21 @@ export default {
 
     handleSendComment() {
       let resourceId = this.$router.currentRoute.params.id;
-    
-      // comment.content= 
-      this.$refs["commentForm"].validate((vaild)=>{
-         if(vaild){
-              commentModel.resourceId=resourceId;
-              commentModel.userId= this.account.id;
-              commentModel.content=this.commentForm.content;
-              alert(this.commentForm.content);
-              commentEdit(commentModel).then((res) => {
-                  if (res) {
-                    this.$notification.success({message: messages.SUCCESS});
-                    this.loadComments();
-                  }
-                });
-         }
+
+      // comment.content=
+      this.$refs["commentForm"].validate((vaild) => {
+        if (vaild) {
+          commentModel.resourceId = resourceId;
+          commentModel.userId = this.account.id;
+          commentModel.content = this.commentForm.content;
+          commentEdit(commentModel).then((res) => {
+            if (res) {
+              this.$notification.success({ message: messages.SUCCESS });
+              this.loadComments();
+            }
+          });
+        }
       });
- 
     },
 
     handleDownload(fileName, path) {
@@ -383,6 +457,18 @@ export default {
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
         downloadFile(fileName, path);
+      }
+    },
+
+    handleStar() {
+      if (!this.isLogin) {
+        this.starScore = 0;
+        this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
+      } else {
+        let resourceId = this.$router.currentRoute.params.id;
+        star(resourceId, this.starScore).then((res) => {
+          this.$notification.success({ message: messages.SUCCESS });
+        });
       }
     },
   },

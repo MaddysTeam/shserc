@@ -1,7 +1,9 @@
 package com.dianda.shserc.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.dianda.common.security.shiro.util.ShiroUtil;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.dto.ChangePasswordDto;
 import com.dianda.shserc.dto.ForgetPasswordDto;
@@ -22,6 +24,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 /**
  * @author hauchao
@@ -47,14 +50,14 @@ public class AccountServiceImpl implements IAccountService {
 			String loginToken = JwtOperation.Sign ( loginJson , System.currentTimeMillis ( ) );
 			Subject subject = SecurityUtils.getSubject ( );
 			subject.login ( new JwtToken ( loginToken ) );
-			
-			// if login succes, get userinfo from shiro
-//			JSONObject userObject = ShiroUtil.getLoginUser();
-//			ResUser user = new ResUser();
-//			user.setId(userObject.getInteger("id"));
-//			user.setLastLoginTime(LocalDateTime.now());  // record last login time
-//			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
-//			userMapper.updateById(user);
+
+			// if login succes, record last login date and login count
+			JSONObject userObject = ShiroUtil.getLoginUser();
+			ResUser user = new ResUser();
+			user.setId(userObject.getInteger("id"));
+			user.setLastLoginTime( LocalDateTime.now());  // record last login time
+			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
+			userMapper.updateById(user);
 			
 			// if login success,we can get token from subject and save it
 			String token = subject.getPrincipal ( ).toString ( );
