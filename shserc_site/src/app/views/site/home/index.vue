@@ -12,7 +12,7 @@
 
     <!-- advance search box start -->
     <div class="block_panel">
-      <searchArea @handleSearch="handleSearchResource()"></searchArea>
+      <searchArea @handleSearch="handleSearchResource" :isForceSearch="false"></searchArea>
     </div>
     <!-- advance search box end -->
 
@@ -28,17 +28,22 @@
             <ResourceBlockList
               :coverWidth="184"
               :coverHeight="120"
-              :source="topFavoriteResources"
+              :source="bestFavoriteResources"
             ></ResourceBlockList>
           </div>
         </div>
         <div class="block_panel">
-          <p class="panel_title">
+          <p class="panel_title flex_space_between">
             <span><i class="el-icon-s-order"></i> 资源排行</span>
+            <section class="font15">
+              <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
+              <span class="cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.commentCount)"> <i class="el-icon-chat-line-round"></i> 评论次数 </span>
+             <span class="m_10 cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.downloadCount)"> <i class="el-icon-download"></i> 下载次数</span>
+             </section>
           </p>
 
           <div class="body">
-            <ResourceList :source="topVisitResources"></ResourceList>
+            <ResourceList :source="topSource"></ResourceList>
           </div>
         </div>
       </el-col>
@@ -56,7 +61,7 @@
                 account.userName
               }}</span
             >
-            <el-avatar :size="50" :src="account.photoPath"></el-avatar>
+            <el-avatar v-if="isLogin" :size="50" :src="account.photoPath"></el-avatar>
           </p>
           <div>
             <!-- login form start-->
@@ -115,30 +120,15 @@
                 >
               </div>
               <p></p>
+              <div>
+                <i class="el-icon-s-tools"></i>
+                <router-link to="/admin" class="link orange"
+                  >进入后台管理</router-link
+                >
+              </div>
+              <p></p>
               <div>  <el-link type="danger" class="link" @click="handleLogout()"><i class="el-icon-info"></i> 退出我的登录</el-link></div>
 
-              <!-- <div class="m_10_top">
-                <el-progress
-                  type="circle"
-                  :percentage="100"
-                  :width="60"
-                ></el-progress>
-                <el-progress
-                  type="circle"
-                  :percentage="100"
-                  :width="60"
-                ></el-progress>
-                <el-progress
-                  type="circle"
-                  :percentage="100"
-                  :width="60"
-                ></el-progress>
-                <el-progress
-                  type="circle"
-                  :percentage="100"
-                  :width="60"
-                ></el-progress>
-              </div> -->
             </div>
             <!-- login info end-->
 
@@ -169,13 +159,14 @@
         </div>
         <!-- activity user list end -->
 
-        <!-- activity user list start -->
+        <!-- bulletin list start -->
         <div class="block_panel">
           <p class="panel_title">
             <span><i class="el-icon-chat-round"></i> 消息公告</span>
           </p>
           <div>
-            <BulltinList listType="list" :source="topBulltins">
+
+            <BulltinList listType="ulList" :source="topBulltins" containerClass="compact_list">
               <template slot="item" slot-scope="bulltin" >
                 <li>
                   <router-link to="/Resource/View/1332"
@@ -184,29 +175,11 @@
                 </li>
               </template>
             </BulltinList>
-            <!-- <ul class="compact_list">
-              <li>
-                <a href="/Resource/View/1333"
-                  ><span class="square">1</span> 公告1</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1334"
-                  ><span class="square">2</span> 公告2</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1335"
-                  ><span class="square">3</span> 公告3</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1332"><span>4</span> 公告4</a>
-              </li>
-            </ul> -->
+
           </div>
         </div>
-        <!-- activity user list end -->
+         <!-- bulletin list end -->
+
       </el-col>
     </el-row>
 
@@ -226,13 +199,13 @@
 <script>
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
-import { selectParam ,orderPhrasesModel} from "@/app/models/resource";
-import {userOrderPhrasesModel} from "@/app/models/user";
+import { selectParam, orderPhrasesModel } from "@/app/models/resource";
+import { userOrderPhrasesModel } from "@/app/models/user";
 import { accountModel } from "@/app/models/account";
 import { rseoureBulletinList } from "@/app/api/bulletin";
 import { list } from "@/app/api/resource";
 import { login, logout } from "@/app/api/account";
-import {list as userList} from "@/app/api/user"
+import { list as userList } from "@/app/api/user";
 import { operationCount } from "@/app/api/my";
 import searchArea from "@/app/views/site/resource/components/SearchArea";
 import { loginModel } from "@/app/models/account";
@@ -242,7 +215,6 @@ import ResourceList from "@/app/views/site/resource/components/List";
 import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
 import ActivityUserList from "@/components/List/index";
 import BulltinList from "@/components/List/index";
-
 
 export default {
   components: {
@@ -256,11 +228,10 @@ export default {
     return {
       loginModel: loginModel,
       selectParam: selectParam,
-      topFavoriteResources: [],
-      topVisitResources: [],
-      topCommentResources: [],
-      topDownloadResources: [],
-      topActivityUsers:[],
+      bestFavoriteResources: [],
+      topSource: [],
+      topActivityUsers: [],
+
       topBulltins: [],
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
@@ -276,44 +247,44 @@ export default {
   },
 
   mounted() {
-    this.loadTopFavoriteResources();
-    this.loadTopVisitResource();
+    this.loadBestFavoriteResources();
+    this.loadTopRankResource(orderPhrasesModel.viewCount);
     this.loadTopActivityUsers();
     this.loadTopBulltins();
   },
 
   methods: {
-    loadTopFavoriteResources() {
+    loadBestFavoriteResources() {
       let param = deepCopy(selectParam);
       param.size = 6; // get top 12 favorite resources
       param.orderPhrases[orderPhrasesModel.favoriteCount] = DESC;
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
-          this.topFavoriteResources = data.listData ? data.listData : [];
+          this.bestFavoriteResources = data.listData ? data.listData : [];
         }
       });
     },
 
-    loadTopVisitResource() {
+    loadTopRankResource(sourceType) {
       let param = deepCopy(selectParam);
       param.size = 4; // get top 12 favorite resources
-      param.orderPhrases[orderPhrasesModel.viewCount] = DESC;
+      param.orderPhrases[sourceType] = DESC;
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
-          this.topVisitResources = data.listData ? data.listData : [];
+          this.topSource = data.listData ? data.listData : [];
         }
       });
     },
-    
-    loadTopActivityUsers(){
+
+    loadTopActivityUsers() {
       let param = deepCopy(selectParam);
       param.size = 16; // get top 16 activity users
       param.orderPhrases[userOrderPhrasesModel.activity] = DESC;
-      
-      userList(param).then((res)=>{
-          if (res && res.data) {
+
+      userList(param).then((res) => {
+        if (res && res.data) {
           let data = JSON.parse(res.data);
           this.topActivityUsers = data.listData ? data.listData : [];
         }
@@ -330,12 +301,8 @@ export default {
       });
     },
 
-    loadTopCommentResource() {},
-
-    loadTopDownloadResource() {},
-
-    handleSearchResource() {
-      this.$router.push("/resource/search");
+    handleSearchResource(param) {
+      this.$router.push("/resource/search?key="+param.searchPhrase);
     },
 
     handleLogin() {

@@ -107,7 +107,8 @@ export const selectParam = {
 export const orderPhrasesModel = {
     favoriteCount: "favorite",
     viewCount: "view",
-    downloadCount: "download"
+    downloadCount: "download",
+    comment: "comment"
 }
 
 

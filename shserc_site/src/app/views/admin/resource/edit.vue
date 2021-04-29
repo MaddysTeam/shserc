@@ -270,7 +270,7 @@
           action="#"
           :on-success="uploadResourceCoverSuccess"
           :http-request="uploadResourceCover"
-          :on-change="uploadOnChange"
+          :on-change="uploadCoverOnChange"
           :auto-upload="true"
           :show-file-list="false"
         >
@@ -502,13 +502,19 @@ export default {
     //upload resource file
 
     uploadResource(options) {
+      this.resource.resourcePath = "";
+      this.resource.fileName = "";;
+      this.resource.fileExtName = "";;
+      this.resource.fileSize = "";
       uploadFile(options);
     },
 
     uploadResourceHandleChange(file, fileList) {
-      if (fileList.length > 0) {
-        //TODO: will force upload  one file which will replace previous one
-      }
+      // var fileList = this.fileList;
+      // if (fileList.length > 0) {
+      //   fileList = [fileList[fileList.length - 1]];
+      // }
+      // this.fileList = fileList;
     },
 
     uploadResourceHandleExceed() {
@@ -521,7 +527,6 @@ export default {
 
     uploadResourceSuccess(response, file, fileList) {
       var data = JSON.parse(response.data);
-      console.log(data);
       this.resource.resourcePath = data.filePath;
       this.resource.fileName = data.fileName;
       this.resource.fileExtName = data.fileExtName;
@@ -539,7 +544,7 @@ export default {
     },
 
 
-    uploadOnChange(file, fileList) {
+    uploadCoverOnChange(file, fileList) {
       let coverList = this.coverList;
       if (coverList.length > 0) {
         coverList = [coverList[coverList.length - 1]];

@@ -1,6 +1,9 @@
 package com.dianda.shsedu.entity;
 
 import com.dianda.common.entity.BaseEntity;
+import lombok.Data;
 
-public class News extends BaseEntity {
+@Data
+public class News  {
+	private  long id;
 }

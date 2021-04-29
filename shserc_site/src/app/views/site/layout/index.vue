@@ -69,10 +69,11 @@
               <el-form class="m_10_top m_30_right search" >
                 <el-form-item class="searchBox">
                   <el-input
+                    v-model="searchPhrase"
                     prefix-icon="el-icon-search"
                     placeholder="资源搜索"
                   ></el-input>
-                  <el-button size="small" class="btn_login el-button el-button--primary searchButton"><i class="el-icon-search"></i></el-button>
+                  <el-button size="small" class="btn_login el-button el-button--primary searchButton" @click="handleSearchResource()"><i class="el-icon-search"></i></el-button>
                 </el-form-item>
               </el-form>
 
@@ -136,7 +137,7 @@ export default {
 
   data(){
     return{
-
+          searchPhrase:"" 
     }
   },
   
@@ -150,6 +151,11 @@ export default {
         this.$store.commit(types.APP + "/" + types.LOGOUT);
         this.$router.push({ path: "/admin/logout", replace: true });
       });
+    },
+
+    handleSearchResource() {
+      this.$router.push("/resource/search?key="+this.searchPhrase);
+      this.searchPhrase="";
     },
   }
 };

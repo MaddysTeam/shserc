@@ -491,6 +491,7 @@ button {
 .compact_list span.square {
     background-color: #f39800;
     color: #fff;
+    border-radius: 50%;
 }
 
 .compact_list span.square:after {

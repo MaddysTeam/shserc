@@ -263,6 +263,7 @@ export default {
       commentSelectParam: commentSelectParam,
       commentModel: commentModel,
       resource: resourceModel,
+      videoOptions:videoOptions,
       appEnum: appEnum,
 
       progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],

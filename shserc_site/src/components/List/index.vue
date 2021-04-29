@@ -8,6 +8,15 @@
     </div>
     <!-- list end -->
 
+
+      <!-- ul list start -->
+    <div class="list" v-if="listType == 'ulList'">
+      <ul :class="containerClass"  v-for="(item, index) in source" :key="index">
+        <slot name="item" :item="item"></slot>
+      </ul>
+    </div>
+    <!-- ul list end -->
+
     <!-- block custom list start -->
     <div class="list" v-if="listType == 'blockCustomList'">
       <el-row :gutter="20">
@@ -68,6 +77,7 @@ export default {
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },
     isShowPage: {type:Boolean,default:false},
+    containerClass:{type:String,default:""},
 
     handleChange: { type: Function },
     handlePageSizeChange:{type:Function},

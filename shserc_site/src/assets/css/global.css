@@ -71,6 +71,10 @@ a {
     font-size: 14px;
 }
 
+.font15 {
+    font-size: 15px;
+}
+
 .font12 {
     font-size: 12px;
 }
@@ -124,6 +128,14 @@ a {
 
 .link {
     color: #0076f3;
+}
+
+.cursor_pointer {
+    cursor: pointer;
+}
+
+.orange {
+    color: rgb(247, 150, 4);
 }
 
 .cursor_pointer {

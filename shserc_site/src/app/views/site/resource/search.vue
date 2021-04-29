@@ -3,12 +3,19 @@
     <div class="block_panel">
       <SearchArea
         :isShowAdvHit="true"
+        :isForceSearch="true"
         @handleSearch="handleSearch"
+        :defaultSearchPhrase="this.$route.query.key"
       ></SearchArea>
     </div>
     <div class="block_panel m_30_bottom">
       <p class="panel_title flex_space_between">
         <span><i class="el-icon-tickets"></i> 搜索结果</span>
+          <section class="font15 m_30_left ">
+              <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
+              <span class="cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.commentCount)"> <i class="el-icon-chat-line-round"></i> 评论次数 </span>
+             <span class="m_10 cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.downloadCount)"> <i class="el-icon-download"></i> 下载次数</span>
+             </section>
         <span>
           <el-link
             :underline="false"
@@ -66,7 +73,8 @@ export default {
   },
 
   mounted() {
-    this.loadResourceList();
+   //this.loadResourceList();
+
   },
 
   methods: {

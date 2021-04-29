@@ -5,8 +5,12 @@
     </p>
     <div class="search">
       <div class="search bar1">
-        <form >
-          <input v-model="searchPhrase" type="text" placeholder="请输入您要搜索的内容..." />
+        <form>
+          <input
+            v-model="searchPhrase"
+            type="text"
+            placeholder="请输入您要搜索的内容..."
+          />
           <button @click.prevent="handlePrevent" @click="handleSubmit()">
             <i class="el-icon-search" style="font-size: 26px; color: #eee"></i>
           </button>
@@ -47,13 +51,13 @@
               ></el-button>
             </li>
             <li v-for="item in selectedItems" :key="item.id">
-              <el-badge
-                :value="'x'"
-                class="item"
-              >
-                <el-tag class="cursor_pointer m_5" type="danger" @click="handleUnSelectItem(item)">{{
-                  item.name
-                }}</el-tag>
+              <el-badge :value="'x'" class="item">
+                <el-tag
+                  class="cursor_pointer m_5"
+                  type="danger"
+                  @click="handleUnSelectItem(item)"
+                  >{{ item.name }}</el-tag
+                >
               </el-badge>
             </li>
           </ul>
@@ -61,12 +65,12 @@
       </dl>
     </div>
 
-    <div class="text-center more" v-show="!isShowMoreOptions&&isShowAdvHit">
+    <div class="text-center more" v-show="!isShowMoreOptions && isShowAdvHit">
       <el-link @click="isShowMoreOptions = !isShowMoreOptions">
         <strong><i class="fa fa-arrow-down"></i> 更多条件</strong>
       </el-link>
     </div>
-    <div class="text-center less" v-show="isShowMoreOptions&&isShowAdvHit">
+    <div class="text-center less" v-show="isShowMoreOptions && isShowAdvHit">
       <el-link @click="isShowMoreOptions = !isShowMoreOptions">
         <strong><i class="fa fa-arrow-up"></i> 收起</strong>
       </el-link>
@@ -83,13 +87,15 @@ export default {
       type: Function,
     },
     isShowAdvHit: { type: Boolean },
+    isForceSearch: { type: Boolean },
+    defaultSearchPhrase: { type: String, default: "" },
   },
 
   data() {
     return {
       selectedItems: [],
       isShowMoreOptions: false,
-	  searchPhrase:'',
+      searchPhrase: "",
     };
   },
 
@@ -97,8 +103,18 @@ export default {
     ...mapState({
       //  dict: (state) => state.app.dict,
       allOptions: (state) => [
-        { title: "领 域", type:"domainId", isShow: true, items: state.app.resourceDomains },
-        { title: "分 类", type:"deformityId", isShow: true, items: state.app.deformity },
+        {
+          title: "领 域",
+          type: "domainId",
+          isShow: true,
+          items: state.app.resourceDomains,
+        },
+        {
+          title: "分 类",
+          type: "deformityId",
+          isShow: true,
+          items: state.app.deformity,
+        },
       ],
       //  deformityOptions: (state) => state.app.deformity,
       //   domainOptions: (state) => state.app.resourceDomains,
@@ -111,15 +127,23 @@ export default {
     }),
   },
 
+  mounted() {
+    this.searchPhrase = this.defaultSearchPhrase;
+    if (this.isForceSearch) this.handleSubmit();
+  },
+
   methods: {
     handlePrevent() {},
 
     handleSubmit() {
-      this.$emit("handleSearch",{searchPhrase:this.searchPhrase, selectItems:this.selectedItems});
+      this.$emit("handleSearch", {
+        searchPhrase: this.searchPhrase,
+        selectItems: this.selectedItems,
+      });
     },
 
     handleSelectItem(item, parent) {
-	  item["parent"]=parent;
+      item["parent"] = parent;
       for (let i in this.selectedItems) {
         if (this.selectedItems[i].id == item.id) {
           return false;
@@ -137,19 +161,19 @@ export default {
       for (let i in this.allOptions) {
         this.allOptions[i].isShow = true;
       }
-	   this.handleSubmit();
+      this.handleSubmit();
     },
 
     handleUnSelectItem(item) {
-		for(var i=0; i< this.selectedItems.length;i++){
-			let current=this.selectedItems[i];
-			 if(current.id ==item.id){
-				 current["parent"].isShow=true;
-				 this.selectedItems.splice(i,1)
-				 i-=1;
-			 }
-		}
-		 this.handleSubmit();
+      for (var i = 0; i < this.selectedItems.length; i++) {
+        let current = this.selectedItems[i];
+        if (current.id == item.id) {
+          current["parent"].isShow = true;
+          this.selectedItems.splice(i, 1);
+          i -= 1;
+        }
+      }
+      this.handleSubmit();
     },
   },
 };

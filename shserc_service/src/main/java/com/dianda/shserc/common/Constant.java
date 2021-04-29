@@ -104,6 +104,7 @@ public final class Constant {
 			Map<String,String> orderPhraseMapping=new HashMap<> (  );
 			// resource
 			orderPhraseMapping.put ( "favorite" ,"favorite_count");
+			orderPhraseMapping.put ( "view" ,"view_count");
 			orderPhraseMapping.put ( "download" ,"download_count");
 			orderPhraseMapping.put ( "comment" ,"comment_count");
 			
