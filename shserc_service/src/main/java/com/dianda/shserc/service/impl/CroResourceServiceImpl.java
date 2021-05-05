@@ -230,7 +230,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
 		wrapper.eq ( "resource_id" , userId ).eq ( "resource_id" , resourceId );
-		List<ResourceOperation> list = mapper.selectFavorite ( wrapper );
+		List<ResourceOperation> list = mapper.selectFavorites ( wrapper );
 		if ( ObjectUtil.isNull ( list ) || list.size ( ) <= 0 ) {
 			croResource.addFavoriteCount ( );
 			return mapper.updateById ( croResource ) + mapper.addFavorite ( resourceOperation ) == 2;

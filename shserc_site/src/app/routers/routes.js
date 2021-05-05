@@ -1,3 +1,5 @@
+import { appEnum } from '@/app/static/enum'
+
 import Admin from '@/app/views/admin/layout/index'
 import Login from '@/app/views/admin/account/login'
 import Empty from '@/app/views/admin/layout/empty'
@@ -25,6 +27,12 @@ import AccountLogin from '@/app/views/site/account/login'
 import AccountSpace from '@/app/views/site/account/space'
 import AccountRegister from '@/app/views/site/account/register'
 import ForgetPassword from '@/app/views/site/account/forgetPassword'
+
+import CroSite from '@/app/views/croSite/layout/index'
+import CroSiteHomeIndex from '@/app/views/croSite/home/index'
+import CroSIteResourceSearch from '@/app/views/croSite/resource/search'
+import CroMySpace from '@/app/views/croSite/account/space'
+
 
 export const menuRoutes = [{
         path: '/admin/dashboard/summary',
@@ -173,7 +181,10 @@ const frontendRoutes = [
         children: [{
                 path: '/home/index',
                 name: 'HomeIndex',
-                component: HomeIndex
+                component: HomeIndex,
+                meta: {
+                    title: appEnum.appTitle.site
+                },
             },
             {
                 path: '/resource/search',
@@ -204,9 +215,34 @@ const frontendRoutes = [
                 path: '/account/forgetPassword',
                 name: 'ForgetPassword',
                 component: ForgetPassword
-            }
+            },
         ],
         redirect: { name: 'HomeIndex' } // redirect to home index
+    },
+    {
+        path: '/croSite',
+        name: 'CroSite',
+        component: CroSite,
+        children: [{
+                path: '/croSite/home/index',
+                name: 'CroSiteHomeIndex',
+                component: CroSiteHomeIndex,
+                meta: {
+                    title: appEnum.appTitle.croSite
+                },
+            },
+            {
+                path: '/croSite/resource/search',
+                name: 'CooSiteRsourceSearch',
+                component: CroSIteResourceSearch
+            },
+            {
+                path: '/croSite/space',
+                name: 'CroMySpace',
+                component: CroMySpace
+            }
+        ],
+        redirect: { name: 'CroSiteHomeIndex' }
     }
 ]
 

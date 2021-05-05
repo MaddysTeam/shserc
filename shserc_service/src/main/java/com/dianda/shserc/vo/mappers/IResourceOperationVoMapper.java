@@ -1,6 +1,7 @@
 package com.dianda.shserc.vo.mappers;
 
 import com.dianda.common.util.mapper.BasicMapper;
+import com.dianda.shserc.entity.ResComment;
 import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.vo.ResourceOperationVo;
 import org.mapstruct.Mapper;
@@ -22,4 +23,5 @@ public interface IResourceOperationVoMapper extends BasicMapper<ResourceOperatio
 			@Mapping( source = "fileExtName", target = "fileExtName" ) ,
 	} )
 	ResourceOperationVo mapFrom( ResourceOperation resourceOperation );
+	
 }

@@ -5,6 +5,7 @@ import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.common.Constant;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IMyService;
+import com.dianda.shserc.vo.CommentVoList;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.ResourceOperationVoList;
 import org.springframework.validation.BindingResult;
@@ -40,12 +41,9 @@ public class MyController extends BaseController {
 	}
 	
 	@RequestMapping( path = "/download", method = RequestMethod.POST )
-	public JsonResult myDownloads( @RequestBody @Valid @Min( value = 1, message = Constant.Error.INVALID_ID ) long id , BindingResult bindingResult ) {
-		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( generateErrorMessage ( bindingResult ) );
-		}
-		
-		ResourceOperationVoList resourceOperationVoList = service.findFavorites ( id );
+	public JsonResult myDownloads( ) {
+		ResUser user=getLoginUserInfo ();
+		ResourceOperationVoList resourceOperationVoList = service.findDownloads ( user.getId () );
 		return JsonResult.success ( resourceOperationVoList );
 	}
 	
@@ -58,7 +56,9 @@ public class MyController extends BaseController {
 	
 	@RequestMapping( path = "/comment/", method = RequestMethod.POST )
 	public JsonResult myComments( ) {
-		return null;
+		ResUser user= getLoginUserInfo ();
+		CommentVoList resourceOperationVoList = service.findComments ( user.getId () );
+		return JsonResult.success ( resourceOperationVoList );
 	}
 	
 }

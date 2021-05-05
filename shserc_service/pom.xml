@@ -163,6 +163,12 @@
             <version>1.60</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>Dm7JdbcDriver17</artifactId>
+            <version>7.6.0.142</version>
+        </dependency>
+
     </dependencies>
 
     <build>

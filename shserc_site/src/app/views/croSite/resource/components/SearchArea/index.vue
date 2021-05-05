@@ -8,7 +8,7 @@
             type="text"
             placeholder="请输入您要搜索的内容..."
           />
-           <el-button type="primary" @click.prevent="handlePrevent" @click="handleSubmit()">
+          <el-button type="success" @click.prevent="handlePrevent" @click="handleSubmit()">
             <i class="el-icon-search" ></i>
           </el-button>
         </form>
@@ -22,24 +22,24 @@
         v-for="option in allOptions"
         :key="option.title"
       >
-        <dt>{{ option.title }}：</dt>
+        <dt class="green">{{ option.title }}：</dt>
         <dd>
           <ul id="domainChoose" class="items">
-            <li><el-button type="danger" size="mini">全部</el-button></li>
+            <li><el-button type="success" size="mini">全部</el-button></li>
             <li
               class="item"
               v-for="item in option.items"
               :key="item.id"
               @click="handleSelectItem(item, option)"
             >
-              <el-tag class="cursor_pointer m_5">{{ item.name }}</el-tag>
+              <el-tag class="cursor_pointer m_5 " type="success">{{ item.name }}</el-tag>
             </li>
           </ul>
         </dd>
       </dl>
 
       <dl class="selectItems hidden">
-        <dt>过滤条件：</dt>
+        <dt class="green">过滤条件：</dt>
         <dd>
           <ul id="selectItems">
             <li @click="handleUnSelectAllItems()">
@@ -51,7 +51,7 @@
               <el-badge :value="'x'" class="item">
                 <el-tag
                   class="cursor_pointer m_5"
-                  type="danger"
+                  type="success"
                   @click="handleUnSelectItem(item)"
                   >{{ item.name }}</el-tag
                 >

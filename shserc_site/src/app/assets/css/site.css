@@ -42,6 +42,13 @@
     line-height: 24px;
 }
 
+.site_cro_footer {
+    background-color: #313131;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
 .bk_gray {
     background-color: #f4f4f4;
     /* padding-bottom: 56px; */
@@ -135,10 +142,25 @@ dir {
     border-top: #7ab4ce 3px solid;
 }
 
+.block_panel.green_edge {
+    border-top: #578d38 3px solid;
+}
+
 .block_panel .panel_title {
     font-size: 18px;
     /* color: #f39800; */
     color: #0076f3;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #a0a0a0;
+    height: 20px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.block_panel .green_panel_title {
+    font-size: 18px;
+    /* color: #f39800; */
+    color: #578d38;
     padding-bottom: 40px;
     border-bottom: 1px solid #a0a0a0;
     height: 20px;
@@ -210,13 +232,18 @@ dir {
 
 .search .bar1 button {
     top: 0;
-    background-image: linear-gradient(135deg, rgb(252, 207, 49) 10%, rgb(245, 85, 85) 100%);
+    /* background-image: linear-gradient(135deg, rgb(252, 207, 49) 10%, rgb(245, 85, 85) 100%); */
     border-radius: 0 5px 5px 0;
 }
 
 .search .bar1 button:before {
-    font-size: 16px;
+    font-size: 26px;
     color: #F9F0DA;
+}
+
+.search .bar1 button i {
+    font-size: 26px;
+    color: #eee;
 }
 
 .search input,
@@ -227,6 +254,12 @@ button {
 
 .adv_hit {
     font-size: 14px;
+}
+
+.adv_hit .dash {
+    border: 1px #eee dashed;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .adv_hit dl {
@@ -243,7 +276,7 @@ button {
     font-weight: bold;
     font-size: 18px;
     /* color: #f39800; */
-    color: #0076f3;
+    /* color: #0076f3; */
     float: left;
     line-height: 22px;
 }

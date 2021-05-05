@@ -14,5 +14,9 @@ export const appEnum = {
 
     httpCode: {
         success: 200
+    },
+    appTitle: {
+        site: "上海特教资源库",
+        croSite: "上海特教资源众筹平台"
     }
 }

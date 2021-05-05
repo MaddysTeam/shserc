@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <div class="block_panel">
-     <p class="panel_title ">
-      <span><i class="el-icon-search"></i> 资源检索</span>
+    <div>
+    <div class="block_panel green_edge">
+     <p class="green_panel_title">
+      <span><i class="el-icon-search"></i> 众筹资源检索</span>
     </p>
-      <SearchArea
+      <CroSourceSearchArea
         :isShowAdvHit="true"
         :isForceSearch="true"
         @handleSearch="handleSearch"
         :defaultSearchPhrase="this.$route.query.key"
-      ></SearchArea>
+      ></CroSourceSearchArea>
     </div>
     <div class="block_panel m_30_bottom">
-      <p class="panel_title flex_space_between">
+      <p class="green_panel_title flex_space_between">
         <span><i class="el-icon-tickets"></i> 搜索结果</span>
           <section class="font15 m_30_left ">
               <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
@@ -24,7 +24,7 @@
             :underline="false"
             :type="listButtonType"
             @click="handleShowList()"
-            ><i class="el-icon-tickets font30"></i
+            ><i class="el-icon-tickets font30 green"></i
           ></el-link>
           <el-link
             :underline="false"
@@ -55,32 +55,30 @@
     </div>
   </div>
 </template>
+
 <script>
-import { list } from "@/app/api/resource";
+import { list } from "@/app/api/croResource";
 import { selectParam } from "@/app/models/resource.js";
-import SearchArea from "@/app/views/site/resource/components/SearchArea";
-import ResourceBlockList from "@/app/views/site/resource/components/BlockList";
-import ResourceList from "@/app/views/site/resource/components/List";
+import CroSourceSearchArea from "@/app/views/croSite/resource/components/SearchArea";
+import ResourceBlockList from "@/app/views/croSite/resource/components/BlockList";
+import ResourceList from "@/app/views/croSite/resource/components/List";
 import { deepCopy } from "@/app/utils/objectHelper";
+
+
 export default {
-  components: { SearchArea, ResourceBlockList, ResourceList },
+    components: { ResourceBlockList, ResourceList,CroSourceSearchArea },
 
-  data() {
-    return {
-      isShowList: true,
-      listButtonType: "primary",
-      blockListButtonType: "info",
-      selectParam: deepCopy(selectParam),
-      source: [],
-    };
-  },
+    data(){
+        return {
+            isShowList: true,
+            listButtonType: "primary",
+            blockListButtonType: "info",
+            selectParam: deepCopy(selectParam),
+            source: [],
+        }
+    },
 
-  mounted() {
-   //this.loadResourceList();
-
-  },
-
-  methods: {
+     methods: {
     handleShowBlockList() {
       this.isShowList = false;
       this.listButtonType = "info";
@@ -126,8 +124,6 @@ export default {
       });
     },
   },
-};
-</script>
 
-<style scoped>
-</style>
+}
+</script>

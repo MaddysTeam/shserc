@@ -46,11 +46,11 @@ export default {
   },
 
   mounted() {
-    this.loadCommentList();
+    this.loadFavoriteList();
   },
 
   methods: {
-    loadCommentList(current) {
+    loadFavoriteList(current) {
       if (current) {
         this.selectParam.current = current;
       }

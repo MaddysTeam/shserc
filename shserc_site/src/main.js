@@ -16,7 +16,7 @@ import router from '@/router'
 
 
 /** initial mock data */
-const mock = false;
+const mock = true;
 if (mock) {
     require('./app/mock/mock');
 }

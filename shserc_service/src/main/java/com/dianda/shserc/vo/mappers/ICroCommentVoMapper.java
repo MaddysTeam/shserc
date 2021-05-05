@@ -1,8 +1,7 @@
 package com.dianda.shserc.vo.mappers;
 
-import com.dianda.shserc.entity.CroComment;
-import com.dianda.shserc.entity.ResComment;
 import com.dianda.common.util.mapper.BasicMapper;
+import com.dianda.shserc.entity.CroComment;
 import com.dianda.shserc.vo.CommentVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,12 +10,12 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface ICommentVoMapper extends BasicMapper<CommentVo, ResComment> {
-	ICommentVoMapper INSTANCE = Mappers.getMapper(ICommentVoMapper.class);
-
+public interface ICroCommentVoMapper extends BasicMapper<CommentVo, CroComment> {
+	ICroCommentVoMapper INSTANCE = Mappers.getMapper(ICroCommentVoMapper.class);
+	
 	@Mappings({
 			@Mapping(source = "id", target = "id"),
-			@Mapping(source = "resourceId", target = "resourceId"),
+			@Mapping(source = "croResourceId", target = "resourceId"),
 			@Mapping(source = "content", target = "content"),
 			@Mapping(source = "auditType", target = "auditType"),
 			@Mapping(source = "auditorName", target = "auditorName"),
@@ -25,7 +24,5 @@ public interface ICommentVoMapper extends BasicMapper<CommentVo, ResComment> {
 			@Mapping(source = "addTime", target = "commentTime"),
 			@Mapping(source = "userPhotoPath", target = "userPhotoPath"),
 	})
-	CommentVo mapFrom(ResComment comment);
+	CommentVo mapFrom(CroComment comment );
 }
-
-

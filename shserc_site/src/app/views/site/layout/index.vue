@@ -65,7 +65,7 @@
                 >
               </li>
             </ul>
-            <div style="display:flex" class="m_5_top m_30_right">
+            <div class="flex_space_between m_5_top m_30_right">
               <el-form class="m_10_top m_30_right search" >
                 <el-form-item class="searchBox">
                   <el-input

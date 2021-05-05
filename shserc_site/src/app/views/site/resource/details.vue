@@ -240,6 +240,7 @@ import {
   favorite,
   star,
   listStarScores,
+  download
 } from "@/app/api/resource";
 import { list as commentList, edit as commentEdit } from "@/app/api/comment";
 import { myFavoriteList } from "@/app/api/my";
@@ -326,18 +327,21 @@ export default {
       },
     ];
 
+    this.resourceId=this.$router.currentRoute.params.id;
+
     this.loadResourceInfo();
     this.loadTopVisitResourceList();
     this.loadTopVisitResourceList();
     this.loadComments();
     this.checkIsFavorite();
     this.loadStarScores();
+    
   },
 
   methods: {
     loadResourceInfo() {
-      let id = this.$router.currentRoute.params.id;
-      info(id).then((res) => {
+      //let id = this.resourceId; //this.$router.currentRoute.params.id;
+      info( this.resourceId).then((res) => {
         if (res) {
           this.resource = JSON.parse(res.data);
           this.resource.isVideo =
@@ -356,7 +360,7 @@ export default {
 
     loadComments(current) {
       let selectParam = this.commentSelectParam;
-      selectParam.resourceId = this.$router.currentRoute.params.id;
+      selectParam.resourceId = this.resourceId;//this.$router.currentRoute.params.id;
       selectParam.stateId = AUDIT_SUCCESS_ID;
       if (current) {
         selectParam.current = current;
@@ -371,7 +375,7 @@ export default {
     },
 
     loadStarScores() {
-      let id = this.$router.currentRoute.params.id;
+      let id = this.resourceId; //this.$router.currentRoute.params.id;
       listStarScores(id).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
@@ -407,7 +411,7 @@ export default {
       if (!this.isLogin) {
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        let resourceId = this.$router.currentRoute.params.id;
+        let resourceId = this.resourceId;// this.$router.currentRoute.params.id;
         favorite(resourceId).then((res) => {
           this.$notification.success({ message: messages.SUCCESS });
 
@@ -420,7 +424,7 @@ export default {
       if (!this.isLogin) return false;
 
       this.isFavorite = false;
-      let resourceId = this.$router.currentRoute.params.id;
+      let resourceId = this.resourceId; // this.$router.currentRoute.params.id;
       myFavoriteList().then((res) => {
         if (res && res.data) {
           let listData = JSON.parse(res.data).listData;
@@ -435,9 +439,7 @@ export default {
     },
 
     handleSendComment() {
-      let resourceId = this.$router.currentRoute.params.id;
-
-      // comment.content=
+      let resourceId = this.resourceId;//this.$router.currentRoute.params.id;
       this.$refs["commentForm"].validate((vaild) => {
         if (vaild) {
           commentModel.resourceId = resourceId;
@@ -454,10 +456,15 @@ export default {
     },
 
     handleDownload(fileName, path) {
+      let resourceId = this.resourceId;
       if (!this.isLogin) {
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        downloadFile(fileName, path);
+        download(resourceId).then((res)=>{
+          if(res){
+              downloadFile(fileName, path);
+          }
+        });
       }
     },
 
@@ -466,7 +473,7 @@ export default {
         this.starScore = 0;
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        let resourceId = this.$router.currentRoute.params.id;
+        let resourceId = this.resourceId;// this.$router.currentRoute.params.id;
         star(resourceId, this.starScore).then((res) => {
           this.$notification.success({ message: messages.SUCCESS });
         });

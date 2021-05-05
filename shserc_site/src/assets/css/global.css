@@ -27,6 +27,10 @@ a {
     margin-bottom: 30px;
 }
 
+.m_10_bottom {
+    margin-bottom: 10px;
+}
+
 .m_30_right {
     margin-right: 30px;
 }
@@ -104,6 +108,10 @@ a {
     padding: 0px;
 }
 
+.height600 {
+    height: 600px;
+}
+
 .height300 {
     height: 300px;
 }
@@ -120,6 +128,10 @@ a {
     width: 200px;
 }
 
+.widthPercent60 {
+    width: 60%;
+}
+
 .flex_space_between {
     display: flex;
     flex-direction: row;
@@ -128,6 +140,7 @@ a {
 
 .link {
     color: #0076f3;
+    text-decoration: none;
 }
 
 .cursor_pointer {
@@ -138,6 +151,6 @@ a {
     color: rgb(247, 150, 4);
 }
 
-.cursor_pointer {
-    cursor: pointer;
+.green {
+    color: #578d38
 }

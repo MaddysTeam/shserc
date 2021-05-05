@@ -1,17 +1,16 @@
 package com.dianda.shserc.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dianda.shserc.entity.CroComment;
 import com.dianda.shserc.entity.ResComment;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResourceOperation;
-import com.dianda.shserc.mapper.ResCommentMapper;
-import com.dianda.shserc.mapper.ResUserMapper;
-import com.dianda.shserc.mapper.ResourceMapper;
-import com.dianda.shserc.service.IMyService;
+import com.dianda.shserc.mapper.*;
+import com.dianda.shserc.service.ICroMyService;
 import com.dianda.shserc.vo.*;
 import com.dianda.shserc.vo.mappers.ICommentVoMapperImpl;
+import com.dianda.shserc.vo.mappers.ICroCommentVoMapper;
 import com.dianda.shserc.vo.mappers.IResourceOperationVoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -30,16 +29,16 @@ import java.util.List;
 
 @Service
 @Validated
-public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implements IMyService {
+public class CroMyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implements ICroMyService {
 	
 	@Resource
 	ResUserMapper mapper;
 	
 	@Resource
-	ResourceMapper resourceMapper;
+	CroResourceMapper croResourceMapper;
 	
 	@Resource
-	ResCommentMapper commentMapper;
+	CroCommentMapper commentMapper;
 	
 	@Override
 	public ResUserVo findResourceOperationCount( long id ) {
@@ -61,7 +60,7 @@ public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implement
 	public ResourceOperationVoList findFavorites( long id ) {
 		QueryWrapper<ResourceOperation> wrapper=new QueryWrapper<> (  );
 		wrapper.eq ( "user_id", id );
-		List<ResourceOperation> operationList= resourceMapper.selectFavorites (wrapper );
+		List<ResourceOperation> operationList= croResourceMapper.selectFavorites (wrapper );
 		List<ResourceOperationVo> operationVoList =new ArrayList<> (  );
 		for(ResourceOperation resourceOperation : operationList){
 			operationVoList.add ( IResourceOperationVoMapper.INSTANCE.mapFrom ( resourceOperation ));
@@ -78,7 +77,7 @@ public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implement
 	public ResourceOperationVoList findDownloads( long id ) {
 		QueryWrapper<ResourceOperation> wrapper=new QueryWrapper<> (  );
 		wrapper.eq ( "user_id", id );
-		List<ResourceOperation> operationList= resourceMapper.selectDownloads (wrapper );
+		List<ResourceOperation> operationList= croResourceMapper.selectDownloads (wrapper );
 		List<ResourceOperationVo> operationVoList =new ArrayList<> (  );
 		for(ResourceOperation resourceOperation : operationList){
 			operationVoList.add ( IResourceOperationVoMapper.INSTANCE.mapFrom ( resourceOperation ));
@@ -92,13 +91,13 @@ public class MyServiceImpl extends ServiceImpl<ResUserMapper, ResUser> implement
 	
 	@Override
 	public CommentVoList findComments( long id ) {
-		QueryWrapper<ResComment> wrapper=new QueryWrapper<> (  );
+		QueryWrapper<CroComment> wrapper=new QueryWrapper<> (  );
 		wrapper.eq ("user_id", id   );
-		List<ResComment> commentList=commentMapper.selectList (wrapper  );
+		List<CroComment> commentList=commentMapper.selectList (wrapper  );
 		
 		List<CommentVo> listData =new ArrayList<> (  );
-		for(ResComment resComment : commentList){
-			listData.add ( ICommentVoMapperImpl.INSTANCE.mapFrom ( resComment ));
+		for(CroComment croComment : commentList){
+			listData.add ( ICroCommentVoMapper.INSTANCE.mapFrom ( croComment ));
 		}
 		
 		CommentVoList  commentVoList=new CommentVoList ();
