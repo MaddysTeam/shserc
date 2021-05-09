@@ -36,7 +36,7 @@
           <p class="green_panel_title flex_space_between">
             <span><i class="el-icon-star-on font20"></i> 热门资源</span>
              <span>
-               <router-link class="link font14" to=""><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
+               <router-link class="link font14" to="/croSite/resource/more"><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
             </span>
           </p>
 
@@ -52,7 +52,7 @@
           <p class="green_panel_title flex_space_between">
             <span><i class="el-icon-s-order"></i> 最新资源</span>
             <span>
-               <router-link class="link font14" to=""><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
+               <router-link class="link font14" to="/croSite/resource/more'"><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
             </span>
           </p>
 
@@ -127,9 +127,11 @@
         </div>
         <!-- login area end -->
 
-        <div class="block_panel ">
-           <span class="font20 "><i class="el-icon-upload font30"></i> 我要上传</span>
+        <router-link to="/croSite/space/declare">
+        <div class="block_panel cursor_pointer" style="background:#578d38; color:white" >   
+           <span class="font20 "><i class="el-icon-upload font30" style="font-size:25px;"></i>   我要上传</span>
         </div>
+         </router-link>
 
         <!-- activity user list start -->
         <div class="block_panel">

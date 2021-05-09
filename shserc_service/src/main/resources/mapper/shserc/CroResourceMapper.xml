@@ -33,52 +33,74 @@
         r.auditor,
         r.auditor_time,
         r.auditor_opinion,
+        r.create_type_id,
+        r. source_url,
         r.add_time
-        from resource r
+        from cro_resource r
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
     <insert id="addView" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_view (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into cro_view (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <insert id="addDownload" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_download (resource_id, user_id,add_time) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into cro_download (resource_id, user_id,add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <insert id="addFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">
-		 insert into res_favorite (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
+		 insert into cro_favorite (resource_id, user_id, add_time) values(#{resourceId} ,#{userId},#{addTime})
 	</insert>
 
     <delete id="deleteFavorite" parameterType="com.dianda.shserc.entity.ResourceOperation">
-        delete from res_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
+        delete from cro_favorite where  resource_id = #{resourceId} and  user_id=#{userId}
     </delete>
 
-    <select id="selectFavorite" resultType="com.dianda.shserc.entity.ResourceOperation">
+    <select id="selectFavorites" resultType="com.dianda.shserc.entity.ResourceOperation">
         select
-        resource_id,
-        user_id
-        from res_favorite
+        f.resource_id,
+        f.user_id,
+        r.title,
+        r.author,
+        r.file_ext_name
+        from cro_favorite f
+        join cro_resource r on r.id=f.resource_id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
-    <select id="selectStar" resultType="com.dianda.shserc.entity.ResourceOperation">
+    <select id="selectDownloads" resultType="com.dianda.shserc.entity.ResourceOperation"
+            parameterType="com.dianda.shserc.entity.ResourceOperation">
         select
-        resource_id,
-        user_id,
-        score as oper_int_result
-        from res_star
+        d.resource_id,
+        d.user_id,
+        r.title,
+        r.author,
+        r.file_ext_name
+        from cro_download d
+        join cro_resource r on r.id=d.resource_id
         <where>
             ${ew.sqlSegment}
         </where>
     </select>
 
     <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
-         insert into res_star values (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+         insert into cro_star values (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
     </insert>
+
+
+    <select id="selectStars" resultType="com.dianda.shserc.entity.ResourceOperation">
+        select
+        resource_id,
+        user_id,
+        score as oper_int_result
+        from cro_star
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
 
 </mapper>

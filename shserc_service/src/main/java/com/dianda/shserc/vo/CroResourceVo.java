@@ -100,6 +100,10 @@ public class CroResourceVo implements Serializable {
 	private long auditor;
 
 	private String auditorOpinion;
+	
+	private  long  createTypeId;
+	
+	private String sourceUrl;
 
 }
 

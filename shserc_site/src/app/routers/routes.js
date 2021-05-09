@@ -1,5 +1,7 @@
 import { appEnum } from '@/app/static/enum'
+import { routeNames } from '@/app/routers/routeNames'
 
+// admin routes
 import Admin from '@/app/views/admin/layout/index'
 import Login from '@/app/views/admin/account/login'
 import Empty from '@/app/views/admin/layout/empty'
@@ -7,10 +9,17 @@ import AccountInfo from '@/app/views/admin/account/info'
 import Password from '@/app/views/admin/account/password'
 import UserList from '@/app/views/admin/user/list'
 import CompanyList from '@/app/views/admin/company/list'
+
 import ResourceList from '@/app/views/admin/resource/list'
 import ResourceEdit from '@/app/views/admin/resource/edit'
 import ResourceDetail from '@/app/views/admin/resource/detail'
 import ResourceIndex from '@/app/views/admin/resource/index'
+
+import CroResourceList from '@/app/views/admin/resource/list'
+import CroResourceEdit from '@/app/views/admin/resource/edit'
+import CroResourceDetail from '@/app/views/admin/resource/detail'
+import CroResourceIndex from '@/app/views/admin/resource/index'
+
 import Summary from '@/app/views/admin/dashboard/summary'
 import RoleList from '@/app/views/admin/role/list'
 import RealList from '@/app/views/admin/real/list'
@@ -18,21 +27,26 @@ import CommentList from '@/app/views/admin/comment/list'
 import BulletinList from '@/app/views/admin/bulletin/list'
 import BulletinEdit from '@/app/views/admin/bulletin/edit'
 import MenuList from '@/app/views/admin/menu/list'
-// following for site
+
+//  site routes
 import Site from '@/app/views/site/layout/index'
 import HomeIndex from '@/app/views/site/home/index'
-import ResourceSearch from '@/app/views/site/resource/search'
-import ResourceDetails from '@/app/views/site/resource/details'
 import AccountLogin from '@/app/views/site/account/login'
 import AccountSpace from '@/app/views/site/account/space'
 import AccountRegister from '@/app/views/site/account/register'
 import ForgetPassword from '@/app/views/site/account/forgetPassword'
 
+import ResourceSearch from '@/app/views/site/resource/search'
+import ResourceDetails from '@/app/views/site/resource/details'
+
+// cro site routes
 import CroSite from '@/app/views/croSite/layout/index'
 import CroSiteHomeIndex from '@/app/views/croSite/home/index'
 import CroSIteResourceSearch from '@/app/views/croSite/resource/search'
+import CroSiteResourceMore from '@/app/views/croSite/resource/more'
 import CroMySpace from '@/app/views/croSite/account/space'
-
+import CroSiteRsourceDetails from '@/app/views/croSite/resource/details'
+import MySpaceDeclare from '@/app/views/croSite/account/components/Space/declare'
 
 export const menuRoutes = [{
         path: '/admin/dashboard/summary',
@@ -94,14 +108,24 @@ export const menuRoutes = [{
         path: '/admin/resource',
         component: Empty,
         children: [{
-            id: 8,
-            level: 2,
-            name: '入库资源',
-            path: "/admin/resource/index",
-            icon: 'el-icon-files',
-            component: ResourceIndex,
-            children: []
-        }]
+                id: 8,
+                level: 2,
+                name: '入库资源',
+                path: "/admin/resource/index",
+                icon: 'el-icon-files',
+                component: ResourceIndex,
+                children: []
+            },
+            {
+                id: 14,
+                level: 2,
+                name: '众筹资源',
+                path: "/admin/croResource/index",
+                icon: 'el-icon-files',
+                component: CroResourceIndex,
+                children: []
+            }
+        ]
     },
     {
         id: 9,
@@ -225,7 +249,7 @@ const frontendRoutes = [
         component: CroSite,
         children: [{
                 path: '/croSite/home/index',
-                name: 'CroSiteHomeIndex',
+                name: routeNames.CroSiteHomeIndex,
                 component: CroSiteHomeIndex,
                 meta: {
                     title: appEnum.appTitle.croSite
@@ -233,13 +257,33 @@ const frontendRoutes = [
             },
             {
                 path: '/croSite/resource/search',
-                name: 'CooSiteRsourceSearch',
+                name: 'CroSiteRsourceSearch',
                 component: CroSIteResourceSearch
+            },
+            {
+                path: '/croSite/resource/details/:id',
+                name: 'CroSiteRsourceDetails',
+                component: CroSiteRsourceDetails
+            },
+            {
+                path: '/croSite/resource/more',
+                name: 'CroSiteRsourceMore',
+                component: CroSiteResourceMore
             },
             {
                 path: '/croSite/space',
                 name: 'CroMySpace',
                 component: CroMySpace
+            },
+            {
+                path: '/croSite/space/upload',
+                name: 'CroMyUpload',
+                component: CroMySpace
+            },
+            {
+                path: '/croSite/space/declare',
+                name: routeNames.MySpaceDeclare,
+                component: MySpaceDeclare
             }
         ],
         redirect: { name: 'CroSiteHomeIndex' }
@@ -284,6 +328,24 @@ const backendRoutes = [
                 path: '/admin/resource/detail/:id',
                 name: 'ResourceDetail',
                 component: ResourceDetail
+            },
+            {
+                path: '/admin/croResource/list',
+                name: 'ResourceList',
+                component: CroResourceList
+            },
+            {
+                path: '/admin/croResource/add/',
+                name: 'ResourceAdd',
+                component: CroResourceEdit
+            }, {
+                path: '/admin/croResource/edit/:id',
+                name: 'ResourceEdit',
+                component: CroResourceEdit
+            }, {
+                path: '/admin/croResource/detail/:id',
+                name: 'ResourceDetail',
+                component: CroResourceDetail
             },
             {
                 path: '/admin/bulletin/edit/:id',

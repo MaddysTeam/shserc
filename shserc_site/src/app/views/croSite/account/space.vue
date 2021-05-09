@@ -5,7 +5,7 @@
       <!-- left menu start -->
       <el-col :span="5">
         <el-menu 
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo height600"
           @open="handleOpen"
           @close="handleClose"
@@ -58,7 +58,10 @@
 import UploadResource from "@/app/views/croSite/account/components/Space/upload"
 
 export default {
-    components:{UploadResource}
+    components:{UploadResource},
 
+    mounted(){
+        console.log(this.$route.path);
+    }
 };
 </script>

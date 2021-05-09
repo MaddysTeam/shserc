@@ -22,6 +22,7 @@ import com.dianda.shserc.mapper.CroResourceMapper;
 import com.dianda.shserc.service.ICroResourceService;
 import com.dianda.shserc.vo.*;
 import com.dianda.shserc.vo.mappers.ICroResourceVoMapper;
+import com.dianda.shserc.vo.mappers.IResourceScoreVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,6 +67,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		long domainId = params.getDomainId ( );
 		long gradeId = params.getGradeId ( );
 		long resourceTypeId = params.getResourceTypeId ( );
+		long createTypeId=params.getCreateTypeId ();
 		Map<String, String> orderPhrases = params.getOrderPhrases ( );
 		String phrase = params.getSearchPhrase ( );
 		
@@ -99,6 +101,10 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		if ( gradeId > 0 ) {
 			wrapper = wrapper.eq ( "grade_id" , stageId );
 		}
+		if(createTypeId>0){
+			wrapper = wrapper.eq ( "create_type_id" , createTypeId );
+		}
+		
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) )
 			wrapper = wrapper.like ( "title" , phrase );
 		
@@ -255,25 +261,20 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 	
 	@Override
 	public ResourceOperationVoList findStars( @Valid long resourceId ) {
-		return null;
+		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
+		wrapper.eq ( "resource_id" , resourceId );
+		List<ResourceOperation> results = mapper.selectStars ( wrapper );
+		List<ResourceOperationVo> voList= new ArrayList<> (  );
+		
+		for ( ResourceOperation item : results ) {
+			ResourceOperationVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
+			voList.add ( vo );
+		}
+		
+		ResourceOperationVoList scoreVoList=new ResourceOperationVoList ();
+		scoreVoList.setListData ( voList );
+		
+		return scoreVoList;
 	}
-
-//	@Override
-//	public ScoreVoList findStars( @Valid long resourceId ) {
-//		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
-//		wrapper.eq ( "resource_id" , resourceId );
-//		List<ResourceOperation> results = mapper.selectStar ( wrapper );
-//		List<ScoreVo> voList= new ArrayList<> (  );
-//
-//		for ( ResourceOperation item : results ) {
-//			ScoreVo vo = IResourceScoreVoMapper.INSTANCE.mapFrom (item);
-//			voList.add ( vo );
-//		}
-//
-//		ScoreVoList scoreVoList=new ScoreVoList();
-//		scoreVoList.setListData ( voList );
-//
-//		return scoreVoList;
-//	}
 	
 }

@@ -1,39 +1,51 @@
 <template>
-    <div>
-        <ul class="compact_list">
-              <li>
-                <a href="/Resource/View/1333"
-                  ><span class="square">1</span> 解决问题的策略——转化</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1334"
-                  ><span class="square">2</span>
-                  认知数学《认识整点》（课堂实录）</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1335"
-                  ><span class="square">3</span> 我的学校</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1332"><span>4</span> 荷叶圆圆</a>
-              </li>
-              <li>
-                <a href="/Resource/View/1553"
-                  ><span>5</span> 品德与社会《绿色的呼唤》</a
-                >
-              </li>
-              <li>
-                <a href="/Resource/View/1336"><span>6</span> 有序数对</a>
-              </li>
-
-            </ul>
-    </div>
+  <TopList
+    :source="source"
+    :isShowPage="isShowPage"
+    :pageSize="pageSize"
+    :total="total"
+    :handleChange="handleChange"
+    :handlePageSizeChange="handlePageSizeChange"
+  >
+    <template slot="item" slot-scope="resource">
+      <router-link :to="{path:'/croSite/resource/details/'+resource.item.id}" :title="resource.item.title"
+        ><img
+          class="cover"
+          :src="resource.item.coverPath"
+          style="height: 100px"
+      /></router-link>
+      <div class="details">
+        <router-link  :to="{path:'/croSite/resource/details/'+resource.item.id}" :title="resource.item.title"
+          ><span class="restitle">{{ resource.item.title }}</span></router-link
+        ><br />
+        <p class="snippet">
+          {{ resource.item.description }}
+        </p>
+        <div class="info">
+          作者：<span>{{ resource.item.author }}</span> 单位：<span>{{
+            resource.item.authorCompany
+          }}</span
+          ><p/>
+        </div>
+      </div>
+    </template>
+  </TopList>
 </template>
+
 <script>
+import TopList from "@/components/List";
 export default {
-    
-}
+  components: { TopList },
+  props: {
+    source: { type: Array, dufault: [] },
+    isShowPage: { type: Boolean, default: false },
+    pageSize: { type: Number, default: 0 },
+    total: { type: Number, default: 0 },
+    handleChange: { type: Function },
+    handlePageSizeChange: { type: Function },
+  },
+};
 </script>
+
+<style scoped>
+</style>

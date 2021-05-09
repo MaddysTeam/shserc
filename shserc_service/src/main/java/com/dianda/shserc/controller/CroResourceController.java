@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
-@RequestMapping("/croresource")
+@RequestMapping("/croResource")
 public class CroResourceController extends BaseController {
 	
 	@Resource

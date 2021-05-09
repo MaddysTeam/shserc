@@ -20,7 +20,7 @@
 
           <!-- widget content start-->
           <div class="widget-content">
-            <router-link :to="{path:'/resource/details/'+resource.item.id}">
+            <router-link :to="{path:'/croSite/resource/details/'+resource.item.id}">
               <img
                 :title="resource.item.title "
                 class="cover"
@@ -33,13 +33,14 @@
             </router-link>
             <div class="hot"></div>
             <div class="m_5 text_align_left">
-              <div>标题：<router-link class="link" :to="{path:'/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
+              <div>标题：<router-link class="link" :to="{path:'/croSite/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
               <p>作者：{{resource.item.author}}</p>
+              <el-tag>访问量：{{ resource.item.viewCount}}</el-tag>
 
               <p v-show="isShowStatistical">
-                <el-tag>点击量：{{ resource.item.viewCount}}</el-tag>
-                <el-tag type="info">下载量：{{ resource.item.viewCount}}</el-tag>
-                <el-tag type="danger"> 格式： {{resource.item.fileExtName}}</el-tag>
+                <!-- <el-tag>点击量：{{ resource.item.viewCount}}</el-tag> -->
+                <el-tag type="info">下载次数：{{ resource.item.viewCount}}</el-tag>
+                <!-- <el-tag type="danger"> 格式： {{resource.item.fileExtName}}</el-tag> -->
               </p>
               <el-rate v-model="value2" :colors="colors" disabled> </el-rate>
             </div>

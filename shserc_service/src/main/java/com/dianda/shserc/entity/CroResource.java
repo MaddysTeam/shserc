@@ -57,6 +57,10 @@ public class CroResource extends BaseEntity {
 	
 	private LocalDateTime auditorTime;
 	
+	private long createTypeId;
+	
+	private String sourceUrl;
+	
 	@TableField(exist = false)
 	private String deformity;
 	

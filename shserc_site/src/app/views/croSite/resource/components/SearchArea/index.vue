@@ -8,8 +8,12 @@
             type="text"
             placeholder="请输入您要搜索的内容..."
           />
-          <el-button type="success" @click.prevent="handlePrevent" @click="handleSubmit()">
-            <i class="el-icon-search" ></i>
+          <el-button
+            type="success"
+            @click.prevent="handlePrevent"
+            @click="handleSubmit()"
+          >
+            <i class="el-icon-search"></i>
           </el-button>
         </form>
       </div>
@@ -32,7 +36,9 @@
               :key="item.id"
               @click="handleSelectItem(item, option)"
             >
-              <el-tag class="cursor_pointer m_5 " type="success">{{ item.name }}</el-tag>
+              <el-tag class="cursor_pointer m_5" type="success">{{
+                item.name
+              }}</el-tag>
             </li>
           </ul>
         </dd>
@@ -63,12 +69,12 @@
     </div>
 
     <div class="text-center more" v-show="!isShowMoreOptions && isShowAdvHit">
-      <el-link @click="isShowMoreOptions = !isShowMoreOptions">
+      <el-link @click="handleShowMoreOptions()">
         <strong><i class="fa fa-arrow-down"></i> 更多条件</strong>
       </el-link>
     </div>
     <div class="text-center less" v-show="isShowMoreOptions && isShowAdvHit">
-      <el-link @click="isShowMoreOptions = !isShowMoreOptions">
+      <el-link @click="handleHideMoreOptions()">
         <strong><i class="fa fa-arrow-up"></i> 收起</strong>
       </el-link>
     </div>
@@ -77,6 +83,12 @@
 
 <script>
 import { mapState } from "vuex";
+import {
+  getRelevantByRelevantId,
+  getChildrenByParentId,
+  getTargetRelevant,
+} from "@/app/utils/dictHelper";
+import {DICTIONARY_TYPES} from "@/app/static/type"
 
 export default {
   props: {
@@ -90,6 +102,7 @@ export default {
 
   data() {
     return {
+      allOptions: [],
       selectedItems: [],
       isShowMoreOptions: false,
       searchPhrase: "",
@@ -98,19 +111,35 @@ export default {
 
   computed: {
     ...mapState({
-      //  dict: (state) => state.app.dict,
-      allOptions: (state) => [
+      dict: (state) => state.app.dict,
+      showOptions: (state) => [
         {
           title: "领 域",
           type: "domainId",
+          childType: "resourceTypeId",
+          typeId: DICTIONARY_TYPES[2].id,
           isShow: true,
           items: state.app.resourceDomains,
         },
         {
           title: "分 类",
           type: "deformityId",
+          childType: "",
+          typeId: 0,
           isShow: true,
           items: state.app.deformity,
+        },
+      ],
+
+      moreOptions: (state) => [
+        {
+          title: "类 型",
+          type: "resourceTypeId",
+          parentType: "domainId",
+          childType: "",
+          typeId: DICTIONARY_TYPES[8].id,
+          isShow: true,
+          items: state.app.resourceTypes,
         },
       ],
       //  deformityOptions: (state) => state.app.deformity,
@@ -127,6 +156,8 @@ export default {
   mounted() {
     this.searchPhrase = this.defaultSearchPhrase;
     if (this.isForceSearch) this.handleSubmit();
+
+    this.allOptions = this.allOptions.concat(this.showOptions);
   },
 
   methods: {
@@ -139,16 +170,41 @@ export default {
       });
     },
 
-    handleSelectItem(item, parent) {
-      item["parent"] = parent;
+    handleSelectItem(item, option) {
+      item["parent"] = option; // save option data into item
+
+      var options = this.showOptions.concat(this.moreOptions);
+      if (option.childType) {
+        let filterChildren = getRelevantByRelevantId(item.id, this.dict);
+        for (let i in options) {
+          if (options[i].type == option.childType) {
+            options[i].items = filterChildren;
+            break;
+          }
+        }
+      }
+
+      if (option.parentType) {
+        let filterParnet = getTargetRelevant(item.relevantId, this.dict);
+        console.log(filterParnet)
+        for (let i in options) {
+          if (options[i].type == option.parentType) {
+          options[i].items = filterParnet;
+          break;
+          }
+        }
+      }
+
       for (let i in this.selectedItems) {
         if (this.selectedItems[i].id == item.id) {
           return false;
         }
       }
       if (item && item.value > 0) {
-        parent.isShow = false;
+        option.isShow = false;
+
         this.selectedItems.push(item);
+
         this.handleSubmit();
       }
     },
@@ -162,6 +218,31 @@ export default {
     },
 
     handleUnSelectItem(item) {
+      let option = item["parent"];
+
+       var options = this.showOptions.concat(this.moreOptions);
+      if (option && option.childType) {       
+        for (let i in options) {
+          if (options[i].type == option.childType) {
+            options[i].items = getChildrenByParentId(
+              options[i].typeId,
+              this.dict
+            ); // restore all child option items  when unselect parent option item
+          }
+        }
+      }
+
+      if (option && option.parentType) {       
+        for (let i in options) {
+          if (options[i].type == option.parentType) {
+            options[i].items = getChildrenByParentId(
+              options[i].typeId,
+              this.dict
+            ); // restore all parent option items  when unselect child option item
+          }
+        }
+      }
+
       for (var i = 0; i < this.selectedItems.length; i++) {
         let current = this.selectedItems[i];
         if (current.id == item.id) {
@@ -170,7 +251,18 @@ export default {
           i -= 1;
         }
       }
+      
       this.handleSubmit();
+    },
+
+    handleShowMoreOptions() {
+      this.isShowMoreOptions = true;
+      this.allOptions = this.allOptions.concat(this.moreOptions);
+    },
+
+    handleHideMoreOptions() {
+      this.isShowMoreOptions = false;
+      this.allOptions = this.showOptions;
     },
   },
 };

@@ -119,8 +119,8 @@
           text-color="#578d38"
           active-text-color ="#578d38"
         >
-          <el-menu-item index="1"  style="; font-size:16px">首页</el-menu-item>
-          <el-menu-item index="2" style=" font-size:16px">课程与教学</el-menu-item>
+          <el-menu-item index="1"  style="font-size:16px"  @click="handelNavToHome">首页</el-menu-item>
+          <el-menu-item index="2" style=" font-size:16px" @click="handelNavToSearch">课程与教学</el-menu-item>
           <el-menu-item index="3" style="font-size:16px">康复与干预</el-menu-item>
           <el-menu-item index="4" style="font-size:16px">支持与服务</el-menu-item>
            <el-menu-item index="5" style="font-size:16px">分类搜索</el-menu-item>
@@ -178,6 +178,15 @@ export default {
       //this.$router.push("/resource/search?key="+this.searchPhrase);
       // this.searchPhrase="";
     },
+
+    handelNavToHome(){
+      this.$router.push({path:"/croSite/home/index"});
+    },
+
+    handelNavToSearch(){
+      this.$router.push({path:"/croSite/resource/search"});
+    }
+
   },
 };
 </script>
@@ -189,7 +198,7 @@ export default {
    background-color:#e1f3d8 !important; 
 }
 .el-menu-item.is-active {
-background-color: transparent !important;
+   background-color: transparent !important;
 }
 </style>
 

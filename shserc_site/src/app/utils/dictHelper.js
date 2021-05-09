@@ -50,6 +50,18 @@ export function getRelevantByRelevantId(relevantId, dict) {
     return relevants;
 }
 
+export function getTargetRelevant(relevantId, dict) {
+    let relevants = [];
+    dict.map(o => {
+        if (o.id == relevantId)
+            relevants.push(o);
+    });
+
+    return relevants;
+}
+
+
+
 function bindDictData(store, dict) {
     for (var i in types.DICTIONARY_TYPES) {
 

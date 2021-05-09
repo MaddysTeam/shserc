@@ -8,6 +8,7 @@ import com.dianda.shserc.dto.PackageAuditDto;
 import com.dianda.shserc.entity.PackageOperation;
 import com.dianda.shserc.vo.PackageVo;
 import com.dianda.shserc.vo.PackageVoList;
+import com.dianda.shserc.vo.ResourceVoList;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,6 +18,8 @@ public interface IPackageService {
 	PackageVoList  find( PackageSelectParams packageSelectParams );
 	
 	PackageVo findById( long id);
+	
+	ResourceVoList findResource(long id);
 	
 	boolean  edit( @Valid @NotNull EditPackageDto editPackageDto );
 	

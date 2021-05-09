@@ -12,18 +12,25 @@ import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.bean.PackageSelectParams;
 import com.dianda.shserc.common.Constant;
+import com.dianda.shserc.dto.EditCroResourceDto;
 import com.dianda.shserc.dto.EditPackageDto;
 import com.dianda.shserc.dto.EditPackageResourceDto;
 import com.dianda.shserc.dto.PackageAuditDto;
+import com.dianda.shserc.dto.mappers.IBindPackageResourceMapper;
 import com.dianda.shserc.dto.mappers.IEditPackageMapper;
 import com.dianda.shserc.dto.mappers.IPackageAuditMapper;
 import com.dianda.shserc.entity.Package;
 import com.dianda.shserc.entity.PackageOperation;
+import com.dianda.shserc.entity.Resource;
 import com.dianda.shserc.mapper.PackageMapper;
+import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.IPackageService;
 import com.dianda.shserc.vo.PackageVo;
 import com.dianda.shserc.vo.PackageVoList;
+import com.dianda.shserc.vo.ResourceVo;
+import com.dianda.shserc.vo.ResourceVoList;
 import com.dianda.shserc.vo.mappers.IPackageVoMapper;
+import com.dianda.shserc.vo.mappers.IResourceVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +43,9 @@ public class PackageServiceImpl extends ServiceImpl<PackageMapper, Package> impl
 	
 	@Autowired
 	PackageMapper mapper;
+	
+	@Autowired
+	ResourceMapper resourceMapper;
 	
 	DictionaryCache cache;
 	
@@ -142,6 +152,39 @@ public class PackageServiceImpl extends ServiceImpl<PackageMapper, Package> impl
 	}
 	
 	@Override
+	public ResourceVoList findResource( long id ) {
+		PackageOperation param=new PackageOperation ();
+		param.setPackageId ( id );
+		List<PackageOperation>  packageResources= mapper.selectPackageResource ( param);
+		
+		List<Long> resourceIds= new ArrayList<> (  );
+		for(PackageOperation options : packageResources){
+			resourceIds.add ( options.getResourceId ());
+		}
+		
+		List<ResourceVo> resourceVoList = new ArrayList<> ( );
+		
+		QueryWrapper<Resource> resourceQueryWrapper=new QueryWrapper<> (  );
+		resourceQueryWrapper.in("",resourceIds);
+		List<Resource> resourceList=resourceMapper.selectList (  resourceQueryWrapper);
+		for ( Resource res : resourceList ) {
+			Resource.dictTranslate ( res , cache ); // 翻译字典
+			ResourceVo vo = IResourceVoMapper.INSTANCE.mapFrom ( res );
+			vo.setGrade ( res.getGrade ( ) );
+			vo.setSubject ( res.getSubject ( ) );
+			resourceVoList.add ( vo );
+		}
+		
+		// get vo list data
+		
+		ResourceVoList voList = new ResourceVoList ( );
+		if ( ! ObjectUtil.isNull ( resourceList ) && resourceList.size ( ) > 0 )
+			voList.setListData ( resourceVoList );
+		
+		return voList;
+	}
+	
+	@Override
 	public boolean edit( @Valid @NotNull EditPackageDto editPackageDto ) {
 		Package pack = IEditPackageMapper.INSTANCE.mapFrom ( editPackageDto );
 		PackageVo packageVo = findById ( pack.getId ( ) );
@@ -162,8 +205,15 @@ public class PackageServiceImpl extends ServiceImpl<PackageMapper, Package> impl
 	
 	@Override
 	@Transactional( readOnly = false, rollbackFor = GlobalException.class )
-	public boolean addPackageResource( List<EditPackageResourceDto> editPackageResourceDto ) {
-		return false;
+	public boolean addPackageResource( List<EditPackageResourceDto> editPackageResourceDtos ) {
+		int count=editPackageResourceDtos.size ();
+		int editCount=0;
+		for( EditPackageResourceDto editPackageResourceDto : editPackageResourceDtos ){
+			PackageOperation packageOperation= IBindPackageResourceMapper.INSTANCE.mapFrom ( editPackageResourceDto );
+			editCount+=mapper.addPackageResource ( packageOperation  );
+		}
+
+		return count==editCount;
 	}
 	
 	@Override

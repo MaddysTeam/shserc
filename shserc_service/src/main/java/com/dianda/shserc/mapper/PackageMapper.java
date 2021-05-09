@@ -8,6 +8,8 @@ import com.dianda.shserc.entity.Package;
 import com.dianda.shserc.entity.PackageOperation;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * package Mapper interface
  *
@@ -18,10 +20,11 @@ public interface PackageMapper extends BaseMapper<Package> {
 	
 	IPage<Package> selectPackages( IPage<Package> page , @Param( Constants.WRAPPER ) Wrapper<Package> wrapper );
 	
+	List<PackageOperation> selectPackageResource (PackageOperation operation);
+	
 	int addPackageResource( PackageOperation packageOperation );
 	
 	int deletePackageResource( PackageOperation packageOperation );
-	
 	
 	int addView( PackageOperation operation );
 	

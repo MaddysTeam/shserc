@@ -17,5 +17,6 @@ public class CroResourceSelectParams extends BaseSelectParams {
 	long gradeId;
 	long stageId;
 	long resourceTypeId;
+	long createTypeId;
 	String title;
 }

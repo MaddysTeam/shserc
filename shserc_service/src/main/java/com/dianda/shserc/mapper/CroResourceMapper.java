@@ -36,5 +36,5 @@ public interface CroResourceMapper extends BaseMapper<CroResource> {
 	
 	List<ResourceOperation> selectDownloads(@Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 	
-	List<ResourceOperation> selectStar( @Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
+	List<ResourceOperation> selectStars( @Param( Constants.WRAPPER ) Wrapper<ResourceOperation> wrapper );
 }

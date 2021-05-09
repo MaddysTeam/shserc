@@ -33,6 +33,10 @@
         </where>
     </select>
 
+    <select id="selectPackageResource" resultType="com.dianda.shserc.entity.PackageOperation" parameterType="com.dianda.shserc.entity.PackageOperation">
+        select  * from package_resource where  package_id = #{packageId}
+    </select>
+
     <insert id="addPackageResource" parameterType="com.dianda.shserc.entity.PackageOperation">
         insert into package_resource(package_id,resource_id) values(#{packageId},#{resourceId})
     </insert>

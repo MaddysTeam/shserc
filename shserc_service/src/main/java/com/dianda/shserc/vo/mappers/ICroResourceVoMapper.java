@@ -60,7 +60,10 @@ public interface ICroResourceVoMapper extends BasicMapper<CroResourceVo, CroReso
 			@Mapping( source = "fileSize", target = "fileSize" ),
 
 			@Mapping( source = "auditor", target = "auditor" ),
-			@Mapping( source = "auditorOpinion", target = "auditorOpinion" )
+			@Mapping( source = "auditorOpinion", target = "auditorOpinion" ),
+			@Mapping( source = "createTypeId", target = "createTypeId" ),
+			@Mapping( source = "sourceUrl", target = "sourceUrl" )
+			
 	} )
 	CroResourceVo mapFrom( CroResource resource );
 }

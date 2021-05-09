@@ -8,14 +8,14 @@
     :handlePageSizeChange="handlePageSizeChange"
   >
     <template slot="item" slot-scope="resource">
-      <router-link :to="{path:'/resource/details/'+resource.item.id}" :title="resource.item.title"
+      <router-link :to="{path:'/croSite/resource/details/'+resource.item.id}" :title="resource.item.title"
         ><img
           class="cover"
           :src="resource.item.coverPath"
           style="height: 100px"
       /></router-link>
       <div class="details">
-        <router-link  :to="{path:'/resource/details/'+resource.item.id}" :title="resource.item.title"
+        <router-link  :to="{path:'/croSite/resource/details/'+resource.item.id}" :title="resource.item.title"
           ><span class="restitle">{{ resource.item.title }}</span></router-link
         ><br />
         <p class="snippet">

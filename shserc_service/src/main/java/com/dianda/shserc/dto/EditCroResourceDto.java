@@ -67,6 +67,10 @@ public class EditCroResourceDto extends BaseDto {
 	private long learnFromId;
 
 	private long resourceTypeId;
+	
+	private long createTypeId;
+	
+	private String sourceUrl;
 
 }
 
