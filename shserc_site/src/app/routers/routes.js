@@ -15,10 +15,10 @@ import ResourceEdit from '@/app/views/admin/resource/edit'
 import ResourceDetail from '@/app/views/admin/resource/detail'
 import ResourceIndex from '@/app/views/admin/resource/index'
 
-import CroResourceList from '@/app/views/admin/resource/list'
-import CroResourceEdit from '@/app/views/admin/resource/edit'
-import CroResourceDetail from '@/app/views/admin/resource/detail'
-import CroResourceIndex from '@/app/views/admin/resource/index'
+import CroResourceList from '@/app/views/admin/croResource/list'
+import CroResourceEdit from '@/app/views/admin/croResource/edit'
+import CroResourceDetail from '@/app/views/admin/croResource/detail'
+import CroResourceIndex from '@/app/views/admin/croResource/index'
 
 import Summary from '@/app/views/admin/dashboard/summary'
 import RoleList from '@/app/views/admin/role/list'
@@ -331,16 +331,16 @@ const backendRoutes = [
             },
             {
                 path: '/admin/croResource/list',
-                name: 'ResourceList',
+                name: routeNames.CroResourceList,
                 component: CroResourceList
             },
             {
                 path: '/admin/croResource/add/',
-                name: 'ResourceAdd',
+                name: routeNames.CroResourceAdd,
                 component: CroResourceEdit
             }, {
                 path: '/admin/croResource/edit/:id',
-                name: 'ResourceEdit',
+                name: routeNames.CroResourceEdit,
                 component: CroResourceEdit
             }, {
                 path: '/admin/croResource/detail/:id',

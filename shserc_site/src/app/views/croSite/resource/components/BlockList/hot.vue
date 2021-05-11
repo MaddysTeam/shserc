@@ -31,15 +31,17 @@
                 }"
             />
             </router-link>
+
+
             <div class="hot"></div>
             <div class="m_5 text_align_left">
               <div>标题：<router-link class="link" :to="{path:'/croSite/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
               <p>作者：{{resource.item.author}}</p>
               <el-tag>访问量：{{ resource.item.viewCount}}</el-tag>
 
-              <p v-show="isShowStatistical">
+              <p v-show="isRecommand">
                 <!-- <el-tag>点击量：{{ resource.item.viewCount}}</el-tag> -->
-                <el-tag type="info">下载次数：{{ resource.item.viewCount}}</el-tag>
+                <el-tag type="info">资源出处：{{ resource.item.sourceUrl}}</el-tag>
                 <!-- <el-tag type="danger"> 格式： {{resource.item.fileExtName}}</el-tag> -->
               </p>
               <el-rate v-model="value2" :colors="colors" disabled> </el-rate>
@@ -55,13 +57,12 @@
 
 <script>
 import List from "@/components/List";
-import {SEARCH_TYPE_HOT,SEARCH_TYPE_LATEST} from "@/app/static/type"
 
 export default {
   components: { List },
 
   props: {
-    isShowStatistical: { type: Boolean },
+    isRecommand: { type: Boolean }, //  whether is recommand list 
     source:{type:Array, dufault: []},
     coverWidth: { type: Number },
     coverHeight: { type: Number },
@@ -70,7 +71,6 @@ export default {
     total:{type:Number,default:0},
     handleChange: { type: Function },
     handlePageSizeChange:{type:Function},
-    searchType:{type:String}
   },
 
   data() {

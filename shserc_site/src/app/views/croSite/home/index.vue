@@ -41,11 +41,11 @@
           </p>
 
           <div class="body">
-            <ResourceBlockList
+            <ResourceBlockHotList
               :coverWidth="184"
               :coverHeight="120"
-              :source="bestFavoriteResources"
-            ></ResourceBlockList>
+              :source="topHotResources"
+            ></ResourceBlockHotList>
           </div>
         </div>
         <div class="block_panel green_edge">
@@ -57,7 +57,7 @@
           </p>
 
           <div class="body">
-            <ResourceBlockList :source="topSource"></ResourceBlockList>
+            <ResourceBlockLatestList :source="topLatestSource"></ResourceBlockLatestList>
           </div>
         </div>
       </el-col>
@@ -113,7 +113,7 @@
             <div v-if="isLogin" class="text_align_left font14">
               <div>
                 <i class="el-icon-s-custom"></i>
-                <router-link to="/account/space" class="link"
+                <router-link to="/croSite/space" class="link"
                   >进入我的中心</router-link
                 >
               </div>
@@ -162,35 +162,38 @@
 <script>
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
-import { selectParam, orderPhrasesModel } from "@/app/models/resource";
+import { selectParam, orderPhrasesModel } from "@/app/models/croResource";
 import { userOrderPhrasesModel } from "@/app/models/user";
 import { accountModel } from "@/app/models/account";
 import { rseoureBulletinList } from "@/app/api/bulletin";
-import { list } from "@/app/api/resource";
+import { list } from "@/app/api/croResource";
 import { login, logout } from "@/app/api/account";
 import { list as userList } from "@/app/api/user";
-import { operationCount } from "@/app/api/my";
+import { operationCount } from "@/app/api/croMy";
 import { loginModel } from "@/app/models/account";
 import { deepCopy } from "@/app/utils/objectHelper";
 import { DESC } from "@/app/static/type";
 import ResourceList from "@/app/views/croSite/resource/components/List";
-import ResourceBlockList from "@/app/views/croSite/resource/components/BlockList";
+import ResourceBlockHotList from "@/app/views/croSite/resource/components/BlockList/hot";
+import ResourceBlockLatestList from "@/app/views/croSite/resource/components/BlockList/latest";
 import ActivityUserList from "@/components/List/index";
 import BulltinList from "@/components/List/index";
 
 export default {
   components: {
     ResourceList,
-    ResourceBlockList,
+    //ResourceBlockList,
     ActivityUserList,
     BulltinList,
+    ResourceBlockHotList,
+    ResourceBlockLatestList
   },
   data() {
     return {
       loginModel: loginModel,
       selectParam: selectParam,
-      bestFavoriteResources: [],
-      topSource: [],
+      topHotResources: [],
+      topLatestSource: [],
       topActivityUsers: [],
 
       topBulltins: [],
@@ -208,17 +211,23 @@ export default {
   },
 
   mounted() {
-    this.loadBestFavoriteResources();
-    this.loadTopRankResource(orderPhrasesModel.viewCount);
+    this.loadTopHotResources();
+    this.loadTopLatestResource();
     this.loadTopActivityUsers();
     this.loadTopBulltins();
   },
 
   methods: {
-    loadBestFavoriteResources() {
+    
+  /**
+  * @description: load top hot resources
+  * @param {number} createType (原创或推荐)
+  * @return void
+  */
+    loadTopHotResources(createType) {
       let param = deepCopy(selectParam);
       param.size = 6; // get top 12 favorite resources
-      param.orderPhrases[orderPhrasesModel.favoriteCount] = DESC;
+      param.orderPhrases[orderPhrasesModel.viewCount] = DESC;
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
@@ -227,10 +236,15 @@ export default {
       });
     },
 
-    loadTopRankResource(sourceType) {
+  /**
+  * @description: load top latest resources
+  * @param {number} createType (原创或推荐)
+  * @return void
+  */
+    loadTopLatestResource(createType) {
       let param = deepCopy(selectParam);
       param.size = 4; // get top 12 favorite resources
-      param.orderPhrases[sourceType] = DESC;
+      param.orderPhrases[orderPhrasesModel.lateset] = DESC;
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);

@@ -110,6 +110,14 @@
             "icon": "el-icon-files"
         },
         {
+            " id": 14,
+            "level": 2,
+            "parentId": 7,
+            "title": "众筹资源",
+            "path": "/admin/croResource/index",
+            "icon": "el-icon-files"
+        },
+        {
             "id": 9,
             "level": 1,
             "title": "资源包",

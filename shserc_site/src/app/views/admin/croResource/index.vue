@@ -42,7 +42,7 @@
               <div class="widget-content">
                 <el-row style="padding: 20px">
                   <el-col v-for="type in domain.resourceTypes" :key="type.id" style="text-align: left">
-                    <router-link :to="{path:'/admin/resource/list',query:{typeId:type.id}}">{{type.name}}</router-link>
+                    <router-link :to="{name:routeNames.CroResourceList,query:{typeId:type.id}}">{{type.name}}</router-link>
                     <p></p>
                   </el-col>
                 </el-row>
@@ -59,11 +59,13 @@
 </template>
 
 <script>
+import { routeNames } from '@/app/routers/routeNames'
 import { getRelevantByRelevantId ,bindDomain} from "@/app/utils/dictHelper";
 
 export default {
   data() {
     return {
+      routeNames:routeNames,
       searchPhrase: "",
       domains: [],
       colors:['#e54d42','#0081ff','#39b54a','#6739b6','#a5673f']
@@ -79,19 +81,17 @@ export default {
 
     handleSearchButtonClick() {
       if (this.searchPhrase === "")
-        this.$router.push({
-          path: "/admin/resource/list",
-        });
+        this.$router.push({name:routeNames.CroResourceList});
       else
         this.$router.push({
-          path: "/admin/resource/list",
+          name: routeNames.CroResourceList,
           query: { searchPhrase: this.searchPhrase },
         });
     },
       
 
     handleAddResource() {
-      this.$router.push("/admin/resource/add");
+      this.$router.push({name:routeNames.CroResourceAdd});
     },
 
     handleLoadDomains() {

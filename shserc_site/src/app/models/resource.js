@@ -2,7 +2,7 @@ import { CDN } from "@/static/CDN"
 
 export const resourceModel = {
     id: 0,
-    title: "资源名称",
+    title: "",
     state: "",
     stateId: 10002,
     deformityId: "",

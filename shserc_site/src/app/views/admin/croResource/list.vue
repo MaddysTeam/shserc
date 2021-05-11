@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb>
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>资源列表</el-breadcrumb-item>
+      <el-breadcrumb-item>众筹资源列表</el-breadcrumb-item>
     </el-breadcrumb>
 
     <div class="btn-group">
@@ -10,7 +10,7 @@
         class="el-button--primary"
         type="danger"
         @click="addResource()"
-        >新增资源</el-button
+        >新增众筹资源</el-button
       >
     </div>
     <div class="filters">

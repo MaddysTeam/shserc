@@ -10,8 +10,17 @@
           <!-- resource start -->
 
           <el-form-item label="资源名称" prop="title">
-            <el-input v-model="resource.title"></el-input>
+            <el-input v-model="resource.title" placeholder="资源名称"></el-input>
           </el-form-item>
+
+          <el-form-item label="资源类型" prop="createType">
+            <el-radio-group v-model="resource.createType">
+               <el-radio label="原创资源"></el-radio>
+                <el-radio label="推荐资源"></el-radio>
+              </el-radio-group>
+               <el-input v-model="resource.sourceUrl" placeholder="资源出处"></el-input>
+          </el-form-item>
+
           <el-form-item label="上传资源">
             <el-upload
               class="upload-file"
@@ -82,7 +91,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="资源类型" prop="resourceTypeId">
+              <el-form-item label="资源类别" prop="resourceTypeId">
                 <el-select
                   @change="resourceTypeSelectChanged"
                   v-model="resource.resourceType"

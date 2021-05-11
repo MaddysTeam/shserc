@@ -78,5 +78,9 @@ export const DESC = "DESC";
 export const ASC = "ASC";
 
 
-// follwong keys for state
+// following keys for state
 export const AUDIT_SUCCESS_ID = "129";
+
+// following keys for cro resource search
+export const SEARCH_HOT = "SEARCH_HOT";
+export const SEARCH_LATEST = "SEARCH_LATEST";
