@@ -43,7 +43,7 @@ export const resourceModel = {
     isFile: false,
     starTotal: 0,
     starCount: 1,
-    createTypeId: 0,
+    createTypeId: 10001,
     sourceUrl: ""
 };
 

@@ -277,7 +277,7 @@ const frontendRoutes = [
             },
             {
                 path: '/croSite/space/upload',
-                name: 'CroMyUpload',
+                name: routeNames.CroMyUpload,
                 component: CroMySpace
             },
             {

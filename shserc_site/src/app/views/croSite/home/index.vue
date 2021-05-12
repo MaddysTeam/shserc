@@ -127,7 +127,7 @@
         </div>
         <!-- login area end -->
 
-        <router-link to="/croSite/space/declare">
+        <router-link to="/croSite/space/declare" v-if="isLogin">
         <div class="block_panel cursor_pointer" style="background:#578d38; color:white" >   
            <span class="font20 "><i class="el-icon-upload font30" style="font-size:25px;"></i>   我要上传</span>
         </div>

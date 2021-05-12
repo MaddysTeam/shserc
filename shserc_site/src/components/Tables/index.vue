@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="outer">
-      <div class="search-Box">
-        <el-input
+      <div class="search-Box" >
+        <el-input v-if="isShowSearchBox"
           placeholder="请输入关键字"
           icon="search"
           class="search"
           v-model="searchPhrase"
           @change="searchTextChanged"
         ></el-input>
-        <el-button class="el-button--primary"
+        <el-button class="el-button--primary" v-if="isShowSearchBox"
           ><i class="el-icon-search"></i
         ></el-button>
       </div>
@@ -90,7 +90,7 @@
       </template>
     </el-table>
     <div class="outer">
-      <el-pagination
+      <el-pagination v-if="isPagination"
         class="pagenation"
         background
         :current-page="current"
@@ -111,7 +111,9 @@ export default {
     columns: { type: Array, default: [] },
     // commandColumnWidth:{type:Number,default:'200px'},
     commands: {},
+    isPagination:{type:Boolean,default: true},
     isMultiSelect:{type:Boolean,default:false},
+    isShowSearchBox:{type:Boolean,default:true},
     total: { type: Number, default: 0 },
     pageSize: { type: Number, default: 0 },
     current: { type: Number, default: 0 },

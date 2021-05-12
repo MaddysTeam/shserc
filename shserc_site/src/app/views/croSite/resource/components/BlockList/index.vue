@@ -31,6 +31,8 @@
                 }"
             />
             </router-link>
+
+
             <div class="hot"></div>
             <div class="m_5 text_align_left">
               <div>标题：<router-link class="link" :to="{path:'/croSite/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
@@ -55,7 +57,6 @@
 
 <script>
 import List from "@/components/List";
-import {SEARCH_TYPE_HOT,SEARCH_TYPE_LATEST} from "@/app/static/type"
 
 export default {
   components: { List },
@@ -70,7 +71,6 @@ export default {
     total:{type:Number,default:0},
     handleChange: { type: Function },
     handlePageSizeChange:{type:Function},
-    searchType:{type:String}
   },
 
   data() {

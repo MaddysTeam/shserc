@@ -13,12 +13,12 @@
             <el-input v-model="resource.title" placeholder="资源名称"></el-input>
           </el-form-item>
 
-          <el-form-item label="资源类型" prop="createType">
-            <el-radio-group v-model="resource.createType">
-               <el-radio label="原创资源"></el-radio>
-                <el-radio label="推荐资源"></el-radio>
+          <el-form-item label="资源类型" prop="createType" class="text_align_left" >
+            <el-radio-group v-model="resource.createTypeId"  @change="createTypeSelectChange">
+               <el-radio :label="10001" >原创</el-radio>
+                <el-radio :label="10002">推荐</el-radio>
               </el-radio-group>
-               <el-input v-model="resource.sourceUrl" placeholder="资源出处"></el-input>
+               <el-input v-model="resource.sourceUrl" placeholder="资源出处" v-show="isShowSourceUrl"></el-input>
           </el-form-item>
 
           <el-form-item label="上传资源">
@@ -51,7 +51,7 @@
               v-if="inputVisible"
               @blur="handleKeywordsConfirm()"
             ></el-input>
-            <el-button class="btn-keywords" v-else @click="showKeywordsInput()"
+            <el-button class="btn-keywords" v-else @click="handleAddKeywords()"
               >新增关键字</el-button
             >
             <el-tag
@@ -260,7 +260,7 @@
           <!-- author info end -->
 
           <el-form-item>
-            <el-button type="success" @click="handSubmit()">提交</el-button>
+            <el-button type="success" @click="handleSubmit()">提交</el-button>
             <el-button type="info" @click="handCancel()">取消</el-button>
           </el-form-item>
         </el-form>
@@ -331,7 +331,7 @@ import {
 import { messages } from "@/app/static/message";
 import { edit, info } from "@/app/api/resource";
 import { uploadFile } from "@/app/api/file";
-import { resourceModel } from "@/app/models/resource";
+import { resourceModel } from "@/app/models/croResource";
 import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
 import { deepCopy } from "@/app/utils/objectHelper";
 
@@ -349,6 +349,7 @@ export default {
       dialogVisible: false,
       dialogImageUrl: "",
       disabled: false,
+      isShowSourceUrl:false,
 
       rules: {
         title: [
@@ -375,19 +376,6 @@ export default {
             trigger: "blur",
           },
         ],
-
-        // TODO: will remove later
-        // deformityId: {
-        //   validator: (rule, value, callback) => {
-        //     validateSelectValue(
-        //       rule,
-        //       value,
-        //       callback,
-        //       messages.RESOURCE_DEFORMITY_SELECT_NOT_NULL
-        //     );
-        //   },
-        //   trigger: "change",
-        // },
 
         keywords: {
           validator: (rule, value, callback) => {
@@ -494,7 +482,7 @@ export default {
       this.inputVisible = false;
     },
 
-    showKeywordsInput() {
+    handleAddKeywords() {
       this.inputVisible = true;
       this.$nextTick((_) => {
         this.$refs.inputKeywords.$refs.input.focus();
@@ -610,9 +598,13 @@ export default {
       this.resource.resourceTypeId = resourceTypeId;
     },
 
+    createTypeSelectChange(val){
+        this.isShowSourceUrl=val==10002;
+    },
+
     // submit
 
-    handSubmit() {
+    handleSubmit() {
       let _this = this;
       _this.$refs["resourceForm"].validate((isValid) => {
         if (isValid) {
@@ -653,7 +645,7 @@ export default {
   width: 100%;
 }
 
-.el-form-item__label {
+.el-form-item__label,.el-radio__label {
   font-size: 12px;
 }
 
@@ -676,4 +668,12 @@ export default {
 .cover-path{
 height: 300px; width: 100%;border: 1px dashed #a6a9ad;
 }
+
+.el-radio__input.is-checked + .el-radio__label {
+       color: #fd7624 !important;
+   }
+   .el-radio__input.is-checked .el-radio__inner {
+       background: #fd7624 !important;
+       border-color: #fd7624 !important;
+   }
 </style>

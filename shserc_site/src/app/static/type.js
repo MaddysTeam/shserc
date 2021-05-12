@@ -82,5 +82,5 @@ export const ASC = "ASC";
 export const AUDIT_SUCCESS_ID = "129";
 
 // following keys for cro resource search
-export const SEARCH_HOT = "SEARCH_HOT";
-export const SEARCH_LATEST = "SEARCH_LATEST";
+export const SEARCH_TYPE_HOT = "SEARCH_HOT";
+export const SEARCH_TYPE_LATEST = "SEARCH_LATEST";
