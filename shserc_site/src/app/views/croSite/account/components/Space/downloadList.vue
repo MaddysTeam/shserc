@@ -27,7 +27,7 @@
 
 <script>
 import List from "@/components/List/index";
-import { downloadList } from "@/app/api/my";
+import { downloadList } from "@/app/api/croMy";
 
 export default {
   components: { List },

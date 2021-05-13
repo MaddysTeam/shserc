@@ -24,7 +24,7 @@
           <el-submenu index="4">
             <template slot="title">  <i class="el-icon-menu"></i>我的资源</template>
             <el-menu-item index="41">我创建的资源</el-menu-item>
-            <el-menu-item index="42">我点赞的资源</el-menu-item>
+            <!-- <el-menu-item index="42">我点赞的资源</el-menu-item> -->
           </el-submenu>
           <el-menu-item index="5">
             <i class="el-icon-document"></i>
@@ -52,6 +52,7 @@
         <AccountInfo v-else-if="defaultActiveIndex== 2"></AccountInfo>
         <MyResourceList v-else-if="defaultActiveIndex==41"></MyResourceList>
         <MyFavoriteList v-else-if="defaultActiveIndex==5"></MyFavoriteList>
+        <MyDownloadList v-else-if="defaultActiveIndex==6"></MyDownloadList>
       </el-col>
     </el-row>
   </div>
@@ -64,9 +65,10 @@ import BulletinList from "@/app/views/croSite/account/components/Space/bulletin"
 import AccountInfo from "@/app/views/croSite/account/components/Space/info";
 import MyResourceList from "@/app/views/croSite/account/components/Space/myResource";
 import MyFavoriteList from "@/app/views/croSite/account/components/Space/favoriteList";
+import MyDownloadList from "@/app/views/croSite/account/components/Space/downloadList";
 
 export default {
-  components: { UploadResource, BulletinList,AccountInfo,MyResourceList,MyFavoriteList },
+  components: { UploadResource, BulletinList,AccountInfo,MyResourceList,MyFavoriteList,MyDownloadList },
 
   data() {
     return {

@@ -7,8 +7,8 @@
           label-width="80px"
           :rules="rules"
         >
-          <!-- resource start -->
 
+          <!-- base info start -->
           <el-form-item label="资源名称" prop="title">
             <el-input v-model="resource.title" placeholder="资源名称"></el-input>
           </el-form-item>
@@ -66,7 +66,7 @@
             </el-tag>
           </el-form-item>
 
-          <!-- resource end -->
+          <!-- base info end -->
 
           <!-- dropdown start -->
 
