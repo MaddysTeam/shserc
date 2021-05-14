@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface IEditCommentMapper extends BasicMapper<ResComment, EditCommentDto> {
+public interface 	IEditCommentMapper extends BasicMapper<ResComment, EditCommentDto> {
 
 	IEditCommentMapper INSTANCE = Mappers.getMapper(IEditCommentMapper.class);
 

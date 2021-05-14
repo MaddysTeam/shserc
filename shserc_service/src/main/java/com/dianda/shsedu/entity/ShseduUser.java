@@ -8,11 +8,13 @@ public class ShseduUser extends BaseEntity {
 	  
 	  private  String password;
 	  
-	  private  long  areaId;
+	  private  long  districtId;
 	  
 	  private String realName;
 	  
 	  private  String mobile;
 	  
 	  private  String email;
+
+	  private  long roleId;
 }
