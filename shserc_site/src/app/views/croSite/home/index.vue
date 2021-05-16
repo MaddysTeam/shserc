@@ -42,8 +42,7 @@
 
           <div class="body">
             <ResourceBlockHotList
-              :coverWidth="184"
-              :coverHeight="120"
+              :coverHeight="150"
               :source="topHotResources"
             ></ResourceBlockHotList>
           </div>
@@ -57,7 +56,10 @@
           </p>
 
           <div class="body">
-            <ResourceBlockLatestList :source="topLatestSource"></ResourceBlockLatestList>
+            <ResourceBlockLatestList 
+             :coverHeight="150"
+            :source="topLatestSource">
+            </ResourceBlockLatestList>
           </div>
         </div>
       </el-col>
@@ -146,7 +148,9 @@
             :source="topActivityUsers"
           >
             <template slot="item" slot-scope="user">
-              <el-avatar :src="user.item.photoPath" :size="40"></el-avatar>
+              <el-avatar :src="user.item.photoPath" :size="40"  @error="handleImageError" >
+                  <img :src="CDN.DEFAULT_HEADER_COVER" />
+              </el-avatar>
               <div>{{user.item.userName}}</div>
             </template>
           </ActivityUserList>
@@ -160,6 +164,7 @@
 </template>
 
 <script>
+import {CDN} from "@/static/CDN"
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
 import { selectParam, orderPhrasesModel } from "@/app/models/croResource";
@@ -178,6 +183,7 @@ import ResourceBlockHotList from "@/app/views/croSite/resource/components/BlockL
 import ResourceBlockLatestList from "@/app/views/croSite/resource/components/BlockList/latest";
 import ActivityUserList from "@/components/List/index";
 import BulltinList from "@/components/List/index";
+
 
 export default {
   components: {
@@ -200,6 +206,7 @@ export default {
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       friendSites: [],
+      CDN:CDN
     };
   },
 
@@ -231,7 +238,7 @@ export default {
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
-          this.bestFavoriteResources = data.listData ? data.listData : [];
+          this.topHotResources = data.listData ? data.listData : [];
         }
       });
     },
@@ -248,7 +255,7 @@ export default {
       list(param).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
-          this.topSource = data.listData ? data.listData : [];
+          this.topLatestSource = data.listData ? data.listData : [];
         }
       });
     },
@@ -303,6 +310,14 @@ export default {
         this.$store.commit(types.APP + "/" + types.LOGOUT);
         this.$router.push({ path: "/admin/logout", replace: true });
       });
+    },
+
+    handleImageError(){
+      // let img=event.srcElement;
+      // img.src = CDN.DEFAULT_HEADER_COVER;
+	    // img.onerror = null; //防止闪图
+
+      return true;
     },
   },
 };

@@ -18,6 +18,15 @@
           <el-form-item label="资源名称" prop="title">
             <el-input v-model="resource.title"></el-input>
           </el-form-item>
+
+           <el-form-item label="资源类型" prop="createType" class="text_align_left" >
+            <el-radio-group v-model="resource.createTypeId"  @change="createTypeSelectChange">
+               <el-radio :label="10001" :key="10001" >原创</el-radio>
+                <el-radio :label="10002" :key="10002">推荐</el-radio>
+              </el-radio-group>
+               <el-input v-model="resource.sourceUrl" placeholder="资源出处" v-show="isShowSourceUrl"></el-input>
+          </el-form-item>
+
           <el-form-item label="上传资源">
             <el-upload
               class="upload-file"
@@ -607,6 +616,11 @@ export default {
     resourceTypeSelectChanged(resourceTypeId) {
       this.resource.resourceTypeId = resourceTypeId;
     },
+
+    createTypeSelectChange(val){
+        this.isShowSourceUrl=val==10002;
+    },
+
 
     // submit
 

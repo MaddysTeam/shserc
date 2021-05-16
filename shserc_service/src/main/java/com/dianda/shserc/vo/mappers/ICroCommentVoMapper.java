@@ -15,7 +15,7 @@ public interface ICroCommentVoMapper extends BasicMapper<CommentVo, CroComment> 
 	
 	@Mappings({
 			@Mapping(source = "id", target = "id"),
-			@Mapping(source = "croResourceId", target = "resourceId"),
+			@Mapping(source = "resourceId", target = "resourceId"),
 			@Mapping(source = "content", target = "content"),
 			@Mapping(source = "auditType", target = "auditType"),
 			@Mapping(source = "auditorName", target = "auditorName"),

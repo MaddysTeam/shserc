@@ -284,7 +284,22 @@ const frontendRoutes = [
                 path: '/croSite/space/declare',
                 name: routeNames.MySpaceDeclare,
                 component: MySpaceDeclare
-            }
+            },
+            // {
+            //     path: '/croSite/activityUser/more',
+            //     name: routeNames.MySpaceDeclare,
+            //     component: MySpaceDeclare
+            // },
+            // {
+            //     path: '/croSite/bulletin/more',
+            //     name: routeNames.MySpaceDeclare,
+            //     component: MySpaceDeclare
+            // },
+            // {
+            //     path: '/croSite/bulletin/details',
+            //     name: routeNames.MySpaceDeclare,
+            //     component: MySpaceDeclare
+            // },
         ],
         redirect: { name: 'CroSiteHomeIndex' }
     }

@@ -31,3 +31,7 @@ export function download(id) {
 export function listStarScores(id) {
     return axios.post('api/croResource/stars/' + id);
 }
+
+export function addViewCount(id) {
+    return axios.post('api/croResource/viewCount/' + id);
+}

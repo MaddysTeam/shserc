@@ -9,14 +9,15 @@
         >
 
           <!-- base info start -->
+          
           <el-form-item label="资源名称" prop="title">
             <el-input v-model="resource.title" placeholder="资源名称"></el-input>
           </el-form-item>
 
           <el-form-item label="资源类型" prop="createType" class="text_align_left" >
             <el-radio-group v-model="resource.createTypeId"  @change="createTypeSelectChange">
-               <el-radio :label="10001" >原创</el-radio>
-                <el-radio :label="10002">推荐</el-radio>
+               <el-radio :label="10001" :key="10001" >原创</el-radio>
+                <el-radio :label="10002" :key="10002">推荐</el-radio>
               </el-radio-group>
                <el-input v-model="resource.sourceUrl" placeholder="资源出处" v-show="isShowSourceUrl"></el-input>
           </el-form-item>
@@ -329,7 +330,7 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
-import { edit, info } from "@/app/api/resource";
+import { edit, info } from "@/app/api/croResource";
 import { uploadFile } from "@/app/api/file";
 import { resourceModel } from "@/app/models/croResource";
 import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
@@ -608,9 +609,10 @@ export default {
       let _this = this;
       _this.$refs["resourceForm"].validate((isValid) => {
         if (isValid) {
+          console.log(this.resource);
           edit(this.resource).then((res) => {
             this.cleanForm();
-            this.redirectToList();
+            //this.redirectToList();
           });
         }
       });
@@ -618,12 +620,12 @@ export default {
 
     handCancel() {
       this.cleanForm();
-      this.redirectToList();
+     // this.redirectToList();
     },
 
-    redirectToList() {
-      this.$router.push("/admin/resource/list");
-    },
+    // redirectToList() {
+    //    this.resource=deepCopy(resourceModel);
+    // },
 
     cleanForm() {
       this.resource = deepCopy(resourceModel);

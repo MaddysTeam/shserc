@@ -1,10 +1,9 @@
 package com.dianda.shsedu;
 
 import com.dianda.ServiceApplication;
-import com.dianda.shsedu.entity.News;
 import com.dianda.shsedu.service.INewsService;
-import com.dianda.shserc.service.IResCompanyService;
-import com.dianda.shserc.vo.ResCompanyVo;
+import com.dianda.shsedu.vo.NewsVo;
+import com.dianda.shsedu.vo.NewsVoList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,14 +30,14 @@ public class NewsTest {
 	
 	@Test
 	public void get_news_test( ) {
-		News news  = service.findById (1 );
+		NewsVo news  = service.findById (1 );
 		Assert.assertTrue ( news != null );
 	}
 	
 	
 	@Test
 	public void get_news_paged_data_test( ) {
-		List<News> newsList  = service.findByPhrase ();
+		NewsVoList newsList  = service.findByPhrase (null);
 		Assert.assertTrue ( newsList != null );
 	}
 

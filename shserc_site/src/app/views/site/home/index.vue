@@ -137,9 +137,10 @@
         <!-- login area end -->
 
         <div class="block_panel">
-          <!-- <p class="panel_title">
-            <span><i class="el-icon-headset"></i> 众筹资源</span>
-          </p> -->
+          <p class="panel_title">
+             <span><i class="el-icon-headset"></i> 众筹资源</span> 
+          </p> 
+           <router-link :to="{name:routeNames.CroSiteHomeIndex}"><img src="../../../assets/images/i_zy.jpg"  style="width:100%;height:100%"/></router-link>
         </div>
 
         <!-- activity user list start -->
@@ -155,7 +156,9 @@
             :source="topActivityUsers"
           >
             <template slot="item" slot-scope="user">
-              <el-avatar :src="user.item.photoPath" :size="40"></el-avatar>
+              <el-avatar :src="user.item.photoPath" :size="40" @error="handleImageError">
+                 <img :src="CDN.DEFAULT_HEADER_COVER" />
+              </el-avatar>
               <div>{{user.item.userName}}</div>
             </template>
           </ActivityUserList>
@@ -203,6 +206,8 @@
 </template>
 
 <script>
+import {CDN} from "@/static/CDN"
+import {routeNames} from "@/app/routers/routeNames";
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
 import { selectParam, orderPhrasesModel } from "@/app/models/resource";
@@ -242,6 +247,8 @@ export default {
       value2: 5,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       friendSites: [],
+      routeNames:routeNames,
+      CDN:CDN
     };
   },
 
@@ -335,6 +342,10 @@ export default {
         this.$router.push({ path: "/admin/logout", replace: true });
       });
     },
+
+    handleImageError(){
+      return true;
+    }
   },
 };
 </script>

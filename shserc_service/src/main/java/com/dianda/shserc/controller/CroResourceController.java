@@ -10,16 +10,14 @@ import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.service.ICroResourceService;
 import com.dianda.shserc.vo.*;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
+@RestController
 @RequestMapping("/croResource")
 public class CroResourceController extends BaseController {
 	
@@ -82,27 +80,38 @@ public class CroResourceController extends BaseController {
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
-	@PostMapping( path = "/star/{id}" )
-	public JsonResult star( @PathVariable long id , int score ) {
+	@PostMapping( path = "/star/{id}/{score}" )
+	public JsonResult star( @PathVariable long id ,@PathVariable int score ) {
 		ResUser loginUser = getLoginUserInfo ( );
 		ResourceOperation operation = new ResourceOperation ( );
 		operation.setResourceId ( id );
 		operation.setUserId ( loginUser.getId ( ) );
 		operation.setOperIntResult ( score );
+		operation.setAddTime ( LocalDateTime.now () );
 		
 		boolean result = service.setStar ( operation );
 		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
 				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
-	@PostMapping( path = "/stars/{resourceId}" )
-	public JsonResult findStars( @PathVariable @Min( value = 1 ) long resourceId , BindingResult bindingResult) {
-		if ( bindingResult.hasErrors ( ) ) {
-			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
-		}
-		
-		ResourceOperationVoList list = service.findStars ( resourceId );
+	@PostMapping( path = "/stars/{id}" )
+	public JsonResult findStars( @PathVariable @Min( value = 1 ) long id ) {
+		ResourceOperationVoList list = service.findStars ( id );
 		return JsonResult.success ( list );
+	}
+	
+	@PostMapping( path = "/viewCount/{id}" )
+	public JsonResult AddViewCount( @PathVariable @Min( value = 1 ) long id ){
+		 ResUser loginUser=getLoginUserInfo ();
+		ResourceOperation operation = new ResourceOperation ( );
+		operation.setResourceId ( id );
+		operation.setUserId ( loginUser.getId ( ) );
+		operation.setAddTime ( LocalDateTime.now () );
+		
+		boolean result=service.addViewCount ( operation );
+		
+		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
+				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 	
 }

@@ -13,7 +13,7 @@ public class CroComment extends BaseEntity {
 
 	private long userId;
 
-	private long croResourceId;
+	private long resourceId;
 
 	private String content;
 

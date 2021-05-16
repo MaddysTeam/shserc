@@ -33,7 +33,9 @@ public interface IEditCroResourceMapper extends BasicMapper<CroResource, EditCro
 			@Mapping(source="domainId",target="domainId"),
 			@Mapping(source="coverPath",target="coverPath"),
 			@Mapping(source="stateId",target="stateId"),
-			@Mapping(source="resourceTypeId",target="resourceTypeId")
+			@Mapping(source="resourceTypeId",target="resourceTypeId"),
+			@Mapping(source="createTypeId",target="createTypeId"),
+			@Mapping(source="sourceUrl",target="sourceUrl")
 	} )
 	CroResource mapFrom( EditCroResourceDto editUserDto );
 }

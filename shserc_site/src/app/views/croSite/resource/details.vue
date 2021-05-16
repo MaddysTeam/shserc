@@ -14,7 +14,7 @@
           <div class="body">
             <div class="body res_details">
               <div v-if="resource.isVideo">
-                <div class="title filetype ">
+                <div class="title filetype">
                   <i class="el-icon-video-play link font30 green"></i>
                   {{ resource.title }}
                 </div>
@@ -42,7 +42,7 @@
               </div>
 
               <div class="opbar">
-                   <div class="buttons">
+                <div class="buttons">
                   <el-button
                     size="larger"
                     type="danger"
@@ -65,7 +65,7 @@
                     <i class="fa fa-download"></i> 下 载
                   </el-button>
                 </div>
-                
+
                 <div class="stars">
                   <b>点击评分：</b>
                   <el-rate
@@ -75,7 +75,6 @@
                   >
                   </el-rate>
                 </div>
-               
               </div>
 
               <div class="info">
@@ -215,7 +214,7 @@
         </div>
         <!--  hot  resource list end -->
 
-         <!--  relative  resource list start -->
+        <!--  relative  resource list start -->
         <div class="block_panel">
           <p class="green_panel_title">
             <span><i class="el-icon-user-solid"></i> 最新资源</span>
@@ -236,7 +235,11 @@ import { AUDIT_SUCCESS_ID } from "@/app/static/type";
 import { messages } from "@/app/static/message.js";
 import CommentList from "@/app/views/croSite/comment/components/List/index";
 import TopList from "@/app/views/croSite/resource/components/TopList/index";
-import { resourceModel, videoOptions, starScores } from "@/app/models/croResource";
+import {
+  resourceModel,
+  videoOptions,
+  starScores,
+} from "@/app/models/croResource";
 import {
   selectParam as commentSelectParam,
   commentModel,
@@ -248,7 +251,8 @@ import {
   favorite,
   star,
   listStarScores,
-  download
+  download,
+  addViewCount,
 } from "@/app/api/croResource";
 import { list as commentList, edit as commentEdit } from "@/app/api/croComment";
 import { myFavoriteList } from "@/app/api/croMy";
@@ -272,7 +276,7 @@ export default {
       commentSelectParam: commentSelectParam,
       commentModel: commentModel,
       resource: resourceModel,
-      videoOptions:videoOptions,
+      videoOptions: videoOptions,
       appEnum: appEnum,
 
       progressColors: ["#409eff", "#67c23a", "#e6a23c", "#f56c6c", "#6f7ad3"],
@@ -291,8 +295,7 @@ export default {
 
   mounted() {
     let _this = this;
-    this.starScores = 
-    [
+    this.starScores = [
       {
         score: 1,
         count: 0,
@@ -335,21 +338,20 @@ export default {
       },
     ];
 
-    this.resourceId=this.$router.currentRoute.params.id;
+    this.resourceId = this.$router.currentRoute.params.id;
 
     this.loadResourceInfo();
     this.loadTopVisitResourceList();
-    this.loadTopVisitResourceList();
+    this.loadRelativeResourceList();
     this.loadComments();
     this.checkIsFavorite();
     this.loadStarScores();
-    
+    this.handleAddViewCount();
   },
 
   methods: {
     loadResourceInfo() {
-      //let id = this.resourceId; //this.$router.currentRoute.params.id;
-      info( this.resourceId).then((res) => {
+      info(this.resourceId).then((res) => {
         if (res) {
           this.resource = JSON.parse(res.data);
           this.resource.isVideo =
@@ -368,7 +370,7 @@ export default {
 
     loadComments(current) {
       let selectParam = this.commentSelectParam;
-      selectParam.resourceId = this.resourceId;//this.$router.currentRoute.params.id;
+      selectParam.resourceId = this.resourceId;
       selectParam.stateId = AUDIT_SUCCESS_ID;
       if (current) {
         selectParam.current = current;
@@ -383,7 +385,7 @@ export default {
     },
 
     loadStarScores() {
-      let id = this.resourceId; //this.$router.currentRoute.params.id;
+      let id = this.resourceId;
       listStarScores(id).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
@@ -395,7 +397,7 @@ export default {
             scoreObj.percentage =
               Math.floor(scoreObj.count / source.length) == 0
                 ? 10
-                : Math.floor(scoreObj.count /  source.length) * 100;
+                : Math.floor(scoreObj.count / source.length) * 100;
           }
         }
 
@@ -419,7 +421,7 @@ export default {
       if (!this.isLogin) {
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        let resourceId = this.resourceId;// this.$router.currentRoute.params.id;
+        let resourceId = this.resourceId; // this.$router.currentRoute.params.id;
         favorite(resourceId).then((res) => {
           this.$notification.success({ message: messages.SUCCESS });
 
@@ -447,7 +449,7 @@ export default {
     },
 
     handleSendComment() {
-      let resourceId = this.resourceId;//this.$router.currentRoute.params.id;
+      let resourceId = this.resourceId; //this.$router.currentRoute.params.id;
       this.$refs["commentForm"].validate((vaild) => {
         if (vaild) {
           commentModel.resourceId = resourceId;
@@ -468,9 +470,9 @@ export default {
       if (!this.isLogin) {
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        download(resourceId).then((res)=>{
-          if(res){
-              downloadFile(fileName, path);
+        download(resourceId).then((res) => {
+          if (res) {
+            downloadFile(fileName, path);
           }
         });
       }
@@ -481,10 +483,16 @@ export default {
         this.starScore = 0;
         this.$notification.error({ message: messages.MUST_LOGIN_FIRST });
       } else {
-        let resourceId = this.resourceId;// this.$router.currentRoute.params.id;
+        let resourceId = this.resourceId; // this.$router.currentRoute.params.id;
         star(resourceId, this.starScore).then((res) => {
           this.$notification.success({ message: messages.SUCCESS });
         });
+      }
+    },
+
+    handleAddViewCount() {
+      if (this.isLogin) {
+        addViewCount(this.resourceId).then((res)=>{ });
       }
     },
   },

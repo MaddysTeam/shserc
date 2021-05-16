@@ -36,8 +36,8 @@
             <div class="hot"></div>
             <div class="m_5 text_align_left">
               <div>标题：<router-link class="link" :to="{path:'/croSite/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
-              <p>作者：{{resource.item.author}}</p>
-              <el-tag>访问量：{{ resource.item.viewCount}}</el-tag>
+              <p>作者：<span v-dot="resource.item.author"></span></p>
+              <p>访问量：{{ resource.item.viewCount}}</p>
 
               <p v-show="isRecommand">
                 <!-- <el-tag>点击量：{{ resource.item.viewCount}}</el-tag> -->

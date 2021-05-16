@@ -235,7 +235,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		if ( ObjectUtil.isNull ( croResource ) ) return false;
 		
 		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
-		wrapper.eq ( "resource_id" , userId ).eq ( "resource_id" , resourceId );
+		wrapper.eq ( "user_id" , userId ).eq ( "resource_id" , resourceId );
 		List<ResourceOperation> list = mapper.selectFavorites ( wrapper );
 		if ( ObjectUtil.isNull ( list ) || list.size ( ) <= 0 ) {
 			croResource.addFavoriteCount ( );

@@ -88,7 +88,7 @@ import {
   getChildrenByParentId,
   getTargetRelevant,
 } from "@/app/utils/dictHelper";
-import {DICTIONARY_TYPES} from "@/app/static/type"
+import { DICTIONARY_TYPES } from "@/app/static/type";
 
 export default {
   props: {
@@ -97,6 +97,7 @@ export default {
     },
     isShowAdvHit: { type: Boolean },
     isForceSearch: { type: Boolean },
+    defaultSelectItems: { type: Array },
     defaultSearchPhrase: { type: String, default: "" },
   },
 
@@ -158,6 +159,14 @@ export default {
     if (this.isForceSearch) this.handleSubmit();
 
     this.allOptions = this.allOptions.concat(this.showOptions);
+
+    this.handleSelectItems();
+  },
+
+  watch: {
+    defaultSelectItems(val, oldVal) {
+      this.handleSelectItems();
+    },
   },
 
   methods: {
@@ -186,11 +195,11 @@ export default {
 
       if (option.parentType) {
         let filterParnet = getTargetRelevant(item.relevantId, this.dict);
-        console.log(filterParnet)
+        console.log(filterParnet);
         for (let i in options) {
           if (options[i].type == option.parentType) {
-          options[i].items = filterParnet;
-          break;
+            options[i].items = filterParnet;
+            break;
           }
         }
       }
@@ -220,8 +229,8 @@ export default {
     handleUnSelectItem(item) {
       let option = item["parent"];
 
-       var options = this.showOptions.concat(this.moreOptions);
-      if (option && option.childType) {       
+      var options = this.showOptions.concat(this.moreOptions);
+      if (option && option.childType) {
         for (let i in options) {
           if (options[i].type == option.childType) {
             options[i].items = getChildrenByParentId(
@@ -232,7 +241,7 @@ export default {
         }
       }
 
-      if (option && option.parentType) {       
+      if (option && option.parentType) {
         for (let i in options) {
           if (options[i].type == option.parentType) {
             options[i].items = getChildrenByParentId(
@@ -251,7 +260,7 @@ export default {
           i -= 1;
         }
       }
-      
+
       this.handleSubmit();
     },
 
@@ -264,6 +273,14 @@ export default {
       this.isShowMoreOptions = false;
       this.allOptions = this.showOptions;
     },
+
+    handleSelectItems() {
+      this.selectedItems = [];
+      for (let i in this.defaultSelectItems) {
+        this.handleSelectItem(this.defaultSelectItems[i], this.allOptions[0]); //TODO will change asap
+      }
+    },
+
   },
 };
 </script>

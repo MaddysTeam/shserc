@@ -8,7 +8,7 @@ import com.dianda.shserc.entity.CroComment;
 import org.apache.ibatis.annotations.Param;
 
 public interface CroCommentMapper extends BaseMapper<CroComment> {
-	IPage<CroComment> selectResComments( IPage<CroComment> page , @Param( Constants.WRAPPER ) Wrapper<CroComment> wrapper );
+	IPage<CroComment> selectCroComments( IPage<CroComment> page , @Param( Constants.WRAPPER ) Wrapper<CroComment> wrapper );
 	int editComment( CroComment model );
 	int delComment( long id );
 }

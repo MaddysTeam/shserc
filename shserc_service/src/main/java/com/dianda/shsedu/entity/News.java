@@ -3,10 +3,12 @@ package com.dianda.shsedu.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class News extends BaseEntity {
 	
 	private String  title;

@@ -36,10 +36,10 @@
             <div class="hot"></div>
             <div class="m_5 text_align_left">
               <div>标题：<router-link class="link" :to="{path:'/croSite/resource/details/'+resource.item.id}">{{ resource.item.title}} </router-link></div>
-              <p>作者：{{resource.item.author}}</p>
-              <el-tag>下载次数：{{ resource.item.downloadCount}}</el-tag>
+              <p>作者：<span v-dot="resource.item.author"></span></p>
+              <p><el-tag>下载次数：{{ resource.item.downloadCount}}</el-tag></p>
 
-              <p v-show="isShowStatistical">
+              <p v-show="isShowSourceUrl">
                 <!-- <el-tag>点击量：{{ resource.item.viewCount}}</el-tag> -->
                 <el-tag type="info">资源出处：{{ resource.item.sourceUrl}}</el-tag>
                 <!-- <el-tag type="danger"> 格式： {{resource.item.fileExtName}}</el-tag> -->
@@ -71,6 +71,7 @@ export default {
     total:{type:Number,default:0},
     handleChange: { type: Function },
     handlePageSizeChange:{type:Function},
+    isShowSourceUrl:{type:Boolean}
   },
 
   data() {

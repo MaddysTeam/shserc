@@ -109,33 +109,54 @@
           src="../../../assets/images/i_banner.jpg"
           style="position: absolute; left: 0px"
         />
-        <img src="../../../assets/images/logo.png" style="position: absolute; left: 0px; width:200px; left:30px; top:30px;"/>
-        <div style="height:120px;"></div>
+        <img
+          src="../../../assets/images/logo.png"
+          style="
+            position: absolute;
+            left: 0px;
+            width: 200px;
+            left: 30px;
+            top: 30px;
+          "
+        />
+        <div style="height: 120px"></div>
         <el-menu
           default-active="0"
           class="el-menu-demo m_30_left"
           mode="horizontal"
-          style="position:none; background:transparent"
+          style="position: none; background: transparent"
           text-color="#578d38"
-          active-text-color ="#578d38"
+          active-text-color="#578d38"
         >
-          <el-menu-item index="1"  style="font-size:16px"  @click="handelNavToHome">首页</el-menu-item>
-          <el-menu-item index="2" style=" font-size:16px" @click="handelNavToSearch">课程与教学</el-menu-item>
-          <el-menu-item index="3" style="font-size:16px">康复与干预</el-menu-item>
-          <el-menu-item index="4" style="font-size:16px">支持与服务</el-menu-item>
-           <el-menu-item index="5" style="font-size:16px">分类搜索</el-menu-item>
+          <el-menu-item
+            index="8"
+            style="font-size: 16px"
+            @click="handelNavToHome"
+            >首页</el-menu-item
+          >
+          <el-menu-item
+            :index="index.toString()"
+            v-for="(item, index) in domains"
+            :key="item.id"
+            style="font-size: 16px"
+            @click="handelNavToSearch(item.id)"
+            >{{ item.name }}</el-menu-item
+          >
+          <el-menu-item
+            index="-1"
+            style="font-size: 16px"
+            @click="handelNavToSearch()"
+            >分类搜索</el-menu-item
+          >
         </el-menu>
       </div>
 
       <transition name="fade" mode="out-in" appear>
         <router-view class=""></router-view>
       </transition>
-
-      
     </div>
 
     <div class="site_cro_footer"></div>
-
   </div>
 
   <!-- site page end -->
@@ -153,6 +174,7 @@ export default {
     ...mapState({
       isLogin: (state) => state.app.isAuth,
       account: (state) => state.app.account,
+      domains: (state) => state.app.resourceDomains,
     }),
   },
 
@@ -163,30 +185,22 @@ export default {
   },
 
   methods: {
-    // handleShowAccountInfo(){
-    //   this.$router.push({path:"/account/space"});
-    // },
-
-    //  handleLogout() {
-    //   logout().then((res) => {
-    //     this.$store.commit(types.APP + "/" + types.LOGOUT);
-    //     this.$router.push({ path: "/admin/logout", replace: true });
-    //   });
-    // },
-
     handleSearchCroResource() {
       //this.$router.push("/resource/search?key="+this.searchPhrase);
       // this.searchPhrase="";
     },
 
-    handelNavToHome(){
-      this.$router.push({path:"/croSite/home/index"});
+    handelNavToHome() {
+      this.$router.push({ path: "/croSite/home/index" });
     },
 
-    handelNavToSearch(){
-      this.$router.push({path:"/croSite/resource/search"});
-    }
-
+    handelNavToSearch(domainId) {
+      if (!domainId) domainId = 0;
+      
+      this.$router.push({
+        path: "/croSite/resource/search?domainId=" + domainId,
+      });
+    },
   },
 };
 </script>
@@ -195,10 +209,10 @@ export default {
 @import "../../../assets/css/site.css";
 
 .el-menu-item:hover {
-   background-color:#e1f3d8 !important; 
+  background-color: #e1f3d8 !important;
 }
 .el-menu-item.is-active {
-   background-color: transparent !important;
+  background-color: transparent !important;
 }
 </style>
 

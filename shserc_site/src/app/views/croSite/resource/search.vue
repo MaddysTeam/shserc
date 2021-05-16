@@ -9,6 +9,7 @@
         :isForceSearch="true"
         @handleSearch="handleSearch"
         :defaultSearchPhrase="this.$route.query.key"
+        :defaultSelectItems="defaultSelectSearchItems"
       ></CroSourceSearchArea>
     </div>
     <div class="block_panel m_30_bottom">
@@ -57,6 +58,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { list } from "@/app/api/croResource";
 import { selectParam } from "@/app/models/resource.js";
 import CroSourceSearchArea from "@/app/views/croSite/resource/components/SearchArea";
@@ -64,21 +66,43 @@ import ResourceBlockList from "@/app/views/croSite/resource/components/BlockList
 import ResourceList from "@/app/views/croSite/resource/components/List";
 import { deepCopy } from "@/app/utils/objectHelper";
 
-
 export default {
-    components: { ResourceBlockList, ResourceList,CroSourceSearchArea },
+  components: { ResourceBlockList, ResourceList, CroSourceSearchArea },
 
-    data(){
-        return {
-            isShowList: true,
-            listButtonType: "primary",
-            blockListButtonType: "info",
-            selectParam: deepCopy(selectParam),
-            source: [],
-        }
+  data() {
+    return {
+      isShowList: true,
+      listButtonType: "primary",
+      blockListButtonType: "info",
+      selectParam: deepCopy(selectParam),
+      source: [],
+      defaultSelectSearchItems: [],
+    };
+  },
+
+  computed: {
+    ...mapState({
+      domains: (state) => state.app.resourceDomains,
+    }),
+  },
+
+  created() {
+     this.handleDefaultSelectItem();
+  },
+
+  watch: {
+    $route() {
+       this.defaultSelectSearchItems=[];
+      if (this.$route.query.domainId > 0) {
+        this.handleDefaultSelectItem();
+      }
+      else{
+        location.href=location.href;
+      }
     },
+  },
 
-     methods: {
+  methods: {
     handleShowBlockList() {
       this.isShowList = false;
       this.listButtonType = "info";
@@ -111,6 +135,16 @@ export default {
       this.loadResourceList();
     },
 
+    handleDefaultSelectItem(){
+       let domains = this.domains;
+        let domainId = this.$route.query.domainId;
+        for (let i in this.domains) {
+          if (domains[i].id == domainId) {
+            this.defaultSelectSearchItems.push(domains[i]);
+          }
+        }
+    },
+
     loadResourceList(current) {
       if (current) {
         this.selectParam.current = current;
@@ -124,6 +158,5 @@ export default {
       });
     },
   },
-
-}
+};
 </script>

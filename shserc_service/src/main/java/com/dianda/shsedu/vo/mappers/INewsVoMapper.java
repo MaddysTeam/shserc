@@ -12,8 +12,8 @@ public interface INewsVoMapper extends BasicMapper<NewsVo, News> {
 
 	@Mappings({
 			@Mapping(target = "id", source = "id"),
-			@Mapping(target = "", source = ""),
-			@Mapping(target = "", source = "")
+//			@Mapping(target = "", source = ""),
+//			@Mapping(target = "", source = "")
 	})
 	NewsVo mapTo(News source);
 }

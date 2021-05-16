@@ -61,7 +61,7 @@
 <script>
 import { routeNames } from '@/app/routers/routeNames'
 import UploadResource from "@/app/views/croSite/account/components/Space/upload";
-import BulletinList from "@/app/views/croSite/account/components/Space/bulletin";
+import BulletinList from "@/app/views/croSite/bulletin/components/List/index";
 import AccountInfo from "@/app/views/croSite/account/components/Space/info";
 import MyResourceList from "@/app/views/croSite/account/components/Space/myResource";
 import MyFavoriteList from "@/app/views/croSite/account/components/Space/favoriteList";

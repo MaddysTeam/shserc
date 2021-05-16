@@ -24,6 +24,9 @@
       <template slot-scope="scopes" slot="content">
         <div v-html="scopes.scope.row.content"></div>
       </template>
+      <!-- <template slot-scope="scopes" slot="content">
+        <div v-html="scopes.scope.row.content"></div>
+      </template> -->
     </Table>
   </div>
 </template>
