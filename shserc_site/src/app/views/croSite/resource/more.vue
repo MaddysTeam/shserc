@@ -2,11 +2,15 @@
   <div>
     <el-row :gutter="10">
       <el-col :span="16">
-        <div class="block_panel">
+        <div class="block_panel green_edge">
+        <p class="green_panel_title flex_space_between">
+           <span ><i class="el-icon-star-on font20"></i> 热门资源   &nbsp; &nbsp;  </span>
+        </p>
           <ResourceList
             :isShowPage="true"
             :pageSize="selectParam.pageSize"
             :total="selectParam.total"
+            :source="topHotResource"
           ></ResourceList>
         </div>
       </el-col>
@@ -36,6 +40,7 @@ import TopNewList from "@/app/views/croSite/resource/components/TopList";
 import { selectParam, orderPhrasesModel } from "@/app/models/croResource";
 import { list } from "@/app/api/croResource";
 import { deepCopy } from "@/app/utils/objectHelper";
+import { DESC } from "@/app/static/type";
 
 export default {
     components:{ ResourceList,TopHotList,TopNewList},
@@ -46,14 +51,19 @@ export default {
            topLatestSource: [],
            selectParam:deepCopy(selectParam)
         }
-    }
-,
+    },
+
+    mounted(){
+        this.loadTopHotList(this.selectParam.current);
+    },
+
     methods:{
         loadTopHotList(current,size){
+          let param= this.selectParam;
              if (current) {
-                this.selectParam.current = current;
+                param.current = current;
             }
-            this.selectParam.createType=this.$router.currentRoute.params.createType; // get create type , original or recommend
+             param.createTypeId=this.$router.currentRoute.query.createType; // get create type , original or recommend
              param.orderPhrases[orderPhrasesModel.viewCount] = DESC;
              if(size && size>0){
                  param.size=size;

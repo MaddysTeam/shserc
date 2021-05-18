@@ -267,7 +267,7 @@ const frontendRoutes = [
             },
             {
                 path: '/croSite/resource/more',
-                name: 'CroSiteRsourceMore',
+                name: routeNames.CroSiteRsourceMore,
                 component: CroSiteResourceMore
             },
             {

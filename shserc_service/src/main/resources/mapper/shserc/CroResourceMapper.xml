@@ -88,7 +88,7 @@
     </select>
 
     <insert id="addStar" parameterType="com.dianda.shserc.entity.ResourceOperation">
-         insert into cro_star values (resource_id,user_id, score, add_date) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
+         insert into cro_star (resource_id,user_id, score, add_time) values(#{resourceId},#{userId},#{operIntResult},#{addTime})
     </insert>
 
 

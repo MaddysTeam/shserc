@@ -17,7 +17,7 @@ public class ResComment extends BaseEntity {
 
 	private String content;
 
-	private long auditTypeId;
+	//private long auditTypeId;
 
 	private long auditor;
 

@@ -13,9 +13,6 @@ public class EditCommentDto {
 	@Min ( value = 1)
 	private long userId;
 	
-	@Min ( value = 0)
-	private long auditTypeId;
-	
 	@NotBlank
 	private String content;
 	

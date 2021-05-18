@@ -4,19 +4,6 @@
     <!-- site nav start -->
     <div class="site_nav">
       <div class="div_ml_mr95">
-        <!-- <a
-          class="top_s_text p_l0"
-          href="/Account/Login?returnUrl=%2FResource%2FAdvanceSearch%3FKeywords%3D%26SearchType%3D1%26PackageType%3D%26Domain%3D%26Deformity%3D%26ResourceType%3D%26Subject%3D%26SchoolType%3D%26LearnFrom%3D%26Grade%3D%26Sort%3D%26ShowMoreOptions%3D"
-          >登录</a
-        >
-        <span class="top_s_bo"></span>
-        <a
-          class="top_s_text"
-          href="/Account/Register?returnUrl=%2FResource%2FAdvanceSearch%3FKeywords%3D%26SearchType%3D1%26PackageType%3D%26Domain%3D%26Deformity%3D%26ResourceType%3D%26Subject%3D%26SchoolType%3D%26LearnFrom%3D%26Grade%3D%26Sort%3D%26ShowMoreOptions%3D"
-          >注册</a
-        >
-
-        <span class="fr">欢迎访问上海市特殊教育资源库</span> -->
 
         <header
           role="banner"
@@ -28,7 +15,7 @@
             <ul role="navigation">
               <li v-if="!isLogin">
                 <router-link
-                  to="/croHome/index"
+                  to="/croSite/home/index"
                   replace
                   type="primary"
                   aria-label="欢迎访问特教众筹资源平台"
@@ -47,29 +34,10 @@
                   >进入上海市特殊教育资源库</router-link
                 >
               </li>
-              <!-- <li role="tab">
-                <router-link
-                  v-if="!isLogin"
-                  to="/account/register"
-                  type="danger"
-                  class="font12"
-                  :underline="false"
-                  ><el-tag>注册</el-tag></router-link
-                >
-              </li>
-              <li role="tab">
-                <router-link
-                  v-if="!isLogin"
-                  to="/account/login"
-                  class="font12"
-                  :underline="false"
-                  ><el-tag type="danger">登录</el-tag></router-link
-                >
-              </li>-->
               <li role="tab">
                 <router-link
                   v-if="isLogin"
-                  to="/croMy/space"
+                  to="/croSite/space"
                   class="font12"
                   :underline="false"
                   ><el-tag type="success"
@@ -99,6 +67,7 @@
           </div>
           <div></div>
         </header>
+        
       </div>
     </div>
 
@@ -164,8 +133,7 @@
 
 <script>
 import { mapState } from "vuex";
-import * as types from "@/app/static/type";
-import { logout } from "@/app/api/account";
+import {routeNames} from "@/app/routers/routeNames";
 
 export default {
   components: {},
@@ -181,6 +149,7 @@ export default {
   data() {
     return {
       searchPhrase: "",
+      routeNames:routeNames
     };
   },
 
@@ -191,7 +160,7 @@ export default {
     },
 
     handelNavToHome() {
-      this.$router.push({ path: "/croSite/home/index" });
+      this.$router.push({ name: routeNames.CroSiteHomeIndex });
     },
 
     handelNavToSearch(domainId) {

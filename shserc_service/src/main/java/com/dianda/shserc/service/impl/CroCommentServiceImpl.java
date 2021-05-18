@@ -39,7 +39,6 @@ public class CroCommentServiceImpl extends ServiceImpl<CroCommentMapper, CroComm
 		QueryWrapper<CroComment> queryWrapper = new QueryWrapper<> ( );
 		long auditor = params.getAuditor ( );
 		long resourceId = params.getResourceId ( );
-		long auditTypeId = params.getAuditTypeId ( );
 		long stateId=params.getStateId ();
 		String phrase = params.getSearchPhrase ( );
 
@@ -50,9 +49,6 @@ public class CroCommentServiceImpl extends ServiceImpl<CroCommentMapper, CroComm
 		}
 		if ( auditor > 0 ) {
 			queryWrapper = queryWrapper.eq ( "auditor" , auditor );
-		}
-		if ( auditTypeId > 0 ) {
-			queryWrapper = queryWrapper.eq ( "audit_type_id" , auditTypeId );
 		}
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) ) {
 			queryWrapper = queryWrapper.and ( wrapper -> wrapper.like ( "content" , phrase ) );

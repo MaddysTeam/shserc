@@ -9,6 +9,5 @@ import lombok.EqualsAndHashCode;
 public class CommentSelectParams extends BaseSelectParams {
 	private long resourceId;
 	private long auditor;
-	private long auditTypeId;
 	private long stateId;
 }

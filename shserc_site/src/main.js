@@ -11,7 +11,7 @@ import router from '@/router'
 import { Plugins } from '@/global/plugins'
 
 /** initial mock data */
-const mock = true;
+const mock = false;
 if (mock) {
     require('./app/mock/mock');
 }

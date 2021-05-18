@@ -6,7 +6,7 @@
           <div class="details downwide">
 
             <router-link
-              :to="{path:'/Resource/details/'+resourceOperation.item.resourceId}"
+              :to="{path:'/croSite/resource/details/'+resourceOperation.item.resourceId}"
               :title="resourceOperation.item.title"
               ><span class="restitle">{{ resourceOperation.item.title }}</span>
             </router-link>

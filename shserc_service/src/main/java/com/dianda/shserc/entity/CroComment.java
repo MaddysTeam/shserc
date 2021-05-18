@@ -17,7 +17,7 @@ public class CroComment extends BaseEntity {
 
 	private String content;
 
-	private long auditTypeId;
+	//private long auditTypeId;
 
 	private long auditor;
 

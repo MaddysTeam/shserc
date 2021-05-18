@@ -16,7 +16,6 @@ public interface 	IEditCommentMapper extends BasicMapper<ResComment, EditComment
 
 	@Mappings({
 			@Mapping(source = "id", target = "id"),
-			@Mapping(source = "auditTypeId", target = "auditTypeId"),
 			@Mapping(source="resourceId",target="resourceId"),
 			@Mapping(source="auditor",target="auditor"),
 			@Mapping(source="content",target="content")

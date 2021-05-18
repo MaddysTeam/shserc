@@ -1,12 +1,12 @@
 <template>
   <div class="ranking">
     <List :source="source">
-      <template slot="item" slot-scope="resourceOperation">
+      <template slot="item" slot-scope="resourceOperation" >
         <div class="ranking_square">
           <div class="details downwide">
 
             <router-link
-              :to="{path:'/CroResource/details/'+resourceOperation.item.resourceId}"
+              :to="{path:'/croSite/resource/details/'+resourceOperation.item.resourceId}"
               :title="resourceOperation.item.title"
               ><span class="restitle">{{ resourceOperation.item.title }}</span>
             </router-link>

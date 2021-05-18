@@ -46,7 +46,7 @@
       </el-col>
       <!-- left menu end -->
 
-      <el-col :span="19" class="p_30_left_right">
+      <el-col :span="19" class="p_30">
         <UploadResource v-if="defaultActiveIndex == 3 || isUpload"></UploadResource>
         <BulletinList v-else-if="defaultActiveIndex == 1"></BulletinList>
         <AccountInfo v-else-if="defaultActiveIndex== 2"></AccountInfo>

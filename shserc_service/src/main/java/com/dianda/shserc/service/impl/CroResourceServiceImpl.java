@@ -255,6 +255,14 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		CroResource croResource = mapper.selectById ( resourceId );
 		if ( ObjectUtil.isNull ( croResource ) ) return false;
 		
+		QueryWrapper<ResourceOperation> wrapper = new QueryWrapper<> ( );
+		wrapper.eq ( "resource_id" , resourceOperation.getResourceId () )
+				.eq ( "user_id", resourceOperation.getUserId ());
+		List<ResourceOperation> results = mapper.selectStars ( wrapper );
+		if(results.size ()>0){
+			return false;
+		}
+		
 		croResource.addStarCount ( resourceOperation.getOperIntResult ( ) );
 		return mapper.updateById ( croResource ) + mapper.addStar ( resourceOperation ) == 2;
 	}

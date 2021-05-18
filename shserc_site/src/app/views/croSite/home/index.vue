@@ -34,7 +34,10 @@
 
         <div class="block_panel green_edge">
           <p class="green_panel_title flex_space_between">
-            <span><i class="el-icon-star-on font20"></i> 热门资源</span>
+            <span ><i class="el-icon-star-on font20"></i> 热门资源   &nbsp; &nbsp;  
+             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.origin}}"><el-tag type="success" class="cursor_pointer" >原创</el-tag></router-link>
+             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.recommend}}"><el-tag type="success"  class="cursor_pointer"> 推荐</el-tag></router-link>
+            </span>
              <span>
                <router-link class="link font14" to="/croSite/resource/more"><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
             </span>
@@ -51,7 +54,7 @@
           <p class="green_panel_title flex_space_between">
             <span><i class="el-icon-s-order"></i> 最新资源</span>
             <span>
-               <router-link class="link font14" to="/croSite/resource/more'"><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
+               <router-link class="link font14" :to="{name:routeNames.CroSiteRsourceMore}"><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
             </span>
           </p>
 
@@ -164,10 +167,11 @@
 </template>
 
 <script>
+import {routeNames} from "@/app/routers/routeNames";
 import {CDN} from "@/static/CDN"
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
-import { selectParam, orderPhrasesModel } from "@/app/models/croResource";
+import { selectParam, orderPhrasesModel,createType } from "@/app/models/croResource";
 import { userOrderPhrasesModel } from "@/app/models/user";
 import { accountModel } from "@/app/models/account";
 import { rseoureBulletinList } from "@/app/api/bulletin";
@@ -196,11 +200,13 @@ export default {
   },
   data() {
     return {
+      routeNames:routeNames,
       loginModel: loginModel,
       selectParam: selectParam,
       topHotResources: [],
       topLatestSource: [],
       topActivityUsers: [],
+      createType:createType,
 
       topBulltins: [],
       value2: 5,
@@ -313,10 +319,6 @@ export default {
     },
 
     handleImageError(){
-      // let img=event.srcElement;
-      // img.src = CDN.DEFAULT_HEADER_COVER;
-	    // img.onerror = null; //防止闪图
-
       return true;
     },
   },

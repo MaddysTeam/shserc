@@ -47,6 +47,11 @@ export const resourceModel = {
     sourceUrl: ""
 };
 
+export const createType = {
+    origin: 10001,
+    recommend: 10002
+};
+
 export const starScores = [{
     score: 1,
     count: 0,
