@@ -423,7 +423,8 @@ export default {
 
   methods: {
     loadResource() {
-      let id = this.$router.currentRoute.params.id;
+      let id = this.$router.currentRoute.query.id;
+      //  load resource instance even id exist
       if (id) {
         info(id).then((res) => {
           this.resource = JSON.parse(res.data);
@@ -433,7 +434,7 @@ export default {
             url: this.resource.resourcePath,
           });
 
-          //fix bugs for cascade data  in edit condition
+          // fix bugs for cascade data  in edit condition
           let domainId = this.resource.domainId;
           if (domainId > 0) {
             // load cascade data
@@ -448,7 +449,7 @@ export default {
             this.$store.dispatch("app/changeGrades", grades);
           }
 
-          //bind key words
+          // bind key words
           this.bindKeywords();
         });
       }

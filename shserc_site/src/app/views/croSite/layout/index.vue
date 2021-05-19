@@ -90,7 +90,7 @@
         />
         <div style="height: 120px"></div>
         <el-menu
-          default-active="0"
+          default-active="8"
           class="el-menu-demo m_30_left"
           mode="horizontal"
           style="position: none; background: transparent"

@@ -4,5 +4,6 @@ export const routeNames = {
     CroResourceList: "CroResourceList",
     CroResourceAdd: "CroResourceAdd",
     CroMyUpload: "CroMyUpload",
-    CroSiteRsourceMore: "CroSiteRsourceMore"
+    CroSiteRsourceMore: "CroSiteRsourceMore",
+    MySpaceBulletin: "MySpaceBulletin"
 }

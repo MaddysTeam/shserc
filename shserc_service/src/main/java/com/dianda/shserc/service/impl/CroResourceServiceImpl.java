@@ -75,7 +75,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 		
 		wrapper = wrapper.eq ( "is_deleted" , 0 );
 		if ( userId > 0 ) {
-			wrapper = wrapper.eq ( "user_id" , userId );
+			wrapper = wrapper.eq ( "add_user" , userId );
 		}
 		if ( deformityId > 0 ) {
 			wrapper = wrapper.eq ( "deformity_Id" , deformityId );

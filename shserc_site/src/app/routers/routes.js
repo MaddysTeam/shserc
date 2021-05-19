@@ -47,6 +47,12 @@ import CroSiteResourceMore from '@/app/views/croSite/resource/more'
 import CroMySpace from '@/app/views/croSite/account/space'
 import CroSiteRsourceDetails from '@/app/views/croSite/resource/details'
 import MySpaceDeclare from '@/app/views/croSite/account/components/Space/declare'
+import MySpaceBulletin from '@/app/views/croSite/bulletin/components/List/index'
+import MySpaceInfo from '@/app/views/croSite/account/components/Space/Info'
+import MySpaceUpload from '@/app/views/croSite/account/components/Space/upload'
+import MySpaceResource from '@/app/views/croSite/account/components/Space/myResource'
+import MySpaceFavorite from '@/app/views/croSite/account/components/Space/favoriteList'
+import MySpaceDownload from '@/app/views/croSite/account/components/Space/downloadList'
 
 export const menuRoutes = [{
         path: '/admin/dashboard/summary',
@@ -273,18 +279,39 @@ const frontendRoutes = [
             {
                 path: '/croSite/space',
                 name: 'CroMySpace',
-                component: CroMySpace
+                component: CroMySpace,
+                children: [{
+                    path: '/croSite/space/upload',
+                    name: routeNames.CroMyUpload,
+                    component: MySpaceUpload
+                }, {
+                    path: '/croSite/space/declare',
+                    name: routeNames.MySpaceDeclare,
+                    component: MySpaceDeclare
+                }, {
+                    path: '/croSite/space/bulletin',
+                    name: "MySpaceBulletin",
+                    component: MySpaceBulletin
+                }, {
+                    path: '/croSite/space/info',
+                    name: "MySpaceInfo",
+                    component: MySpaceInfo
+                }, {
+                    path: '/croSite/space/resource',
+                    name: "MySpaceResource",
+                    component: MySpaceResource
+                }, {
+                    path: '/croSite/space/download',
+                    name: "MySpaceDownload",
+                    component: MySpaceDownload
+                }, {
+                    path: '/croSite/space/favorite',
+                    name: "MySpaceFavorite",
+                    component: MySpaceFavorite
+                }]
             },
-            {
-                path: '/croSite/space/upload',
-                name: routeNames.CroMyUpload,
-                component: CroMySpace
-            },
-            {
-                path: '/croSite/space/declare',
-                name: routeNames.MySpaceDeclare,
-                component: MySpaceDeclare
-            },
+
+
             // {
             //     path: '/croSite/activityUser/more',
             //     name: routeNames.MySpaceDeclare,
