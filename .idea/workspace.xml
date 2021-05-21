@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d2b2bb8-4a6d-4a61-b5a7-a3223930e407" name="Default Changelist" comment="" />
+    <list default="true" id="9d2b2bb8-4a6d-4a61-b5a7-a3223930e407" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +30,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1fcwaqDsQSFzhKZT1GuDhnBaTxm" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,10 +45,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="D:/software/download/idea/AndroidSDK" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resource" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager" selected="JUnit.MybatisPlusTest.SelectResourceListTest">
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
     <configuration name="CodeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo.CodeGenerator" />
       <module name="shserc" />
@@ -165,6 +173,9 @@
       <workItem from="1596683692384" duration="16310000" />
       <workItem from="1596720062689" duration="668000" />
       <workItem from="1596720754856" duration="70000" />
+      <workItem from="1621583819501" duration="13000" />
+      <workItem from="1621583989734" duration="38000" />
+      <workItem from="1621584039785" duration="212000" />
     </task>
     <servers />
   </component>
@@ -172,82 +183,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Auto_Import" timestamp="1596695702212">
+    <state x="511" y="193" key="SettingsEditor" timestamp="1621584191366">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Auto_Import/0.0.1920.1040@0.0.1920.1040" timestamp="1596695702212" />
-    <state x="552" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596531566291">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="349" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596531566291" />
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser" timestamp="1596697741997">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="203" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1596697741997" />
-    <state width="415" height="466" key="DebuggerActiveHint" timestamp="1596618939862">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="415" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1596618939862" />
-    <state x="2272" y="916" key="FileChooserDialogImpl" timestamp="1596720823283">
-      <screen x="0" y="0" width="3440" height="1400" />
-    </state>
-    <state x="2272" y="916" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1596720823283" />
-    <state width="1877" height="338" key="GridCell.Tab.0.bottom" timestamp="1596700288928">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288928" />
-    <state width="1877" height="338" key="GridCell.Tab.0.center" timestamp="1596700288928">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288928" />
-    <state width="1877" height="338" key="GridCell.Tab.0.left" timestamp="1596700288928">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288928" />
-    <state width="1877" height="338" key="GridCell.Tab.0.right" timestamp="1596700288928">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288928" />
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom" timestamp="1596700288929">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288929" />
-    <state width="1877" height="338" key="GridCell.Tab.1.center" timestamp="1596700288929">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288929" />
-    <state width="1877" height="338" key="GridCell.Tab.1.left" timestamp="1596700288929">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288929" />
-    <state width="1877" height="338" key="GridCell.Tab.1.right" timestamp="1596700288929">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="338" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596700288929" />
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom" timestamp="1596619465417">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596619465417" />
-    <state width="1877" height="348" key="GridCell.Tab.2.center" timestamp="1596619465416">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596619465416" />
-    <state width="1877" height="348" key="GridCell.Tab.2.left" timestamp="1596619465416">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596619465416" />
-    <state width="1877" height="348" key="GridCell.Tab.2.right" timestamp="1596619465416">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596619465416" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1596695988034">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596695988034" />
-    <state x="640" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1596684373700">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="640" y="343" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596684373700" />
+    <state x="511" y="193" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1621584191366" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
