@@ -15,6 +15,7 @@ export const selectParam = {
     total: 0,
     size: 10,
     searchPhrase: "",
+    orderPhrases: {}
 }
 
 export const changePassword = {

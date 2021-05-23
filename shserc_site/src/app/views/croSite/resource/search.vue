@@ -16,16 +16,18 @@
       <p class="green_panel_title flex_space_between">
         <span><i class="el-icon-tickets"></i> 搜索结果</span>
           <section class="font15 m_30_left ">
-              <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
-              <span class="cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.commentCount)"> <i class="el-icon-chat-line-round"></i> 评论次数 </span>
-             <span class="m_10 cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.downloadCount)"> <i class="el-icon-download"></i> 下载次数</span>
+              <el-radio-group v-model="orderKey" fill="#578d38">
+                  <el-radio-button  :label="orderPhrasesModel.viewCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection" v-show="orderKey==orderPhrasesModel.viewCount"></i> 点击量 </el-radio-button>
+                  <el-radio-button label="commentCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='commentCount'"></i>评论次数</el-radio-button>
+                  <el-radio-button label="downloadCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='downloadCount'"></i>下载次数</el-radio-button>
+                </el-radio-group>
              </section>
         <span>
           <el-link
             :underline="false"
             :type="listButtonType"
             @click="handleShowList()"
-            ><i class="el-icon-tickets font30 green"></i
+            ><i class="el-icon-tickets font30"></i
           ></el-link>
           <el-link
             :underline="false"
@@ -60,11 +62,12 @@
 <script>
 import { mapState } from "vuex";
 import { list } from "@/app/api/croResource";
-import { selectParam } from "@/app/models/resource.js";
+import { selectParam, orderPhrasesModel } from "@/app/models/resource.js";
 import CroSourceSearchArea from "@/app/views/croSite/resource/components/SearchArea";
 import ResourceBlockList from "@/app/views/croSite/resource/components/BlockList";
 import ResourceList from "@/app/views/croSite/resource/components/List";
 import { deepCopy } from "@/app/utils/objectHelper";
+import { ASC, DESC } from "@/app/static/type";
 
 export default {
   components: { ResourceBlockList, ResourceList, CroSourceSearchArea },
@@ -72,11 +75,15 @@ export default {
   data() {
     return {
       isShowList: true,
-      listButtonType: "primary",
+      listButtonType: "success",
       blockListButtonType: "info",
       selectParam: deepCopy(selectParam),
       source: [],
       defaultSelectSearchItems: [],
+      orderPhrasesModel: orderPhrasesModel,
+      orderKey: orderPhrasesModel.viewCount,
+      orderDirection: "up",
+      arrowDirection: "el-icon-top",
     };
   },
 
@@ -87,17 +94,16 @@ export default {
   },
 
   created() {
-     this.handleDefaultSelectItem();
+    this.handleDefaultSelectItem();
   },
 
   watch: {
     $route() {
-       this.defaultSelectSearchItems=[];
+      this.defaultSelectSearchItems = [];
       if (this.$route.query.domainId > 0) {
         this.handleDefaultSelectItem();
-      }
-      else{
-        location.href=location.href;
+      } else {
+        location.href = location.href;
       }
     },
   },
@@ -106,28 +112,60 @@ export default {
     handleShowBlockList() {
       this.isShowList = false;
       this.listButtonType = "info";
-      this.blockListButtonType = "primary";
+      this.blockListButtonType = "success";
     },
 
     handleShowList() {
       this.isShowList = true;
       this.blockListButtonType = "info";
-      this.listButtonType = "primary";
+      this.listButtonType = "success";
     },
 
     handleSearch(option) {
       let selectItems = option.selectItems;
-      this.selectParam = deepCopy(selectParam);
-      if (selectItems) {
+      let selectParam2 = this.selectParam;
+      if (selectItems.length <= 0){ }
+      console.log('------------------');
+      console.log(selectParam2);
+
+      if (selectItems && selectItems.length>0) {
         for (let i in selectItems) {
           let item = selectItems[i];
-          this.selectParam[item.parent.type] = item.id;
+          selectParam2[item.parent.type] = item.id;
         }
-        console.log(this.selectParam);
+      }
+      else{
+      selectParam2 = deepCopy(selectParam);
       }
 
-      this.selectParam.searchPhrase = option.searchPhrase;
+      if (this.orderKey == orderPhrasesModel.viewCount) {
+        selectParam2.orderPhrases[orderPhrasesModel.viewCount] =
+          this.orderDirection == "up" ? ASC : DESC;
+      }
+
+      selectParam2.searchPhrase = option.searchPhrase; // search keyword
+
+      this.selectParam=selectParam2; 
       this.loadResourceList();
+    },
+
+    handleChangeSearchOrder(e, val) {
+      // fix issue for click twice when click el-radio button
+      if (e.target.tagName === "INPUT") {
+        this.arrowDirection =
+          this.arrowDirection == "el-icon-top"
+            ? "el-icon-bottom"
+            : "el-icon-top";
+
+        this.orderDirection =
+          this.arrowDirection == "el-icon-top" ? "up" : "down";
+
+        if (this.orderKey == orderPhrasesModel.viewCount) {
+          this.selectParam.orderPhrases[orderPhrasesModel.viewCount] =
+            this.orderDirection == "up" ? ASC : DESC;
+        }
+        this.loadResourceList();
+      }
     },
 
     handlePageSizeChange(val) {
@@ -135,20 +173,22 @@ export default {
       this.loadResourceList();
     },
 
-    handleDefaultSelectItem(){
-       let domains = this.domains;
-        let domainId = this.$route.query.domainId;
-        for (let i in this.domains) {
-          if (domains[i].id == domainId) {
-            this.defaultSelectSearchItems.push(domains[i]);
-          }
+    handleDefaultSelectItem() {
+      let domains = this.domains;
+      let domainId = this.$route.query.domainId;
+      for (let i in this.domains) {
+        if (domains[i].id == domainId) {
+          this.defaultSelectSearchItems.push(domains[i]);
         }
+      }
     },
 
     loadResourceList(current) {
       if (current) {
         this.selectParam.current = current;
       }
+      console.log("----------------param -------------------");
+      console.log(this.selectParam);
       let result = list(this.selectParam).then((res) => {
         if (res && res.data) {
           let data = JSON.parse(res.data);
@@ -160,3 +200,5 @@ export default {
   },
 };
 </script>
+
+ 

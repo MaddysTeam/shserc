@@ -100,6 +100,8 @@ public class ResourceVo  implements Serializable {
 	private long auditor;
 
 	private String auditorOpinion;
+	
+	private long addUser;
 
 }
 

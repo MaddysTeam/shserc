@@ -36,9 +36,11 @@
           <p class="panel_title flex_space_between">
             <span><i class="el-icon-s-order"></i> 资源排行</span>
             <section class="font15">
-              <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
-              <span class="cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.commentCount)"> <i class="el-icon-chat-line-round"></i> 评论次数 </span>
-             <span class="m_10 cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.downloadCount)"> <i class="el-icon-download"></i> 下载次数</span>
+              <el-radio-group v-model="orderKey" >
+                  <el-radio-button  label="hot" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection" v-show="orderKey=='hot'"></i> 点击量 </el-radio-button>
+                  <el-radio-button label="commentCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='commentCount'"></i>评论次数</el-radio-button>
+                  <el-radio-button label="downloadCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='downloadCount'"></i>下载次数</el-radio-button>
+                </el-radio-group>
              </section>
           </p>
 
@@ -75,6 +77,7 @@
               </el-form-item>
               <el-form-item prop="password">
                 <el-input
+                  type="password"
                   prefix-icon="el-icon-search"
                   v-model="loginModel.password"
                   placeholder="请输入密码"
@@ -248,7 +251,10 @@ export default {
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
       friendSites: [],
       routeNames:routeNames,
-      CDN:CDN
+      CDN:CDN,
+
+      orderKey:"hot",
+      arrowDirection:"el-icon-top"
     };
   },
 
@@ -345,7 +351,14 @@ export default {
 
     handleImageError(){
       return true;
-    }
+    },
+
+  handleChangeSearchOrder(e,val){
+      if(e.target.tagName==="INPUT"){
+        this.arrowDirection= this.arrowDirection=="el-icon-top"? "el-icon-bottom":"el-icon-top";
+      }
+    },
+
   },
 };
 </script>

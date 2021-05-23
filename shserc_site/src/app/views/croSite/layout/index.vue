@@ -4,7 +4,6 @@
     <!-- site nav start -->
     <div class="site_nav">
       <div class="div_ml_mr95">
-
         <header
           role="banner"
           class="Sticky appHeader"
@@ -67,7 +66,6 @@
           </div>
           <div></div>
         </header>
-        
       </div>
     </div>
 
@@ -133,7 +131,7 @@
 
 <script>
 import { mapState } from "vuex";
-import {routeNames} from "@/app/routers/routeNames";
+import { routeNames } from "@/app/routers/routeNames";
 
 export default {
   components: {},
@@ -149,7 +147,7 @@ export default {
   data() {
     return {
       searchPhrase: "",
-      routeNames:routeNames
+      routeNames: routeNames,
     };
   },
 
@@ -164,11 +162,18 @@ export default {
     },
 
     handelNavToSearch(domainId) {
-      if (!domainId) domainId = 0;
-      
-      this.$router.push({
-        path: "/croSite/resource/search?domainId=" + domainId,
-      });
+      if (!domainId || domainId == 0){
+        this.$router.push({
+          path: "/croSite/resource/search" ,
+        });
+        //location.reload();
+      }
+      else
+        this.$router.push({
+          path: "/croSite/resource/search?domainId=" + domainId,
+        });
+
+
     },
   },
 };

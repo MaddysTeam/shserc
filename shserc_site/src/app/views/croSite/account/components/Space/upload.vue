@@ -330,9 +330,10 @@ import {
   validateSelectValue,
 } from "@/static/validator";
 import { messages } from "@/app/static/message";
+import { routeNames } from '@/app/routers/routeNames'
 import { edit, info } from "@/app/api/croResource";
 import { uploadFile } from "@/app/api/file";
-import { resourceModel } from "@/app/models/croResource";
+import { resourceModel,createType } from "@/app/models/croResource";
 import { getRelevantByRelevantId } from "@/app/utils/dictHelper";
 import { deepCopy } from "@/app/utils/objectHelper";
 
@@ -423,7 +424,7 @@ export default {
 
   methods: {
     loadResource() {
-      let id = this.$router.currentRoute.query.id;
+      let id = this.$router.currentRoute.params.id;
       //  load resource instance even id exist
       if (id) {
         info(id).then((res) => {
@@ -451,6 +452,8 @@ export default {
 
           // bind key words
           this.bindKeywords();
+
+           this.isShowSourceUrl=this.resource.createTypeId==createType.recommend;
         });
       }
     },
@@ -613,7 +616,7 @@ export default {
           console.log(this.resource);
           edit(this.resource).then((res) => {
             this.cleanForm();
-            //this.redirectToList();
+            this.redirectToList();
           });
         }
       });
@@ -621,12 +624,11 @@ export default {
 
     handCancel() {
       this.cleanForm();
-     // this.redirectToList();
     },
 
-    // redirectToList() {
-    //    this.resource=deepCopy(resourceModel);
-    // },
+    redirectToList() {
+      this.$router.push({name:routeNames.MySpaceResource});
+    },
 
     cleanForm() {
       this.resource = deepCopy(resourceModel);

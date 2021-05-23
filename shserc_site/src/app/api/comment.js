@@ -7,3 +7,7 @@ export function list(selectParam) {
 export function edit(editParam) {
     return axios.post('api/comment/edit', editParam);
 }
+
+export function audit(auditParam) {
+    return axios.post('api/comment/audit', auditParam);
+}

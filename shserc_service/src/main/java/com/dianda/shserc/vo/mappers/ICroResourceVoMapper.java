@@ -49,6 +49,7 @@ public interface ICroResourceVoMapper extends BasicMapper<CroResourceVo, CroReso
 			@Mapping( source = "learnFrom", target = "learnFrom" ) ,
 			@Mapping( source = "resourceType", target = "resourceType" ) ,
 			
+			@Mapping( source = "addUser", target = "addUser" ) ,
 			@Mapping( source = "addTime", target = "addTime" ) ,
 			@Mapping( source = "fileExtName", target = "fileExtName" ) ,
 			@Mapping( source = "state", target = "state" ) ,

@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@DS("shsedu")
-@Service
+
 public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements INewsService {
 	
 	@Resource

@@ -2,7 +2,10 @@ package com.dianda.shserc.controller;
 
 import com.dianda.shserc.bean.CommentSelectParams;
 import com.dianda.shserc.common.Constant;
+import com.dianda.shserc.dto.CommentAuditDto;
 import com.dianda.shserc.dto.EditCommentDto;
+import com.dianda.shserc.dto.ResourceAuditDto;
+import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IResCommentService;
 import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.CommentVoList;
@@ -14,10 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/comment")
-public class CommentController {
+public class CommentController extends BaseController {
 
 	@Resource
 	IResCommentService service;
@@ -33,10 +37,27 @@ public class CommentController {
 		if(bindingResult.hasErrors()){
 			return JsonResult.error(Constant.Error.PARAMS_IS_INVALID);
 		}
+		
+		ResUser user= getLoginUserInfo ();
+		editCommentDto.setOperatorId ( user.getId () );
+		editCommentDto.setOperateDate ( LocalDateTime.now () );
 
 		boolean result = service.edit(editCommentDto);
 		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :
 				JsonResult.error(Constant.Error.EDIT_FAILURE);
+	}
+	
+	@PostMapping( path = "/audit" )
+	public JsonResult audit( @RequestBody @Valid CommentAuditDto commentAuditDto , BindingResult bindingResult ) {
+		if ( bindingResult.hasErrors ( ) ) {
+			return JsonResult.error ( super.generateErrorMessage ( bindingResult ) );
+		}
+		
+		ResUser loginUser = getLoginUserInfo ( );
+		commentAuditDto.setAuditorId ( loginUser.getId ( ) );
+		boolean result = service.audit ( commentAuditDto );
+		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
+				JsonResult.error ( Constant.Error.EDIT_FAILURE );
 	}
 
 }

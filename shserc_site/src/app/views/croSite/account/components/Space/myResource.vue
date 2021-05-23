@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="">
-          <el-button type="success" @click="handleNavToDetails()"
+          <el-button type="success" @click="handleNavToDetails(resource.item.id)"
             >预览</el-button
           >
           <el-button type="info" @click="handleModify(resource.item.id)"
@@ -121,11 +121,11 @@ export default {
     },
 
     handleNavToDetails(id) {
-      this.$router.push();
+      this.$router.push({name: routeNames.CroSiteRsourceDetails,params:{id:id}});
     },
 
     handleModify(id) {
-      this.$router.push({ name: routeNames.CroMyUpload, query: { id: id } });
+      this.$router.push({ name: routeNames.CroMyUpload, params: { id: id } });
     },
 
     handleRemove() {},

@@ -15,9 +15,11 @@
       <p class="panel_title flex_space_between">
         <span><i class="el-icon-tickets"></i> 搜索结果</span>
           <section class="font15 m_30_left ">
-              <span class="m_10 orange cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.viewCount)"><i class="el-icon-thumb"></i> 点击量 </span> 
-              <span class="cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.commentCount)"> <i class="el-icon-chat-line-round"></i> 评论次数 </span>
-             <span class="m_10 cursor_pointer" @click="loadTopRankResource(orderPhrasesModel.downloadCount)"> <i class="el-icon-download"></i> 下载次数</span>
+               <el-radio-group v-model="orderKey" >
+                  <el-radio-button  label="hot" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection" v-show="orderKey=='hot'"></i> 点击量 </el-radio-button>
+                  <el-radio-button label="commentCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='commentCount'"></i>评论次数</el-radio-button>
+                  <el-radio-button label="downloadCount" @click.native="handleChangeSearchOrder($event)"><i :class="arrowDirection"  v-show="orderKey=='downloadCount'"></i>下载次数</el-radio-button>
+                </el-radio-group>
              </section>
         <span>
           <el-link
@@ -72,6 +74,8 @@ export default {
       blockListButtonType: "info",
       selectParam: deepCopy(selectParam),
       source: [],
+      orderKey:"hot",
+      arrowDirection:"el-icon-top"
     };
   },
 
@@ -106,6 +110,12 @@ export default {
 
       this.selectParam.searchPhrase = option.searchPhrase;
       this.loadResourceList();
+    },
+
+       handleChangeSearchOrder(e,val){
+      if(e.target.tagName==="INPUT"){
+        this.arrowDirection= this.arrowDirection=="el-icon-top"? "el-icon-bottom":"el-icon-top";
+      }
     },
 
     handlePageSizeChange(val) {

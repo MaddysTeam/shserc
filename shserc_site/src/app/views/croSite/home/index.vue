@@ -12,7 +12,7 @@
           <p class="green_panel_title flex_space_between">
             <span><i class="el-icon-chat-round"></i> 消息公告</span>
             <span>
-               <router-link class="link font14" to=""><i  style="font-size:32px;" class="el-icon-more green"  title="更多公告"></i> </router-link>
+               <router-link class="link font14" :to="{name:routeNames.CroSiteBulletinList}"><i  style="font-size:32px;" class="el-icon-more green"  title="更多公告"></i> </router-link>
             </span>
           </p>
           <div>
@@ -35,11 +35,11 @@
         <div class="block_panel green_edge">
           <p class="green_panel_title flex_space_between">
             <span ><i class="el-icon-star-on font20"></i> 热门资源   &nbsp; &nbsp;  
-             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.origin}}"><el-tag type="success" class="cursor_pointer" >原创</el-tag></router-link>
-             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.recommend}}"><el-tag type="success"  class="cursor_pointer"> 推荐</el-tag></router-link>
+             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.origin, moreType:moreType.hot}}"><el-tag type="success" class="cursor_pointer" >原创</el-tag></router-link>
+             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.recommend,moreType:moreType.hot}}"><el-tag type="success"  class="cursor_pointer"> 推荐</el-tag></router-link>
             </span>
              <span>
-               <router-link class="link font14" to="/croSite/resource/more"><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
+               <router-link class="link font14" :to="{name:routeNames.CroSiteRsourceMore,query:{moreType:moreType.hot}}"><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
             </span>
           </p>
 
@@ -52,9 +52,12 @@
         </div>
         <div class="block_panel green_edge">
           <p class="green_panel_title flex_space_between">
-            <span><i class="el-icon-s-order"></i> 最新资源</span>
+            <span><i class="el-icon-s-order"></i> 最新资源 &nbsp; &nbsp;  
+            <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.origin,moreType: moreType.latest}}"><el-tag type="success" class="cursor_pointer" >原创</el-tag></router-link>
+             <router-link :to="{name:routeNames.CroSiteRsourceMore,query:{createType:createType.recommend,moreType:moreType.latest}}"><el-tag type="success"  class="cursor_pointer"> 推荐</el-tag></router-link>
+            </span>
             <span>
-               <router-link class="link font14" :to="{name:routeNames.CroSiteRsourceMore}"><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
+               <router-link class="link font14" :to="{name:routeNames.CroSiteRsourceMore,query:{moreType:moreType.latest}}"><i  style="font-size:32px;" class="el-icon-more green" title="更多资源"></i> </router-link>
             </span>
           </p>
 
@@ -143,7 +146,7 @@
           <p class="green_panel_title flex_space_between">
             <span><i class="el-icon-headset"></i> 活跃用户</span>
               <span>
-               <router-link class="link font14" to=""><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
+               <router-link class="link font14" :to="{name:routeNames.CroSiteActivityUserList}"><i  style="font-size:32px;" class="el-icon-more green"></i> </router-link>
             </span>
           </p>
           <ActivityUserList
@@ -171,7 +174,7 @@ import {routeNames} from "@/app/routers/routeNames";
 import {CDN} from "@/static/CDN"
 import { mapState } from "vuex";
 import * as types from "@/app/static/type";
-import { selectParam, orderPhrasesModel,createType } from "@/app/models/croResource";
+import { selectParam, orderPhrasesModel,createType ,moreType} from "@/app/models/croResource";
 import { userOrderPhrasesModel } from "@/app/models/user";
 import { accountModel } from "@/app/models/account";
 import { rseoureBulletinList } from "@/app/api/bulletin";
@@ -207,6 +210,7 @@ export default {
       topLatestSource: [],
       topActivityUsers: [],
       createType:createType,
+      moreType:moreType,
 
       topBulltins: [],
       value2: 5,

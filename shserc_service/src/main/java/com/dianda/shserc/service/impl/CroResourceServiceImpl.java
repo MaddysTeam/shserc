@@ -159,10 +159,9 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 	public boolean edit( @Valid @NotNull EditCroResourceDto editCroResourceDto ) {
 		CroResource croResource = IEditCroResourceMapper.INSTANCE.mapFrom ( editCroResourceDto );
 		CroResourceVo croResourceVo = findById ( croResource.getId ( ) );
+		croResource.setAddUser ( croResourceVo.getAddUser () );
+		croResource.setAddTime ( editCroResourceDto.getOperateDate ( ) );
 		if ( croResource.isNewOne ( ) && ObjectUtil.isNull ( croResourceVo ) ) {
-			croResource.setAddTime ( editCroResourceDto.getOperateDate ( ) );
-			croResource.setAddUser ( editCroResourceDto.getId ( ) );
-			
 			return mapper.insert ( croResource ) > 0;
 		} else {
 			croResource.setUpdateTime ( editCroResourceDto.getOperateDate ( ) );

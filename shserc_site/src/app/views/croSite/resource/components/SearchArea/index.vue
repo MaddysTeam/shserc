@@ -165,6 +165,7 @@ export default {
 
   watch: {
     defaultSelectItems(val, oldVal) {
+      this.handleUnSelectAllItems();
       this.handleSelectItems();
     },
   },
@@ -219,11 +220,16 @@ export default {
     },
 
     handleUnSelectAllItems() {
-      this.selectedItems = [];
-      for (let i in this.allOptions) {
-        this.allOptions[i].isShow = true;
+
+      for(let i in this.selectedItems ){
+        this.handleUnSelectItem(this.selectedItems[i]);
       }
-      this.handleSubmit();
+      //this.selectedItems = [];
+
+      // for (let i in this.allOptions) {
+      //   this.allOptions[i].isShow = true;
+      // }
+      //this.handleSubmit();
     },
 
     handleUnSelectItem(item) {

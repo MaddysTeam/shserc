@@ -44,6 +44,8 @@ import CroSite from '@/app/views/croSite/layout/index'
 import CroSiteHomeIndex from '@/app/views/croSite/home/index'
 import CroSIteResourceSearch from '@/app/views/croSite/resource/search'
 import CroSiteResourceMore from '@/app/views/croSite/resource/more'
+import CroSiteActivityUsers from '@/app/views/croSite/user/activityUserList'
+import CroSiteBulletinList from '@/app/views/croSite/bulletin/components/List/index'
 import CroMySpace from '@/app/views/croSite/account/space'
 import CroSiteRsourceDetails from '@/app/views/croSite/resource/details'
 import MySpaceDeclare from '@/app/views/croSite/account/components/Space/declare'
@@ -268,13 +270,23 @@ const frontendRoutes = [
             },
             {
                 path: '/croSite/resource/details/:id',
-                name: 'CroSiteRsourceDetails',
+                name: routeNames.CroSiteRsourceDetails,
                 component: CroSiteRsourceDetails
             },
             {
                 path: '/croSite/resource/more',
                 name: routeNames.CroSiteRsourceMore,
                 component: CroSiteResourceMore
+            },
+            {
+                path: '/croSite/activityUsers/more',
+                name: routeNames.CroSiteActivityUserList,
+                component: CroSiteActivityUsers
+            },
+            {
+                path: '/croSite/bulletin/more',
+                name: routeNames.CroSiteBulletinList,
+                component: CroSiteBulletinList
             },
             {
                 path: '/croSite/space',
@@ -298,7 +310,7 @@ const frontendRoutes = [
                     component: MySpaceInfo
                 }, {
                     path: '/croSite/space/resource',
-                    name: "MySpaceResource",
+                    name: routeNames.MySpaceResource,
                     component: MySpaceResource
                 }, {
                     path: '/croSite/space/download',

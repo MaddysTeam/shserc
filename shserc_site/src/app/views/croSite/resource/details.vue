@@ -176,7 +176,7 @@
                 <div class="comment_count">
                   <el-tag type="danger" class="font14"
                     ><i class="el-icon-info"></i> 共
-                    <strong>{{ resource.commentCount }}</strong> 条评论</el-tag
+                    <strong>{{ comments.length }}</strong> 条评论</el-tag
                   >
                 </div>
 
@@ -379,6 +379,7 @@ export default {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           selectParam.total = data.total;
+
           this.comments = data.listData ? data.listData : [];
         }
       });

@@ -23,3 +23,11 @@ export const selectParam = {
     stateId: 0,
     searchPhrase: "",
 }
+
+export const auditModel = {
+    resourceId: 0,
+    commentId: 0,
+    stateId: 0,
+    auditorId: 0,
+    auditOpinion: ""
+}

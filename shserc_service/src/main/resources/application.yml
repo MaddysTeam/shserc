@@ -32,25 +32,25 @@ spring:
           testOnReturn: false
           poolPreparedStatements: true
           maxOpenPreparedStatements: 20
-        shsedu:
-          driver-class-name: dm.jdbc.driver.DmDriver
-          #url: jdbc:mysql://192.168.1.13:30070/shsedu?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
-          url: jdbc:dm://localhost
-          username: SYSDBA
-          password: '#Bugsfor123'
-          filters: stat
-          maxActive: 300
-          initialSize: 1
-          maxWait: 60000
-          minIdle: 1
-          timeBetweenEvictionRunsMillis: 60000
-          minEvictableIdleTimeMillis: 300000
-          validationQuery: select 1 FROM DUAL
-          testWhileIdle: true
-          testOnBorrow: false
-          testOnReturn: false
-          poolPreparedStatements: true
-          maxOpenPreparedStatements: 20
+#        shsedu:
+#          driver-class-name: dm.jdbc.driver.DmDriver
+#          #url: jdbc:mysql://192.168.1.13:30070/shsedu?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+#          url: jdbc:dm://localhost
+#          username: SYSDBA
+#          password: '#Bugsfor123'
+#          filters: stat
+#          maxActive: 300
+#          initialSize: 1
+#          maxWait: 60000
+#          minIdle: 1
+#          timeBetweenEvictionRunsMillis: 60000
+#          minEvictableIdleTimeMillis: 300000
+#          validationQuery: select 1 FROM DUAL
+#          testWhileIdle: true
+#          testOnBorrow: false
+#          testOnReturn: false
+#          poolPreparedStatements: true
+#          maxOpenPreparedStatements: 20
 
 
   #http configuration

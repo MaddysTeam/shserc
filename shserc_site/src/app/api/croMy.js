@@ -11,3 +11,7 @@ export function myFavoriteList() {
 export function downloadList() {
     return axios.post('api/croMy/download', )
 }
+
+export function commentList() {
+    return axios.post('api/croMy/comment', )
+}

@@ -43,6 +43,8 @@ public class CroResourceVo implements Serializable {
 	
 	private  long viewCount;
 	
+	private long addUser;
+	
 	private LocalDateTime addTime;
 	
 	private  String resourcePath;

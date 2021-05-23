@@ -5,9 +5,12 @@
 </template>
 
 <script>
+
+import { deepCopy } from "@/app/utils/objectHelper";
+import { DESC } from "@/app/static/type";
 import { list as userList } from "@/app/api/user";
-import {selectParam} from "@/app/model/selectParam"
-import ActivityUserAvatarList from "@/app/user/components/AvataList/index"
+import {selectParam,userOrderPhrasesModel} from "@/app/models/user"
+import ActivityUserAvatarList from "@/app/views/croSite/user/components/AvatarList/index"
 
 export default {
     components:{ActivityUserAvatarList},
@@ -15,8 +18,13 @@ export default {
     data() {
       return {
           selectParam:deepCopy(selectParam),
-          source:[]
+          source:[],
+          size:16
       }
+  },
+
+  mounted(){
+    this.loadTopActivityUsers();
   },
 
   methods: {
@@ -32,10 +40,10 @@ export default {
         if (res && res.data) {
           let data = JSON.parse(res.data);
           this.selectParam.total= data.total;
-          this.topActivityUsers = data.listData ? data.listData : [];
+          this.source= data.listData ? data.listData : [];
         }
       });
-    },
+    }
   },
 
 }

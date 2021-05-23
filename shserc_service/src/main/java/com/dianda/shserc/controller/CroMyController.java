@@ -53,7 +53,7 @@ public class CroMyController extends  BaseController {
 		return JsonResult.success ( resourceOperationVoList );
 	}
 	
-	@RequestMapping( path = "/comment/", method = RequestMethod.POST )
+	@RequestMapping( path = "/comment", method = RequestMethod.POST )
 	public JsonResult myComments( ) {
 		ResUser user= getLoginUserInfo ();
 		CommentVoList resourceOperationVoList = service.findComments ( user.getId () );

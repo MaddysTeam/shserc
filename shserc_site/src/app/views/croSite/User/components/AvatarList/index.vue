@@ -16,7 +16,7 @@
       <template slot="item" slot-scope="user">
         <el-avatar
           :src="user.item.photoPath"
-          :size="40"
+          :size="100"
           @error="handleImageError"
         >
           <img :src="CDN.DEFAULT_HEADER_COVER" />
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { CDN } from "@/static/CDN"
 import UserAvatarList from "@/components/List/index";
 
 export default {
@@ -39,6 +40,18 @@ export default {
      title: {type:String,default:""},
      source: {type: Array ,default:[]}
   },
+
+  data(){
+    return {
+      CDN:CDN
+    }
+  },
+
+  methods:{
+        handleImageError(){
+      
+    }
+  }
 
 };
 </script>

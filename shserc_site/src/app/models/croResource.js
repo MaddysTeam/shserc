@@ -52,6 +52,11 @@ export const createType = {
     recommend: 10002
 };
 
+export const moreType = {
+    hot: "hot",
+    latest: "latest"
+}
+
 export const starScores = [{
     score: 1,
     count: 0,

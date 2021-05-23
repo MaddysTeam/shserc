@@ -6,6 +6,12 @@
       <el-breadcrumb-item>入库资源评论</el-breadcrumb-item>
     </el-breadcrumb>
 
+     <Audit
+      @close="handleCloseAudit"
+      :visible="dialogVisible"
+      :model="auditModel"
+    ></Audit>
+
     <Table
       :list="source"
       :columns="columns"
@@ -24,6 +30,10 @@
 import Table from "@/components/Tables/index";
 import { selectParam, commentModel } from "@/app/models/comment";
 import { list } from "@/app/api/comment";
+import { auditModel } from "@/app/models/comment";
+import { deepCopy } from "@/app/utils/objectHelper";
+
+import Audit from "@/app/views/admin/comment/audit";
 
 export default {
   components: {
@@ -46,12 +56,21 @@ export default {
           label: "审核",
           type: "primary",
           method: (index, row) => {
-           
+              this.auditModel = {
+              // resourceId: row.id,
+              // resourceTitle: row.title,
+              // auditOpinion: row.auditOpinion,
+              // auditResult: row.stateId == this.resourceStatusOptions[2].id,
+            };
+
+            this.dialogVisible = true;
           },
         },
       ],
       source: [],
-      selectParam: selectParam
+      selectParam: deepCopy(selectParam),
+      dialogVisible:false,
+      auditModel: deepCopy(auditModel)  
     };
   },
   mounted() {

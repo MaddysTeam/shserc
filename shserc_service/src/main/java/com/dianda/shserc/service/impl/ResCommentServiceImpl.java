@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.CommentSelectParams;
 import com.dianda.shserc.common.Constant;
+import com.dianda.shserc.dto.CommentAuditDto;
 import com.dianda.shserc.dto.EditCommentDto;
 import com.dianda.shserc.dto.mappers.IEditCommentMapperImpl;
 import com.dianda.shserc.entity.ResComment;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResCommentMapper;
+import com.dianda.shserc.mapper.ResourceMapper;
 import com.dianda.shserc.service.IResCommentService;
 import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.util.basic.StringUtil;
@@ -19,6 +21,7 @@ import com.dianda.shserc.vo.CommentVo;
 import com.dianda.shserc.vo.CommentVoList;
 import com.dianda.shserc.vo.mappers.ICommentVoMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
@@ -34,15 +37,18 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 	@Resource
 	ResCommentMapper mapper;
 	
+	@Resource
+	ResourceMapper resourceMapper;
+	
 	@Override
 	public CommentVoList find( CommentSelectParams params ) {
 		QueryWrapper<ResComment> queryWrapper = new QueryWrapper<> ( );
 		long auditor = params.getAuditor ( );
 		long resourceId = params.getResourceId ( );
 		//long auditTypeId = params.getAuditTypeId ( );
-		long stateId=params.getStateId ();
+		long stateId = params.getStateId ( );
 		String phrase = params.getSearchPhrase ( );
-
+		
 		// where phrase
 		
 		if ( resourceId > 0 ) {
@@ -57,12 +63,12 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 		if ( ! StringUtil.isNullOrEmpty ( phrase ) ) {
 			queryWrapper = queryWrapper.and ( wrapper -> wrapper.like ( "content" , phrase ) );
 		}
-		if(stateId>0){
+		if ( stateId > 0 ) {
 			queryWrapper = queryWrapper.eq ( "rc.state_id" , stateId );
 		}
 		
 		// order phrase
-
+		
 		Map<String, String> orderPhrases = params.getOrderPhrases ( );
 		if ( ! ObjectUtil.isNull ( orderPhrases ) && orderPhrases.size ( ) > 0 ) {
 			for ( Map.Entry<String, String> entry : orderPhrases.entrySet ( ) ) {
@@ -99,20 +105,36 @@ public class ResCommentServiceImpl extends ServiceImpl<ResCommentMapper, ResComm
 	}
 	
 	@Override
-	public boolean edit(@Valid @NotNull EditCommentDto model ) {
-		if (ObjectUtil.isNull(model)) {
-			throw new GlobalException (Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE, Constant.Error.OBJECT_IS_REQUIRED);
+	public boolean edit( @Valid @NotNull EditCommentDto model ) {
+		if ( ObjectUtil.isNull ( model ) ) {
+			throw new GlobalException ( Constant.ErrorCode.PARAM_NULL_POINT_REFERENCE , Constant.Error.OBJECT_IS_REQUIRED );
 		}
 		
 		int result = 0;
-		ResComment resComment = IEditCommentMapperImpl.INSTANCE.mapFrom(model);
-		if (resComment.isNewOne() ) {
-			result = mapper.insert(resComment);
+		ResComment resComment = IEditCommentMapperImpl.INSTANCE.mapFrom ( model );
+		if ( resComment.isNewOne ( ) ) {
+			result = mapper.insert ( resComment );
 			return result > 0;
 		} else {
-			result = mapper.updateById(resComment);
+			result = mapper.updateById ( resComment );
 			return result >= 0;
 		}
+	}
+	
+	@Override
+	@Transactional
+	public boolean audit( @Valid CommentAuditDto model ) {
+		
+		//		ResComment comment=null;
+       //		comment.setStateId ( model.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
+		
+		if ( model.getAuditResult ( ) ) {
+			com.dianda.shserc.entity.Resource resource = resourceMapper.selectById ( model.getResourceId ( ) );
+			resource.addCommentCount ( );
+			resourceMapper.updateById ( resource );
+		}
+		
+		return false;
 	}
 	
 }
