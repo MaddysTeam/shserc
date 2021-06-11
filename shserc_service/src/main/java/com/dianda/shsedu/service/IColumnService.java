@@ -12,5 +12,4 @@ public interface IColumnService {
   ColumnVo findById(long id);
 
   boolean edit(EditColumnDto editColumnDto);
-
 }

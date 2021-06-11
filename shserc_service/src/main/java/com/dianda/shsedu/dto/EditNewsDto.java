@@ -18,4 +18,6 @@ public class EditNewsDto extends BaseDto {
 
 	long statusId;
 
+	long columnId;
+
 }

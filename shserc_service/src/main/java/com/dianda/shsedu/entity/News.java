@@ -2,6 +2,7 @@ package com.dianda.shsedu.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.common.entity.BaseEntity;
+import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,7 +32,11 @@ public class News extends BaseEntity {
 	@TableField(exist = false)
 	private  String status;
 
-	public void dictTranslate(News news){
+	public void addViewCount(){
+		this.visitCount++;
+	}
+
+	public static void dictTranslate(News news, DictionaryCache cache){
 
 	}
 

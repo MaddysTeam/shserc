@@ -7,5 +7,7 @@ public class Roles extends BaseEntity {
     private String roleName;
 
    private  String description;
+
+   private  String permissionIds;
     
 }

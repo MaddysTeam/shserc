@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.dianda.shsedu.entity.Columns;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface ColumnsMapper extends BaseMapper<Columns> {
-	IPage<Columns> selectNews(IPage<Columns> page, @Param(Constants.WRAPPER) Wrapper<Columns> wrapper);
+	List<Columns> selectColumns(@Param(Constants.WRAPPER) Wrapper<Columns> wrapper);
 }
