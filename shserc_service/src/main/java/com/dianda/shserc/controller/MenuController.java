@@ -1,7 +1,7 @@
 package com.dianda.shserc.controller;
 
 import com.dianda.shserc.bean.MenuSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;

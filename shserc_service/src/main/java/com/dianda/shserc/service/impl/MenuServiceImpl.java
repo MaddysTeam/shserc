@@ -3,7 +3,7 @@ package com.dianda.shserc.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.MenuSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
 import com.dianda.shserc.dto.EditMenuRoleDto;
 import com.dianda.shserc.dto.EditStateDto;

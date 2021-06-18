@@ -12,6 +12,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -33,7 +34,8 @@ public class ShiroConfig {
 	RedisSettings redisSettings;
 	
 	//TODO:  this wil  be use by  multi   implements  , you can  determine which project name will be use or not
-	@Resource
+	@Resource()
+	@Qualifier("ShseduShiroService")
 	IShrioCustomsizedService shrioCustomsizedService;
 	
 	@Bean

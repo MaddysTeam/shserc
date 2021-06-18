@@ -17,8 +17,9 @@ import com.dianda.shsedu.service.INewsService;
 import com.dianda.shsedu.vo.NewsVo;
 import com.dianda.shsedu.vo.NewsVoList;
 import com.dianda.shsedu.vo.mappers.INewsVoMapper;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -26,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@DS("shsedu")
+@Service("ShseduNewsService")
 public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements INewsService {
 
 	@Resource
@@ -101,7 +103,7 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 	@Override
 	public NewsVo findById(long id) {
 		News news = mapper.selectById(id);
-		return INewsVoMapper.INSTANCE.mapTo(news);
+		return INewsVoMapper.INSTANCE.mapFrom(news);
 	}
 
 	@Override

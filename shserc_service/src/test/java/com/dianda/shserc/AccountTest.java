@@ -1,8 +1,8 @@
 package com.dianda.shserc;
 
 import com.dianda.ServiceApplication;
-import com.dianda.shserc.dto.LoginDto;
-import com.dianda.shserc.service.IAccountService;
+import com.dianda.common.dto.LoginDto;
+import com.dianda.common.service.IAccountService;
 import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.security.shiro.jwt.JwtOperation;
 import com.dianda.common.security.shiro.jwt.JwtSettings;

@@ -1,14 +1,13 @@
 package com.dianda.shserc.dto;
 
 import com.dianda.common.dto.BaseDto;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(callSuper = false)

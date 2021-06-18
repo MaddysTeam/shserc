@@ -9,5 +9,9 @@ public class Roles extends BaseEntity {
    private  String description;
 
    private  String permissionIds;
+
+    public boolean hasPermission(String permissionId) {
+        return permissionIds.indexOf(permissionId) >= 0;
+    }
     
 }

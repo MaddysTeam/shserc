@@ -1,4 +1,4 @@
-package com.dianda.shserc.dto;
+package com.dianda.common.dto;
 
 import lombok.Data;
 

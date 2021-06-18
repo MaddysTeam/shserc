@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.shserc.entity.ResourceOperation;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @author huachao
  * @since 2020-08-17
  */
+
 public interface ResUserMapper extends BaseMapper<ResUser> {
 
 	IPage<ResUser> selectUsers(IPage<ResUser> page, @Param(Constants.WRAPPER) Wrapper<ResUser> wrapper);

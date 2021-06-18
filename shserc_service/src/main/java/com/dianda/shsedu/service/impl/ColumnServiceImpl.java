@@ -15,7 +15,8 @@ import com.dianda.shsedu.service.IColumnService;
 import com.dianda.shsedu.vo.ColumnVo;
 import com.dianda.shsedu.vo.ColumnVoList;
 import com.dianda.shsedu.vo.mappers.IColumnVoMapper;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
+import org.apache.logging.log4j.core.appender.db.ColumnMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DS("shsedu")
-@Service
+@Service("ShseduColumnService")
 public class ColumnServiceImpl extends ServiceImpl<ColumnsMapper, Columns> implements IColumnService {
 
 	@Resource
@@ -41,32 +42,16 @@ public class ColumnServiceImpl extends ServiceImpl<ColumnsMapper, Columns> imple
 	@Override
 	public ColumnVoList findByPhrase(ColumnSelectParam selectParam) {
 		QueryWrapper<Columns> wrapper = new QueryWrapper<> ( );
-//		long roleId = menuSelectParams.getRoleId ( );
-//		if ( roleId > 0 ) {
-//			wrapper.eq ( "role_id" , roleId );
-//		}
+		long ownerId=selectParam.getOwnerId();
+		if(ownerId>0){
+			wrapper.inSql("id", "select newsId from owned_columns where ownerId="+ownerId);
+		}
 
-		//ArrayList<ResRoleVo> roleVoList = new ArrayList ( );
 		List<Columns> columnList = mapper.selectColumns ( wrapper );
 		List<ColumnVo> voList = new ArrayList<>( );
 		for ( Columns column : columnList ) {
 			ColumnVo vo = IColumnVoMapper.INSTANCE.mapFrom ( column );
-			//vo.setRoles ( new ArrayList<> (  ) );
-
-			boolean exist = voList.stream ( ).anyMatch ( x -> x.getId ( ) == column.getId ( ) );
-			if(!exist){
-				voList.add ( vo );
-			}
-			else{
-				vo = voList.stream ( ).filter ( x -> x.getId ( ) == column.getId ( ) ).findFirst ( ).get ( );
-			}
-
-//			if ( column.getRoleId ( ) > 0 ) {
-//				ResRoleVo roleVo = new ResRoleVo ( );
-//				roleVo.setId ( menu.getRoleId ( ) );
-//				roleVo.setRoleName ( menu.getRoleName ( ) );
-//				vo.getRoles ().add ( roleVo );
-//			}
+			voList.add(vo);
 		}
 
 		ColumnVoList columnVoList = new ColumnVoList ( );
@@ -77,7 +62,8 @@ public class ColumnServiceImpl extends ServiceImpl<ColumnsMapper, Columns> imple
 
 	@Override
 	public ColumnVo findById(long id) {
-		return null;
+		Columns column= mapper.selectById(id);
+		return IColumnVoMapper.INSTANCE.mapFrom(column);
 	}
 
 	@Override

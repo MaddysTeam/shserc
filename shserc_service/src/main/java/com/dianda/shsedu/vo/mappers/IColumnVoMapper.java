@@ -17,5 +17,5 @@ public interface IColumnVoMapper extends BasicMapper<ColumnVo, Columns> {
 //			@Mapping(target = "", source = ""),
 //			@Mapping(target = "", source = "")
 	})
-	ColumnVo mapTo(Columns source);
+	ColumnVo mapFrom(Columns source);
 }

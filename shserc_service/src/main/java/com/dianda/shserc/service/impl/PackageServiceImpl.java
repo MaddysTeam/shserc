@@ -11,8 +11,8 @@ import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.bean.PackageSelectParams;
-import com.dianda.shserc.common.Constant;
-import com.dianda.shserc.dto.EditCroResourceDto;
+import com.dianda.common.common.Constant;
+import com.dianda.shserc.common.ShsercConstant;
 import com.dianda.shserc.dto.EditPackageDto;
 import com.dianda.shserc.dto.EditPackageResourceDto;
 import com.dianda.shserc.dto.PackageAuditDto;
@@ -198,7 +198,7 @@ public class PackageServiceImpl extends ServiceImpl<PackageMapper, Package> impl
 	@Override
 	public boolean audit( @Valid PackageAuditDto packageAuditDto ) {
 		Package pack = IPackageAuditMapper.INSTANCE.mapFrom ( packageAuditDto );
-		pack.setStateId ( packageAuditDto.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
+		pack.setStateId ( packageAuditDto.getAuditResult ( ) ? ShsercConstant.State.AUDITSUCCESS : ShsercConstant.State.AUDITFALURE );
 		
 		return mapper.updateById ( pack ) >= 0;
 	}

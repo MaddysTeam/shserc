@@ -1,8 +1,7 @@
 package com.dianda.shserc.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.dianda.common.util.json.JsonResult;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.service.IMyService;
 import com.dianda.shserc.vo.CommentVoList;

@@ -1,6 +1,6 @@
 package com.dianda.common.util.upload;
 
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.common.util.basic.ObjectUtil;
 import org.springframework.web.multipart.MultipartFile;
 

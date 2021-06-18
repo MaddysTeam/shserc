@@ -12,7 +12,7 @@ import com.dianda.common.security.shiro.service.IShrioCustomsizedService;
 import com.dianda.common.util.basic.EncoderUtil;
 import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.util.nosql.redis.RedisUtil;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.mapper.ResUserMapper;
 import org.apache.shiro.authc.AuthenticationException;
@@ -31,14 +31,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("ShsecShrioService")
 public class ShsecShrioService implements IShrioCustomsizedService {
 	
 	@Autowired
 	RedisUtil redisUtil;
 	
 	@Resource
-	ResUserMapper userMapper;
+	ResUserMapper resUserMapper;
 	
 	@Override
 	public AuthenticationInfo authenticate( AuthenticationToken authenticationToken ) {
@@ -56,7 +56,7 @@ public class ShsecShrioService implements IShrioCustomsizedService {
 		String password = EncoderUtil.SHA ( dto.getString ( "password" ) );
 		try {
 			ResUser user = null;
-			List<ResUser> users = userMapper.selectUsers ( new Page<> ( ) ,
+			List<ResUser> users = resUserMapper.selectUsers ( new Page<> ( ) ,
 					new QueryWrapper<ResUser> ( )
 							.eq ( "password" , password )
 							.and ( wrapper ->

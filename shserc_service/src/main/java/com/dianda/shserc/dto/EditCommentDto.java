@@ -2,11 +2,13 @@ package com.dianda.shserc.dto;
 
 import com.dianda.common.dto.BaseDto;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class EditCommentDto extends BaseDto {
 	
 	private long id;

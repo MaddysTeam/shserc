@@ -11,10 +11,11 @@ public interface IEditNewsMapper extends BasicMapper<News, EditNewsDto> {
 	IEditNewsMapper INSTANCE = Mappers.getMapper(IEditNewsMapper.class);
 
 	@Mappings({
-			@Mapping(target = "id", source = "newsId"),
+			@Mapping(target = "id", source = "id"),
 			@Mapping(target = "title", source = "title"),
 			@Mapping(target = "typeId", source = "typeId"),
 			@Mapping(target = "statusId", source = "statusId"),
+			@Mapping(target = "columnId", source = "columnId"),
 	})
 	News mapFrom(EditNewsDto source);
 }

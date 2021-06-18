@@ -1,8 +1,27 @@
 package com.dianda.shsedu.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class NewsVo implements Serializable {
-		long id;
+	long id;
+
+	private String  title;
+
+	private String subTitle;
+
+	private String content;
+
+	private  long  columnId;
+
+	private long typeId;
+
+	private  int  visitCount;
+
+	private String type;
+
+	private  String status;
 
 }

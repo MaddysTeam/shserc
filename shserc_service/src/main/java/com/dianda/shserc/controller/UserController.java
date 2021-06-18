@@ -2,7 +2,7 @@ package com.dianda.shserc.controller;
 
 
 import com.dianda.shserc.bean.UserSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
 import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.entity.ResUser;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 /**

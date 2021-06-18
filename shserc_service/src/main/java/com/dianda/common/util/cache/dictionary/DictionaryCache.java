@@ -1,6 +1,6 @@
 package com.dianda.common.util.cache.dictionary;
 
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.common.service.IDictionaryService;
 import com.dianda.common.util.basic.ObjectUtil;

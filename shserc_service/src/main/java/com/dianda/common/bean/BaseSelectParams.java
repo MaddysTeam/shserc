@@ -1,8 +1,8 @@
 package com.dianda.common.bean;
 
 import com.dianda.common.util.basic.MapperUtil;
-import com.dianda.common.util.basic.StringUtil;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
+import com.dianda.shserc.common.ShsercConstant;
 import lombok.Data;
 
 
@@ -16,7 +16,7 @@ public class BaseSelectParams {
 	int size;
 	
 	public String translateOrderPhrase( String frontendOrderPhrase ) {
-		Map<String, String> orderPhraseMapping = Constant.OrderPhraseMapping.getOrderPhraseMapping ( );
+		Map<String, String> orderPhraseMapping = ShsercConstant.OrderPhraseMapping.getOrderPhraseMapping ( );
 		String value=MapperUtil.FindValueByKey (orderPhraseMapping,  frontendOrderPhrase);
 
 		return value;

@@ -1,4 +1,4 @@
-package com.dianda.shserc.common;
+package com.dianda.common.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,14 +80,6 @@ public final class Constant {
 		public static final int MAX_NAME_LENGTH=100;
 		public static final int MIN_NAME_LENGTH=1;
 	}
-
-	public static final class State {
-		public final static int DELETED = 171;
-		public final static int AUDITSUCCESS = 129;
-		public final static int AUDITFALURE = 130;
-		public final static int ENABLED = 13;
-		public final static int DISABLED = 14;
-	}
 	
 	public static final class OrderDirection {
 		public final static String ASC = "ASC";
@@ -97,28 +89,9 @@ public final class Constant {
 	public static final  class Dictonary{
 		public final  static String All="不限";
 	}
-	
-	public static final class OrderPhraseMapping{
-		
-		public  final static Map<String,String> getOrderPhraseMapping(){
-			Map<String,String> orderPhraseMapping=new HashMap<> (  );
-			// resource
-			orderPhraseMapping.put ( "favorite" ,"favorite_count");
-			orderPhraseMapping.put ( "view" ,"view_count");
-			orderPhraseMapping.put ( "download" ,"download_count");
-			orderPhraseMapping.put ( "comment" ,"comment_count");
-			
-			// user
-			orderPhraseMapping.put("activity","login_count");
-			
-			return orderPhraseMapping;
-		}
-		
-	}
 
 	public static final class Regex{
 		public final static String PASSWORD= "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,15}$";
 	}
 
-	
 }

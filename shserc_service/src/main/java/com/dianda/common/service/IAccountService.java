@@ -1,8 +1,8 @@
-package com.dianda.shserc.service;
+package com.dianda.common.service;
 
-import com.dianda.shserc.dto.ChangePasswordDto;
-import com.dianda.shserc.dto.ForgetPasswordDto;
-import com.dianda.shserc.dto.LoginDto;
+import com.dianda.common.dto.ChangePasswordDto;
+import com.dianda.common.dto.ForgetPasswordDto;
+import com.dianda.common.dto.LoginDto;
 
 import javax.validation.Valid;
 

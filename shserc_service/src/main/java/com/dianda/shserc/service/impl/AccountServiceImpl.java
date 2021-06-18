@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.dianda.common.security.shiro.util.ShiroUtil;
-import com.dianda.shserc.common.Constant;
-import com.dianda.shserc.dto.ChangePasswordDto;
-import com.dianda.shserc.dto.ForgetPasswordDto;
-import com.dianda.shserc.dto.LoginDto;
+import com.dianda.common.common.Constant;
+import com.dianda.common.dto.ChangePasswordDto;
+import com.dianda.common.dto.ForgetPasswordDto;
+import com.dianda.common.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.shserc.mapper.ResUserMapper;
-import com.dianda.shserc.service.IAccountService;
+import com.dianda.common.service.IAccountService;
 import com.dianda.common.util.basic.EncoderUtil;
 import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.security.shiro.jwt.JwtOperation;
@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
  * @Copyright 2019-2020
  */
 
-@Service
+@Service("ShsercAccountService")
 @Validated
 public class AccountServiceImpl implements IAccountService {
 	

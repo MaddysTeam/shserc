@@ -2,7 +2,7 @@ package com.dianda.shserc.controller;
 
 
 import com.dianda.shserc.bean.BulletinSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditBulletinDto;
 import com.dianda.shserc.dto.EditStateDto;
 import com.dianda.shserc.entity.ResUser;

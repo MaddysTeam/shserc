@@ -1,7 +1,8 @@
 package com.dianda.shserc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
+import com.dianda.shserc.common.ShsercConstant;
 import com.dianda.shserc.dto.EditCompanyDto;
 import com.dianda.shserc.dto.mappers.IEditCompanyMapper;
 import com.dianda.shserc.entity.ResCompany;
@@ -105,7 +106,7 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		ResCompany company = resCompanyMapper.selectById ( id );
 		//TODO: if this used by user and resource then cannot been deleted
 		
-		company.setIsDeleted ( Constant.State.DELETED );
+		company.setIsDeleted ( ShsercConstant.State.DELETED );
 		resCompanyMapper.updateById ( company );
 		
 		return company;

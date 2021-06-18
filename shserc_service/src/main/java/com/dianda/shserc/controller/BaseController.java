@@ -1,7 +1,7 @@
 package com.dianda.shserc.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.common.exceptions.GlobalException;
 import com.dianda.common.util.basic.ObjectUtil;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * 用户控制器父类
+ * 控制器父类
  *
  * @author huachao
  * @since 2020-08-08
  */
-@RestController
+@RestController("ShsercBaseController")
 public class BaseController {
 
 	public ResUser getLoginUserInfo() {

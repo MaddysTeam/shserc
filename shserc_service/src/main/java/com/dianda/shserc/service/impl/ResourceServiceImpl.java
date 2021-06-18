@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.ResourceSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
+import com.dianda.shserc.common.ShsercConstant;
 import com.dianda.shserc.dto.EditResourceDto;
 import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.dto.mappers.IResourceAuditMapper;
@@ -173,7 +174,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Override
 	public boolean audit( @Valid @NotNull ResourceAuditDto model ) {
 		Resource resource = IResourceAuditMapper.INSTANCE.mapFrom ( model );
-		resource.setStateId ( model.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
+		resource.setStateId ( model.getAuditResult ( ) ? ShsercConstant.State.AUDITSUCCESS : ShsercConstant.State.AUDITFALURE );
 		
 		return mapper.updateById ( resource ) >= 0;
 	}

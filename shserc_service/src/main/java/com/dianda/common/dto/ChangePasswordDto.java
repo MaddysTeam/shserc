@@ -1,6 +1,6 @@
-package com.dianda.shserc.dto;
+package com.dianda.common.dto;
 
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

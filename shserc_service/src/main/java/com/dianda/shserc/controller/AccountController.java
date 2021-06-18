@@ -1,16 +1,17 @@
 package com.dianda.shserc.controller;
 
 
-import com.dianda.shserc.common.Constant;
-import com.dianda.shserc.dto.ChangePasswordDto;
-import com.dianda.shserc.dto.LoginDto;
+import com.dianda.common.common.Constant;
+import com.dianda.common.dto.ChangePasswordDto;
+import com.dianda.common.dto.LoginDto;
 import com.dianda.shserc.entity.ResUser;
-import com.dianda.shserc.service.IAccountService;
+import com.dianda.common.service.IAccountService;
 import com.dianda.common.util.crypto.CryptoSecret;
 import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.vo.ResUserVo;
 import com.dianda.shserc.vo.mappers.IUserVoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
@@ -26,11 +28,12 @@ import javax.validation.Valid;
  * @author huachao
  * @since 2020-08-05
  */
-@RestController
+@RestController("ShsercController")
 @RequestMapping( "/account" )
 public class AccountController extends BaseController {
 	
-	@Autowired
+	@Resource(name = "ShsercAccountService")
+	@Qualifier("ShsercAccountService")
 	IAccountService accountService;
 	
 	@RequestMapping( value = "/login", method = RequestMethod.POST )

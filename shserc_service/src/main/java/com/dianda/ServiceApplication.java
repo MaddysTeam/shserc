@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @SpringBootApplication
 @EnableConfigurationProperties({ JwtSettings.class,})
 @EnableAspectJAutoProxy()
-@MapperScan("com.dianda.*.mapper*")
+//@MapperScan("com.dianda.*.mapper*")
 @CrossOrigin(origins = {"http://127.0.0.1:8080", "null"})
 public class ServiceApplication {
 	

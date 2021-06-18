@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.shserc.bean.CommentSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.CommentAuditDto;
 import com.dianda.shserc.dto.EditCommentDto;
 import com.dianda.shserc.dto.mappers.IEditCommentMapperImpl;

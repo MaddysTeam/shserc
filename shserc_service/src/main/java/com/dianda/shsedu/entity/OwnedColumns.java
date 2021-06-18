@@ -2,7 +2,7 @@ package com.dianda.shsedu.entity;
 
 import com.dianda.common.entity.BaseEntity;
 
-public  class UserColumns extends BaseEntity {
+public  class OwnedColumns extends BaseEntity {
 	
 	private  long userId;
 	

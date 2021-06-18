@@ -11,7 +11,7 @@ import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.common.util.logger.system.SystemLog;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shserc.bean.CroResourceSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditCroResourceDto;
 import com.dianda.shserc.dto.ResourceAuditDto;
 import com.dianda.shserc.dto.mappers.ICroResourceAuditMapper;
@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import com.dianda.shserc.common.ShsercConstant;
+
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -174,7 +176,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 	@Override
 	public boolean audit( @Valid @NotNull ResourceAuditDto model ) {
 		CroResource croResource = ICroResourceAuditMapper.INSTANCE.mapFrom ( model );
-		croResource.setStateId ( model.getAuditResult ( ) ? Constant.State.AUDITSUCCESS : Constant.State.AUDITFALURE );
+		croResource.setStateId ( model.getAuditResult ( ) ? ShsercConstant.State.AUDITSUCCESS : ShsercConstant.State.AUDITFALURE );
 		
 		return mapper.updateById ( croResource ) >= 0;
 	}

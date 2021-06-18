@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dianda.shserc.bean.UserSelectParams;
-import com.dianda.shserc.common.Constant;
+import com.dianda.common.common.Constant;
+import com.dianda.shserc.common.ShsercConstant;
 import com.dianda.shserc.dto.EditUserDto;
 import com.dianda.shserc.dto.EditUserRoleDto;
 import com.dianda.shserc.dto.mappers.IEditUserMapper;
@@ -12,7 +13,6 @@ import com.dianda.shserc.dto.mappers.IEditUserRoleMapper;
 import com.dianda.shserc.entity.ResUser;
 import com.dianda.shserc.entity.ResUserRole;
 import com.dianda.common.exceptions.GlobalException;
-import com.dianda.shserc.entity.ResourceOperation;
 import com.dianda.shserc.mapper.ResUserMapper;
 import com.dianda.shserc.service.IResUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -143,7 +143,7 @@ public class ResUserServiceImpl extends ServiceImpl<ResUserMapper, ResUser> impl
 			return false;
 		
 		ResUser user = mapper.selectById ( id );
-		user.setIsDeleted ( Constant.State.DELETED );
+		user.setIsDeleted ( ShsercConstant.State.DELETED );
 		int result = mapper.updateById ( user );
 		
 		return result > 1;
