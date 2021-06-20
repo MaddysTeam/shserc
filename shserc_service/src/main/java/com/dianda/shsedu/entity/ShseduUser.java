@@ -29,7 +29,7 @@ public class ShseduUser extends BaseEntity {
 
 	@TableField(exist = false)
 	private String roleIds;
-
+	@TableField(exist = false)
 	private List<Columns> ownedColumns;
 
 	public boolean hasPermission(String permissionId) {

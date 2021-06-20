@@ -15,14 +15,14 @@ spring:
       primary: shserc
       datasource:
         shserc:
-          #driver-class-name: com.mysql.jdbc.Driver
-          #url: jdbc:mysql://192.168.1.13:30070/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
-          #username: root
-          #password: password
-          driver-class-name: dm.jdbc.driver.DmDriver
-          url: jdbc:dm://61.129.1.179:5236/SHSERC?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
-          username: SYSDBA
-          password: 'dameng123'
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://192.168.1.13:30070/shserc?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
+          username: root
+          password: password
+#          driver-class-name: dm.jdbc.driver.DmDriver
+#          url: jdbc:dm://61.129.1.179:5236/SHSERC?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
+#          username: SYSDBA
+#          password: 'dameng123'
           filters: stat
           maxActive: 300
           initialSize: 1
@@ -39,9 +39,9 @@ spring:
         shsedu:
           driver-class-name: dm.jdbc.driver.DmDriver
           #url: jdbc:mysql://192.168.1.13:30070/shsedu?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT
-          url: jdbc:dm://61.129.1.179:5236/SHSEDU?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
-          username: SYSDBA
-          password: 'dameng123'
+          url: jdbc:dm://61.129.1.179/SHSEDU
+          username: SHSEDU
+          password: '#Bugsfor123'
           filters: stat
           maxActive: 300
           initialSize: 1

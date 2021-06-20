@@ -108,18 +108,19 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 
 	@Override
 	public boolean edit(@Valid @NotNull EditNewsDto editNewsDto) {
-		News news = IEditNewsMapper.INSTANCE.mapFrom(editNewsDto);
-		NewsVo newsVo = findById(news.getId());
-		news.setAddUser(editNewsDto.getOperatorId());
-		news.setAddTime(editNewsDto.getOperateDate());
-		if (news.isNewOne() && ObjectUtil.isNull(newsVo)) {
-			return mapper.insert(news) > 0;
-		} else {
-			news.setUpdateTime(editNewsDto.getOperateDate());
-			news.setUpdateUser(editNewsDto.getOperatorId());
-
-			return mapper.updateById(news) >= 0;
-		}
+//		News news = IEditNewsMapper.INSTANCE.mapFrom(editNewsDto);
+//		NewsVo newsVo = findById(news.getId());
+//		news.setAddUser(editNewsDto.getOperatorId());
+//		news.setAddTime(editNewsDto.getOperateDate());
+//		if (news.isNewOne() && ObjectUtil.isNull(newsVo)) {
+//			return mapper.insert(news) > 0;
+//		} else {
+//			news.setUpdateTime(editNewsDto.getOperateDate());
+//			news.setUpdateUser(editNewsDto.getOperatorId());
+//
+//			return mapper.updateById(news) >= 0;
+//		}
+		return false;
 	}
 
 	@Override
