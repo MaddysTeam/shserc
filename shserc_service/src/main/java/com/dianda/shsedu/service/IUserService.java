@@ -7,11 +7,13 @@ import com.dianda.shsedu.entity.ShseduUser;
 import com.dianda.shsedu.vo.UserVo;
 import com.dianda.shsedu.vo.UserVoList;
 
-public interface IUserService extends IService<ShseduUser> {
+public interface IUserService  extends  IService<ShseduUser> {
 
 	UserVoList findByPhrase(UserSelectParams userSelectParams);
 
 	UserVo findById(long id );
+
+	UserVo findByNameAndPassword(String userName,String password);
 
 	boolean edit(EditUserDto editUserDto);
 

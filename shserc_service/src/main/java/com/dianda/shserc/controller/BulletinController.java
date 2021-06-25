@@ -1,6 +1,7 @@
 package com.dianda.shserc.controller;
 
 
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.bean.BulletinSelectParams;
 import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditBulletinDto;
@@ -45,7 +46,7 @@ public class BulletinController extends BaseController {
 		
 		ResUser loginUser=super.getLoginUserInfo ();
 		editBulletinDto.setOperatorId ( loginUser.getId () );
-		editBulletinDto.setOperateDate ( LocalDateTime.now () );
+		editBulletinDto.setOperateDate ( DateTimeUtil.now () );
 		
 		boolean result=service.edit ( editBulletinDto );
 		return result ? JsonResult.success( Constant.Success.EDIT_SUCCESS) :
@@ -61,7 +62,7 @@ public class BulletinController extends BaseController {
 		
 		ResUser loginUser=super.getLoginUserInfo ();
 		editStateDto.setOperatorId ( loginUser.getId () );
-		editStateDto.setOperateDate ( LocalDateTime.now () );
+		editStateDto.setOperateDate ( DateTimeUtil.now () );
 		
 		boolean result=service.top ( editStateDto );
 		return result ? JsonResult.success( Constant.Success.EDIT_SUCCESS) :

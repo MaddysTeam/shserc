@@ -10,6 +10,7 @@ import org.apache.shiro.util.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,7 +26,8 @@ public class AccountTest {
 	
 	@Autowired
 	WebApplicationContext wac;
-	
+
+	@Qualifier("ShsercAccountService")
 	@Autowired
 	IAccountService accountService;
 	

@@ -54,7 +54,7 @@ public class CroResourceServiceImpl extends ServiceImpl<CroResourceMapper, CroRe
 	@Autowired
 	public CroResourceServiceImpl( DictionaryCache cache ) {
 		this.cache = cache;
-		this.cache.setCacheFromService ( 0 );
+		//this.cache.setCacheFromService ( 0 );
 	}
 	
 	@Override

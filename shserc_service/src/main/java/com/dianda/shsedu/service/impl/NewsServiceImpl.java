@@ -39,6 +39,9 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 	@Autowired
 	public NewsServiceImpl(DictionaryCache cache) {
 		this.cache = cache;
+		if (ObjectUtil.isNull(cache.getCache())){
+			this.cache.setCacheFromService(0);
+		}
 	}
 
 	@Override

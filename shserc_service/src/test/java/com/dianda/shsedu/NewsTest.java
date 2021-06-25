@@ -1,6 +1,7 @@
 package com.dianda.shsedu;
 
 import com.dianda.ServiceApplication;
+import com.dianda.shsedu.dto.EditNewsDto;
 import com.dianda.shsedu.service.INewsService;
 import com.dianda.shsedu.vo.NewsVo;
 import com.dianda.shsedu.vo.NewsVoList;
@@ -27,6 +28,7 @@ public class NewsTest {
 	
 	@Resource
 	INewsService service;
+	String title="新闻标题";
 	
 	@Test
 	public void get_news_test( ) {
@@ -42,8 +44,9 @@ public class NewsTest {
 	}
 
 	@Test
-	public void edit_company_test(){
-
+	public void edit_news_test(){
+		EditNewsDto newsDto=new EditNewsDto();
+		newsDto.setTitle("");
 	}
 	
 }

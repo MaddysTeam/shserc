@@ -15,4 +15,6 @@ public class ColumnVo implements Serializable {
 
     private boolean isMenu;
 
+    private long statusId;
+
 }

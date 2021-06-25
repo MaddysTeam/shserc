@@ -8,6 +8,4 @@ public  class OwnedColumns extends BaseEntity {
 	
 	private  long columnsId;
 	
-	private  long permissionId;
-	
 }

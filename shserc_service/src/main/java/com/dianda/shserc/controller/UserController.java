@@ -1,6 +1,7 @@
 package com.dianda.shserc.controller;
 
 
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.bean.UserSelectParams;
 import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditUserDto;
@@ -50,7 +51,7 @@ public class UserController extends BaseController {
 		
 		ResUser loginUser=super.getLoginUserInfo ();
 		editUserDto.setOperatorId ( loginUser.getId () );
-		editUserDto.setOperateDate ( LocalDateTime.now () );
+		editUserDto.setOperateDate ( DateTimeUtil.now () );
 		
 		return service.edit ( editUserDto ) ?
 				JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :

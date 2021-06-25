@@ -3,6 +3,7 @@ package com.dianda.shserc.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.bean.RoleSelectParams;
 import com.dianda.shserc.dto.EditRoleDto;
 import com.dianda.shserc.dto.mappers.IEditRoleMapper;
@@ -82,12 +83,12 @@ public class ResRoleServiceImpl extends ServiceImpl<ResRoleMapper, ResRole> impl
 		ResRole resRole = IEditRoleMapper.INSTANCE.mapFrom ( roleDto );
 		if ( resRole.isNewOne ( ) ) {
 			resRole.setAddUser ( roleDto.getOperatorId ( ) );
-			resRole.setAddTime ( LocalDateTime.now ( ) );
+			resRole.setAddTime ( DateTimeUtil.now ( ) );
 			
 			return mapper.insert ( resRole ) > 0;
 		} else {
 			resRole.setUpdateUser ( roleDto.getOperatorId ( ) );
-			resRole.setUpdateTime ( LocalDateTime.now ( ) );
+			resRole.setUpdateTime ( DateTimeUtil.now ( ) );
 			
 			return mapper.updateById ( resRole ) > 0;
 		}

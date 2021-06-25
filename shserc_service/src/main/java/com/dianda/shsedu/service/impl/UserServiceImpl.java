@@ -103,6 +103,19 @@ public class UserServiceImpl extends ServiceImpl<ShseduUserMapper, ShseduUser> i
 	}
 
 	@Override
+	public UserVo findByNameAndPassword(String userName, String password) {
+		QueryWrapper<ShseduUser> wrapper= new QueryWrapper<>();
+		wrapper.eq("user_name", userName);
+        wrapper.eq("password", password);
+
+        ShseduUser shseduUser= shseduUserMapper.selectOne(wrapper);
+
+        if(ObjectUtil.isNull(shseduUser)) return null;
+
+		return IUserVoMapper.INSTANCE.mapFrom(shseduUser);
+	}
+
+	@Override
 	public boolean edit(EditUserDto editUserDto) {
 		// execute user mapping from dto
 		ShseduUser user = IEditUserMapper.INSTANCE.mapFrom(editUserDto);
@@ -122,6 +135,7 @@ public class UserServiceImpl extends ServiceImpl<ShseduUserMapper, ShseduUser> i
 			user.setPassword(com.dianda.common.util.basic.EncoderUtil.SHA(password));
 			user.setAddUser(editUserDto.getOperatorId());
 			user.setAddTime(editUserDto.getOperateDate());
+			
 			return shseduUserMapper.insert(user) > 0;
 		} else {
 			user.setUpdateUser(editUserDto.getOperatorId());

@@ -9,13 +9,15 @@ import lombok.EqualsAndHashCode;
 public class Columns extends BaseEntity {
 	
 	String title;
-	
-	boolean isMenu;
-	
+
 	long parentId;
 	
-	long order;
-	
-	boolean isAudit;
+	long orderNo;
+
+	long statusId;
+
+	boolean isMenu;
+
+	//boolean isAudit;
 	
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dianda.shsedu.mapper.ShseduUserMapper">
+
+    <select id="selectNews"  resultType="com.dianda.shsedu.entity.ShseduUser">
+        select u.id as id,
+        u.user_name,
+        u.real_name,
+        u.email,
+        u.mobile,
+        u.photo_path,
+        u..permission_ids,
+        r.role_name,
+        r.id as role_id
+        from shsedu_user
+        left join role r  on r.id=u.role_id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+
+</mapper>

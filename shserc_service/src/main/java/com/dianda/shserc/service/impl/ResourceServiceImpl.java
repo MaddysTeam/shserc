@@ -56,7 +56,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
 	@Autowired
 	public ResourceServiceImpl( DictionaryCache cache ) {
 		this.cache = cache;
-		this.cache.setCacheFromService ( 0 );
+		//this.cache.setCacheFromService ( 0 );
 	}
 	
 	@Override

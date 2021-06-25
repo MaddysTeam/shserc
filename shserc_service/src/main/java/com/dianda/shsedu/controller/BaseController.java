@@ -23,7 +23,7 @@ public class BaseController {
 		JSONObject user = ShiroUtil.getLoginUser();
 		if (!ObjectUtil.isNull(user)) {
 			ShseduUser shseduUser = new ShseduUser();
-			shseduUser.setId(user.getInteger("id"));
+			shseduUser.setId(user.getLong("id"));
 			shseduUser.setUserName(user.getString("userName"));
 			shseduUser.setRealName(user.getString("realName"));
 			shseduUser.setRoleId(user.getInteger("roleId"));

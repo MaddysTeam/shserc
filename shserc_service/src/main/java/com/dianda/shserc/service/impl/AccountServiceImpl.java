@@ -54,7 +54,7 @@ public class AccountServiceImpl implements IAccountService {
 			// if login succes, record last login date and login count
 			JSONObject userObject = ShiroUtil.getLoginUser();
 			ResUser user = new ResUser();
-			user.setId(userObject.getInteger("id"));
+			user.setId(userObject.getLong("id"));
 			user.setLastLoginTime( LocalDateTime.now());  // record last login time
 			user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
 			userMapper.updateById(user);

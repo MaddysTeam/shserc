@@ -2,6 +2,7 @@ package com.dianda.shserc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.bean.MenuSelectParams;
 import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.EditMenuDto;
@@ -97,10 +98,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
 		
 		boolean result;
 		if ( menu.isNewOne ( ) ) {
-			menu.setAddTime ( LocalDateTime.now ( ) );
+			menu.setAddTime ( DateTimeUtil.now ( ) );
 			result = mapper.insert ( menu ) > 0;
 		} else {
-			menu.setUpdateTime ( LocalDateTime.now ( ) );
+			menu.setUpdateTime ( DateTimeUtil.now ( ) );
 			result = mapper.updateById ( menu ) >= 0;
 		}
 		

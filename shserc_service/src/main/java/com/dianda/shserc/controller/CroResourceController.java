@@ -1,5 +1,6 @@
 package com.dianda.shserc.controller;
 
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.common.util.json.JsonResult;
 import com.dianda.shserc.bean.CroResourceSelectParams;
 import com.dianda.common.common.Constant;
@@ -44,7 +45,7 @@ public class CroResourceController extends BaseController {
 		
 		ResUser loginUser = super.getLoginUserInfo ( );
 		editCroResourceDto.setOperatorId ( loginUser.getId ( ) );
-		editCroResourceDto.setOperateDate ( LocalDateTime.now ( ) );
+		editCroResourceDto.setOperateDate ( DateTimeUtil.now ( ) );
 		
 		boolean result = service.edit ( editCroResourceDto );
 		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :

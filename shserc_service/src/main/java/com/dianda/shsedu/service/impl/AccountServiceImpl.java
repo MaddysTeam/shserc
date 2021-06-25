@@ -44,11 +44,11 @@ public class AccountServiceImpl implements IAccountService {
 			// if login succes, record last login date and login count
 			JSONObject userObject = ShiroUtil.getLoginUser();
 			ShseduUser user = new ShseduUser();
-			user.setId(userObject.getInteger("id"));
+			user.setId(userObject.getLong("id"));
 			//user.setLastLoginTime( LocalDateTime.now());  // record last login time
 			//user.setLoginCount(userObject.getInteger ( "loginCount" ) + 1);  // record login count++
 
-			shseduUserMapper.updateById(user);
+			//shseduUserMapper.updateById(user);
 
 			// if login success,we can get token from subject and save it
 			String token = subject.getPrincipal ( ).toString ( );

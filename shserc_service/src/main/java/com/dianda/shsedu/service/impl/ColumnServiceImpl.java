@@ -4,6 +4,7 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dianda.common.exceptions.GlobalException;
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.shsedu.bean.ColumnSelectParam;
@@ -76,10 +77,10 @@ public class ColumnServiceImpl extends ServiceImpl<ColumnsMapper, Columns> imple
 
 		boolean result;
 		if ( column.isNewOne ( ) ) {
-			column.setAddTime ( LocalDateTime.now ( ) );
+			column.setAddTime ( DateTimeUtil.now ( ) );
 			result = mapper.insert ( column ) > 0;
 		} else {
-			column.setUpdateTime ( LocalDateTime.now ( ) );
+			column.setUpdateTime ( DateTimeUtil.now ( ) );
 			result = mapper.updateById ( column ) >= 0;
 		}
 

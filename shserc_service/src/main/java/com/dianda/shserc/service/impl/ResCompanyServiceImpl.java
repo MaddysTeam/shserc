@@ -2,6 +2,7 @@ package com.dianda.shserc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dianda.common.common.Constant;
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.common.ShsercConstant;
 import com.dianda.shserc.dto.EditCompanyDto;
 import com.dianda.shserc.dto.mappers.IEditCompanyMapper;
@@ -84,11 +85,11 @@ public class ResCompanyServiceImpl extends ServiceImpl<ResCompanyMapper, ResComp
 		
 		int result = 0;
 		if ( o.isNewOne ( ) ) {
-			o.setAddTime (LocalDateTime.now ());
+			o.setAddTime (DateTimeUtil.now ());
 			o.setAddUser (userId  );
 			result = resCompanyMapper.insert ( o );
 		} else {
-			o.setUpdateTime ( LocalDateTime.now () );
+			o.setUpdateTime (new Date());
 			o.setUpdateUser ( userId );
 			result = resCompanyMapper.updateById ( o );
 		}

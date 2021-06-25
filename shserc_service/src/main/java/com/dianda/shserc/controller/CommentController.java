@@ -1,5 +1,6 @@
 package com.dianda.shserc.controller;
 
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.shserc.bean.CommentSelectParams;
 import com.dianda.common.common.Constant;
 import com.dianda.shserc.dto.CommentAuditDto;
@@ -39,7 +40,7 @@ public class CommentController extends BaseController {
 		
 		ResUser user= getLoginUserInfo ();
 		editCommentDto.setOperatorId ( user.getId () );
-		editCommentDto.setOperateDate ( LocalDateTime.now () );
+		editCommentDto.setOperateDate ( DateTimeUtil.now () );
 
 		boolean result = service.edit(editCommentDto);
 		return result ? JsonResult.success(Constant.Success.EDIT_SUCCESS) :

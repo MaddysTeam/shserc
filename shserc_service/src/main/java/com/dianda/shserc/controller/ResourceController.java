@@ -1,5 +1,6 @@
 package com.dianda.shserc.controller;
 
+import com.dianda.common.util.basic.DateTimeUtil;
 import com.dianda.common.util.basic.StringUtil;
 import com.dianda.shserc.bean.ResourceSelectParams;
 import com.dianda.common.common.Constant;
@@ -53,7 +54,7 @@ public class ResourceController extends BaseController {
 		
 		ResUser loginUser = super.getLoginUserInfo ( );
 		editResourceDto.setOperatorId ( loginUser.getId ( ) );
-		editResourceDto.setOperateDate ( LocalDateTime.now ( ) );
+		editResourceDto.setOperateDate ( DateTimeUtil.now ( ) );
 		
 		boolean result = service.edit ( editResourceDto );
 		return result ? JsonResult.success ( Constant.Success.EDIT_SUCCESS ) :
