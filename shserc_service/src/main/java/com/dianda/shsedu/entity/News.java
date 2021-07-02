@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -17,7 +18,7 @@ public class News extends BaseEntity {
 
 	private String subTitle;
 
-	private String key;
+	private String keyword;
 	
 	private String content;
 	
@@ -32,9 +33,11 @@ public class News extends BaseEntity {
 
 	private long districtId;
 
-	private  LocalDateTime publishTime;
+	private Date publishTime;
 	
-	private LocalDateTime  auditTime;
+	private Date  auditTime;
+
+	private long auditorId;
 
 	private String coverPath;
 

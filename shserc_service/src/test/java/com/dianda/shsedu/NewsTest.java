@@ -1,6 +1,8 @@
 package com.dianda.shsedu;
 
 import com.dianda.ServiceApplication;
+import com.dianda.common.util.basic.DateTimeUtil;
+import com.dianda.shsedu.common.ShseduConstant;
 import com.dianda.shsedu.dto.EditNewsDto;
 import com.dianda.shsedu.service.INewsService;
 import com.dianda.shsedu.vo.NewsVo;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +31,16 @@ public class NewsTest {
 	
 	@Resource
 	INewsService service;
+
 	String title="新闻标题";
+	String content="content here";
+	long columnId=1000;
+	long statusId= ShseduConstant.State.NEEDAUDIT;
+	long typeId=ShseduConstant.NewsType.OTHERTYPES;
+	long operatorId=1000;
+	long districtId=1001;
+	Date operateDate= DateTimeUtil.now();
+	String keyword="keyword";
 	
 	@Test
 	public void get_news_test( ) {
@@ -46,7 +58,23 @@ public class NewsTest {
 	@Test
 	public void edit_news_test(){
 		EditNewsDto newsDto=new EditNewsDto();
-		newsDto.setTitle("");
+		newsDto.setTitle(title);
+		newsDto.setColumnId(columnId);
+		newsDto.setStatusId(statusId);
+		newsDto.setContent(content);
+		newsDto.setTypeId(typeId);
+		newsDto.setKeyword(keyword);
+		newsDto.setOperatorId(operatorId);
+		newsDto.setOperateDate(operateDate);
+
+		boolean result= service.edit(newsDto);
+
+		Assert.assertTrue(result);
 	}
-	
+
+	@Test
+	public void audit_news_test(){
+
+	}
+
 }

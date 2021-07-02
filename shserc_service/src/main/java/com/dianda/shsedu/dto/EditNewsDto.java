@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -16,6 +17,8 @@ public class EditNewsDto extends BaseDto {
 
 	@NotBlank
 	String title;
+
+	String keyword;
 
 	String content;
 
@@ -28,4 +31,10 @@ public class EditNewsDto extends BaseDto {
 	@Min(value = 1)
 	long columnId;
 
+	@Min(value = 1)
+	long districtId;
+
+	String coverPath;
+
 }
+

@@ -6,12 +6,19 @@ import java.util.Map;
 public final class ShseduConstant {
 
 	public static final class State {
-//		public final static int DELETED = 171;
-//		public final static int AUDITSUCCESS = 129;
-//		public final static int AUDITFALURE = 130;
-//		public final static int ENABLED = 13;
-//		public final static int DISABLED = 14;
+		public final static int AUDITSUCCESS = 1024;
+		public final static int AUDITFALURE = 1025;
+		public final static int NEEDAUDIT = 1023;
+		public final static int DISABLED = 1026;
 	}
+
+	public static final class NewsType{
+		public final static int DEAF=1019;
+		public final static int BLIND=1020;
+		public final static int ASSISTANCE=1021;
+		public final static int OTHERTYPES=1027;
+	}
+
 
 	public static final class OrderPhraseMapping{
 

@@ -12,7 +12,7 @@ mybatis-plus:
 spring:
   datasource:
     dynamic:
-      primary: shserc
+      primary: shsedu
       datasource:
         shserc:
 #          driver-class-name: com.mysql.jdbc.Driver

@@ -12,6 +12,8 @@ public class NewsVo implements Serializable {
 
 	private String subTitle;
 
+	private String keyword;
+
 	private String content;
 
 	private  long  columnId;
@@ -23,5 +25,11 @@ public class NewsVo implements Serializable {
 	private String type;
 
 	private  String status;
+
+	private  long  districtId;
+
+	private  String district;
+
+	private  String coverPath;
 
 }

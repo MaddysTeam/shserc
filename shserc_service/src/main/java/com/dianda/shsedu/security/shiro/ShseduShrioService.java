@@ -96,13 +96,13 @@ public class ShseduShrioService implements IShrioCustomsizedService {
 		filterRuleMap.put ( "/static/**" , "anon" );
 
 		// TODO : will  dynamic get data from db
-		filterRuleMap.put ( "/account/login" , "anon" );
+		filterRuleMap.put ( "/shseduAccount/login" , "anon" );
 		filterRuleMap.put ( "/dictionary/*" , "anon" );
-		filterRuleMap.put ( "/role/list*" , "anon" );
+		filterRuleMap.put ( "/shseduRole/list*" , "anon" );
 
 		filterRuleMap.put ( "/file/*" , "jwt" );
-		filterRuleMap.put ( "/role/edit" , "jwt" );
-		filterRuleMap.put ( "/account/logout" , "jwt" );
+		filterRuleMap.put ( "/shseduRole/edit" , "jwt" );
+		filterRuleMap.put ( "/shseduAccount/logout" , "jwt" );
 		filterRuleMap.put ( "/**" , "jwt" );
 
 		return filterRuleMap;

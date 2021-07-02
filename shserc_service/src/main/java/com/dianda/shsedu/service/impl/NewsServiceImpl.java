@@ -9,7 +9,9 @@ import com.dianda.common.util.basic.ObjectUtil;
 import com.dianda.common.util.cache.dictionary.DictionaryCache;
 import com.dianda.common.validators.NotNull;
 import com.dianda.shsedu.bean.NewsSelectParams;
+import com.dianda.shsedu.dto.AuditNewsDto;
 import com.dianda.shsedu.dto.EditNewsDto;
+import com.dianda.shsedu.dto.mappers.IAuditNewsMapper;
 import com.dianda.shsedu.dto.mappers.IEditNewsMapper;
 import com.dianda.shsedu.entity.News;
 import com.dianda.shsedu.mapper.NewsMapper;
@@ -111,19 +113,28 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 
 	@Override
 	public boolean edit(@Valid @NotNull EditNewsDto editNewsDto) {
-//		News news = IEditNewsMapper.INSTANCE.mapFrom(editNewsDto);
-//		NewsVo newsVo = findById(news.getId());
-//		news.setAddUser(editNewsDto.getOperatorId());
-//		news.setAddTime(editNewsDto.getOperateDate());
-//		if (news.isNewOne() && ObjectUtil.isNull(newsVo)) {
-//			return mapper.insert(news) > 0;
-//		} else {
-//			news.setUpdateTime(editNewsDto.getOperateDate());
-//			news.setUpdateUser(editNewsDto.getOperatorId());
-//
-//			return mapper.updateById(news) >= 0;
-//		}
-		return false;
+		News news = IEditNewsMapper.INSTANCE.mapFrom(editNewsDto);
+		NewsVo newsVo = findById(news.getId());
+		news.setAddUser(editNewsDto.getOperatorId());
+		news.setAddTime(editNewsDto.getOperateDate());
+		if (news.isNewOne() && ObjectUtil.isNull(newsVo)) {
+			return mapper.insert(news) > 0;
+		} else {
+			news.setUpdateTime(editNewsDto.getOperateDate());
+			news.setUpdateUser(editNewsDto.getOperatorId());
+
+			return mapper.updateById(news) >= 0;
+		}
+	}
+
+	@Override
+	public boolean audit(AuditNewsDto auditNewsDto) {
+		News news = IAuditNewsMapper.INSTANCE.mapFrom(auditNewsDto);
+
+		news.setUpdateTime(auditNewsDto.getOperateDate());
+		news.setUpdateUser(auditNewsDto.getOperatorId());
+
+		return mapper.updateById(news) >= 0;
 	}
 
 	@Override
