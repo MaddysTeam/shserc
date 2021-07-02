@@ -27,7 +27,7 @@ import step2 from "@/app/views/site/account/components/Steps/register/step2.vue"
   export default {
     components:{step1,step2},
 
-    data() {
+    data() { 
       return {
         active: 0
       };

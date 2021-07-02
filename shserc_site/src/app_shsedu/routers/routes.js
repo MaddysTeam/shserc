@@ -1,17 +1,46 @@
- import Login from '@/app_shsedu/views/admin/account/login'
+import Admin from "@/app_shsedu/views/admin/layout/index"
+import Login from "@/app_shsedu/views/admin/account/login"
+import UserList from "@/app_shsedu/views/admin/user/list"
 
- const backendRoutes = [{
-     path: '/login',
-     name: 'Login',
-     component: Login,
- }];
 
- const routes = [
-     ...backendRoutes,
-     //  {
-     //      path: "*",
-     //      redirect: "/404"
-     //  }
- ]
+export const constRoutes = [{
+    path: "/admin/login",
+    name: "AdminLogin",
+    component: Login
+},
+{
+    path: "/admin/logout",
+    name: "AdminLogout",
+},
+{
+    path: "/404",
+    name: "404",
+    component: () =>
+        import("@/app_shsedu/views/404.vue")
+}
+];
 
- export default routes;
+export const menuRoutes = [
+    { path: "/admin/user/list", name: "用户管理", component: UserList }
+];
+
+export const backendRoutes = [{
+    path: "/admin",
+    name: "AdminIndex",
+    component: Admin,
+    children: [
+      ...menuRoutes
+    ]
+}];
+
+
+const routes = [
+    ...constRoutes,
+    ...backendRoutes
+    //  {
+    //      path: "*",
+    //      redirect: "/404"
+    //  }
+]
+
+export default routes;
