@@ -8,11 +8,11 @@ import '@/static/validator.js'
 import '@/assets/css/global.css'
 import App from './App'
 
-import router from '@/router'
-import { Plugins } from '@/plugins/shserc.js'
+//import router from '@/router'
+//import { Plugins } from '@/plugins/shserc.js'
 
-//import router from '@/router/shsedu.js'
-//import { Plugins } from '@/plugins/shsedu.js'
+import router from '@/router/shsedu.js'
+import { Plugins } from '@/plugins/shsedu.js'
 
 /** initial mock data */
 const mock = false;

@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 /* set global store */
 export default new Vuex.Store({
-  modules: {
-    app
-  }
+    modules: {
+        app
+    }
 });

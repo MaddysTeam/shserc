@@ -1,4 +1,4 @@
-export const loginModel = {
+export const account = {
     name: "",
     password: ""
 }
@@ -10,4 +10,11 @@ export const changePasswordModel = {
     confirmPassword: ""
 }
 
-
+export const accountModel = {
+    userId: 0,
+    userName: "",
+    realName: "",
+    mobile: "",
+    email: "",
+    // lastLoginTime: ""
+}

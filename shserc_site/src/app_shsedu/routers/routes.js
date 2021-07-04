@@ -4,20 +4,20 @@ import UserList from "@/app_shsedu/views/admin/user/list"
 
 
 export const constRoutes = [{
-    path: "/admin/login",
-    name: "AdminLogin",
-    component: Login
-},
-{
-    path: "/admin/logout",
-    name: "AdminLogout",
-},
-{
-    path: "/404",
-    name: "404",
-    component: () =>
-        import("@/app_shsedu/views/404.vue")
-}
+        path: "/admin/login",
+        name: "AdminLogin",
+        component: Login
+    },
+    {
+        path: "/admin/logout",
+        name: "AdminLogout",
+    },
+    {
+        path: "/404",
+        name: "404",
+        component: () =>
+            import ("@/app_shsedu/views/404.vue")
+    }
 ];
 
 export const menuRoutes = [
@@ -29,14 +29,14 @@ export const backendRoutes = [{
     name: "AdminIndex",
     component: Admin,
     children: [
-      ...menuRoutes
+        ...menuRoutes
     ]
 }];
 
 
 const routes = [
     ...constRoutes,
-    ...backendRoutes
+    // ...backendRoutes
     //  {
     //      path: "*",
     //      redirect: "/404"

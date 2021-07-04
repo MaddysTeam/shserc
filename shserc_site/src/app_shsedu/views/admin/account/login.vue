@@ -66,12 +66,68 @@
 <script>
 import Verify from "vue2-verify";
 import { loginModel } from "@/app_shsedu/models/account.js";
-import {messages} from "@/app_shsedu/models/message.js"
+import { messages } from "@/app_shsedu/static/message.js";
+import {login} from "@/app_shsedu/api/account"
+import {
+  validateRequired,
+  validateLessThan50,
+  validatePassword,
+} from "@/static/validator";
+import {encrypt} from "@/util/crypto"
 
 export default {
   components: { Verify },
-  methods:{
-        
-  }
+  data() {
+    return {
+      form: loginModel,
+      rules: {
+        name: [
+          {
+            validator: (rule, value, callback) => {validateRequired(rule,value,callback,messages.ACCOUNT_NAME_REQUIRED)},
+            validator:(rule,value,callback)=> {validateLessThan50(rule,value,callback,messages.ACCOUNT_LENGHT_NOT_ALLOWED_MORE_THAN_50)}
+          },
+        ],
+      },
+    };
+  },
+
+  methods: { 
+   /**
+     *  submit login from
+     */
+    submitForm(formName) {
+      let _this = this;
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          login({
+            userName: _this.form.name,
+            password: encrypt(_this.form.password), // encrypt password and  de-encrypt in server side
+          }).then((res) => {
+            if (res) {
+              //Notification.success({ message: "登录成功" });
+              // save login info to store，save dynamic route info to store
+              _this.$store.commit(types.APP + "/" + types.LOGIN, JSON.parse(res.data));
+
+              this.$router.push({path:""})
+
+              // initMenus(_this.$store, res.data.roleId, () => {
+              //   _this.$router.push({
+              //     path: "/admin/dashboard/summary",
+              //     replace:  true,
+              //     query: { _time: new Date().getTime() / 1000 },
+              //   });
+              // });
+
+              // redirect to admin index page
+            }
+          });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    
+  },
 };
 </script>
