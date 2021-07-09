@@ -19,6 +19,7 @@ public interface INewsVoMapper extends BasicMapper<NewsVo, News> {
 			@Mapping(target = "columnId", source = "columnId"),
 			@Mapping(target = "typeId", source = "typeId"),
 			@Mapping(target = "type", source = "type"),
+			@Mapping(target = "statusId", source = "statusId"),
 			@Mapping(target = "status", source = "status"),
 			@Mapping(target = "districtId", source = "districtId"),
 			@Mapping(target = "district", source = "district"),

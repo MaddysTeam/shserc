@@ -8,12 +8,10 @@ const protector = (to, from, next) => {
         window.location.reload();
     } else if (to.path.indexOf("/admin") >= 0) {
         if (!module.isAuth) {
-            alert();
             next({
                 path: "/admin/login"
             });
         } else {
-            // reload route (permisson) from backend
             next();
         }
     }

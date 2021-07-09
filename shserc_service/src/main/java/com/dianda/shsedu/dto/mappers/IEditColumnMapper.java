@@ -18,6 +18,7 @@ public interface IEditColumnMapper extends BasicMapper<Columns, EditColumnDto> {
 			@Mapping(target = "title", source = "title"),
 			@Mapping(target = "menu", source = "menu"),
 			@Mapping(target = "parentId", source = "parentId"),
+			@Mapping(target = "orderNo", source = "orderNo"),
 	})
 	Columns mapFrom(EditColumnDto source);
 }

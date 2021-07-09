@@ -1,12 +1,30 @@
 <template>
   <el-container>
-    <el-header>
-      <div><span></span></div>
+    <el-header style="height:70px">
+      <div>
+        <span>特教之窗后台管理</span>
+      </div>
+      <el-dropdown :hide-timeout="300">
+        <!-- <el-button type="info" circle><el-image class="img_header" :src="account.photoPath"></el-image>
+        </el-button> -->
+        <el-link class="img-header " type="none">JimmyPoor</el-link>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="handleShowAccountInfo"
+            ><i class="el-icon-user-solid"></i>用户信息</el-dropdown-item
+          >
+          <el-dropdown-item @click.native="handleChangePassword"
+            ><i class="el-icon-lock"></i>修改密码</el-dropdown-item
+          >
+          <el-dropdown-item @click.native="handleLogout"
+            ><i class="el-icon-info"></i>注销
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-header>
 
     <el-container>
       <!-- left aside start-->
-      <el-aside style="width: 230px">
+      <el-aside style="width: 230px;height:700px;background:#333744">
         <DynamicMenu :dataSource="menus"></DynamicMenu>
       </el-aside>
       <!-- left aside end-->
@@ -30,6 +48,12 @@ export default {
     DynamicMenu,
   },
 
+  data() {
+    return {
+      account: this.$store.state.app.account,
+      menus: this.$store.state.app.menus,
+    };
+  },
 
   methods: {
     handleLogout() {},
@@ -53,4 +77,5 @@ export default {
 
 <style>
 @import "../../../assets/css/admin.css";
+
 </style>

@@ -23,6 +23,7 @@ public class EditColumnDto extends BaseDto {
 	long statusId;
 
 	boolean isMenu;
-	//boolean isShow;
 
+	@Min(0)
+	int orderNo;
 }

@@ -2,22 +2,23 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'babel-polyfill'
 import Vue from 'vue'
-import store from '@/store/store'
 import '@/static/elementUI.js'
 import '@/static/validator.js'
 import '@/assets/css/global.css'
 import App from './App'
 
+//import store from '@/store/store'
 //import router from '@/router'
 //import { Plugins } from '@/plugins/shserc.js'
 
+import store from '@/store/shsedu.js'
 import router from '@/router/shsedu.js'
 import { Plugins } from '@/plugins/shsedu.js'
 
 /** initial mock data */
-const mock = false;
+const mock = true;
 if (mock) {
-    require('./app/mock/mock');
+    require('./app_shsedu/mock/mock');
 }
 
 /** initial plugin */

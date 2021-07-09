@@ -30,7 +30,7 @@ export function addDynamicRoutes() {
 
 //addDynamicRoutes();
 
-//router.beforeEach(protector);
+router.beforeEach(protector);
 
 
 

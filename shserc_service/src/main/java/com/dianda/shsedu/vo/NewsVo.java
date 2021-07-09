@@ -20,6 +20,8 @@ public class NewsVo implements Serializable {
 
 	private long typeId;
 
+	private long statusId;
+
 	private  int  visitCount;
 
 	private String type;

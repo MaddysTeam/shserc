@@ -1,5 +1,6 @@
 {
-    "userList": [{
+    "userList": [
+        {
             "id": 1001,
             "userName": "mock",
             "idCard": "310115***",
@@ -25,13 +26,16 @@
         "id": 1001,
         "value": 1001,
         "label": "上海市",
-        "children": [{
-            "id": 1002,
-            "value": 1002,
-            "label": "黄浦区"
-        }]
+        "children": [
+            {
+                "id": 1002,
+                "value": 1002,
+                "label": "黄浦区"
+            }
+        ]
     },
-    "roleList": [{
+    "roleList": [
+        {
             "id": 1,
             "roleName": "系统管理员"
         },
@@ -52,7 +56,8 @@
             "roleName": "未知"
         }
     ],
-    "menuList": [{
+    "menuList": [
+        {
             "path": "/admin/dashboard/summary",
             "title": "仪表板",
             "level": 1,

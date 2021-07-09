@@ -19,6 +19,7 @@ public interface IUserVoMapper extends BasicMapper<UserVo, ShseduUser> {
 			@Mapping(target = "districtId", source = "districtId"),
 			@Mapping(target = "realName", source = "realName"),
 			@Mapping(target = "roleId", source = "roleId"),
+			@Mapping(target = "roleName", source = "roleName"),
 			@Mapping(target = "mobile", source = "mobile"),
 			@Mapping(target = "email", source = "email"),
 	})

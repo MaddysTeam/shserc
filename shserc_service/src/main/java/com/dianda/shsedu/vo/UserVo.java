@@ -11,6 +11,7 @@ public class UserVo implements Serializable {
 	private long districtId;
 	private String realName;
 	private long roleId;
+	private String roleName;
 	private String mobile;
 	private String email;
 

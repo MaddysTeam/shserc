@@ -1,6 +1,7 @@
-export const account = {
+export const loginModel = {
     name: "",
-    password: ""
+    password: "",
+    isAble:false,
 }
 
 export const changePasswordModel = {

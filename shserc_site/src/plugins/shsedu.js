@@ -1,6 +1,6 @@
 import instance_ from '@/static/axios.js'
-// import { initDic } from '@/app/utils/dictHelper'
-// import { initRoles } from '@/app/utils/roleHelper'
+import { initDic } from '@/app_shsedu/utils/dictHelper'
+//import { initRoles } from '@/app_shsedu/utils/roleHelper'
 import VideoPlayer from 'vue-video-player'
 import TEditor from '@/components/Editor/index'
 

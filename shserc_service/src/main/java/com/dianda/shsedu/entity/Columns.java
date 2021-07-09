@@ -1,5 +1,6 @@
 package com.dianda.shsedu.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.dianda.common.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,9 @@ public class Columns extends BaseEntity {
 	long statusId;
 
 	boolean isMenu;
+
+	@TableField(exist = false)
+	private  String status;
 
 	//boolean isAudit;
 	

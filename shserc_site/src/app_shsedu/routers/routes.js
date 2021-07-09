@@ -1,6 +1,7 @@
 import Admin from "@/app_shsedu/views/admin/layout/index"
 import Login from "@/app_shsedu/views/admin/account/login"
 import UserList from "@/app_shsedu/views/admin/user/list"
+import ColumnList from "@/app_shsedu/views/admin/columns/list"
 
 
 export const constRoutes = [{
@@ -21,7 +22,8 @@ export const constRoutes = [{
 ];
 
 export const menuRoutes = [
-    { path: "/admin/user/list", name: "用户管理", component: UserList }
+    { path: "/admin/user/list", name: "用户管理", component: UserList },
+    { path: "/admin/column/list", name: "栏目管理", component: ColumnList }
 ];
 
 export const backendRoutes = [{
@@ -36,11 +38,11 @@ export const backendRoutes = [{
 
 const routes = [
     ...constRoutes,
-    // ...backendRoutes
-    //  {
-    //      path: "*",
-    //      redirect: "/404"
-    //  }
+    ...backendRoutes,
+     {
+         path: "*",
+         redirect: "/404"
+     }
 ]
 
 export default routes;

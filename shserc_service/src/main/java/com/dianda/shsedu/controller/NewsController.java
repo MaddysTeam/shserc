@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("ShseduNews")
+@RequestMapping("shseduNews")
 public class NewsController extends BaseController {
 
 	 @Resource

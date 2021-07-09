@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ShseduUser extends BaseEntity{
+public class ShseduUser extends BaseEntity {
 
 	private String userName;
 
@@ -32,7 +32,11 @@ public class ShseduUser extends BaseEntity{
 	private String permissionIds;
 
 	@TableField(exist = false)
+	private String roleName;
+
+	@TableField(exist = false)
 	private String roleIds;
+
 	@TableField(exist = false)
 	private List<Columns> ownedColumns;
 
@@ -44,7 +48,7 @@ public class ShseduUser extends BaseEntity{
 		return roleId == this.roleId;
 	}
 
-	public static void dictTranslate(ShseduUser user, DictionaryCache cache){
+	public static void dictTranslate(ShseduUser user, DictionaryCache cache) {
 
 	}
 }

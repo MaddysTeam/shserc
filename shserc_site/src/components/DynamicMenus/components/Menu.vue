@@ -69,7 +69,7 @@
 	}
 
     .el-menu-item:hover{
-        background-color: rgba(14, 221, 240, 0.32) !important;
-        color:#333744 !important;
+        background-color: #0176df!important;
+        color:#fff !important;
     } 
 </style>

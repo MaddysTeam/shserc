@@ -1,0 +1,80 @@
+{
+    "userList": [{
+            "id": 1001,
+            "userName": "jimmywolf",
+            "realName": "华超",
+            "mobile": "",
+            "roleName":"admin",
+            "district":"黄浦区"
+        }
+    ],
+    "menuList": [{
+            "path": "/admin/dashboard/summary",
+            "title": "仪表板",
+            "level": 1,
+            "id": 1,
+            "icon": "el-icon-pie-chart"
+        },
+        {
+            "id": 2,
+            "level": 1,
+            "title": "用户管理",
+            "icon": "el-icon-user",
+            "path": "/admin/user/list"
+        },
+        {
+            "id": 3,
+            "level": 1,
+            "title": "栏目管理",
+            "path": "/admin/column/list",
+            "icon": "el-icon-school"
+        },
+        {
+            "id": 4,
+            "level": 1,
+            "title": "新闻管理",
+            "icon": "el-icon-tickets",
+            "path": "/admin/news/list"
+        },
+        {
+            "id": 5,
+            "level": 1,
+            "title": "角色管理",
+            "path": "/admin/role/list",
+            "icon": "el-icon-s-custom"
+        },
+        {
+            "id": 6,
+            "level": 1,
+            "title": "权限管理",
+            "icon": "el-icon-folder",
+            "path": "/admin/shseduPermission/list"
+        }
+    ],
+    "columnList": [
+        {
+            "id": 1,
+            "parentId": 0,
+            "title":"根栏目",
+            "isMenu":true,
+            "auditResult":true,
+            "orderNo":1
+        },
+        {
+            "id": 2,
+            "parentId": 1,
+            "title":"公告通知",
+            "isMenu":true,
+            "auditResult":true,
+            "orderNo":2
+        },
+        {
+            "id": 3,
+            "parentId": 1,
+            "title":"动态资讯",
+            "isMenu":true,
+            "auditResult":true,
+            "orderNo":3
+        }
+    ]
+}
