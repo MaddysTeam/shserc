@@ -17,6 +17,7 @@ public interface INewsVoMapper extends BasicMapper<NewsVo, News> {
 			@Mapping(target = "keyword", source = "keyword"),
 			@Mapping(target = "content", source = "content"),
 			@Mapping(target = "columnId", source = "columnId"),
+			@Mapping(target = "column", source = "column"),
 			@Mapping(target = "typeId", source = "typeId"),
 			@Mapping(target = "type", source = "type"),
 			@Mapping(target = "statusId", source = "statusId"),

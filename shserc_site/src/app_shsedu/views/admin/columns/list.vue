@@ -45,9 +45,9 @@
 import { messages } from "@/app_shsedu/static/message";
 import { Notification } from "element-ui";
 import edit from "./edit.vue";
-import { list, changeState } from "@/app_shsedu/api/columns";
+import { list } from "@/app_shsedu/api/column";
 import { deepCopy, buildHierarchy } from "@/app_shsedu/utils/objectHelper";
-import { columnModel, selectParam } from "@/app_shsedu/models/columns";
+import { columnModel, selectParam } from "@/app_shsedu/models/column";
 import { mapState } from "vuex";
 
 export default {
@@ -99,16 +99,16 @@ export default {
       return false;
     },
 
-    handleChangeState(node, data) {
-      this.stateModel.targetId = data.id;
-      //TODO:this.stateModel.stateId=
-      changeState(this.stateModel).then((res) => {
-        if (res) {
-          Notification.success({ message: messages.SUCCESS });
-        }
-      });
-      return false;
-    },
+    // handleChangeState(node, data) {
+    //   this.stateModel.targetId = data.id;
+    //   //TODO:this.stateModel.stateId=
+    //   changeState(this.stateModel).then((res) => {
+    //     if (res) {
+    //       Notification.success({ message: messages.SUCCESS });
+    //     }
+    //   });
+    //   return false;
+    // },
   },
 };
 </script>

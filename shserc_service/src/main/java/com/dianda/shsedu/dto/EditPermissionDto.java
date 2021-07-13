@@ -22,4 +22,6 @@ public class EditPermissionDto extends BaseDto {
 
 	@NotBlank
 	private String url;
+	
+	private  boolean isMenu;
 }

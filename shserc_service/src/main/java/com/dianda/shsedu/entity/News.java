@@ -49,6 +49,9 @@ public class News extends BaseEntity {
 
 	@TableField(exist = false)
 	private  String district;
+	
+	@TableField(exist = false)
+	private String column;
 
 	public void addViewCount(){
 		this.visitCount++;

@@ -19,6 +19,7 @@ public interface IEditPermissionMapper extends BasicMapper<Permission, EditPermi
 			@Mapping(target = "name", source = "name"),
 			@Mapping(target = "description", source = "description"),
 			@Mapping(target = "url", source = "url"),
+			@Mapping(target = "isMenu", source = "isMenu"),
 	})
 	EditPermissionDto mapFrom(EditRoleDto Permission);
 }

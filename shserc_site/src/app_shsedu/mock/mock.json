@@ -1,13 +1,12 @@
 {
     "userList": [{
-            "id": 1001,
-            "userName": "jimmywolf",
-            "realName": "华超",
-            "mobile": "",
-            "roleName":"admin",
-            "district":"黄浦区"
-        }
-    ],
+        "id": 1001,
+        "userName": "jimmywolf",
+        "realName": "华超",
+        "mobile": "",
+        "roleName": "admin",
+        "district": "黄浦区"
+    }],
     "menuList": [{
             "path": "/admin/dashboard/summary",
             "title": "仪表板",
@@ -51,30 +50,45 @@
             "path": "/admin/shseduPermission/list"
         }
     ],
-    "columnList": [
-        {
+    "columnList": [{
             "id": 1,
             "parentId": 0,
-            "title":"根栏目",
-            "isMenu":true,
-            "auditResult":true,
-            "orderNo":1
+            "title": "根栏目",
+            "isMenu": true,
+            "auditResult": true,
+            "orderNo": 1
         },
         {
             "id": 2,
             "parentId": 1,
-            "title":"公告通知",
-            "isMenu":true,
-            "auditResult":true,
-            "orderNo":2
+            "title": "公告通知",
+            "isMenu": true,
+            "auditResult": true,
+            "orderNo": 2
         },
         {
             "id": 3,
             "parentId": 1,
-            "title":"动态资讯",
-            "isMenu":true,
-            "auditResult":true,
-            "orderNo":3
+            "title": "动态资讯",
+            "isMenu": true,
+            "auditResult": true,
+            "orderNo": 3
         }
-    ]
+    ],
+    "newsList": [{
+        "id": 1,
+        "title": "这是一条新闻",
+        "subTitle": "新闻自标题",
+        "keyword": "新闻",
+        "content": "",
+        "columnId": 0,
+        "column": "测试栏目",
+        "typeId": 0,
+        "type": "",
+        "statusId": 0,
+        "status": "",
+        "districtId": 0,
+        "district": "",
+        "coverPath": ""
+    }]
 }

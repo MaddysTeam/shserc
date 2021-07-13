@@ -4,39 +4,37 @@
     :visible.sync="visible"
     :before-close="handleClose"
   >
-    <el-form :model="model" ref="columnForm" :rules="rules">
-      <el-form-item prop="title">
+    <el-form :model="model" ref="columnForm" :rules="rules" label-width="120px"> 
+      <el-form-item prop="title" label="栏目名称" size="small">
         <el-input
-          prefix-icon="el-icon-search"
           v-model="model.title"
           placeholder="栏目名称"
         ></el-input>
       </el-form-item>
 
-      <el-form-item prop="parentId">
+      <el-form-item prop="parentId" label="上级栏目" >
         <el-select-tree
           :data="columns"
           :clearable="true"
           :default-expand-all="true"
           :check-strictly="true"
           v-model="model.parentId"
-          placeholder="选择上级栏目"
-          size="medium"
+          size="small"
           style="width: 100%"
           @change="selectChanged"
         >
         </el-select-tree>
       </el-form-item>
 
-      <el-form-item prop="isMenu">
-        <el-switch
+      <el-form-item prop="isMenu" label="审核结果"  class="text_align_left">
+        <el-switch 
           v-model="model.auditResult"
           active-color="#13ce66"
           inactive-color="#ff4949"
         >
         </el-switch>
       </el-form-item>
-      <el-form-item prop="orderNo">
+      <el-form-item prop="orderNo" label="同级栏目顺序号" class="text_align_left">
         <el-input-number
           v-model="model.orderNo"
           :min="1"
@@ -64,8 +62,8 @@ import {
   validateLessThan50,
   validateSelectValue,
 } from "@/static/validator";
-import { deepCopy, buildHierarchy } from "@/app/utils/objectHelper";
-import { columnModel } from "@/app/models/column";
+import { deepCopy, buildHierarchy } from "@/app_shsedu/utils/objectHelper";
+import { columnModel } from "@/app_shsedu/models/column";
 import ElSelectTree from "el-select-tree";
 
 export default {
@@ -145,8 +143,6 @@ export default {
 };
 </script>
 
-<style>
-.el-select-tree__item {
-  font-size: 12px;
-}
+<style scoped>
+
 </style>

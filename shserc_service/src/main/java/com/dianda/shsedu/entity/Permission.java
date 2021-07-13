@@ -17,5 +17,7 @@ public class Permission extends BaseEntity {
 	private long sort;
 
 	private long parentId;
+	
+	private boolean isMenu;
 
 }

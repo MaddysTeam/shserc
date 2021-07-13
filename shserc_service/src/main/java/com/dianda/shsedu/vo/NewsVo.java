@@ -17,6 +17,8 @@ public class NewsVo implements Serializable {
 	private String content;
 
 	private  long  columnId;
+	
+	private String column;
 
 	private long typeId;
 

@@ -23,7 +23,8 @@ export const constRoutes = [{
 
 export const menuRoutes = [
     { path: "/admin/user/list", name: "用户管理", component: UserList },
-    { path: "/admin/column/list", name: "栏目管理", component: ColumnList }
+    { path: "/admin/column/list", name: "栏目管理", component: ColumnList },
+
 ];
 
 export const backendRoutes = [{
@@ -39,10 +40,10 @@ export const backendRoutes = [{
 const routes = [
     ...constRoutes,
     ...backendRoutes,
-     {
-         path: "*",
-         redirect: "/404"
-     }
+    {
+        path: "*",
+        redirect: "/404"
+    }
 ]
 
 export default routes;
